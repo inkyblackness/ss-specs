@@ -2,6 +2,26 @@
 
 ### Map layout
 
+#### Level information
+
+```L04``` contains the basic information about a level (a map).
+
+**Level Information** (58 bytes)
+
+    0000  int32     Map width (number of tiles) - always 64 in the archives.
+    0004  int32     Map height (number of tiles) - always 64 in the archives.
+    0008  int32     Unknown - always 6 in the archives.
+    000C  int32     Unknown - always 6 in the archvies.
+    0010  int32     Height factor - always 3 in the archives.
+    0014  int32     Placeholder - ignore
+    0018  int32     Cyberspace flag. 0: real life, 1: cyberspace
+    001C  byte[30]  Unknown
+
+The height factor is log2 (number of height units per tile width). For a height factor of X, a regular tile with height 2^X is a perfect cube.
+
+The placeholder has no use in the archives.
+> According to original documentation, this field is used as a placeholder for a pointer within the game logic. 
+
 #### Tile map
 
 The tiles are described in ```L05```, a table of tile map entries. The first entry describes the lower left tile and the next entries go east first, then north (first columns, then rows).
