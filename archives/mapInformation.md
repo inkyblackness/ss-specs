@@ -4,7 +4,7 @@
 
 #### Tile map
 
-The tiles are described in ```L05```, a table of tile map entries. The first entry describes the lower left tile and the next entries go west first, then north (first columns, then rows).
+The tiles are described in ```L05```, a table of tile map entries. The first entry describes the lower left tile and the next entries go east first, then north (first columns, then rows).
 
 **Tile Map Entry** (16 bytes)
 
@@ -82,4 +82,4 @@ The maximum length of one note is 40 bytes (including the termination character)
 Data in this chunk is always defragmented. If a note is modified or removed, the notes are rearranged.
 
 #### Next available space
-Chunk ```L47``` is a single uint32 pointing to the first available byte in the text data chunk.
+Chunk ```L47``` is a single uint32 offset, pointing to the first available byte in the text data chunk.
