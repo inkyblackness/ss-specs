@@ -23,7 +23,7 @@ This chunk contains information about the game and the hacker.
 * By topic
   * [Map Information](mapInformation.md)
   * [Level Objects](levelObjects.md)
-
+  * [Surveillance Sources](surveillanceSources.md)
 
 * By level-specific chunk ID
   * ```L02``` Unknown int32. ```0x0000000B``` for all maps.
@@ -41,7 +41,7 @@ This chunk contains information about the game and the hacker.
   * ```L41``` Unknown byte. ```0x00``` for all maps.
   * ```L42``` Unknown. 0x1C * 0x00
 
-  * ```L43``` Surveillance cameras
+  * ```L43``` [Surveillance sources](surveillanceSources.md)
 
   * ```L44``` Unknown. 0x10 byte length.
   * ```L45``` Unknown. 0x5E byte length.
