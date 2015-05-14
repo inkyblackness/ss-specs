@@ -22,6 +22,8 @@ This chunk contains information about the game and the hacker.
 
 * By topic
   * [Map Information](mapInformation.md)
+  * [Level Objects](levelObjects.md)
+
 
 * By level-specific chunk ID
   * ```L02``` Unknown int32. ```0x0000000B``` for all maps.
@@ -30,29 +32,11 @@ This chunk contains information about the game and the hacker.
   * ```L05``` [Map Layout](mapInformation.md)
   * ```L06``` Unknown. 8 bytes per map, L1 has 16 (with info doubled).
   * ```L07``` [Level texture map](mapInformation.md)
-  * ```L08``` Master object table
-  * ```L09``` Object cross-reference table
-  * ```L10``` to ...
-  * ```L23```    ... Object class specific tables
+  * ```L08``` [Master object table](levelObjects.md#level-object-table)
+  * ```L09``` [Level object cross-reference table](levelObjects.md#level-object-cross-reference-table)
+  * ```L10``` to ```L24``` 15 object [class specific tables](levelObjects.md#class-tables-and-entries)
+  * ```L25``` to ```L39``` 15 object [class extra info](levelObjects.md#class-extra-information)
 
-  * ```L24``` Unknown. 64 of 46 byte entries.
-
-  * ```L25``` Unknown. 8 * 0x00
-  * ```L26``` Unknown. 6 * 0x00
-  * ```L27``` Unknown. 0x28 * 0x00
-  * ```L28``` Unknown. 0x0B * 0x00
-  * ```L29``` Unknown. 6 * 0x00
-  * ```L30``` Unknown. 7 * 0x00
-  * ```L31``` Unknown. 8 * 0x00
-  * ```L32``` Unknown. 0x10 * 0x00
-  * ```L33``` Unknown. 0x10 * 0x00
-  * ```L34``` Unknown. 0x1D * 0x00
-  * ```L35``` Unknown. 0x0D * 0x00
-  * ```L36``` Unknown. 0x0A * 0x00
-  * ```L37``` Unknown. 0x0C * 0x00
-  * ```L38``` Unknown. 0x14 * 0x00
-
-  * ```L39``` Unknown. 0x2E byte length.
   * ```L40``` Unknown int32. ```0x0000000D``` for all maps.
   * ```L41``` Unknown byte. ```0x00``` for all maps.
   * ```L42``` Unknown. 0x1C * 0x00
@@ -62,13 +46,12 @@ This chunk contains information about the game and the hacker.
   * ```L44``` Unknown. 0x10 byte length.
   * ```L45``` Unknown. 0x5E byte length.
 
-  * ```L46``` [Map notes](mapInformation.md)
-  * ```L47``` [Map notes pointer](mapInformation.md)
+  * ```L46``` [Map notes](mapInformation.md#map-notes)
+  * ```L47``` [Map notes pointer](mapInformation.md#map-notes)
 
   * ```L48``` Unknown. 0x30 byte length.
   * ```L49``` Unknown. 0x1C0 byte length, all zeroes.
-  * ```L50``` Unknown int16. ```0x0000``` for all maps. 
+  * ```L50``` Unknown int16. ```0x0000``` for all maps.
   * ```L51``` Unknown. Up to 64 of 15 byte entries.
   * ```L52``` Unknown int16.
   * ```L53``` Unknown. 0x40 byte length, all zeroes.
-

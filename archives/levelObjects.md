@@ -61,30 +61,14 @@ In the following chunks, all tables have entries with a common prefix.
     0002  int16  Previous
     0004  int16  Next
 
-#### Level Weapon Table (Class 0)
+The ```Previous``` and ```Next``` fields form a double-linked list within the same table. The first and last entries are linked together, so an endless loop is created.
 
-```L10``` is a table describing weapons and entries extend the prefix with their current ammo or charge.
+#### Class Tables and Entries
 
-**Level Weapon Entry** (8 bytes)
+* ```L10``` [Weapons](../levelObjects/00_Weapons/levelWeaponEntry.md)
+* ```L11``` [Ammo Clips](../levelObjects/01_AmmoClips/levelAmmoClipEntry.md)
+* ```L18``` [Items](../levelObjects/08_Items/levelItemEntry.md)
 
-    0000  [6]byte  Level object prefix
-    0006  byte     Ammo type / Charge
-    0007  byte     Ammo count / Temperature
+### Class Extra Information
 
-#### Level Ammo Clip Table (Class 1)
-
-```L11``` is a table for ammo clips. Since clips are always full, entries have no further fields.
-
-**Level Ammo Clip Entry** (6 bytes)
-
-    0000  [6]byte  Level object prefix
-
-#### Level Item Table (Class 8)
-
-```L18``` describes general items
-
-**Level Item Entry** (16 bytes)
-
-    0000  [6]byte   Level object prefix
-    0008  [10]byte  Unknown
-
+Each level has 15 further chunks, ```L25``` to ```L39```, one for each object class. The length of these chunks is the same as for one class entry from the corresponding specific entries. Most of the time, all their bytes are 0x00.
