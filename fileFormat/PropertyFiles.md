@@ -10,20 +10,19 @@ This file contains a single table of texture property entries.
 
 
 ### Object Properties (objprop.dat)
-The object properties file contains several tables about object properties. It has the following format:
+The object properties file contains several tables about properties of [level objects](../levelObjects/index.md). It has the following format:
 
     | Magic | Class 0 Tables   | Class 1 Tables     | ... | Common Table |
 
-Objects are identified through class, subclass and type.
+#### Header
+The file starts with a 4-byte header, purpose unknown.
 
 **Magic Header** (4 bytes)
-
-The file starts with a 4-byte header, purpose unknown.
 
     0000  int32  magic header, value 0x2D
 
 #### Class Tables
-For each object class, one file entry exists with a table of class-generic properties and a further table, subclass-specific:
+For each object class, one entry exists with a table of class-generic properties and a further table, subclass-specific:
 
     | Class N Tables                                           |
     | Generic | Subclass 0   | Subclass 1   | ... | Subclass N |

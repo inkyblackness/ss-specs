@@ -1,15 +1,6 @@
 ## Level Objects
 
-A level object is anything that is not part of the basic level layout (the tile map).
-
-Objects are identified using three values. They are divided by class, subclass and type. In this documentation such an identifier will be written as ```c/s/t```. For example, the cyberjack port is ```9/2/0```.
-
-Information about level objects exists in two forms:
-* Static properties, describing an object in general
-* Instance data, describing the state of a specific object instance in the game
-
-The static properties are stored in a separate file. See [Property Files](../fileFormat/PropertyFiles.md).
-Instance data is stored as part of an archive. Two chunks describe general information, then further chunks are object class specific.
+Instance data of [Level Objects](../levelObjects/index.md) is stored as part of an archive. Two chunks describe general information, then further chunks are object class specific.
 
 ### General Information
 
@@ -57,9 +48,9 @@ In the following chunks, all tables have entries with a common prefix.
 
 **Level Object Prefix** (6 bytes)
 
-    0000  int16  Index into level object entry table
-    0002  int16  Previous
-    0004  int16  Next
+    0000  int16    Index into level object entry table
+    0002  int16    Previous
+    0004  int16    Next
 
 The ```Previous``` and ```Next``` fields form a double-linked list within the same table. The first and last entries are linked together, so an endless loop is created.
 
@@ -71,4 +62,4 @@ The ```Previous``` and ```Next``` fields form a double-linked list within the sa
 
 ### Class Extra Information
 
-Each level has 15 further chunks, ```L25``` to ```L39```, one for each object class. The length of these chunks is the same as for one class entry from the corresponding specific entries. Most of the time, all their bytes are 0x00.
+Each level has 15 further chunks, ```L25``` to ```L39```, one for each object class. The length of these chunks is the same as for one class entry of the corresponding specific entries. Most of the time, all their bytes are 0x00.
