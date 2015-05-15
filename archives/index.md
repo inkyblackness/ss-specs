@@ -13,10 +13,19 @@ On the following pages, chunks identified as ```LXX``` refer to level-specific c
 ### Name of archive, chunk 0x0FA0 (4000)
 This chunk contains the name of the archive (title of the save-game). It is a 0x00 terminated string, with a dynamic length of up to 32 bytes (including the termination character).
 
-> The archive.dat file contains garbage after the name in this chunk, up to a complete length of 128 bytes. A save-game file has only the name in this chunk. The name of the template archive is "Starting Game".
+> The archive.dat file contains extra (unknown) data after the name in this chunk, up to a complete length of 128 bytes. A save-game file has only the name in this chunk. The name of the template archive is "Starting Game".
 
 ### [Game state chunk 0x0FA1 (4001)](gameState.md)
 This chunk contains information about the game and the hacker.
+
+### Additional Chunks
+
+Save-game files contain 4 further chunks that are not present in archive.dat :
+
+* 0x0000 Unknown int32. ```0x00000000``` at first investigation
+* 0x024E Unknown.
+* 0x024F Unknown.
+* 0x0F9F Unknown int32. ```0x00004444``` at first investigation
 
 ## Index
 
