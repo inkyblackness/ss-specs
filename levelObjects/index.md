@@ -2,7 +2,7 @@
 
 A level object is anything that is not part of the basic level layout (the tile map).
 
-Objects are identified using three values. They are divided by class, subclass and type. In this documentation such an identifier will be written as ```c/s/t```. For example, the cyberjack port is ```9/2/0```.
+Objects are identified using three values. They are divided by class, subclass and type. In this documentation such an identifier will be written as ```c/s/t```. For example, the energy charge station is ```9/2/1```.
 
 Information about level objects exists in two places:
 * Static properties, describing an object in general

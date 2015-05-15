@@ -7,13 +7,23 @@
     0000  [6]byte   Level object prefix
     0008  [10]byte  Scenery Info
 
-### Screens 7/2/6
+### Decal 7/2/1
+
+### Control Pedestal 7/4/0
+
+### Surgery Machines 7/4/3
+
+### Camera 7/5/4
+
+### Bridges 7/7/0
+
+### Screens 7/2/6, 7/2/9
 
 **Screen Info** (10 bytes)
 
     0000  int16     Frame count
-	 0002  int16     Unknown
-	 0006  int16     Picture source
+    0002  int16     Unknown
+    0006  int16     Picture source
 
 **Picture Source**
 
