@@ -30,7 +30,7 @@ This chunk contains information about the game and the hacker.
   * ```L03``` Unknown int32. ```0x0000001B``` for all maps.
   * ```L04``` [Basic level information](mapInformation.md)
   * ```L05``` [Map Layout](mapInformation.md)
-  * ```L06``` Unknown. 8 bytes per map, L1 has 16 (with info doubled).
+  * ```L06``` Unknown. Multiple of 8 bytes per map, starting with 8.
   * ```L07``` [Level texture map](mapInformation.md)
   * ```L08``` [Master object table](levelObjects.md#level-object-table)
   * ```L09``` [Level object cross-reference table](levelObjects.md#level-object-cross-reference-table)
