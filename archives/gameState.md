@@ -27,7 +27,7 @@ This chunk contains everything about the hacker, together with general game-stat
                    0x10: Beta Grove enabled
                    0x80: Beta Grove launched
     00B8  uint8    Station State (?) - default; 0xE5
-                   0x10: Life pods enabled, reactor on destruct 
+                   0x10: Life pods enabled, reactor on destruct
 
     00C8  byte     Option: Online Help (0: off, 2: on)
 
@@ -75,10 +75,9 @@ This chunk contains everything about the hacker, together with general game-stat
 
     051b  int32    tilt (plus further bytes...)
 
-    0521  byte     map X tile (east/west)
-    0522  byte     ???
-    0524  uint16   in-tile Y (?)
-    0525  byte     map Y tile (north/south)
+    0520  int16    X Coordinate (east/west)
+
+    0524  int16    Y Coordinate (north/south)
 
     0528  uint16   height above ground. standard head height: 0x00BD
     052C  float32  pitch. 0 is facing East, going clockwise  
@@ -107,4 +106,3 @@ For the MFD[s] map displays the game stores 0x05 for side view, apparently treat
 #### Options not determined:
 * Option: Joystick
 * Option: Video, Headset
-
