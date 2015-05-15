@@ -33,6 +33,7 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
   * [Map Information](mapInformation.md)
   * [Level Objects](levelObjects.md)
   * [Surveillance Sources](surveillanceSources.md)
+  * [Loop Configuration](loopConfiguration.md)
 
 * By level-specific chunk ID
   * ```L02``` Unknown int32. ```0x0000000B``` for all maps.
@@ -61,6 +62,6 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
   * ```L48``` Unknown. 0x30 byte length.
   * ```L49``` Unknown. 0x1C0 byte length, all zeroes.
   * ```L50``` Unknown int16. ```0x0000``` for all maps.
-  * ```L51``` Unknown. Up to 64 of 15 byte entries.
+  * ```L51``` [Loop Configuration](loopConfiguration.md)
   * ```L52``` Unknown int16.
   * ```L53``` Unknown. 0x40 byte length, all zeroes.
