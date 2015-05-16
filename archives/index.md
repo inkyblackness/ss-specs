@@ -35,6 +35,7 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
   * [Surveillance Sources](surveillanceSources.md)
   * [Loop Configuration](loopConfiguration.md)
 
+
 * By level-specific chunk ID
   * ```L02``` Unknown int32. ```0x0000000B``` for all maps.
   * ```L03``` Unknown int32. ```0x0000001B``` for all maps.
@@ -47,9 +48,9 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
   * ```L10``` to ```L24``` 15 object [class specific tables](levelObjects.md#class-tables-and-entries)
   * ```L25``` to ```L39``` 15 object [class extra info](levelObjects.md#class-extra-information)
 
-  * ```L40``` Unknown int32. ```0x0000000D``` for all maps.
+  * ```L40``` Unknown int32. For all maps: ```CD-Release```: ```0x0000000D```. All other: ```0x0000000B```
   * ```L41``` Unknown byte. ```0x00``` for all maps.
-  * ```L42``` Unknown. 0x1C * 0x00
+  * ```L42``` Unknown. Size of 0x1C bytes; Many levels have it 0x00.
 
   * ```L43``` [Surveillance sources](surveillanceSources.md)
 
@@ -63,5 +64,5 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
   * ```L49``` Unknown. 0x1C0 byte length, all zeroes.
   * ```L50``` Unknown int16. ```0x0000``` for all maps.
   * ```L51``` [Loop Configuration](loopConfiguration.md)
-  * ```L52``` Unknown int16.
-  * ```L53``` Unknown. 0x40 byte length, all zeroes.
+  * ```L52``` Unknown int16. (Only present in ```CD-Release```)
+  * ```L53``` Unknown. 0x40 byte length, all zeroes. (Only present in ```CD-Release```)
