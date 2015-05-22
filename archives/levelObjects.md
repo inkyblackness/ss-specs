@@ -6,7 +6,7 @@ Instance data of [Level Objects](../levelObjects/index.md) is stored as part of 
 
 #### Level Object Table
 
-```L08``` contains a table with general entries about the objects in the current level.
+```L08```, a compressed chunk, contains a table with general entries about the objects in the current level. This table contains 872 entries, which form a double-linked list with their ```Previous``` and ```Next``` fields.
 
 **Level Object Entry** (27 bytes)
 
@@ -28,7 +28,7 @@ Instance data of [Level Objects](../levelObjects/index.md) is stored as part of 
 
 #### Level Object Cross-Reference Table
 
-```L09``` is a table that links level objects and the tiles they are in. The index field in the [Tile Map Entry](mapInformation.md) refers to this table, as well as the table index field in the **Level Object Entry**.
+```L09```, a compressed chunk, is a table that links level objects and the tiles they are in. The index field in the [Tile Map Entry](mapInformation.md) refers to this table, as well as the table index field in the **Level Object Entry**. This table contains 1600 entries, which form a single-linked list with the ```Index for next object``` field.
 
 **Level Object Cross-Reference Entry** (10 bytes)
 
@@ -40,7 +40,7 @@ Instance data of [Level Objects](../levelObjects/index.md) is stored as part of 
 
 Objects can extend over several tiles. In this case, the last field in this entry points to the next reference entry.
 
-> The chunk contains 1600 cross reference entries per level. Unused entries appear to simply refer to the next entry and have the remaining fiels 0 otherwise.
+> Unused entries appear to simply refer to the next entry and have the remaining fiels 0 otherwise.
 
 ### Class Specific Information
 
@@ -52,7 +52,11 @@ In the following chunks, all tables have entries with a common prefix.
     0002  int16    Previous
     0004  int16    Next
 
-The ```Previous``` and ```Next``` fields form a double-linked list within the same table. The first and last entries are linked together, so an endless loop is created.
+The ```Previous``` and ```Next``` fields form a double-linked list within the same table. The first and last entries are linked together, so an endless loop is created. All the tables have a static entry count and unused entries refer to an **Level Object Entry** that is not in use.
+
+> For the archives, this unused entry is always the first one, index 0.
+
+> The sum of all possible entries is slightly higher than the total count of possible **Level Object Entries**.
 
 #### Class Tables and Entries
 
