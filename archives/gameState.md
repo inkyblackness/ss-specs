@@ -92,6 +92,9 @@ This chunk contains everything about the hacker, together with general game-stat
 
 ### Notes
 
+#### New Game
+In archive.dat, this table is (nearly) all 0x00.
+
 #### 0x01D3/0x01D4
 For the MFD[s] map displays the game stores 0x05 for side view, apparently treating bit0 as a flag.
 
