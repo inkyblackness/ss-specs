@@ -4,7 +4,7 @@
 
 #### Level information
 
-```L04``` contains the basic information about a level (a map).
+```L04```, a compressed chunk, contains the basic information about a level (a map).
 
 **Level Information** (58 bytes)
 
@@ -24,11 +24,11 @@ The height factor is log2 (number of height units per tile width). For a height 
 > The height factor should always be 3. Although the engine does respect this value, any setting other than 3 will result in weird display.
 
 The placeholder has no use in the archives.
-> According to the documentation of TSSHP, this field is used as a placeholder for a pointer within the game logic. 
+> According to the documentation of TSSHP, this field is used as a placeholder for a pointer within the game logic.
 
 #### Tile map
 
-The tiles are described in ```L05```, a table of tile map entries. The first entry describes the lower left tile and the next entries go east first, then north (first columns, then rows).
+The tiles are described in the compressed chunk ```L05```, a table of tile map entries. The first entry describes the lower left tile and the next entries go east first, then north (first columns, then rows).
 
 **Tile Map Entry** (16 bytes)
 
