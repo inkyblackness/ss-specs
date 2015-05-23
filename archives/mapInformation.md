@@ -75,15 +75,32 @@ All non-open tiles are given as low -> high. Valleys have 3 vertices higher and 
 
 **Texture Info** (2 bytes)
 
-The texture info field contains index values into the texture list for the level.
+The texture info field contains information for the tile textures of the level.
+For real world, it contains index values into the texture list. Cyberspace levels specify the 'animation' type for floor and ceiling.
 
+    Real World:
     bits  0-5     Wall texture
     bits  6-10    Ceiling texture
     bits  11-15   Floor texture
 
+    Cyberspace:
+    bits  0-7     Floor animation
+    bits  8-15    Ceiling animation
+
 **Flags** (4 bytes)
 
+    Real World:
     0x80000000    Tile visited (automapper)
+    0x0F000000    Ceiling Shadow
+    0x000F0000    Floor shadow
+    0x0000F000    Music Index (dependent on world type real/cyber)
+    0x00000200    Remodeled flag ("spooky" music)
+    0x0000001F    Offset for wall textures
+
+    Cyberspace:
+    0x000F0000    Flight distortion/force
+    0x0000F000    Music Index
+    0x00000060    Game-Of-Life flags (either needs to be set)
 
 **State** (4 bytes)
 
