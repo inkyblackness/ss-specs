@@ -55,7 +55,7 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
   * ```L43``` [Surveillance sources](surveillanceSources.md)
 
   * ```L44``` Unknown. 0x10 byte length.
-  * ```L45``` Unknown. 0x5E byte length.
+  * ```L45``` [Level variables](levelVariables.md)
 
   * ```L46``` [Map notes](mapInformation.md#map-notes)
   * ```L47``` [Map notes pointer](mapInformation.md#map-notes)
