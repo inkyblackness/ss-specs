@@ -13,7 +13,7 @@
     0008  int32     Unknown       - always 6 in the archives.
     000C  int32     Unknown       - always 6 in the archives.
     0010  int32     Height shift
-    0014  int32     Placeholder                  - ignore
+    0014  int32     Placeholder   - ignore
     0018  int32     Cyberspace flag. 0: real life, 1: cyberspace
     001C  byte[30]  Unknown
 
@@ -69,19 +69,22 @@ The type is an enumeration with the following constants:
     0x10  ridge se->nw
     0x11  ridge sw->ne
 
-All non-open tiles are given as low -> high. Valleys have 3 vertices higher and one lower (at floor level). Ridges have one vertex higher and the remaining three at floor level. The given direction is that between the one vertex and its opposite one.
+All non-open tiles are given as low -> high. Valleys have 3 vertexes higher and one lower (at floor level). Ridges have one vertex higher and the remaining three at floor level. The given direction is that between the one vertex and its opposite one.
 
 
 **Floor/Ceiling Info** (1 byte)
 
     bits  0-4     Height (ceiling is units down)
-    bits  5-6     Orientation
+    bits  5-6     Texture rotation. When viewed from above: 1: 90°, 2: 180°, 3: 270° - always clockwise
     bit   7       Hazard flag. Floor has biohazard, ceiling has radiation hazard.
+
+The exact behaviour for the hazard flags is determined by the [level variables](levelVariables.md).
 
 **Texture Info** (2 bytes)
 
 The texture info field contains information for the tile textures of the level.
-For real world, it contains index values into the texture list. Cyberspace levels specify the 'animation' type for floor and ceiling.
+For real world, it contains index values into the texture map (see next chunk below).
+Cyberspace levels specify the 'animation' type for floor and ceiling.
 
     Real World:
     bits  0-5     Wall texture
@@ -98,8 +101,10 @@ For real world, it contains index values into the texture list. Cyberspace level
     0x80000000    Tile visited (automapper)
     0x0F000000    Ceiling Shadow
     0x000F0000    Floor shadow
-    0x0000F000    Music Index (dependent on world type real/cyber)
+    0x0000F000    Music Index
+    0x00000C00    Slope control. See below.
     0x00000200    Remodeled flag ("spooky" music)
+    0x00000100    Use wall texture from adjacent tile
     0x0000001F    Offset for wall textures
 
     Cyberspace:
@@ -107,15 +112,24 @@ For real world, it contains index values into the texture list. Cyberspace level
     0x0000F000    Music Index
     0x00000060    Game-Of-Life flags (either needs to be set)
 
+```Slope control``` specifies for the floor and ceiling how slopes (and valleys and ridges) should look like.
+
+    0:  Ceiling is inverted to floor; A slope height of 0x1F will have ceiling and floor seal of the tile.
+    1:  Ceiling is mirroring the floor; A slope height of 0x10 will have their most extent vertexes touch each other.
+    2:  Ceiling is flat.
+    3:  Floor is flat.
+
 **State** (4 bytes)
 
-> tbd
+Default value is ```0x000000FF```.
 
 
 ### Texture map
 
-This chunk is a list of int16 texture identifier in chunk ```L07```. The Texture Info fields in the tile map refer to these identifier.
-As a result, a level can use only up to 64 textures for walls, whereas the first 32 can be used for floor/ceiling as well.
+This chunk is a list of int16 texture identifier in chunk ```L07``` with a fixed length of 108 bytes.
+The ```Texture Info``` fields in the tile map refer to these identifier.
+Although the field for wall textures would allow for 64 textures, the chunk can only hold up to 54 textures.
+The first 32 textures can be used for floor/ceiling as well.
 
 > The engine caches these textures when reloading a savegame with the same level.
 > The 'texture' index for space is 0x00CD, the observation grating has 0x00B1 (ceiling on groves and bridge)
