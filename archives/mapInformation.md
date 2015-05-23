@@ -8,22 +8,27 @@
 
 **Level Information** (58 bytes)
 
-    0000  int32     Map width (number of tiles)  - always 64 in the archives.
-    0004  int32     Map height (number of tiles) - always 64 in the archives.
-    0008  int32     Unknown                      - always 6 in the archives.
-    000C  int32     Unknown                      - always 6 in the archvies.
-    0010  int32     Height factor                - always 3 in the archives.
+    0000  int32     Unknown       - always 64 in the archives.
+    0004  int32     Unknown       - always 64 in the archives.
+    0008  int32     Unknown       - always 6 in the archives.
+    000C  int32     Unknown       - always 6 in the archives.
+    0010  int32     Height shift
     0014  int32     Placeholder                  - ignore
     0018  int32     Cyberspace flag. 0: real life, 1: cyberspace
     001C  byte[30]  Unknown
 
 > The first four fields don't seem to be respected by the engine. A modification of these values does not show any result.
-> It seems these values are a leftover from the Underworld engine.
+> According to the documentation of TSSHP, these should specify the map width and height. The values add up, but as long as they
+> don't show any effect, they are useless.
 
-The height factor is log2 (number of height units per tile width). For a height factor of X, a regular tile with height 2^X is a perfect cube.
-> The height factor should always be 3. Although the engine does respect this value, any setting other than 3 will result in weird display.
+The ```Height shift``` determines the height of the level as well as the size of one height unit for tiles.
+The level is one tile width high (perfect cube) if the shift value is 5.
+A shift value of 0 gives 32 tiles of height, a value of 7 one fourth (1/4) of a tile. So it's 32, 16, 8, 4, 2, 1, 1/2, 1/4 for 0..7.
+> Most levels have a shift value of 3, giving 4 tile widths of height. Security (Level 8) has a shift value of 1 - 16 tiles.
 
-The placeholder has no use in the archives.
+One height unit is the 32th of the level height. The higher the level is, the larger are the visible jumps of any height value.
+
+The ```placeholder``` has no use in the archives.
 > According to the documentation of TSSHP, this field is used as a placeholder for a pointer within the game logic.
 
 #### Tile map
@@ -113,6 +118,7 @@ This chunk is a list of int16 texture identifier in chunk ```L07```. The Texture
 As a result, a level can use only up to 64 textures for walls, whereas the first 32 can be used for floor/ceiling as well.
 
 > The engine caches these textures when reloading a savegame with the same level.
+> The 'texture' index for space is 0x00CD, the observation grating has 0x00B1 (ceiling on groves and bridge)
 
 ### Map notes
 
