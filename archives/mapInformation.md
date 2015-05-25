@@ -105,10 +105,13 @@ Cyberspace levels specify the 'animation' type for floor and ceiling.
     0x00000C00    Slope control. See below.
     0x00000200    Remodeled flag ("spooky" music)
     0x00000100    Use wall texture from adjacent tile
+    0x00000080    Unknown
+    0x00000040    Unknown
+    0x00000020    Unknown
     0x0000001F    Offset for wall textures
 
     Cyberspace:
-    0x000F0000    Flight distortion/force
+    0x000F0000    Flight pull
     0x0000F000    Music Index
     0x00000060    Game-Of-Life flags (either needs to be set)
 
@@ -118,6 +121,30 @@ Cyberspace levels specify the 'animation' type for floor and ceiling.
     1:  Ceiling is mirroring the floor; A slope height of 0x10 will have their most extent vertexes touch each other.
     2:  Ceiling is flat.
     3:  Floor is flat.
+
+```Flight pull``` specifies what default translation/rotation forces are in play
+
+    0:   None
+    1:   Weak pull towards East
+    2:   Weak pull towards West
+    3:   Weak pull towards North
+    4:   Weak pull towards South
+    5:   Medium pull towards East
+    6:   Medium pull towards West
+    7:   Medium pull towards North
+    8:   Medium pull towards South
+    9:   Strong pull towards East
+    10:  Strong pull towards West
+    11:  Strong pull towards North
+    12:  Strong pull towards South
+    13:  Medium pull towards ceiling
+    14:  Medium pull towards floor
+    15:  Strong pull towards ceiling
+
+> The engine applies the force to the 'nose' of the hacker, i.e. it will pull the heading until the hacker looks straight
+> at the origin of the force. This causes the implicit rotation. Only if the heading is exactly opposite to the origin,
+> then no rotation happens (i.e., pulled backwards).
+> All but the 'Strong' pulls can be countered.
 
 **State** (4 bytes)
 
