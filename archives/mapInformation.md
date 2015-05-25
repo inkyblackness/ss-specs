@@ -33,7 +33,9 @@ The ```placeholder``` has no use in the archives.
 
 #### Tile map
 
-The tiles are described in the compressed chunk ```L05```, a table of tile map entries. The first entry describes the lower left tile and the next entries go east first, then north (first columns, then rows).
+The tiles are described in the compressed chunk ```L05```, a table of tile map entries. The first entry describes the lower left tile and the next entries go east first, then north (first columns, then rows). All levels have a size of 64x64 tiles as the engine supports (and expects) only this layout.
+
+The outermost tiles of the level (the 'border') should always be solid tiles. If these tiles are non-solid, the graphics engine may have rendering issues (walls not shown, just black) and entering these tiles freezes the game. This gives an effective available space of 62x62 tiles.
 
 **Tile Map Entry** (16 bytes)
 
