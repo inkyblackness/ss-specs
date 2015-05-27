@@ -9,3 +9,6 @@
 
 * Archives
   * [Archive Overview](archives/index.md)
+
+* Media
+  * [Sound Effects](media/SoundEffects.md)
