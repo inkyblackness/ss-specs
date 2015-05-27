@@ -22,7 +22,7 @@ The following is an extract of the above linked page, specialized to the use by 
     0018  uint16    Version number validation
 
     001A  byte      Sound data block type: 0x01
-    001B  [3]byte   Lenght of block data (sample count + 2)
+    001B  [3]byte   Length of block data (sample count + 2)
 
     001E  byte      Frequency divisor
     001F  byte      Codec ID (audio/L8: 0x00)
