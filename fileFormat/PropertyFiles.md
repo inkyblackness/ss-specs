@@ -6,8 +6,13 @@ This file contains a single table of texture property entries.
 
 **Texture Property Entry** (11 bytes)
 
-    tbd
-
+    0001  byte   Unknown
+    0002  byte   Animation group
+    0003  byte   Animation index within group
+    0004  byte   Unknown. Always low byte of table index.
+    0005  byte   Unknown. Always low byte of table index.
+    0006  int32  Unknown. Always 0x0A
+    000A  byte   Climbable flag: 1 for things like ladders and overgrowth
 
 ### Object Properties (objprop.dat)
 The object properties file contains several tables about properties of [level objects](../levelObjects/index.md). It has the following format:
