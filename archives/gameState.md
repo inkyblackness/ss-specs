@@ -73,6 +73,8 @@ This chunk contains everything about the hacker, together with general game-stat
     048E  byte     infrared active (0: off, 1: on)
     0498  byte     FullScreen control (0: off, 1: on)
 
+    0507  sint32   Kill count
+
     051b  int32    tilt (plus further bytes...)
 
     0520  int16    X Coordinate (east/west)
