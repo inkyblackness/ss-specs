@@ -12,3 +12,4 @@
 
 * Media
   * [Sound Effects](media/SoundEffects.md)
+  * [Audio Logs](media/AudioLogs.md)
