@@ -11,5 +11,6 @@
   * [Archive Overview](archives/index.md)
 
 * Media
+  * [Bitmaps](media/Bitmaps.md)
   * [Sound Effects](media/SoundEffects.md)
   * [Audio Logs](media/AudioLogs.md)
