@@ -70,3 +70,16 @@ value and copy an arbitrary array of bytes. For each of the three, two encoding 
 
 
 ### Private Palette
+
+The format also allows for an optional palette, which is specific for the bitmap. This is used for the splash screens at the beginning of the game,
+where nothing else is shown.
+If the image has no private palette, then this entry is not present and the chunk data ends directly after the pixel data.
+
+** Private Palette ** (772 bytes)
+
+    0000 [4]byte      Unknown. Always 0x00, 0x00, 0x00, 0x01
+    0004 [3*256]byte  RGB values
+
+> The only examples for this can be found in ```gamescr.res``` and ```splash.res```
+
+If no private palette is present, then the colours of the bitmap are context specific. See [Palettes](Palettes.md) for more information.
