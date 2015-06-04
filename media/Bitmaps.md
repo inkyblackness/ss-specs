@@ -10,19 +10,16 @@ Bitmaps are stored with a header, the pixel data (sometimes compressed), and an 
 
 ** Bitmap Header ** (28 bytes)
 
-    0000  [4]byte  Unknown. Always zero.
-    0004  int16    Type: 0x00, 0x02: Uncompressed; 0x04 Compressed
-    0006  int16    Unknown
-    0008  int16    Width
-    000A  int16    Height
-    000C  int16    Stride
-    000E  byte     WidthFactor
-    000F  byte     HeightFactor
-    0010  int16    HotspotBox
-    0012  int16    HotspotBox
-    0014  int16    HotspotBox
-    0016  int16    HotspotBox
-    0018  int32    Unknown
+    0000  [4]byte   Unknown. Always zero.
+    0004  int16     Type: 0x00, 0x02: Uncompressed; 0x04 Compressed
+    0006  int16     Unknown
+    0008  int16     Width
+    000A  int16     Height
+    000C  int16     Stride
+    000E  byte      WidthFactor
+    000F  byte      HeightFactor
+    0010  [4]int16  HotspotBox: Left, Top, Right, Bottom
+    0018  int32     Unknown
 
 The ```WidthFactor``` and ```HeightFactor``` specify the index of the highest set bit of ```Width``` and ```Height```
 respectively. For example, if Width is 320 (0x140), then the WidthFactor is 8 (1<<8 == 0x100).
