@@ -11,7 +11,7 @@ one specific palette is used throughout. This game palette is stored in ```gamep
 
 Palettes always have a size of 768 bytes, for 256 colors with 1 byte for each of the three colour channels.
 
-** Palette ** (768 bytes)
+**Palette** (768 bytes)
 
     0000  [256*3]byte  RGB values
 

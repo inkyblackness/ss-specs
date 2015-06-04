@@ -8,7 +8,7 @@ Bitmaps are stored with a header, the pixel data (sometimes compressed), and an 
 
 ### Header
 
-** Bitmap Header ** (28 bytes)
+**Bitmap Header** (28 bytes)
 
     0000  [4]byte   Unknown. Always zero.
     0004  int16     Type: 0x00, 0x02: Uncompressed; 0x04 Compressed
@@ -72,7 +72,7 @@ The format also allows for an optional palette, which is specific for the bitmap
 where nothing else is shown.
 If the image has no private palette, then this entry is not present and the chunk data ends directly after the pixel data.
 
-** Private Palette ** (772 bytes)
+**Private Palette** (772 bytes)
 
     0000 [4]byte      Unknown. Always 0x00, 0x00, 0x00, 0x01
     0004 [256*3]byte  RGB values

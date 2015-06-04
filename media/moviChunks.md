@@ -11,7 +11,7 @@ Such a chunk contains the following components:
 * an index, describing the following data entries, and
 * the data entries.
 
-*** MOVI Header *** (256 bytes)
+**MOVI Header** (256 bytes)
 
     0000  [4]byte  Container tag: "MOVI"
     0004  int32    Number of index entries
@@ -42,17 +42,17 @@ If the index table size is greater than the total of index entry number times on
 > The index table sizes come in multiples of 0x0400. The rough rule for recreating the existing index sizes is:
 > Required size less than 0x0400 -> Use 0x0400. Otherwise: Round up to next 0x0400 border and add another 0x0400.
 
-*** Palette *** (3*256 bytes)
+**Palette** (256*3 bytes)
 
 The palette is always present, even if the MOVI contains only audio. In such cases all the colour channels are 0x00.
 
-*** Index Table Entry *** (8 bytes)
+**Index Table Entry** (8 bytes)
 
     0000  [3]byte  Start timestamp (in unit of 1/0x10000 seconds)
     0003  byte     Entry type
     0004  int32    Offset to data (from beginning)
 
-*** Entry Type *** (1 byte)
+**Entry Type** (1 byte)
 
     bits  0-2      Data type
     bits  3-6      Extension info

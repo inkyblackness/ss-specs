@@ -12,5 +12,6 @@
 
 * Media
   * [Bitmaps](media/Bitmaps.md)
+  * [Palettes](media/Palettes.md)
   * [Sound Effects](media/SoundEffects.md)
   * [Audio Logs](media/AudioLogs.md)
