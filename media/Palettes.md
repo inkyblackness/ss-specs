@@ -13,7 +13,7 @@ Palettes always have a size of 768 bytes, for 256 colors with 1 byte for each of
 
 ** Palette ** (768 bytes)
 
-    0000  [3x256]byte  RGB values
+    0000  [256*3]byte  RGB values
 
 ### Transparency
 
@@ -35,4 +35,4 @@ The following groups (index values) are looped:
     0x18 - 0x1B
     0x1C - 0x1F
 
-> These groups are looped even while the game is paused. 
+> These groups are looped even while the game is paused.
