@@ -78,7 +78,7 @@ If the image has no private palette, then this entry is not present and the chun
 ** Private Palette ** (772 bytes)
 
     0000 [4]byte      Unknown. Always 0x00, 0x00, 0x00, 0x01
-    0004 [3*256]byte  RGB values
+    0004 [256*3]byte  RGB values
 
 > The only examples for this can be found in ```gamescr.res``` and ```splash.res```
 
