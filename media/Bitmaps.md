@@ -53,17 +53,17 @@ value and copy an arbitrary array of bytes. For each of the three, two encoding 
 > (```00 04 00``` instead of ```84```) - or accepted as part of an arbitrary array (```02 00 00``` instead of ```82```).
 >
 > To implement a compressor that creates output closest to the original content, use the following sequence:
-> 1. From an array of bytes with length X, calculate the count Z of bytes with value 0x00 at the end. Compress only N bytes, where N = X - (Z % 0x7FFF).
->    The final sequence ```80 00 00``` implies to fill the remaining buffer of the expected output with zeroes. The encoder
->    seems to have had a limit of counting only up to 0x7FFF zeroes.
-> 2. Iterate through the pixel data from start to N:
->    1. Count the extent of same value bytes
->    2. Determine encoding method
+> * From an array of bytes with length X, calculate the count Z of bytes with value 0x00 at the end. Compress only N bytes, where N = X - (Z % 0x7FFF).
+>   The final sequence ```80 00 00``` implies to fill the remaining buffer of the expected output with zeroes. The encoder
+>   seems to have had a limit of counting only up to 0x7FFF zeroes.
+> * Iterate through the pixel data from start to N:
+>    * Count the extent of same value bytes
+>    * Determine encoding method
 >       * If the byte value is ```0x00```, encode the count of zero bytes
 >       * Otherwise, if the count is more than three, encode the count and the constant value
 >       * Otherwise, count the extent of an arbitrary array; Abort when a zero value is detected, or more than three same values are found in sequence; Encode this array.
->    3. Skip the input bytes that have been serialized and continue with the loop
-> 3. Encode end of compressed data sequence.
+>    * Skip the input bytes that have been serialized and continue with the loop
+> * Encode end of compressed data sequence.
 
 
 ### Private Palette
