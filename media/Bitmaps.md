@@ -45,8 +45,9 @@ The compressed byte-stream contains the following byte sequences:
     80 lo hi zz  0xC0 < hi: write (nnnn & 0x3FFF) bytes of value zz
     nn           0x80 < nn: write (nn & 0x7F) zeroes
 
-So, for store pixel data, three cases exist: compress a list of zeroes, compress a list of a constant
-value and copy an arbitrary array of bytes. For each of the three, two encoding variants are used: a short and a long form. If a count is to be serialized that is higher than the long-form can store, the encoder uses the long-form to reduce this number to finalize with the short-form.
+Three cases exist to store pixel data: compress a list of zeroes, compress a list of a constant
+value and copy an arbitrary array of bytes. For each of the three, two encoding variants are used: a short and a long form.
+If a count is to be serialized that is higher than the long-form can store, the encoder uses the long-form to reduce this number to finalize with the short-form.
 
 > The original resource files are not entirely consistent about the rules when to apply which storage method. For example,
 > in general, zeroes are compressed on their own, and there are cases where zeroes would be encoded as general constant
