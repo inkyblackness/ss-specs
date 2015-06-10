@@ -11,7 +11,7 @@ Bitmaps are stored with a header, the pixel data (sometimes compressed), and an 
 **Bitmap Header** (28 bytes)
 
     0000  [4]byte   Unknown. Always zero.
-    0004  int16     Type: 0x00, 0x02: Uncompressed; 0x04 Compressed
+    0004  int16     Type: 0x02: Uncompressed; 0x04 Compressed
     0006  int16     Unknown
     0008  int16     Width
     000A  int16     Height
@@ -19,7 +19,7 @@ Bitmaps are stored with a header, the pixel data (sometimes compressed), and an 
     000E  byte      WidthFactor
     000F  byte      HeightFactor
     0010  [4]int16  HotspotBox: Left, Top, Right, Bottom
-    0018  int32     Unknown
+    0018  int32     Private palette offset
 
 The ```WidthFactor``` and ```HeightFactor``` specify the index of the highest set bit of ```Width``` and ```Height```
 respectively. For example, if Width is 320 (0x140), then the WidthFactor is 8 (1<<8 == 0x100).
@@ -69,15 +69,22 @@ If a count is to be serialized that is higher than the long-form can store, the 
 
 ### Private Palette
 
-The format also allows for an optional palette, which is specific for the bitmap. This is used for the splash screens at the beginning of the game,
-where nothing else is shown.
-If the image has no private palette, then this entry is not present and the chunk data ends directly after the pixel data.
+The format also allows for an optional palette, which is specific for the bitmap. If an image has no private palette, then this
+entry is not present and the chunk data ends directly after the pixel data.
+Without a private palette, the colours of the bitmap are context specific. See [Palettes](Palettes.md) for more information.
+
+Private palettes are used for the splash screens at the beginning of the game, where nothing else is shown.
+The ```Private palette offset``` in the bitmap header specifies the absolute offset *from the beginning* of the chunk to the private palette entry. This means in case of a chunk with a directory, this offset measures across the previous chunk blocks as well.
 
 **Private Palette** (772 bytes)
 
     0000 [4]byte      Unknown. Always 0x00, 0x00, 0x00, 0x01
     0004 [256*3]byte  RGB values
 
-> The only examples for this can be found in ```gamescr.res``` and ```splash.res```
-
-If no private palette is present, then the colours of the bitmap are context specific. See [Palettes](Palettes.md) for more information.
+> The only working examples for this can be found in ```splash.res```.
+>
+> The resource file ```gamescr.res``` also contains three bitmaps with a private palette, but these palettes are not used and are ignored by the engine.
+> The three bitmaps in question are the help overlay (```ALT+o```), and are shown with the game world in the background. Since in these
+> cases the world can't change its colour, the screen can't use a private palette. By extension, the side-effects of the "Berserk" patch
+> also affect the colours of the help overlay.
+> Furthermore, for these three bitmaps, the offset field is wrong as well.
