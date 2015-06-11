@@ -87,4 +87,4 @@ The ```Private palette offset``` in the bitmap header specifies the absolute off
 > The three bitmaps in question are the help overlay (```ALT+o```), and are shown with the game world in the background. Since in these
 > cases the world can't change its colour, the screen can't use a private palette. By extension, the side-effects of the "Berserk" patch
 > also affect the colours of the help overlay.
-> Furthermore, for these three bitmaps, the offset field is wrong as well.
+> Furthermore, for these three bitmaps, the values of offset fields are wrong as well.
