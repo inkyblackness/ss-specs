@@ -52,6 +52,20 @@ The following chunk types are known:
 
 Flat chunks contain only one data block, which is the complete chunk data itself. Chunks with a directory contain 0 or more blocks.
 
+### Content Types
+
+The following content types are known:
+
+    0x00  Palette
+    0x01  Text
+    0x02  Bitmap
+    0x03  Font
+    0x04  Video clip
+    0x07  Sound effect
+    0x0F  3D model
+    0x11  MOVI chunk
+    0x30  Archive
+
 ### Chunks with Directories
 If a chunk has a type specifying a directory, the chunk data starts with a directory. This directory contains relative offsets to the first bytes of the contained blocks, following the directory.
 
