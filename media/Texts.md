@@ -1,14 +1,18 @@
 ## Texts
 
 All texts are stored in the language specific files ```cybstrng.res```, ```frnstrng.res``` and ```gerstrng.res```.
-These files contain 188 chunks of type ```0x01```. These chunks are directories with several blocks. Each block contains
+These files contain 188 chunks of type ```0x01```. The chunks are directories with several blocks. Each block contains
 one string, which is always 0x00 terminated.
 
 While the English strings may be readable according to standard ASCII, with the French and German options, texts
-need to be interpreted according to [DOS codepage 850](http://en.wikipedia.org/wiki/Code_page_850).
+need to be interpreted according to the DOS [code page 850](http://en.wikipedia.org/wiki/Code_page_850).
 
 > Since texts are always presented through the game fonts, any one-byte codepage can be used - As long as the
 > corresponding font bitmaps match for the requested characters (bytes).
+
+### Control Characters
+
+For texts with multiple lines, ```0x0A``` acts as a newline marker.
 
 ### Chunk Overview
 

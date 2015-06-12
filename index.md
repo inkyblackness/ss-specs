@@ -10,9 +10,14 @@
 * Archives
   * [Archive Overview](archives/index.md)
 
-* Media
+* Raw Media
   * [Bitmaps](media/Bitmaps.md)
   * [Palettes](media/Palettes.md)
   * [Sound Effects](media/SoundEffects.md)
-  * [Audio Logs](media/AudioLogs.md)
+  * [MOVI Chunks](media/moviChunks.md)
+    * [Audio Logs](media/AudioLogs.md)
   * [Video Mails](media/VideoMails.md)
+  * [Texts](media/Texts.md)
+
+* Content
+  * [Level Objects](levelObjects/index.md)
