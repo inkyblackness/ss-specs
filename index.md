@@ -15,9 +15,9 @@
   * [Palettes](media/Palettes.md)
   * [Sound Effects](media/SoundEffects.md)
   * [MOVI Chunks](media/moviChunks.md)
-    * [Audio Logs](media/AudioLogs.md)
   * [Video Mails](media/VideoMails.md)
   * [Texts](media/Texts.md)
 
 * Content
   * [Level Objects](levelObjects/index.md)
+  * [Electronic Messages](content/ElectronicMessages.md)

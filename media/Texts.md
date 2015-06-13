@@ -14,6 +14,8 @@ need to be interpreted according to the DOS [code page 850](http://en.wikipedia.
 
 For texts with multiple lines, ```0x0A``` acts as a newline marker.
 
+```0x02``` is a soft-hyphen between syllables. Not all texts contain this character.
+
 ### Chunk Overview
 
 * 0x0867 Trap messages, one per block
@@ -50,13 +52,16 @@ For texts with multiple lines, ```0x0A``` acts as a newline marker.
 
 * 0x003C - 0x0046  Paper text messages
 
-* 0x0989 - 0x09B6  E-Reader messages
-* 0x09B8 - 0x09BD  ...
-* 0x09C8 - 0x09E4
+#### Electronic Messages
+
+* 0x0989 - 0x09B6  E-Mails
+* 0x09B8 - 0x09BD  Level R logs
+* 0x09C8 - 0x09D7  Level 1 Logs
+* 0x09D8 - 0x09E4  ...
 * 0x09E8 - 0x09F0
 * 0x09F8 - 0x09FE
 * 0x0A08 - 0x0A13
 * 0x0A18 - 0x0A21
 * 0x0A28 - 0x0A30
-* 0x0A38 - 0x0A3D
-* 0x0A98 - 0x0AA4
+* 0x0A38 - 0x0A3D  Level 8 logs
+* 0x0A98 - 0x0AA4  Data fragments
