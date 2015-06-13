@@ -5,7 +5,7 @@ This means e-mails (including video mails), logs and data fragments - everything
 
 ### Text Format
 
-The [text chunks](../media/Texts.md#Electronic_Messages) for the messages contain both the content, as well as the
+The [text chunks](../media/Texts.md#electronic-messages) for the messages contain both the content, as well as the
 meta information, encoded in text form. Any such message chunk has the following string blocks:
 
     1 line   Meta info

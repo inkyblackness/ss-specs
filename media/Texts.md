@@ -52,7 +52,7 @@ For texts with multiple lines, ```0x0A``` acts as a newline marker.
 
 * 0x003C - 0x0046  Paper text messages
 
-#### Electronic Messages
+#### [Electronic Messages](../content/ElectronicMessages.md)
 
 * 0x0989 - 0x09B6  E-Mails
 * 0x09B8 - 0x09BD  Level R logs
