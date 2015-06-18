@@ -12,12 +12,12 @@ how many further textures are used for this animation. These then have all to be
 The properties of the first texture determine how the remaining will behave (climbable, ...)
 
 > Since most textures have their animation group set to 0x00 and have no animation, the first entry in this
-> table is unused and always 0.
+> table is unused and the bytes always 0.
 
 **Animation Entry** (7 bytes)
 
     0000  int16  Frame time (in milliseconds)
-    0002  int16  Unknown
+    0002  int16  Current frame time
     0004  byte   Current frame index
     0005  byte   Number of frames for loop
     0006  byte   Loop type
