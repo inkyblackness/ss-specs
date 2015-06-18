@@ -50,7 +50,7 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
 
   * ```L40``` Unknown int32. For all maps: ```CD-Release```: ```0x0000000D```. All other: ```0x0000000B```
   * ```L41``` Unknown byte. ```0x00``` for all maps.
-  * ```L42``` Unknown. Size of 0x1C bytes; Many levels have it 0x00.
+  * ```L42``` [Texture animation](textureAnimation.md)
 
   * ```L43``` [Surveillance sources](surveillanceSources.md)
 
