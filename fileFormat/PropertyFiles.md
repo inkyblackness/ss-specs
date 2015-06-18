@@ -1,18 +1,44 @@
 ## Property Files
-A few files don't have an archive format, but are flat files consisting directly serialized tables.
+A few files don't have an archive format, and instead are flat files consisting directly serialized tables.
 
 ### Texture Properties (textprop.dat)
-This file contains a single table of texture property entries.
+This file contains a single table of texture property entries, after a magic header value.
+
+> The table appears to be truncated. Since the game only uses 273 textures, this may have never been detected.
+> The file has 4004 bytes on disk, meaning 4000 bytes are available for the table.
+> In a test, the original engine appeared to be fine to read a smaller file with exactly 273 entries (3007 bytes) -
+> which had the unknown fields set to zero.
+
+#### Header
+The file starts with a 4-byte header, purpose unknown.
+
+**Magic Header** (4 bytes)
+
+    0000  int32  magic header, value 0x09
+
+#### Properties Entry
 
 **Texture Property Entry** (11 bytes)
 
-    0001  byte   Unknown
-    0002  byte   Animation group
-    0003  byte   Animation index within group
-    0004  byte   Unknown. Always low byte of table index.
-    0005  byte   Unknown. Always low byte of table index.
-    0006  int32  Unknown. Always 0x0A
-    000A  byte   Climbable flag: 1 for things like ladders and overgrowth
+    0000  [2]byte  Unknown
+    0002  int32    Unknown
+    0006  byte     Climbable. 0x00: not climbable; != 0x00: wall can be climbed
+    0007  byte     Unknown. Always 0x00
+    0008  byte     Transparency control
+    0009  byte     Animation group
+    000A  byte     Animation index - if texture is animated
+
+> The two bytes at the beginning almost always are each set to the low-byte of the index. A few exceptions have both bytes 0x00.
+> The second field at offset ```0002``` is nearly always ```0x0A```; The one existing exception has it 0.
+
+See [Texture Animation](../archives/textureAnimation.md) for details on animated textures.
+
+**Transparency Control**
+
+    0x00  Regular texture; transparent pixel (palette index 0x00) are drawn black
+    0x01  Space texture (pixel data of image is ignored)
+    0x02  Texture with space background for transparent pixels
+
 
 ### Object Properties (objprop.dat)
 The object properties file contains several tables about properties of [level objects](../levelObjects/index.md). It has the following format:
