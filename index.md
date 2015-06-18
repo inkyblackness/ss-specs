@@ -19,5 +19,6 @@
   * [Texts](media/Texts.md)
 
 * Content
-  * [Level Objects](levelObjects/index.md)
   * [Electronic Messages](content/ElectronicMessages.md)
+  * [Level Objects](levelObjects/index.md)
+  * [Level Textures](content/LevelTextures.md)
