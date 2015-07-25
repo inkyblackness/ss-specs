@@ -32,7 +32,7 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
 * By topic
   * [Map Information](mapInformation.md)
   * [Level Objects](levelObjects.md)
-  * [Surveillance Sources](surveillanceSources.md)
+  * [Surveillance Screens](surveillanceScreens.md)
   * [Loop Configuration](loopConfiguration.md)
 
 
@@ -50,13 +50,11 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
 
   * ```L40``` Unknown int32. For all maps: ```CD-Release```: ```0x0000000D```. All other: ```0x0000000B```
   * ```L41``` Unknown byte. ```0x00``` for all maps.
+
   * ```L42``` [Texture animation](textureAnimation.md)
-
-  * ```L43``` [Surveillance sources](surveillanceSources.md)
-
-  * ```L44``` Unknown. 0x10 byte length.
+  * ```L43``` [Surveillance Sources](surveillanceScreens.md)
+  * ```L44``` [Surveillance Screen Deathwatch](surveillanceScreens.md)
   * ```L45``` [Level variables](levelVariables.md)
-
   * ```L46``` [Map notes](mapInformation.md#map-notes)
   * ```L47``` [Map notes pointer](mapInformation.md#map-notes)
 
