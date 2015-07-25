@@ -108,8 +108,8 @@ Cyberspace levels specify the 'animation' type for floor and ceiling.
     0x00000200    Remodeled flag ("spooky" music)
     0x00000100    Use wall texture from adjacent tile
     0x00000080    Unknown
-    0x00000040    Unknown
-    0x00000020    Unknown
+    0x00000040    Flip texture horizontally alternating
+    0x00000020    Flip texture horizontally
     0x0000001F    Offset for wall textures
 
     Cyberspace:
@@ -123,6 +123,22 @@ Cyberspace levels specify the 'animation' type for floor and ceiling.
     1:  Ceiling is mirroring the floor; A slope height of 0x10 will have their most extent vertexes touch each other.
     2:  Ceiling is flat.
     3:  Floor is flat.
+	
+```Flip texture horizontally```
+
+Textures are flipped horizontally.
+Wall textures in North/South axis and West/East axis are flipped separately.
+Flipping must be handled in following order.
+
+If `0x00000040` is set
+
+    flipNS = ((tileX & 1) == 1) ^ ((tileY & 1) == 0)
+    flipWE = !flipNS
+	
+If `0x00000020` is set invert both
+
+    flipNS = !flipNS
+    flipWE = !flipWE
 
 ```Flight pull``` specifies what default translation/rotation forces are in play
 
