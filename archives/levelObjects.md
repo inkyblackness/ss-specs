@@ -23,11 +23,8 @@ Instance data of [Level Objects](../levelObjects/index.md) is stored as part of 
     0010  [3]byte  Rotation Angles
     0013  byte     Unknown
     0014  byte     Object type
-    0015  int16    Hitpoints
-    0017  byte  Unknown
-	0018  byte  State
-	0019  byte  Unknown
-	0020  byte  Unknown
+    0015  int16    Unknown
+    0017  [4]byte  Unknown
 
 #### Level Object Cross-Reference Table
 
