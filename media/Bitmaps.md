@@ -28,7 +28,7 @@ respectively. For example, if Width is 320 (0x140), then the WidthFactor is 8 (1
 
 ### Pixel Data
 
-After the header, the pixel data is serialized. If uncompressed (Types ```0x00``` and ```0x02```),
+After the header, the pixel data is serialized. If the image is uncompressed (Type ```0x02```),
 ```Height``` x ```Stride``` bytes make up the image. Compressed images (Type ```0x04```) use a simple run-length-encoding (RLE).
 
 #### Pixel Compression
