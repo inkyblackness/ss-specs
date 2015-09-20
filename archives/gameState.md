@@ -22,7 +22,7 @@ This chunk contains everything about the hacker, together with general game-stat
     00B6  512xbool Boolean game variables
                    Game variables are set by SetVariable action in trigger objects
                    Variable is set here when 0x1000 bit is false in the key
-                   Key is 0x01FFF masked to get index
+                   Key is 0x01FF masked to get index
     
                    Known boolean game variable indices:
                    7 Shield on
