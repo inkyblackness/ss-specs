@@ -19,18 +19,25 @@ This chunk contains everything about the hacker, together with general game-stat
     00AC  byte     Power 0x00..0xFF
     00AD  uint8    Power usage in JPM
 
-    00B6  uint8    Station State (?) - default: 0x0E
-                   0x40: Shield on
-    00B7  uint8    Station State (?) - default: 0x00
-                   0x01: Laser destroyed
-                   0x08: Alpha Grove enabled
-                   0x10: Beta Grove enabled
-                   0x80: Beta Grove launched
-    00B8  uint8    Station State (?) - default; 0xE5
-                   0x10: Life pods enabled, reactor on destruct
-
-    00C8  byte     Option: Online Help (0: off, 2: on)
-
+    00B6  512xbool Boolean game variables
+                   Game variables are set by SetVariable action in trigger objects
+                   Variable is set here when 0x1000 bit is false in the key
+                   Key is 0x01FFF masked to get index
+    
+                   Known boolean game variable indices:
+                   7 Shield on
+                   10 Delta	grove enabled
+                   11 Alpha grove enabled
+                   12 Beta grove enabled
+                   15 Beta grove launched
+                   21 Life pods enabled, reactor on destruct
+                   145 Online help
+    
+    00F6  40xuint16 Accumulating game variables
+                   Game variables are set by SetVariable action in trigger objects
+                   Variable is set here when 0x1000 bit is true in the key
+                   Key is 0x003F masked to get index
+    
     0148  byte     Option: Audio, Music Volume (0x00 .. 0x64)
     014A  uint16   Option: Video, Gamma (Default: 0x4A3D)
     014C  byte     Option: Audio, Digital FX Volume (0x00 .. 0x64)
