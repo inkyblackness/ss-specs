@@ -127,7 +127,7 @@ This chunk contains everything about the hacker, together with general game-stat
     0336  byte     EARTH SHAKER EXPLOSIVE
     
     046B  5x byte  First weapon
-      +0  byte     Subclass
+      +0  byte     Subclass (0xFF means no weapon)
       +1  byte     Type
       +2  byte     Rounds
       +3  byte     Ammunition type / Energy (0x80 bit is overload)
