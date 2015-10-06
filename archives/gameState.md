@@ -125,6 +125,20 @@ This chunk contains everything about the hacker, together with general game-stat
     0334  byte     LAND MINE
     0335  byte     NITROPACK
     0336  byte     EARTH SHAKER EXPLOSIVE
+    
+    046B  5x byte  First weapon
+      +0  byte     Subclass
+      +1  byte     Type
+      +2  byte     Rounds
+      +3  byte     Ammunition type / Energy (0x80 bit is overload)
+      +4  byte     Unknown
+    
+	0470  5x byte  Second weapon
+	0475  5x byte  Third weapon
+	047A  5x byte  Fourth weapon
+	047F  5x byte  Fifth weapon
+	0484  5x byte  Sixth weapon
+	0489  5x byte  Seventh weapon
 	
     0490  byte     Sensaround icon active (dependent on MFD)
     0493  byte     Bioware icon active (dependent on MFD)
