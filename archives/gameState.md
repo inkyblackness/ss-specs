@@ -133,13 +133,13 @@ This chunk contains everything about the hacker, together with general game-stat
       +3  byte     Ammunition type / Energy (0x80 bit is overload)
       +4  byte     Unknown
     
-	0470  5x byte  Second weapon
-	0475  5x byte  Third weapon
-	047A  5x byte  Fourth weapon
-	047F  5x byte  Fifth weapon
-	0484  5x byte  Sixth weapon
-	0489  5x byte  Seventh weapon
-	
+    0470  5x byte  Second weapon
+    0475  5x byte  Third weapon
+    047A  5x byte  Fourth weapon
+    047F  5x byte  Fifth weapon
+    0484  5x byte  Sixth weapon
+    0489  5x byte  Seventh weapon
+    
     0490  byte     Sensaround icon active (dependent on MFD)
     0493  byte     Bioware icon active (dependent on MFD)
     0494  byte     Compass icon active (0: off, 1: on)
