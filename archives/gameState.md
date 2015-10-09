@@ -74,6 +74,72 @@ This chunk contains everything about the hacker, together with general game-stat
     02F6  byte     version for jump jet
     02F7  byte     version for system status
 
+	Full clips of ammunition
+    030B  byte     ML STANDARD ROUNDS
+    030C  byte     ML TEFLON COATED ROUNDS 
+    030D  byte     SV NEEDLE DARTS
+    030E  byte     SV TRANQ DARTS
+    030F  byte     HOLLOW-TIP 2100 CLIP
+    0310  byte     HEAVY SLUG 2100 CLIP
+    0311  byte     DC RUBBER SLUGS
+    0312  byte     MARK3 MAGNESIUM-TIP SHELLS
+    0313  byte     MARK3 PENETRATOR SHELLS
+    0314  byte     AM HORNET CLIP
+    0315  byte     AM SPLINTER CLIP
+    0316  byte     RF SLAG CLIP
+    0317  byte     RF LARGE SLAG CLIP
+    0318  byte     SG MAG PULSE CART
+    0319  byte     MM RAIL CLIP
+	
+	Ammunition not in full clips
+    031A  byte     ML STANDARD ROUNDS
+    031B  byte     ML TEFLON COATED ROUNDS
+    031C  byte     SV NEEDLE DARTS
+    031D  byte     SV TRANQ DARTS
+    031E  byte     HOLLOW-TIP 2100 CLIP
+    031F  byte     HEAVY SLUG 2100 CLIP
+    0320  byte     DC RUBBER SLUGS
+    0321  byte     MARK3 MAGNESIUM-TIP SHELLS
+    0322  byte     MARK3 PENETRATOR SHELLS
+    0323  byte     AM HORNET CLIP
+    0324  byte     AM SPLINTER CLIP
+    0325  byte     RF SLAG CLIP
+    0326  byte     RF LARGE SLAG CLIP
+    0327  byte     SG MAG PULSE CART
+    0328  byte     MM RAIL CLIP
+	
+	Patches
+    0329  byte     STAMINUP STIMULANT
+    032A  byte     SIGHT VISION ENCHANCEMENT
+    032B  byte     BERSERK COMBAT BOOSTER
+    032C  byte     MEDIPATCH HEALING AGENT
+    032D  byte     REFLEX REACTION AID
+    032E  byte     GENIUS MIND-ENCHANCER
+    032F  byte     DETOX UNIVERSAL ANTIDOTE
+	
+	Explosives
+    0330  byte     FRAGMENTATION GRENADE
+    0331  byte     EMP GRENADE
+    0332  byte     GAS GRENADE
+    0333  byte     CONCUSSION BOMB
+    0334  byte     LAND MINE
+    0335  byte     NITROPACK
+    0336  byte     EARTH SHAKER EXPLOSIVE
+    
+    046B  5x byte  First weapon
+      +0  byte     Subclass (0xFF means no weapon)
+      +1  byte     Type
+      +2  byte     Rounds
+      +3  byte     Ammunition type / Energy (0x80 bit is overload)
+      +4  byte     Unknown
+    
+    0470  5x byte  Second weapon
+    0475  5x byte  Third weapon
+    047A  5x byte  Fourth weapon
+    047F  5x byte  Fifth weapon
+    0484  5x byte  Sixth weapon
+    0489  5x byte  Seventh weapon
+    
     0490  byte     Sensaround icon active (dependent on MFD)
     0493  byte     Bioware icon active (dependent on MFD)
     0494  byte     Compass icon active (0: off, 1: on)
