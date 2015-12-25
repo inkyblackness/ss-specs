@@ -15,15 +15,15 @@ The following object classes exist:
 * 0 Weapons
 * 1 Ammo
 * 2 Projectiles
-* 3 Grenades and explosives
+* 3 Explosives
 * 4 Patches
 * 5 Hardware
-* 6 Software and logs
+* 6 Software (including logs)
 * 7 Scenery and fixtures
-* 8 Gettable and other objects
-* 9 Switches and panels
-* 10 Doors and gratings
+* 8 Items (gettable and other objects)
+* 9 Panels (switches and the like)
+* 10 Barriers (doors and gratings)
 * 11 Animations
-* 12 Traps and markers
+* 12 Markers (including traps)
 * 13 Containers
 * 14 Critters
