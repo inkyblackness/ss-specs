@@ -1,0 +1,161 @@
+## 3D Object Geometry
+
+This chapter documents the data format of the three dimensional objects encountered in the game (tables, ICE in cyberspace, crates...).
+
+All the geometry is stored in the file ```obj3d.res``` with content type ```0x0F```. Each chunk in this file has a directory with one data block. There is one object per chunk (and data block).
+
+Each three dimensional ```model``` consists of a list vertex definitions and a structure of ```nodes```, with the model itself being the root node. A node contains a list of ```anchors```, with each one having a normal vector and a reference point.
+Up to exactly one anchor per node may branch out to two further nodes (creating a binary tree). Further anchors contain lists of rendered ```faces```. Faces are either texture mapped or filled with a single colour.
+
+### Binary Format
+
+The data starts with 8 bytes of header information, followed by a list of "commands" which describe the structure.
+
+**Geometry Header** (8 bytes)
+
+    0000  int16  Unknown -- always 0x0027
+    0002  int16  Unknown -- always 0x0008
+    0004  int16  Unknown -- always 0x0002
+    0006  int16  Total number of Faces
+
+
+**Model Command** (2+N bytes)
+
+    0000  int16  Model Command Identifier
+    0002  N      Command specific content
+
+> There is no framing structure which would allow skipping command entries, so an implementation has to know of all commands beforehand.
+
+
+**fixed32/8** (4 bytes)
+
+In the following, coordinates (and their offsets) are serialized as fixed floating point values in a 32/8 format.
+
+    0000  sint24  Integer value
+    0003  byte    Fraction (in 1/256 units)
+
+> For a simple implementation, it is sufficient to read the value as a ```sint32```, convert it to floating point and divide by 256.0 .
+
+
+**Vector** (12 bytes)
+
+A vector is serialized with three coordinates:
+
+    0000  fixed32/8  X
+    0004  fixed32/8  Y
+    0008  fixed32/8  Z
+
+
+### Geometry Commands
+
+#### Vertex Definitions
+Vertices are always (and only) defined at the beginning of the model (the root node). Three ways exist: define a single vertex, multiple vertices or references to previous ones with offsets.
+
+##### Define Single Vertex
+
+    0000  int16   Model Command Identifier -- 0x0015
+    0002  int16   Unknown -- always 0x0000
+    0004  Vector  Vertex coordinates
+
+##### Define Multiple Vertices
+
+    0000  int16      Model Command Identifier -- 0x0003
+    0002  int16      Number of vertices
+    0004  int16      Unknown -- always 0x0000
+    0006  [N]Vector  Coordinates of vertices
+
+##### Define Vertex (One Offset)
+
+    0000  int16      Model Command Identifier -- X: 0x000A, Y: 0x000B, Z: 0x000C
+    0002  int16      New vertex index
+    0004  int16      Reference vertex index
+    0006  fixed32/8  Offset value to coordinate as per command identifier
+
+> In the existing files, the ```New vertex index``` has always been found to equal the current amount of known vertices, appending at the end of the list.
+
+##### Define Vertex (Two Offsets)
+
+    0000  int16      Model Command Identifier -- XY: 0x000D, XZ: 0x000E, YZ: 0x000F
+    0002  int16      New vertex index
+    0004  int16      Reference vertex index
+    0006  fixed32/8  Offset value to first coordinate as per command identifier
+    0010  fixed32/8  Offset value to second coordinate as per command identifier
+
+> In the existing files, the ```New vertex index``` has always been found to equal the current amount of known vertices, appending at the end of the list.
+
+
+#### Node Control
+
+##### End Of Node
+
+    0000  int16  Model Command Identifier -- 0x0000
+
+Every node is finished with this command.
+
+##### Define Node Anchor
+
+    0000  int16   Model Command Identifier -- 0x0006
+    0002  Vector  Normal vector
+    000E  Vector  Reference point
+    001A  int16   Byte offset to 'left' branch
+    001C  int16   Byte offset to 'right' branch
+
+The offset values are based on the start of the command. Branch data comes only after the current node has ben finished; There is always only one ```End Of Node``` command pending. Branches are serialized depth-first.
+
+> In the existing files always the 'right' branch has been found to be serialized first. Although only a few cases, several layers can be found within one branch. If a branch is not needed, it contains only the ```End Of Node``` command.
+
+
+#### Face Control
+
+##### Define Face Anchor
+
+    0000  int16   Model Command Identifier -- 0x0001
+    0002  int16   Anchor byte length (measured from start of this command)
+    0004  Vector  Normal vector
+    0010  Vector  Reference point
+    001C  N       Face drawing commands
+
+Faces within one ```Define Face Anchor``` command are either painted in a single colour (with an optional shade) or texture mapped.
+
+##### Coloured Face
+
+    0000  int16     Model Command Identifier -- 0x0004
+    0002  int16     Vertex count
+    0004  [N]int16  Vertex indices
+
+This command always has either a ```Set Colour``` or a ```Set Colour And Shade``` command before. It may be that several ```Coloured Face``` commands refer to the same setting.
+
+##### Set Colour
+
+    0000  int16  Model Command Identifier -- 0x0005
+    0002  int16  Colour palette index
+
+##### Set Colour And Shade
+
+    0000  int16  Model Command Identifier -- 0x001C
+    0002  int16  Colour palette index
+    0004  int16  Shade value
+
+##### Texture Mapping
+
+    0000  int16      Model Command Identifier -- 0x0025
+    0002  int16      Number of entries
+    0004  [N]Entry   Mapping entries
+
+**Mapping Entry (10 bytes)**
+
+    0000  int16      Vertex index
+    0002  fixed32/8  texture u coordinate
+    0006  fixed32/8  texture v coordinate
+
+##### Textured Face
+
+    0000  int16     Model Command Identifier -- 0x0026
+    0002  int16     Texture identifier
+    0004  int16     Vertex count
+    0006  [N]int16  Vertex indices
+
+This command always has a ```Texture Mapping``` command before.
+
+The ```Texture identifier``` references a texture with a resource identifier base of ```0x01DB```.
+The value of 0 specifies special, object specific handling.

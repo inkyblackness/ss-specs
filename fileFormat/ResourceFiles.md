@@ -62,7 +62,7 @@ The following content types are known:
     0x03  Font
     0x04  Video clip
     0x07  Sound effect
-    0x0F  3D model
+    0x0F  3D model geometry
     0x11  MOVI chunk
     0x30  Archive
 
