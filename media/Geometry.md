@@ -94,11 +94,11 @@ Vertices are always (and only) defined at the beginning of the model (the root n
 >    * For each vertex, again find another most similar from those coming before it (including those already handled in this loop).
 >    * Compare the coordinates again.
 >    * If two are identical, write a single offset definition (for the one coordinate not equal).
->    * If one is identical, write a double ofset definition (for the two coordinates not equal).
+>    * If one is identical, write a double offset definition (for the two coordinates not equal).
 >
 > This list assumes the vertices are all unique and they were sorted to have the dissimilar ones come first. This must be done in
-> combination with modifying the face definitions as they refer to the vertex indices.
-> Following this sequence will create a vertex definition with equal byte length. The differences to the original files are in which
+> combination with modifying the face definitions as they refer to the vertices via indices.
+> Following this sequence will create a vertex definition with equal byte length as in the original. The differences to the original files are in which
 > reference vertices were taken.
 
 #### Node Control
