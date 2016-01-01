@@ -18,6 +18,7 @@ The data starts with 8 bytes of header information, followed by a list of "comma
     0004  int16  Unknown -- always 0x0002
     0006  int16  Total number of Faces
 
+> The ```Total number of Faces``` value does not seem to be authorative. There are a few entries in the resouce file which state a higher count than actually in the model.
 
 **Model Command** (2+N bytes)
 
@@ -83,6 +84,22 @@ Vertices are always (and only) defined at the beginning of the model (the root n
 
 > In the existing files, the ```New vertex index``` has always been found to equal the current amount of known vertices, appending at the end of the list.
 
+> To generate a list of vertex definitions as close as possible to the original files, follow these steps:
+> * Determine count of dissimilar vertices:
+>    * From the list of vertices, iterate reverse from the tail.
+>    * For each vertex, search the list below the current index if there is another vertex which has at least one identical coordinate.
+>    * Abort this loop if the current vertex has no similar other. Vertices from beginning to the current index are all dissimilar.
+> * Depending on the count of dissimilar vertices, define them with either the single definition or the multiple definition.
+> * Now iterate forward through the list (until end), beginning with the first vertex after the dissimilar ones.
+>    * For each vertex, again find another most similar from those coming before it (including those already handled in this loop).
+>    * Compare the coordinates again.
+>    * If two are identical, write a single offset definition (for the one coordinate not equal).
+>    * If one is identical, write a double ofset definition (for the two coordinates not equal).
+>
+> This list assumes the vertices are all unique and they were sorted to have the dissimilar ones come first. This must be done in
+> combination with modifying the face definitions as they refer to the vertex indices.
+> Following this sequence will create a vertex definition with equal byte length. The differences to the original files are in which
+> reference vertices were taken.
 
 #### Node Control
 
@@ -134,7 +151,7 @@ This command always has either a ```Set Colour``` or a ```Set Colour And Shade``
 
     0000  int16  Model Command Identifier -- 0x001C
     0002  int16  Colour palette index
-    0004  int16  Shade value
+    0004  int16  Shade value (0..3)
 
 ##### Texture Mapping
 
