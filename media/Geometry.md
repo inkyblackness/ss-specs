@@ -28,23 +28,23 @@ The data starts with 8 bytes of header information, followed by a list of "comma
 > There is no framing structure which would allow skipping command entries, so an implementation has to know of all commands beforehand.
 
 
-**fixed32/8** (4 bytes)
+**fixed32/16** (4 bytes)
 
-In the following, coordinates (and their offsets) are serialized as fixed floating point values in a 32/8 format.
+In the following, coordinates (and their offsets) are serialized as fixed floating point values in a 32/16 format.
 
-    0000  sint24  Integer value
-    0003  byte    Fraction (in 1/256 units)
+    0000  sint16  Integer value
+    0003  uint16  Fraction (in 1/65536 units)
 
-> For a simple implementation, it is sufficient to read the value as a ```sint32```, convert it to floating point and divide by 256.0 .
+> For a simple implementation, it is sufficient to read the value as a ```sint32```, convert it to floating point and divide by 65536.0 .
 
 
 **Vector** (12 bytes)
 
 A vector is serialized with three coordinates:
 
-    0000  fixed32/8  X
-    0004  fixed32/8  Y
-    0008  fixed32/8  Z
+    0000  fixed32/16  X
+    0004  fixed32/16  Y
+    0008  fixed32/16  Z
 
 
 ### Geometry Commands
@@ -67,20 +67,20 @@ Vertices are always (and only) defined at the beginning of the model (the root n
 
 ##### Define Vertex (One Offset)
 
-    0000  int16      Model Command Identifier -- X: 0x000A, Y: 0x000B, Z: 0x000C
-    0002  int16      New vertex index
-    0004  int16      Reference vertex index
-    0006  fixed32/8  Offset value to coordinate as per command identifier
+    0000  int16       Model Command Identifier -- X: 0x000A, Y: 0x000B, Z: 0x000C
+    0002  int16       New vertex index
+    0004  int16       Reference vertex index
+    0006  fixed32/16  Offset value to coordinate as per command identifier
 
 > In the existing files, the ```New vertex index``` has always been found to equal the current amount of known vertices, appending at the end of the list.
 
 ##### Define Vertex (Two Offsets)
 
-    0000  int16      Model Command Identifier -- XY: 0x000D, XZ: 0x000E, YZ: 0x000F
-    0002  int16      New vertex index
-    0004  int16      Reference vertex index
-    0006  fixed32/8  Offset value to first coordinate as per command identifier
-    0010  fixed32/8  Offset value to second coordinate as per command identifier
+    0000  int16       Model Command Identifier -- XY: 0x000D, XZ: 0x000E, YZ: 0x000F
+    0002  int16       New vertex index
+    0004  int16       Reference vertex index
+    0006  fixed32/16  Offset value to first coordinate as per command identifier
+    0010  fixed32/16  Offset value to second coordinate as per command identifier
 
 > In the existing files, the ```New vertex index``` has always been found to equal the current amount of known vertices, appending at the end of the list.
 
@@ -161,9 +161,9 @@ This command always has either a ```Set Colour``` or a ```Set Colour And Shade``
 
 **Mapping Entry (10 bytes)**
 
-    0000  int16      Vertex index
-    0002  fixed32/8  texture u coordinate
-    0006  fixed32/8  texture v coordinate
+    0000  int16       Vertex index
+    0002  fixed32/16  texture u coordinate
+    0006  fixed32/16  texture v coordinate
 
 ##### Textured Face
 
@@ -174,5 +174,5 @@ This command always has either a ```Set Colour``` or a ```Set Colour And Shade``
 
 This command always has a ```Texture Mapping``` command before.
 
-The ```Texture identifier``` references a texture with a resource identifier base of ```0x01DB```.
+The ```Texture identifier``` references a texture with a resource identifier base of ```0x01DB```, found in ```citmat.res```.
 The value of 0 specifies special, object specific handling.
