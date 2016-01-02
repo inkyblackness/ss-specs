@@ -33,7 +33,7 @@ The data starts with 8 bytes of header information, followed by a list of "comma
 In the following, coordinates (and their offsets) are serialized as fixed floating point values in a 32/16 format.
 
     0000  sint16  Integer value
-    0003  uint16  Fraction (in 1/65536 units)
+    0002  uint16  Fraction (in 1/65536 units)
 
 > For a simple implementation, it is sufficient to read the value as a ```sint32```, convert it to floating point and divide by 65536.0 .
 
