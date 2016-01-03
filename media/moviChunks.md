@@ -69,7 +69,22 @@ The timestamp of this entry should match the media length from the header.
 
 #### 1 Video
 
-tbd
+Video frames are compressed in two variants, for low and high resolution.
+
+##### Low-resolution Video
+
+Low-resolution video is using type ```0x21```. Data contains a bounding box and then the compressed frame using the [compression algorithm](./Bitmaps.md#pixel-compression) for standard bitmaps. 
+
+**Low Resolution Video Data** (8+N bytes)
+
+    0000  [4]int16  Bounding Box
+    0008  []byte    Compressed pixel data
+
+> In the existing videos, the bounding box is always ```0, 0, 320, 150```, specifying the same size as the video itself.
+
+##### High-resolution Video
+
+High-resolution video is using type ```0x79``` with a more complex compression algorithm. This algorithm works in conjunction of the ```Dictionary``` types. See [below](#high-resolution-video-compression) for details on the algorithm.
 
 #### 2 Audio
 
@@ -105,5 +120,14 @@ The entry with type ```0x4C``` will have a length of 0 and the same data offset 
 The entry with type ```0x04``` points to data of 0x300 bytes (= 256*3) which describes the new palette for upcoming frames. 
 
 #### 5 Dictionary
+
+Dictionary entries are used in combination with video type ```0x79``` entries for high-resolution videos. There are two dictionary types:
+* ```0x05```: Palette index table
+* ```0x0D```: Control dictionary
+
+See [below](#high-resolution-video-compression) for details on the algorithm.
+
+
+### High-resolution Video Compression
 
 tbd
