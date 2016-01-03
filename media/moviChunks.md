@@ -79,11 +79,30 @@ The data entry contains unsigned 8-bit PCM samples.
 
 #### 3 Subtitle
 
-tbd
+**Subtitle Entry** (16+N bytes)
+
+    0000  [4]byte   Subtitle Control
+    0004  byte      Unknown -- always 0x10
+    0005  [11]byte  Unknown -- always 0x00
+    0010  []byte    Null terminated string
+
+##### Subtitle Controls
+
+```'AREA'``` (uint32 ```0x41455241```) is for setting up the subtitle space. It defines the rectangle, in pixel (left, top, right, bottom), where the text is to be displayed. Example:
+```
+20 365 620 395 CLR
+```
+
+
+```'STD '``` (uint32 ```0x20445453```), ```'FRN '``` (uint32 ```0x204E5246```) and ```'GER '``` (uint32 ```0x20524547```) specify the actual subtitle text in the respective language, with ```'STD '``` being the default language (English).
+
 
 #### 4 Palette
 
-tbd
+There are two palette entry types: ```0x4C``` and ```0x04```. For any change in the palette, two entries are in the container. Both entries always come in sequence (first ```0x4C```, then ```0x04```) and both have identical timestamp values.
+
+The entry with type ```0x4C``` will have a length of 0 and the same data offset as the next entry, ```0x04```.
+The entry with type ```0x04``` points to data of 0x300 bytes (= 256*3) which describes the new palette for upcoming frames. 
 
 #### 5 Dictionary
 
