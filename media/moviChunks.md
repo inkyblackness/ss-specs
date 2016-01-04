@@ -86,6 +86,13 @@ Low-resolution video is using type ```0x21```. Data contains a bounding box and 
 
 High-resolution video is using type ```0x79``` with a more complex compression algorithm. This algorithm works in conjunction of the ```Dictionary``` types. See [below](#high-resolution-video-compression) for details on the algorithm.
 
+**High Resolution Video Data** (2+N bytes)
+
+    0000  int16   Offset to pixel data in bytes, from beginning (XXXX)
+    0002  []byte  Bitstream
+    XXXX  []byte  Frame-specific pixel data
+
+
 #### 2 Audio
 
 The data entry contains unsigned 8-bit PCM samples.
@@ -126,6 +133,11 @@ Dictionary entries are used in combination with video type ```0x79``` entries fo
 * ```0x0D```: Control dictionary
 
 See [below](#high-resolution-video-compression) for details on the algorithm.
+Such entries are common to several frames.
+
+##### Palette index table
+
+This entry, with type ```0x05``` is a simple lookup table. Every entry of type byte is a palette index.
 
 ##### Packed Control Words
 
