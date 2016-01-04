@@ -127,6 +127,24 @@ Dictionary entries are used in combination with video type ```0x79``` entries fo
 
 See [below](#high-resolution-video-compression) for details on the algorithm.
 
+##### Packed Control Words
+
+Dictionary type ```0x0D``` contains a runlength encoded list of control words.
+
+**Packed Control Words** (4+(N*4) bytes)
+
+    0000  int32     Unpacked size
+    0004  []Packed  Packed entries
+
+The ```Unpacked size``` field equals the number of control words, times three (specifying the size in bytes).
+The remainder of the entry is then the list of packed control words, from which the actual list of control words is unpacked.
+
+**Packed Entry** (4 bytes)
+
+    0000  byte    Word count
+    0001  uint24  Control Word
+
+The field ```Word count``` specifies how often the ```Control Word``` shall be repeated. A value of 0 is never encountered.
 
 ### High-resolution Video Compression
 
