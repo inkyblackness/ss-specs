@@ -71,6 +71,8 @@ The timestamp of this entry should match the media length from the header.
 
 Video frames are compressed in two variants, for low and high resolution.
 
+Frames are either "full" frames, which set all pixels in the buffer, typically at a scene change. Other frames are "delta" frames, which re-use (most) of the previous pixel in the buffer. This re-use is done by writing/using the palete index 0x00.
+
 ##### Low-resolution Video
 
 Low-resolution video is using type ```0x21```. Data contains a bounding box and then the compressed frame using the [compression algorithm](./Bitmaps.md#pixel-compression) for standard bitmaps. 
@@ -88,10 +90,13 @@ High-resolution video is using type ```0x79``` with a more complex compression a
 
 **High Resolution Video Data** (2+N bytes)
 
-    0000  int16   Offset to pixel data in bytes, from beginning (XXXX)
+    0000  int16   Offset to Mask-stream in bytes, from beginning (XXXX)
     0002  []byte  Bitstream
-    XXXX  []byte  Frame-specific pixel data
+    XXXX  []byte  Mask-stream
 
+The ```Bitstream``` is a stream of serialized big-endian integers. The ```Mask-stream``` is a stream of serialized little-endian integers of different lengths (2, 4, 6, and 8 bytes).
+
+The order and layout of the values in the streams is determined by the algorithm. For both streams: The decoder will want to read past the end of the streams in a few cases. For these cases the missing bits/bytes are to be set to zero. The encoder removed any trailing 0x00 bytes from these streams in order to save further space.
 
 #### 2 Audio
 
