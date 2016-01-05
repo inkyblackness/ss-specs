@@ -210,7 +210,7 @@ A possible decoder is implemented using the following sequence:
 
 To colour a tile, the ```Parameter``` value of the current control word is used, as well as the ```mask-stream``` and the ```palette lookup list```. The 16 pixel of a tile are colored from left to right, top to bottom.
 
-The palette value for a pixel is determined by an index into a small ```lookup array``` of palette indices. Depending on the type of the control word, this lookup array is either a small, made up one, or a segment in the ```palette lookup list```. The length of a ```lookup array``` is always a power of 2 and has possible lengths of 2, 4, 8 or 16.
+The palette value for a pixel is determined by an index into a small ```lookup array``` of palette indices. Depending on the type of the control word, this lookup array is either a made up one, or a segment in the ```palette lookup list```. The length of a ```lookup array``` is always a power of 2 and has possible lengths of 2, 4, 8 or 16.
 
 The corresponding index values into such lookup arrays have bit sizes of 1, 2, 3 or 4 bits. The 16 index values for a tile are packed into a ```mask integer``` of 2, 4, 6 or 8 bytes. Depending on the type of the control word, this ```mask integer``` is made up or read from the ```mask-stream```.
 
