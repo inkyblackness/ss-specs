@@ -71,7 +71,7 @@ The timestamp of this entry should match the media length from the header.
 
 Video frames are compressed in two variants, for low and high resolution.
 
-Frames are either "full" frames, which set all pixels in the buffer, typically at a scene change. Other frames are "delta" frames, which re-use (most of) the previous pixel in the buffer. This re-use is done by writing/using the palete index 0x00, which is meant to be transparent.
+Frames are either "full" frames, which set all, or nearly all, pixels in the buffer, typically at a scene change. Other frames are "delta" frames, which re-use (most of) the previous pixel in the buffer. This re-use is done by writing/using the palete index 0x00, which is meant to be transparent.
 
 ##### Low-resolution Video
 
@@ -130,6 +130,12 @@ There are two palette entry types: ```0x4C``` and ```0x04```. For any change in 
 
 The entry with type ```0x4C``` will have a length of 0 and the same data offset as the next entry, ```0x04```.
 The entry with type ```0x04``` points to data of 0x300 bytes (= 256*3) which describes the new palette for upcoming frames. 
+
+> At least for high-resolution videos, a scene change (with accompanying palette change) does not always entirely set the complete pixel buffer for the next frame.
+> In the intro video for instance, SHODAN's gaining of conscience scene has a few pixel left over from the previous scene.
+>
+> As a recommendation, a decoder should wipe the current frame buffer with 0x00 before applying a new palette/drawing further frames.
+> An alternative could be to remap all pixel values with palette indices as close as possible to the new palette, though this might alter the resulting frame too much.
 
 #### 5 Dictionary
 
