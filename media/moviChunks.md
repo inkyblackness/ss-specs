@@ -71,7 +71,7 @@ The timestamp of this entry should match the media length from the header.
 
 Video frames are compressed in two variants, for low and high resolution.
 
-Frames are either "full" frames, which set all pixels in the buffer, typically at a scene change. Other frames are "delta" frames, which re-use (most) of the previous pixel in the buffer. This re-use is done by writing/using the palete index 0x00.
+Frames are either "full" frames, which set all pixels in the buffer, typically at a scene change. Other frames are "delta" frames, which re-use (most of) the previous pixel in the buffer. This re-use is done by writing/using the palete index 0x00, which is meant to be transparent.
 
 ##### Low-resolution Video
 
@@ -162,7 +162,7 @@ The remainder of the entry is then the list of packed control words, from which 
     0000  byte    Word count
     0001  uint24  Control Word
 
-The field ```Word count``` specifies how often the ```Control Word``` shall be repeated. A value of 0 is never encountered.
+The field ```Word count``` specifies how often the ```Control Word``` shall be extracted. A value of 0 is never encountered.
 
 ### High-resolution Video Compression
 
@@ -177,7 +177,7 @@ High-resolution video compression uses scene-specific dictionaries shared amongs
 
 As a rough guideline, the frame-specific bit-stream provides index values into the control word dictionary. According to the type of the control word, the current tile is coloured either directly, or with the additional help of the mask-stream and palette lookup list.
 
-A note on the bit-stream: Reading from this stream does not automatically advance the current position. Advancing the bit-stream is a separate operation, which may advance with a smaller number of bits than previously read. This causes re-use of some bits to increase compression.
+A note on the bit-stream: Reading from this stream does not automatically advance the current position. Advancing the bit-stream is a separate operation, which may advance with a different number of bits than were previously read. This may cause re-use of some bits to increase compression.
 
 As noted above, the bit- and mask-stream, as well as the palette lookup list, have possible trailing zero values removed in the files. When the decoder wants to read beyond their end, they must provide values set to 0.
 
@@ -193,8 +193,8 @@ A possible decoder is implemented using the following sequence:
     * Advance the bit-stream by 8 bits
     * Enter a loop as long as the current control word indicates a ```Long Offset```.
         * Advance the bit-stream by 4 bits
-        * Read a 4-bit value from the bit-stream. Add this value to the ```Long Offset``` of the current control word and use the result as another index into the control word dictionary. This becomes the new current control word.
-* Advance the bit-stream by the ```Count``` value of the current control word. This may indicate less bits than previously read.
+        * Read a 4-bit value from the bit-stream. Add this value to the ```Long Offset``` of the current control word and use the result as another index into the control word dictionary. The retrieved entry becomes the new current control word.
+* Advance the bit-stream by the ```Count``` value of the current control word. This may indicate a different amount of bits than previously read, even less.
 * If the type of the current control word is ```6```, use the previously processed control word as the current one for further processing.
 * If the type of the current control word is ```5```, tiles shall be skipped
     * Read a 5-bit value from the bit-stream and advance it by 5 bits. This is the ```Skip Count``` value.
@@ -203,18 +203,19 @@ A possible decoder is implemented using the following sequence:
 * Any type in the range of ```0``` to ```4``` colours the current tile. See below.
 * Next loop iteration
 
-> Type ```7``` is never encountered. According to the documentation of TSSHP, this has the same meaning as ```6```, use previous.
+> Type ```7``` is never encountered. According to the documentation of TSSHP, this has the same meaning as ```6```: use previous control word.
 
 
 ##### Colouring a tile
 
-To colour a tile, the ```Parameter``` value of the current control word is used, as well as the ```mask-stream``` and the ```palette lookup list```. The 16 pixel of a tile are colored from left to right, top to bottom.
+To colour a tile, the ```Parameter``` value of the current control word is used, as well as the ```mask-stream``` and the ```palette lookup list```. The 16 pixel of a tile are coloured from left to right, top to bottom.
 
-The palette value for a pixel is determined by an index into a small ```lookup array``` of palette indices. Depending on the type of the control word, this lookup array is either a made up one, or a segment in the ```palette lookup list```. The length of a ```lookup array``` is always a power of 2 and has possible lengths of 2, 4, 8 or 16.
+The palette value for a pixel is determined by an index into a small ```lookup array``` of palette indices. Depending on the type of the control word, this lookup array is either a made up one, or a segment of the ```palette lookup list```. The length of a ```lookup array``` is always a power of 2 and has possible lengths of 2, 4, 8 or 16.
 
 The corresponding index values into such lookup arrays have bit sizes of 1, 2, 3 or 4 bits. The 16 index values for a tile are packed into a ```mask integer``` of 2, 4, 6 or 8 bytes. Depending on the type of the control word, this ```mask integer``` is made up or read from the ```mask-stream```.
 
 > For example, a lookup array of 4 palette values requires an index size of 2 bits, resulting in a mask integer of 4 byte.
+>
 > For pixel coordinates given in x,y: Mask integer bits 0-1 colour pixel 0,0; mask integer bits 2-3 colour pixel 1,0; ...
 > mask integer bits 28-29 colour pixel 2,3 and mask integer bits 30-31 colour pixel 3,3.
 
