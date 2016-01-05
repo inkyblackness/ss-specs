@@ -96,7 +96,7 @@ High-resolution video is using type ```0x79``` with a more complex compression a
 
 The ```Bitstream``` is a stream of serialized big-endian integers. The ```Mask-stream``` is a stream of serialized little-endian integers of different lengths (2, 4, 6, and 8 bytes).
 
-The order and layout of the values in the streams is determined by the algorithm. For both streams: The decoder will want to read past the end of the streams in a few cases. For these cases the missing bits/bytes are to be set to zero. The encoder removed any trailing 0x00 bytes from these streams in order to save further space.
+The order and layout of the values in the streams is determined by the algorithm. The decoder will want to read past the end of the streams in a few cases. For these cases the missing bits/bytes are to be set to zero. The encoder removed any trailing 0x00 bytes from these streams in order to save further space.
 
 #### 2 Audio
 
@@ -134,15 +134,16 @@ The entry with type ```0x04``` points to data of 0x300 bytes (= 256*3) which des
 #### 5 Dictionary
 
 Dictionary entries are used in combination with video type ```0x79``` entries for high-resolution videos. There are two dictionary types:
-* ```0x05```: Palette index table
+* ```0x05```: Palette lookup list
 * ```0x0D```: Control dictionary
 
 See [below](#high-resolution-video-compression) for details on the algorithm.
 Such entries are common to several frames.
 
-##### Palette index table
+##### Palette lookup list
 
-This entry, with type ```0x05``` is a simple lookup table. Every entry of type byte is a palette index.
+This entry, with type ```0x05``` is a simple lookup list. Every entry of type byte is a palette index.
+This list is truncated as well. The decoder will want to read past the end of this stream, in which case zero bytes must be returned.
 
 ##### Packed Control Words
 
@@ -165,4 +166,64 @@ The field ```Word count``` specifies how often the ```Control Word``` shall be r
 
 ### High-resolution Video Compression
 
-tbd
+High-resolution video compression uses scene-specific dictionaries shared amongst several frames and frame-specific bit- and mask-streams. Frames in this compression are made up of tiles with a size of 4x4 pixel each. For the high-resolution videos of 600x300 pixel this means 150x75 tiles. Tiles are coloured according to different types of control words, from left to right, top to bottom.
+
+**Control Word** (3 bytes, masked)
+
+    0xF00000  Count value
+    0x0E0000  Type
+    0x01FFFF  Parameter
+
+
+As a rough guideline, the frame-specific bit-stream provides index values into the control word dictionary. According to the type of the control word, the current tile is coloured either directly, or with the additional help of the mask-stream and palette lookup list.
+
+A note on the bit-stream: Reading from this stream does not automatically advance the current position. Advancing the bit-stream is a separate operation, which may advance with a smaller number of bits than previously read. This causes re-use of some bits to increase compression.
+
+As noted above, the bit- and mask-stream, as well as the palette lookup list, have possible trailing zero values removed in the files. When the decoder wants to read beyond their end, they must provide values set to 0.
+
+
+#### Decoder sequence
+
+A possible decoder is implemented using the following sequence:
+
+* Iterate over the tiles, outer loop is the rows, inner loop the columns. Finish the loops if either all tiles are covered, or the bit-stream has been exhausted. The stream is exhausted if the current position is at the end of or beyond the available range.
+* Read a 12-bit value from the bit-stream. Use this value as an index into the control word dictionary.
+* If the ```Count value``` of the control word is zero
+    * A ```Count value``` of zero indicates a ```Long Offset```. In this case, the ```Type``` and ```Parameter``` fields are taken together to form a 20-bit ```Long Offset``` value.
+    * Advance the bit-stream by 8 bits
+    * Enter a loop as long as the current control word indicates a ```Long Offset```.
+        * Advance the bit-stream by 4 bits
+        * Read a 4-bit value from the bit-stream. Add this value to the ```Long Offset``` of the current control word and use the result as another index into the control word dictionary. This becomes the new current control word.
+* Advance the bit-stream by the ```Count``` value of the current control word. This may indicate less bits than previously read.
+* If the type of the current control word is ```6```, use the previously processed control word as the current one for further processing.
+* If the type of the current control word is ```5```, tiles shall be skipped
+    * Read a 5-bit value from the bit-stream and advance it by 5 bits. This is the ```Skip Count``` value.
+    * A ```Skip Count``` of 0x1F skips the remainder of the current tile row
+    * Any other value skips the given amount of columns, additionally to the current one. A value of 0 skips only the current tile.
+* Any type in the range of ```0``` to ```4``` colours the current tile. See below.
+* Next loop iteration
+
+> Type ```7``` is never encountered. According to the documentation of TSSHP, this has the same meaning as ```6```, use previous.
+
+
+##### Colouring a tile
+
+To colour a tile, the ```Parameter``` value of the current control word is used, as well as the ```mask-stream``` and the ```palette lookup list```. The 16 pixel of a tile are colored from left to right, top to bottom.
+
+The palette value for a pixel is determined by an index into a small ```lookup array``` of palette indices. Depending on the type of the control word, this lookup array is either a small, made up one, or a segment in the ```palette lookup list```. The length of a ```lookup array``` is always a power of 2 and has possible lengths of 2, 4, 8 or 16.
+
+The corresponding index values into such lookup arrays have bit sizes of 1, 2, 3 or 4 bits. The 16 index values for a tile are packed into a ```mask integer``` of 2, 4, 6 or 8 bytes. Depending on the type of the control word, this ```mask integer``` is made up or read from the ```mask-stream```.
+
+> For example, a lookup array of 4 palette values requires an index size of 2 bits, resulting in a mask integer of 4 byte.
+> For pixel coordinates given in x,y: Mask integer bits 0-1 colour pixel 0,0; mask integer bits 2-3 colour pixel 1,0; ...
+> mask integer bits 28-29 colour pixel 2,3 and mask integer bits 30-31 colour pixel 3,3.
+
+
+| Type | Lookup Array                                           | Mask Integer            |
+|:----:|--------------------------------------------------------|-------------------------|
+|   0  | ```[ Parameter >> 0 & 0xFF, Parameter >> 8 & 0xFF ]``` | Static ```0xAAAA```     |
+|   1  | ```[ Parameter >> 0 & 0xFF, Parameter >> 8 & 0xFF ]``` | 2 byte from mask-stream |
+|   2  | Parameter is start index into list, 4 entries          | 4 byte from mask-stream |
+|   3  | Parameter is start index into list, 8 entries          | 6 byte from mask-stream |
+|   4  | Parameter is start index into list, 16 entries         | 8 byte from mask-stream |
+
