@@ -126,12 +126,12 @@ The data entry contains unsigned 8-bit PCM samples.
 
 #### 4 Palette
 
-There are two palette entry types: ```0x4C``` and ```0x04```. For any change in the palette, two entries are in the container. Both entries always come in sequence (first ```0x4C```, then ```0x04```) and both have identical timestamp values.
+There are two palette entry types: ```0x4C``` and ```0x04```. For any change in the palette, two entries are in the container. Both entries always come in sequence (first ```0x4C```, then ```0x04```) and both have identical timestamp values. 
 
 The entry with type ```0x4C``` will have a length of 0 and the same data offset as the next entry, ```0x04```.
 The entry with type ```0x04``` points to data of 0x300 bytes (= 256*3) which describes the new palette for upcoming frames. 
 
-> At least for high-resolution videos, a scene change (with accompanying palette change) does not always entirely set the complete pixel buffer for the next frame.
+> At least for high-resolution videos, the next frame after a palette change does not always entirely set the complete pixel buffer for the next frame.
 > In the intro video for instance, SHODAN's gaining of conscience scene has a few pixel left over from the previous scene.
 >
 > As a recommendation, a decoder should wipe the current frame buffer with 0x00 before applying a new palette/drawing further frames.
@@ -144,7 +144,10 @@ Dictionary entries are used in combination with video type ```0x79``` entries fo
 * ```0x0D```: Control dictionary
 
 See [below](#high-resolution-video-compression) for details on the algorithm.
-Such entries are common to several frames.
+
+Such entries are common to several frames. For any change, two entries are in the container. Both entries always come in sequence (first ```0x05```, then ```0x0D```).
+
+> In the existing files, a change of dictionaries is always followed by a change of palette. The exception is the first scene, which uses the initial palette from the MOVI header.
 
 ##### Palette lookup list
 
