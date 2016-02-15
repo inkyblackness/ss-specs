@@ -15,7 +15,7 @@
   * [Palettes](media/Palettes.md)
   * [Sound Effects](media/SoundEffects.md)
   * [MOVI Chunks](media/moviChunks.md)
-  * [Video Mails](media/VideoMails.md)
+  * [Video Clips](media/VideoClips.md)
   * [Texts](media/Texts.md)
   * [Geometry](media/Geometry.md)
 
