@@ -38,29 +38,28 @@ The compressed byte-stream contains the following byte sequences:
     00 nn zz     write nn bytes of value zz
     nn ..        0 < nn < 0x80: copy the following nn bytes
     80 lo hi     lo hi are a little-endian uint16 nnnn, to be handled as follows:
-    80 00 00     End of compressed data
-    80 lo hi     0 < hi < 0x80: write (nnnn & 0x7FFF) zeroes
+    80 00 00     End of compressed data (Skip to end)
+    80 lo hi     0 < hi < 0x80: skip (nnnn & 0x7FFF) output pixel
     80 lo hi ..  0x80 <= hi < 0xC0: copy the following (nnnn & 0x3FFF) bytes
     80 lo C0     hi == 0xC0: undefined (not encountered)
     80 lo hi zz  0xC0 < hi: write (nnnn & 0x3FFF) bytes of value zz
-    nn           0x80 < nn: write (nn & 0x7F) zeroes
+    nn           0x80 < nn: skip (nn & 0x7F) output pixel
 
-Three cases exist to store pixel data: compress a list of zeroes, compress a list of a constant
+Three cases exist to compress pixel data: skip a list of pixel, compress a list of a constant
 value and copy an arbitrary array of bytes. For each of the three, two encoding variants are used: a short and a long form.
 If a count is to be serialized that is higher than the long-form can store, the encoder uses the long-form to reduce this number to finalize with the short-form.
 
-> The original resource files are not entirely consistent about the rules when to apply which storage method. For example,
-> in general, zeroes are compressed on their own, and there are cases where zeroes would be encoded as general constant
-> (```00 04 00``` instead of ```84```) - or accepted as part of an arbitrary array (```02 00 00``` instead of ```82```).
+> Skipping output pixel is relevant for compressing video clips. Skipped pixel will retain the colour value from the previous frame.
+> For still images, initialize the output buffer with 0x00.
 >
 > To implement a compressor that creates output closest to the original content, use the following sequence:
 > * From an array of bytes with length X, calculate the count Z of bytes with value 0x00 at the end. Compress only N bytes, where N = X - (Z % 0x7FFF).
->   The final sequence ```80 00 00``` implies to fill the remaining buffer of the expected output with zeroes. The encoder
->   seems to have had a limit of counting only up to 0x7FFF zeroes.
+>   The final sequence ```80 00 00``` implies to skip to the end. The encoder
+>   seems to have had a limit of counting only up to 0x7FFF, so there may be further (long) skip entries before.
 > * Iterate through the pixel data from start to N:
 >    * Count the extent of same value bytes
 >    * Determine encoding method
->       * If the byte value is ```0x00```, encode the count of zero bytes
+>       * If the pixel value shall be retained from the previous frame, skip the count of bytes
 >       * Otherwise, if the count is more than three, encode the count and the constant value
 >       * Otherwise, count the extent of an arbitrary array; Abort when a zero value is detected, or more than three same values are found in sequence; Encode this array.
 >    * Skip the input bytes that have been serialized and continue with the loop
