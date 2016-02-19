@@ -23,3 +23,6 @@
   * [Electronic Messages](content/ElectronicMessages.md)
   * [Level Objects](levelObjects/index.md)
   * [Level Textures](content/LevelTextures.md)
+
+* Other Files
+  * [Music](other/Music.md)
