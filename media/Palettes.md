@@ -23,16 +23,15 @@ to have transparent areas in order to lose the rectangular shape.
 ### Pixel Animation / Palette Looping
 
 During the game, various textures can be observed with small animations. Most typically seen with LED-like blinking effects.
-Instead of implementing this with multiple frames, the engine simply loops through the colors within a few groups of 4 colours each.
+Instead of implementing this with multiple frames, the engine simply loops through the colors within a few groups.
 
 The following groups (index values) are looped:
 
-    0x04 - 0x07
-    0x08 - 0x0B
-    0x0C - 0x0F
-    0x10 - 0x13
-    0x14 - 0x17
-    0x18 - 0x1B
-    0x1C - 0x1F
+    0x03 - 0x07
+    0x0B - 0x0F
+    0x10 - 0x14
+    0x15 - 0x17
+    0x18 - 0x1A
+    0x1B - 0x1F
 
 > These groups are looped even while the game is paused.

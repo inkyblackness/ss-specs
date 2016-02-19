@@ -5,7 +5,7 @@ for which there are four different resolutions available.
 
 ### Bitmaps
 
-The bitmaps are stored in ```texture.res``` in the following chunks:
+The bitmaps are stored uncompressed in ```texture.res``` in the following chunks:
 
     0x004C           16x16 bitmaps, one per block
     0x004D           32x32 bitmaps, one per block

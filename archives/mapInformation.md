@@ -179,6 +179,9 @@ The first 32 textures can be used for floor/ceiling as well.
 > The engine caches these textures when reloading a savegame with the same level.
 > The 'texture' index for space is 0x00CD, the observation grating has 0x00B1 (ceiling on groves and bridge)
 
+See [Level Textures](../content/LevelTextures.md) for further information.
+
+
 ### Map notes
 
 #### Text Data
