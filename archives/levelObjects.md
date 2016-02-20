@@ -62,6 +62,8 @@ The ```Previous``` and ```Next``` fields form a double-linked list within the sa
 
 * ```L10``` [Weapons](../levelObjects/00_Weapons/levelWeaponEntry.md)
 * ```L11``` [Ammo Clips](../levelObjects/01_AmmoClips/levelAmmoClipEntry.md)
+* ```L15``` [Hardware](../levelObjects/05_Hardware/levelHardwareEntry.md)
+* ```L16``` [Software](../levelObjects/06_Software/levelSoftwareEntry.md)
 * ```L17``` [Scenery](../levelObjects/07_Scenery/levelSceneryEntry.md)
 * ```L18``` [Items](../levelObjects/08_Items/levelItemEntry.md)
 
