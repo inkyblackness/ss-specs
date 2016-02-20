@@ -9,6 +9,12 @@
 
 ### Decal 7/2/1
 
+### Words 7/2/3
+
+    0000  int16  Text index (within chunk 0x0868)
+    0002  int16  Font and size (bits 0-3 are font, 4-7 are size)
+    0004  int16  Colour (palette index, 0 defaults to red)
+
 ### Control Pedestal 7/4/0
 
 ### Surgery Machines 7/4/3
@@ -22,7 +28,7 @@
 **Screen Info** (10 bytes)
 
     0000  int16     Frame count
-    0002  int16     Unknown
+    0002  [4]byte   Unknown
     0006  int16     Picture source
 
 **Picture Source**
@@ -38,3 +44,9 @@ The picture source field specifies what shall be shown. It has the following cas
     0x0180 .. 0x01FF  Text message, scrolling vertically
 
 For surveillance screens, the sources of screens 0-7 are specified in the [Surveillance Sources Table](../../archives/surveillanceScreens.md).
+
+### Control Pedestal 7/5/6
+
+    0000  [6]byte   Unknown
+    0006  int16     Picture source (see above)
+
