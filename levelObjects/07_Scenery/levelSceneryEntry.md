@@ -1,11 +1,14 @@
 ## Level Scenery Table (Class 7)
 
-```L17``` is a table describing scenery and fixture items
+```L17``` is a table describing scenery and fixture items.
 
 **Level Scenery Entry** (16 bytes)
 
     0000  [6]byte   Level object prefix
     0008  [10]byte  Scenery Info
+
+Cyberspace levels may re-use "scenery" entries for further software entries. These entries need to be
+interpreted differently.
 
 ### Decal 7/2/1
 
