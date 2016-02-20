@@ -1,6 +1,6 @@
 ## Level Objects
 
-A level object is anything that is not part of the basic level layout (the tile map).
+A level object is anything that is not part of the basic level layout (the tile map). The game knows about 476 different objects.
 
 Objects are identified using three values. They are divided by class, subclass and type. In this documentation such an identifier will be written as ```c/s/t```. For example, the energy charge station is ```9/2/1```.
 
@@ -11,19 +11,29 @@ Information about level objects exists in two places:
 The static properties are stored in a separate file. See [Property Files](../fileFormat/PropertyFiles.md) for basic information.
 Instance data is stored as part of an archive. See [Level Objects](../archives/levelObjects.md) for basic information.
 
-The following object classes exist:
-* 0 Weapons
-* 1 Ammo
-* 2 Projectiles
-* 3 Explosives
-* 4 Patches
-* 5 Hardware
-* 6 Software (including logs)
-* 7 Scenery and fixtures
-* 8 Items (gettable and other objects)
-* 9 Panels (switches and the like)
-* 10 Barriers (doors and gratings)
-* 11 Animations
-* 12 Markers (including traps)
-* 13 Containers
-* 14 Critters
+The following table lists the object classes together with the available types per subclass:
+
+| Class | Name                               | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  |
+|:-----:|------------------------------------|----|----|----|----|----|----|----|----|
+|   0   | Weapons                            | 5  | 2  | 2  | 2  | 3  | 2  | -  | -  |
+|   1   | Ammo                               | 2  | 2  | 3  | 2  | 2  | 2  | 2  | -  |
+|   2   | Projectiles                        | 6  | 16 | 2  | -  | -  | -  | -  | -  |
+|   3   | Explosives                         | 5  | 3  | -  | -  | -  | -  | -  | -  |
+|   4   | Patches                            | 7  | -  | -  | -  | -  | -  | -  | -  |
+|   5   | Hardware                           | 5  | 10 | -  | -  | -  | -  | -  | -  |
+|   6   | Software (including logs)          | 7  | 3  | 4  | 5  | 3  | -  | -  | -  |
+|   7   | Scenery / Fixtures                 | 9  | 10 | 11 | 4  | 9  | 8  | 16 | 10 |
+|   8   | Items (gettable and other objects) | 8  | 10 | 15 | 6  | 12 | 12 | 9  | 8  |
+|   9   | Panels (switches and the like)     | 9  | 7  | 3  | 11 | 2  | 3  | -  | -  |
+|   10  | Barriers (doors and gratings)      | 10 | 9  | 7  | 5  | 10 | -  | -  | -  |
+|   11  | Animations                         | 9  | 11 | 14 | -  | -  | -  | -  | -  |
+|   12  | Markers (including traps)          | 13 | 1  | 5  | -  | -  | -  | -  | -  |
+|   13  | Containers                         | 3  | 3  | 4  | 8  | 13 | 7  | 8  | -  |
+|   14  | Critters                           | 9  | 12 | 7  | 7  | 2  | -  | -  | -  |
+
+> This information is not stored within the resource files, it is hardcoded in the engine.
+
+### Object Names
+
+The names are localized and [stored as texts](../media/Texts.md). The short names are stored in chunk ```0x086D```, the long
+names are in chunk ```0x0024```.
