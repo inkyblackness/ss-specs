@@ -16,6 +16,23 @@
 
 ### Buttons 9/0/x
 
+### Cyberspace Terminals 9/2/0
+
+**Cyberspace Terminal Panel Specific Info** (18 bytes)
+
+    0000  int32     Target X
+    0004  int32     Target Y
+    0008  int32     Target Z
+    000C  int16     Target Level
+    000E  [4]byte   Unknown
+
+The first field of the common info determines the terminal state:
+
+    0: Off
+    1: Active (Normal state)
+    2: Locked. Trying to activate it gives an electrical shock.
+
+
 ### Elevator Panels 9/3/5
 
 **Elevator Panel Specific Info** (18 bytes)
