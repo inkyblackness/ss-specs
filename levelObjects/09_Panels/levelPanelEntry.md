@@ -42,14 +42,15 @@ Puzzles are either "wire" or "block" puzzles. The type of the puzzle is determin
 
 **Block Puzzle Panel Specific Info** (18 bytes)
 
-    0000  int32     Unknown
+    0000  int32     Target object index (object to toggle on success)
     0004  int16     State store object index (refers to a null trigger)
     0006  int16     Puzzle type - must be 0x1000 for block puzzle
     0008  int32     Puzzle layout
 
 **Puzzle Layout** (4 byte bitmask)
 
-    0x0000000F      Unknown
+    0x00000001      Puzzle solved flag ("Circuit Activated")
+    0x0000000E      Unknown
     0x00000070      Y coordinate of source connector
     0x00000180      Source location
     0x00000E00      Unknown
