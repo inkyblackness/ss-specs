@@ -38,14 +38,38 @@ Puzzles are either "wire" or "block" puzzles. The type of the puzzle is determin
 
 #### Wire Puzzles
 
+**Wire Puzzle Panel Specific Info** (18 bytes)
+
+    0000  int32     Target object index (object to toggle on success)
+    0004  byte      Puzzle layout
+    0005  uint8     Target power level out of 0xFF
+    0006  uint8     Current power level; Same value as target value when solved
+    0007  int8      Puzzle type - must be 0x00 for wire puzzle
+    0008  uint32    Target state of wires
+    000C  uint32    Current state of wires
+    0010  [2]byte   Unused
+
+**Puzzle Layout** (1 byte bitmask)
+
+    0x0F            Wire count; 0 default to 4 wires
+    0xF0            Connector count per size; 0 defaults to 6 connectors
+
+Wire states are stored as three-bit pairs, ordered from LSB to MSB (right to left). The first pair describes the first
+wire and the lower triple specifies the left connector.
+
+This allows for puzzles up to 5 wires and 8 connectors, although only up to 6 connectors are visible.
+
+
 #### Block Puzzles
 
 **Block Puzzle Panel Specific Info** (18 bytes)
 
     0000  int32     Target object index (object to toggle on success)
     0004  int16     State store object index (refers to a null trigger)
-    0006  int16     Puzzle type - must be 0x1000 for block puzzle
+    0006  byte      Unused - 0x00
+    0007  int8      Puzzle type - must be 0x10 for block puzzle
     0008  int32     Puzzle layout
+    000C  [6]byte   Unused
 
 **Puzzle Layout** (4 byte bitmask)
 
