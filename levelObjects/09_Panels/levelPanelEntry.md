@@ -32,6 +32,60 @@ The first field of the common info determines the terminal state:
     1: Active (Normal state)
     2: Locked. Trying to activate it gives an electrical shock.
 
+### Puzzles 9/3/0 to 9/3/3
+
+Puzzles are either "wire" or "block" puzzles. The type of the puzzle is determined by a bit within the info structure.
+
+#### Wire Puzzles
+
+#### Block Puzzles
+
+**Block Puzzle Panel Specific Info** (18 bytes)
+
+    0000  int32     Unknown
+    0004  int16     State store object index (refers to a null trigger)
+    0006  int16     Puzzle type - must be 0x1000 for block puzzle
+    0008  int32     Puzzle layout
+
+**Puzzle Layout** (4 byte bitmask)
+
+    0x0000000F      Unknown
+    0x00000070      Y coordinate of source connector
+    0x00000180      Source location
+    0x00000E00      Unknown
+    0x00007000      Y coordinate of destination connector
+    0x00018000      Destination location
+    0x00700000      Width
+    0x07000000      Height
+    0x70000000      Side effect type
+
+The location values are 0: top, 1: bottom, 2: left, 3: right
+
+Side effects are:
+
+    0: Toggle all blocks horizontally/vertically from the changed one (across the board)
+    1: Toggle all surrounding 8 blocks 
+    2: Toggle all blocks diagonally from the changed one (across the board)
+    3: Toggle all blocks horizontally, vertically and diagonally across the board
+    4: None
+
+The state of the puzzle is stored in the referred ```State store object```, a trigger with no action.
+
+The trigger info block is repurposed and at its offset ```0006``` there are 4 uint32 fields, concatenated to a 128 bit array.
+Starting with the LSB from this bit array, 3 bits are repeatedly taken to fill the blocks from left to right, top to bottom.
+This allows a maximum puzzle size of 42 blocks (6x7 or 7x6).
+
+The blocks are:
+
+    0: Nothing (empty)
+    1: Inactive (x)
+    2: Active (+)
+    3: Active (+) - not used
+    4: Solid block
+    5: Solid block - not used
+    6: Switching node
+    7: Switching node - not used
+
 
 ### Elevator Panels 9/3/5
 
