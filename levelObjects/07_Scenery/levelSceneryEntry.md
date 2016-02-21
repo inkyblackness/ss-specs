@@ -5,7 +5,7 @@
 **Level Scenery Entry** (16 bytes)
 
     0000  [6]byte   Level object prefix
-    0008  [10]byte  Scenery Info
+    0006  [10]byte  Scenery Info
 
 Cyberspace levels may re-use "scenery" entries for further software entries. These entries need to be
 interpreted differently.
