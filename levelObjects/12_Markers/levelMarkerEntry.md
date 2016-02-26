@@ -46,3 +46,14 @@ Trigger Types:
     000C  int16      Object 4 index
     000E  int16      Object 4 delay
     
+#### Trigger Action 7: Change lightning
+
+**Change Lightning Trigger Action Details** (16 byte)
+
+    0000  int16      Unknown
+    0002  int16      Reference object index
+    0004  int16      Transition type. 0x0000: immediate, 0x0001: fade, 0x0100: flicker
+    0006  [2]byte    Unknown
+    0008  [2]byte    Unknown
+    000A  int16      Light surface. 0x0000: floor, 0x0001: ceiling, 0x0002: floor and ceiling
+    000C  [4]byte    Unknown
