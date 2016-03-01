@@ -16,6 +16,8 @@ Trigger Types:
 
     0: Entry Trigger; Hacker enters tile
     1: Null Trigger; Must be set off externally. Also used as data storage.
+    2:
+    3: Player Death; Used to resurrect Hacker
 
 
 **Trigger Marker Data** (22 bytes)
@@ -57,3 +59,31 @@ Trigger Types:
     0008  [2]byte    Unknown
     000A  int16      Light surface. 0x0000: floor, 0x0001: ceiling, 0x0002: floor and ceiling
     000C  [4]byte    Unknown
+
+#### Trigger Action 8: Effect
+
+    0000  int16      Sound ID; 0: Play nothing
+    0002  int16      Sound play count; 0: endless
+    0004  int16      Visual effect
+    0006  [2]byte    Unknown
+    0008  int16      Additional visual effect
+    000A  [2]byte    Unknown
+
+Visual Effects:
+
+    0: None
+    1: Power on: Dim level lights and fade back to normal; Plays generator sound as well
+    2: Quake: Shake cam and play rumble sound
+    3: Escape pod: Shows launch sequence, cam shake and abort; Plays Shodan message afterwards
+    4: Red static (fullscreen)
+    5: Red static (interference)
+
+Additional Visual Effects:
+
+    0: None
+    1: White flash
+    2: Pink flash
+    3: Gray static (fullscreen, endless)
+    4: Vertical panning (including HUD, endless)
+
+
