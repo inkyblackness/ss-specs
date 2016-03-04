@@ -27,7 +27,9 @@ Trigger Types:
     0002  [4]byte    Condition
     0006  [16]byte   Trigger action details
 
+
 #### Trigger Action 0: Do nothing or the default
+
 
 #### Trigger Action 1: Transport player
 
@@ -38,6 +40,20 @@ Trigger Types:
     0008  int32      Unknown
     000C  int32      Unknown
 
+
+#### Trigger Action 3: Clone/Move Object
+
+**Clone/Move Trigger Action Details** (16 byte)
+
+    0000  int16      Source object index
+    0002  int16      Move flag: 0: clone object, !0: move object
+    0004  int32      Target X tile
+    0008  int32      Target Y tile
+    000C  int32      Height
+
+The orientation and in-tile position of the source object will be kept.
+
+
 #### Trigger Action 6: Trigger other objects
 
 **Trigger Objects Trigger Action Details** (16 byte)
@@ -47,7 +63,8 @@ Trigger Types:
     ...
     000C  int16      Object 4 index
     000E  int16      Object 4 delay
-    
+
+
 #### Trigger Action 7: Change lightning
 
 **Change Lightning Trigger Action Details** (16 byte)
@@ -60,7 +77,10 @@ Trigger Types:
     000A  int16      Light surface. 0x0000: floor, 0x0001: ceiling, 0x0002: floor and ceiling
     000C  [4]byte    Unknown
 
+
 #### Trigger Action 8: Effect
+
+**Effect Trigger Action Details** (16 byte)
 
     0000  int16      Sound index, based on 0x00C9; 0: Play nothing
     0002  int16      Sound play count; 0: endless
@@ -97,3 +117,17 @@ Additional Visual Effects:
     000C  [4]byte    Unknown
 
 For the height fields the value ```0x0FFF``` indicates "don't move". Otherwise it's the target height in level height units.
+
+
+#### Trigger Action 13: Delete Object
+
+**Delete Object Trigger Action Details** (16 byte)
+
+    0000  int16      Object 1 index
+    0002  int16      Unknown
+    0004  int16      Object 2 index
+    0006  int16      Unknown
+    0008  int16      Object 3 index
+    000A  int16      Unknown
+    000C  int32      Message index; 0: no message
+
