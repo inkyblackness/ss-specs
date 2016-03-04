@@ -131,3 +131,11 @@ For the height fields the value ```0x0FFF``` indicates "don't move". Otherwise i
     000A  int16      Unknown
     000C  int32      Message index; 0: no message
 
+
+#### Trigger Action 15: Receive EMail
+
+**Receive EMail Trigger Action Details** (16 byte)
+
+    0000  int16      EMail index, based on 0x0989
+    0002  [14]byte   Unknown
+
