@@ -88,3 +88,12 @@ Additional Visual Effects:
     4: Vertical panning (including HUD, endless)
 
 
+#### Trigger Action 9: Change tile heights
+
+    0000  int32      Tile X
+    0004  int32      Tile Y
+    0008  int16      Target floor height
+    000A  int16      Target ceiling height
+    000C  [4]byte    Unknown
+
+For the height fields the value ```0x0FFF``` indicates "don't move". Otherwise it's the target height in level height units.
