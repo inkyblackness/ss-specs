@@ -62,12 +62,13 @@ Trigger Types:
 
 #### Trigger Action 8: Effect
 
-    0000  int16      Sound ID; 0: Play nothing
+    0000  int16      Sound index, based on 0x00C9; 0: Play nothing
     0002  int16      Sound play count; 0: endless
     0004  int16      Visual effect
     0006  [2]byte    Unknown
     0008  int16      Additional visual effect
     000A  [2]byte    Unknown
+    000C  [4]byte    Unknown
 
 Visual Effects:
 
