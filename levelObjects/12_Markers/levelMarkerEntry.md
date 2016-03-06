@@ -24,9 +24,13 @@ Trigger Types:
 **Trigger Marker Data** (22 bytes)
 
     0000  byte       Action
-    0001  byte       Unknown
+    0001  byte       Use quota
     0002  [4]byte    Condition
     0006  [16]byte   Trigger action details
+
+The ```Use quota``` indicates how often more this action can be executed. ```0``` means endless.
+The value is only decremented if it is not zero and the condition was met.
+If the value is decremented to zero after the action was executed, the object is deleted.
 
 
 #### Trigger Action 0: Do nothing or the default
