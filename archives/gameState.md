@@ -20,10 +20,7 @@ This chunk contains everything about the hacker, together with general game-stat
     00AD  uint8    Power usage in JPM
 
     00B6  512xbool Boolean game variables
-                   Game variables are set by SetVariable action in trigger objects
-                   Variable is set here when 0x1000 bit is false in the key
-                   Key is 0x01FF masked to get index
-    
+
                    Known boolean game variable indices:
                    7 Shield on
                    10 Delta	grove enabled
@@ -33,10 +30,7 @@ This chunk contains everything about the hacker, together with general game-stat
                    21 Life pods enabled, reactor on destruct
                    145 Online help
     
-    00F6  40xuint16 Accumulating game variables
-                   Game variables are set by SetVariable action in trigger objects
-                   Variable is set here when 0x1000 bit is true in the key
-                   Key is 0x003F masked to get index
+    00F6  40xuint16 Integer game variables
     
     0148  byte     Option: Audio, Music Volume (0x00 .. 0x64)
     014A  uint16   Option: Video, Gamma (Default: 0x4A3D)
