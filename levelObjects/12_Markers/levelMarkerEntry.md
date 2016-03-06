@@ -116,6 +116,8 @@ If the resulting value is not zero, the (optional) ```Message 1``` is played/sho
     000C  int16      Object 4 index
     000E  int16      Object 4 delay
 
+The delays are all relative to the execution start of the action.
+
 
 #### Trigger Action 7: Change lightning
 
