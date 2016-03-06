@@ -152,6 +152,17 @@ Additional Visual Effects:
 For the height fields the value ```0x0FFF``` indicates "don't move". Otherwise it's the target height in level height units.
 
 
+#### Trigger Action 12: Cycle Objects
+
+**Cycle Objects Trigger Action Details** (16 byte)
+
+    0000  [3]int32   Object indices
+    000C  int32      Next object
+
+This action triggers objects from the list of ```Object indices```. The ```Next object``` field indicates which entry to trigger next.
+Afterwards, the ```Next object``` field is incremented and reset to ```0``` if either ```3``` is reached or the next object index is ```0```.
+
+
 #### Trigger Action 13: Delete Object
 
 **Delete Object Trigger Action Details** (16 byte)
