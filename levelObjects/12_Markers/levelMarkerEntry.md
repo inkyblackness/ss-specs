@@ -272,3 +272,19 @@ For the ```Background image```, the following values are possible:
     -2  Diego
 
 > The game uses other image references as well, apparently they don't work.
+
+
+#### Trigger Action 23: Spawn Objects
+
+    0000  int32      Object type; Format 0x00CCSSTT
+    0004  int16      Reference object index 1
+    0006  int16      Reference object index 2
+    0008  int32      Number of objects
+    000C  [4]byte    Unknown
+
+This action spawns a random number of objects, randomly distributed within the rectangle defined by the two reference objects.
+The spawned objects are placed at the floor in the center of the tile.
+
+Objects are only spawned if the ```Combat``` value is 1 or higher. Not all classes can be spawned.
+> Although the game uses enemies exclusively, ammo, explosives, and patches can be spawned as well.
+
