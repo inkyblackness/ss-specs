@@ -189,6 +189,23 @@ Additional Visual Effects:
 For the height fields the value ```0x0FFF``` indicates "don't move". Otherwise it's the target height in level height units.
 
 
+#### Trigger Action 11: Random Timer
+
+**Random Timer Trigger Action Details** (16 byte)
+
+    0000  int32      Object index
+    0004  int32      Time limit
+    0008  int32      Activation value
+    000C  [4]byte    Unknown
+
+The ```Time limit``` specifies within which time span the given object shall be triggered randomly. The first activation
+waits until the complete time limit has elapsed, further activations are random within this limit.
+
+The ```Activation value``` must be ```0xFFFF``` or higher for this action to work.
+
+> The game has the ```Activation value``` typically set to ```0xFFFF```, ```0x10000``` or ```0x11111```. No difference has been found.
+
+
 #### Trigger Action 12: Cycle Objects
 
 **Cycle Objects Trigger Action Details** (16 byte)
