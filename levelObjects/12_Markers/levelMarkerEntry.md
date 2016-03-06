@@ -106,6 +106,22 @@ If the resulting value is not zero, the (optional) ```Message 1``` is played/sho
 > Operations other than Set or Add are not used in the game for the int16 values.
 
 
+#### Trigger Action 5: Cutscene
+
+**Cutscene Trigger Action Details** (16 byte)
+
+    0000  int32      Cutscene index; 0: Death, 1: Intro, 2: Ending
+    0004  int32      End game flag
+    0008  [8]byte    Unused
+
+```End game flag``` must be ```1```. Setting it to ```0``` leaves the game in an unplayable state after the cutscene.
+
+What happens after the cutscene is dependent on the cutscene itself: The death and intro cutscenes return to the main menu,
+the ending cutscene ends the game (showing score and credits).
+
+> In the regular game, this action is used only once when defeating SHODAN.
+
+
 #### Trigger Action 6: Trigger other objects
 
 **Trigger Objects Trigger Action Details** (16 byte)
