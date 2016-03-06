@@ -218,3 +218,22 @@ Effect types are:
     8: Bio contamination
 
 > The game uses this only once to remove the radiation in level R - treatment area.
+
+
+#### Trigger Action 22: Trap Message
+
+**Trap Message Trigger Action Details** (16 byte)
+
+    0000  sint32     Background image
+    0004  int32      Message index
+    0008  int32      Text colour
+    000C  int32      MFD suppression flag; 0: Show in MFD, 1: Show only in HUD
+
+The ```Background image``` and ```Text colour``` are only considered for display in MFD. The user needs to have messages set to "text" or "both" to see them.
+
+For the ```Background image```, the following values are possible:
+
+    -1  SHODAN (black and white)
+    -2  Diego
+
+> The game uses other image references as well, apparently they don't work.
