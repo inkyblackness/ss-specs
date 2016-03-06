@@ -18,6 +18,7 @@ Trigger Types:
     1: Null Trigger; Must be set off externally. Also used as data storage.
     2:
     3: Player Death; Used to resurrect Hacker
+    8: Level Entry Trigger; Used for instance to initialize starting health
 
 
 **Trigger Marker Data** (22 bytes)
@@ -39,6 +40,20 @@ Trigger Types:
     0004  int32      Target Y
     0008  int32      Unknown
     000C  int32      Unknown
+
+
+#### Trigger Action 2: Change Health
+
+**Change Health Trigger Action Details** (16 byte)
+
+    0000  int32      Unused
+    0004  int16      Health delta
+    0006  int16      Health change flag; 0: remove delta, 1: add delta
+    0008  int16      Power delta
+    000A  int16      Power change flag; 0: remove delta, 1: add delta
+    000C  [4]byte    Unknown
+
+> Reducing health to/below 0 causes death. Reducing power below 0 causes an underflow and hacker is fully powered again.
 
 
 #### Trigger Action 3: Clone/Move Object
