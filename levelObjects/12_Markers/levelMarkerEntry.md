@@ -276,6 +276,8 @@ For the ```Background image```, the following values are possible:
 
 #### Trigger Action 23: Spawn Objects
 
+**Spawn Objects Trigger Action Details** (16 byte)
+
     0000  int32      Object type; Format 0x00CCSSTT
     0004  int16      Reference object index 1
     0006  int16      Reference object index 2
@@ -287,4 +289,21 @@ The spawned objects are placed at the floor in the center of the tile.
 
 Objects are only spawned if the ```Combat``` value is 1 or higher. Not all classes can be spawned.
 > Although the game uses enemies exclusively, ammo, explosives, and patches can be spawned as well.
+
+
+#### Trigger Action 24: Change Object Type
+
+**Change Object Type Trigger Action Details** (16 byte)
+
+    0000  int32      Object index
+    0004  int16      New type
+    0006  int16      Unknown
+    0008  int32      Unknown
+    000C  [4]byte    Unused
+
+This action changes the type of an object. It is primarily used to extend and retract force bridges.
+> For bridges in their retracted state, the game uses "Elephant, Jorp" (```7/7/8```), an invisible dummy type.
+
+> The unknown field at ```0006``` is set to ```0x000F``` or ```0x0001``` for a few bridges on level 4 and 5. Effect unknown.
+> The unknown field at ```0008``` is set to ```1``` for only one force bridge in the game (on level 2) and does not seem to have any effect.
 
