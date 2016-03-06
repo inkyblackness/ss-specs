@@ -198,3 +198,19 @@ Afterwards, the ```Next object``` field is incremented and reset to ```0``` if e
     0000  int16      EMail index, based on 0x0989
     0002  [14]byte   Unknown
 
+
+#### Trigger Action 16: Change Effect
+
+**Change Effect Trigger Action Details** (16 byte)
+
+    0000  int16      Delta value
+    0002  int16      Effect change flag; 0: add delta, 1: remove delta
+    0004  int32      Effect type
+    0008  [8]byte    Unknown
+
+Effect types are:
+
+    4: Radiation poisoning
+    8: Bio contamination
+
+> The game uses this only once to remove the radiation in level R - treatment area.
