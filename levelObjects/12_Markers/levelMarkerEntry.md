@@ -277,14 +277,24 @@ This action is a more generic, with several different interpretations, depending
     0000  int32      Change type
     0004  [12]byte   Change parameter
 
-##### Change State Type 1: Switch repulsor
+##### Change State Type 1: Toggle repulsor
 
-**Toggle Repulsor** (12 byte)
+**Toggle Repulsor Details** (12 byte)
 
     0000  int32      Repulsor object index
     0004  byte       "Off" texture index (into level texture list)
     0005  byte       "On" texture index (into level texture list)
     0006  [6]byte    Unused
+
+
+#### Change State Type 2: Show Game Code Digit
+
+**Show Game Code Digit Details** (12 byte)
+
+    0000  int32      Screen object index
+    0004  int32      Digit number 1..6 (= level number)
+    0008  [4]byte    Unused
+
 
 ##### Change State Type 6: Return to main menu
 
