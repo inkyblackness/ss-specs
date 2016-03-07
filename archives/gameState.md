@@ -31,6 +31,10 @@ This chunk contains everything about the hacker, together with general game-stat
                    145 Online help
     
     00F6  40xuint16 Integer game variables
+
+                   31 3-digit game code 1 ([Binary-Coded-Decimal](https://en.wikipedia.org/wiki/Binary-coded_decimal))
+                   32 3-digit game code 2 ([Binary-Coded-Decimal](https://en.wikipedia.org/wiki/Binary-coded_decimal))
+
     
     0148  byte     Option: Audio, Music Volume (0x00 .. 0x64)
     014A  uint16   Option: Video, Gamma (Default: 0x4A3D)
