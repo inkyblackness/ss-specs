@@ -7,6 +7,18 @@
     0000  [6]byte   Level object prefix
     0006  [22]byte  Marker data
 
+### Repulsors 12/0/10
+
+**Repulsor Data** (22 byte)
+
+    0000  [10]byte  Unused; A few have the first byte 0x06 without effect
+    000A  [4]byte   Unknown
+    000E  byte      Unused
+    000F  int16     Repulsion height; 0x0000: endless, 0x0100: one tile height
+    0011  byte      Unused
+    0012  int32     Repulsion flags; 0x00000001: disabled (float down); 0x00000008: strong repulsor
+
+
 ### Triggers 12/0/x
 
 The type of the trigger object determines its cause. The ```Action``` field of the trigger data
@@ -19,6 +31,7 @@ Trigger Types:
     2:
     3: Player Death; Used to resurrect Hacker
     8: Level Entry Trigger; Used for instance to initialize starting health
+    10: This is not a trigger! See repulsors above.
 
 
 **Trigger Marker Data** (22 bytes)
@@ -253,6 +266,42 @@ Effect types are:
     8: Bio contamination
 
 > The game uses this only once to remove the radiation in level R - treatment area.
+
+
+#### Trigger Action 19: Change State
+
+This action is a more generic, with several different interpretations, depending on the first field.
+
+**Change State Trigger Action Details** (16 byte)
+
+    0000  int32      Change type
+    0004  [12]byte   Change parameter
+
+##### Change State Type 1: Switch repulsor
+
+**Toggle Repulsor** (12 byte)
+
+    0000  int32      Repulsor object index
+    0004  byte       "Off" texture index (into level texture list)
+    0005  byte       "On" texture index (into level texture list)
+    0006  [6]byte    Unused
+
+##### Change State Type 6: Return to main menu
+
+This change has no parameters (all 12 bytes 0x00) and directly returns to the main menu.
+
+
+##### Change State Type 9: SHODAN pixelation
+
+This change has no parameters (all 12 bytes 0x00) and fills the screen with an image. The used image is hardcoded.
+The game returns to the main menu after the screen is filled.
+It should be used only in cyberspace; Using it in real world messes up tile textures.
+
+
+##### Change State Type 15: Earth destruction by laser
+
+This change has no parameters (all 12 bytes 0x00) and lets the player receive the message about the fired laser.
+The game continues after the message has played. Images and text are hardcoded.
 
 
 #### Trigger Action 22: Trap Message
