@@ -287,13 +287,26 @@ This action is a more generic, with several different interpretations, depending
     0006  [6]byte    Unused
 
 
-#### Change State Type 2: Show Game Code Digit
+##### Change State Type 2: Show Game Code Digit
 
 **Show Game Code Digit Details** (12 byte)
 
     0000  int32      Screen object index
     0004  int32      Digit number 1..6 (= level number)
     0008  [4]byte    Unused
+
+
+##### Change State Type 3: Set Parameter from Variable
+
+**Set Parameter From Variable Details** (12 byte)
+
+    0000  int32      Target object index
+    0004  int32      Parameter number (1 based)
+    0008  int32      Game integer variable index
+
+> This change is used only twice, exclusively to set the codes for the reactor in the base game.
+> The change itself does not check for target object type and allows modification of (seemingly) arbitrary objects.
+> Use with caution.
 
 
 ##### Change State Type 6: Return to main menu
