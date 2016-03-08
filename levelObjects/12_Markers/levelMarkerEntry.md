@@ -309,6 +309,31 @@ This action is a more generic, with several different interpretations, depending
 > Use with caution.
 
 
+##### Change State Type 4: Set Button State
+
+**Set Button State Details** (12 byte)
+
+    0000  int32      Button object index
+    0004  int32      New state; 0: off, 1: on
+    0008  int32      Unknown
+
+
+##### Change State Type 5: Door Control
+
+**Door Control State Details** (12 byte)
+
+    0000  int32      Door object index
+    0004  int32      Control value
+    0008  int32      Unused
+
+Control values:
+
+    1: open door
+    2: close door
+    3: toggle door
+    4: suppress auto-close
+
+
 ##### Change State Type 6: Return to main menu
 
 This change has no parameters (all 12 bytes 0x00) and directly returns to the main menu.
