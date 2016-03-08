@@ -339,11 +339,36 @@ Control values:
 This change has no parameters (all 12 bytes 0x00) and directly returns to the main menu.
 
 
+##### Change State Type 7: Unknown
+
+    0000  int32      Object index 1
+    0004  int32      Object index 2
+    0008  int32      Unknown
+
+> This entry is only used on level R and Alpha grove to define areas between the two objects. Purpose and effect unknown.
+
+
+#### Change State Type 8: Unknown
+
+> This entry is only used on level 2 in three arbitrary locations. Purpose and effect unknown.
+
+
 ##### Change State Type 9: SHODAN pixelation
 
 This change has no parameters (all 12 bytes 0x00) and fills the screen with an image. The used image is hardcoded.
 The game returns to the main menu after the screen is filled.
 It should be used only in cyberspace; Using it in real world messes up tile textures.
+
+
+##### Change State Type 10: Set Condition
+
+**Set Condition Details** (12 byte)
+
+    0000  int32     Object index
+    0004  [4]byte   Condition
+    0008  [4]byte   Unused
+
+Sets the condition values of specified object.
 
 
 ##### Change State Type 15: Earth destruction by laser
