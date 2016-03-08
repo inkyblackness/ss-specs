@@ -364,9 +364,9 @@ It should be used only in cyberspace; Using it in real world messes up tile text
 
 **Set Condition Details** (12 byte)
 
-    0000  int32     Object index
-    0004  [4]byte   Condition
-    0008  [4]byte   Unused
+    0000  int32      Object index
+    0004  [4]byte    Condition
+    0008  [4]byte    Unused
 
 Sets the condition values of specified object.
 
@@ -374,6 +374,20 @@ Sets the condition values of specified object.
 ##### Change State Type 11: Show System Analyzer
 
 This change has no parameters (all 12 bytes 0x00) and forces the display of the "General" tab of the system analyzer in the HUD.
+
+
+##### Change State Type 12: Make Item Radioactive
+
+**Make Item Radioactive Details** (12 byte)
+
+    0000  int32      Radioactive object index
+    0004  int16      Watched object index
+    0006  int16      Watched object trigger state
+    0008  [4]byte    Unused
+
+The ```Radioactive object``` emits radiation with a radius of 2 tiles while ```Watched object``` is in given state (1 = active/open).
+
+> This is used only once, on level 2 for the small room in Beta quadrant. The door is both the emitter as well as the watched object.
 
 
 ##### Change State Type 15: Earth destruction by laser
