@@ -371,6 +371,11 @@ It should be used only in cyberspace; Using it in real world messes up tile text
 Sets the condition values of specified object.
 
 
+##### Change State Type 11: Show System Analyzer
+
+This change has no parameters (all 12 bytes 0x00) and forces the display of the "General" tab of the system analyzer in the HUD.
+
+
 ##### Change State Type 15: Earth destruction by laser
 
 This change has no parameters (all 12 bytes 0x00) and lets the player receive the message about the fired laser.
