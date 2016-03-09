@@ -268,6 +268,26 @@ Effect types are:
 > The game uses this only once to remove the radiation in level R - treatment area.
 
 
+#### Trigger Action 17: Set Object Parameter
+
+**Set Object Parameter Trigger Action Details** (16 byte)
+
+    0000  int32      Object index
+    0004  int32      Value 1
+    0008  int32      Value 2
+    000C  int32      Value 3
+
+This action sets parameters of a target object. Which value is applied to which parameter is dependent on the target.
+
+The following table lists the known mappings. If a value is ```0xFFFFFFFF``` it doesn't modify the target.
+
+| Target  | Value 1      | Value 2      | Value 3         |
+|:-------:|--------------|--------------|-----------------|
+| Screen  | Frame count  | Unknown      | Picture source  |
+| Door    | Unknown      | Unknown      | Unknown         |
+| Trigger | Unknown      | Unknown      | Unknown         |
+
+
 #### Trigger Action 19: Change State
 
 This action is a more generic one with several different interpretations, depending on the first field.
