@@ -131,12 +131,24 @@ of the accessible floors.
 > Referencing an object from another level requires an editor to keep track of inter-level references. Or burden the user.
 > The target array would allow for up to six entries, it is unknown if all six are supported.
 
-### Number Pads 9/3/7
+
+### Number Pads 9/3/7, 9/3/8
 
 **Number Pad Panel Specific Info** (18 bytes)
 
-    0000  int16     3-digit combination, stored in [Binary-Coded-Decimal](https://en.wikipedia.org/wiki/Binary-coded_decimal)
-    0002  int16     Object index of object to trigger on success
-    0004  [14]byte  Unknown
+    0000  int16     3-digit combination 1
+    0002  int16     Trigger object index 1
+    0004  int16     3-digit combination 2
+    0006  int16     Trigger object index 2
+    0008  int16     3-digit combination 3
+    000A  int16     Trigger object index 3
+    000C  int16     Fail object index
+    000E  [4]byte   Unknown
 
-The 3-digit combination is stored right-bound, so the combination ```451``` is stored as ```0x0451```.
+The 3-digit combinations are stored in [Binary-Coded-Decimal](https://en.wikipedia.org/wiki/Binary-coded_decimal) right-bound,
+so the combination ```451``` is stored as ```0x0451```.
+
+A combination must be something else than "000" to be active ("000" is always wrong).
+Combinations must not be entered in sequence, any of the three combinations is valid at any time.
+
+If the ```Fail object index``` refers to a valid object, this one is triggered when a wrong combination was entered.
