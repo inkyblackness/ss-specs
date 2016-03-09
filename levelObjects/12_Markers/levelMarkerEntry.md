@@ -288,6 +288,22 @@ The following table lists the known mappings. If a value is ```0xFFFFFFFF``` it 
 | Trigger | Unknown      | Unknown      | Unknown         |
 
 
+#### Trigger Action 18: Set Screen Picture
+
+**Set Screen Picture Trigger Action Details** (16 byte)
+
+    0000  int16      Screen 1 object index
+    0002  int16      Screen 2 object index
+    0004  int32      Single sequence source
+    0008  int32      Loop sequence source
+    000C  int32      Unused
+
+This action sets the picture source for the given screen object(s).
+
+If provided, the ```Single sequence``` source is played first. If provided, the ```Loop sequence``` is played
+next and looped. If no loop is provided, the last frame of the single sequence will be kept.
+
+
 #### Trigger Action 19: Change State
 
 This action is a more generic one with several different interpretations, depending on the first field.
