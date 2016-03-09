@@ -178,7 +178,7 @@ Visual Effects:
     0: None
     1: Power on: Dim level lights and fade back to normal; Plays generator sound as well
     2: Quake: Shake cam and play rumble sound
-    3: Escape pod: Shows launch sequence, cam shake and abort; Plays Shodan message afterwards
+    3: Escape pod: Shows launch sequence, cam shake and abort; Plays SHODAN message afterwards
     4: Red static (fullscreen)
     5: Red static (interference)
 
@@ -227,7 +227,7 @@ The ```Activation value``` must be ```0xFFFF``` or higher for this action to wor
     000C  int32      Next object
 
 This action triggers objects from the list of ```Object indices```. The ```Next object``` field indicates which entry to trigger next.
-Afterwards, the ```Next object``` field is incremented and reset to ```0``` if either ```3``` is reached or the next object index is ```0```.
+Afterwards, the ```Next object``` field is incremented. It is reset to ```0``` if either ```3``` is reached or the next object index is ```0```.
 
 
 #### Trigger Action 13: Delete Object
@@ -270,12 +270,13 @@ Effect types are:
 
 #### Trigger Action 19: Change State
 
-This action is a more generic, with several different interpretations, depending on the first field.
+This action is a more generic one with several different interpretations, depending on the first field.
 
 **Change State Trigger Action Details** (16 byte)
 
     0000  int32      Change type
     0004  [12]byte   Change parameter
+
 
 ##### Change State Type 1: Toggle repulsor
 
@@ -373,7 +374,7 @@ Sets the condition values of specified object.
 
 ##### Change State Type 11: Show System Analyzer
 
-This change has no parameters (all 12 bytes 0x00) and forces the display of the "General" tab of the system analyzer in the HUD.
+This change has no parameters (all 12 bytes 0x00) and forces the display of the "General" tab of the system analyzer in the MFD.
 
 
 ##### Change State Type 12: Make Item Radioactive
@@ -402,6 +403,7 @@ This change triggers the given object if the provided filter is satisfied.
 
 > The filter is either ```0x0000```, ```0x4000```, ```0x8000``` or ```0xC000```. It is exclusively used
 > on level 8 to trigger three different taunts from Diego.
+> What the filter is applied on is unknown.
 
 
 ##### Change State Type 14: Close Data MFD
