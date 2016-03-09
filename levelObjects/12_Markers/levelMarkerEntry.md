@@ -390,6 +390,32 @@ The ```Radioactive object``` emits radiation with a radius of 2 tiles while ```W
 > This is used only once, on level 2 for the small room in Beta quadrant. The door is both the emitter as well as the watched object.
 
 
+##### Change State Type 13: Filtered Trigger Object
+
+**Filtered Trigger Object Details** (12 byte)
+
+    0000  [4]byte    Filter (?)
+    0004  int32      Object index
+    0008  [4]byte    Unused
+
+This change triggers the given object if the provided filter is satisfied.
+
+> The filter is either ```0x0000```, ```0x4000```, ```0x8000``` or ```0xC000```. It is exclusively used
+> on level 8 to trigger three different taunts from Diego.
+
+
+##### Change State Type 14: Close Data MFD
+
+**Close Data MFD Details** (12 byte)
+
+    0000  int32      Displayed object index
+    0004  [8]byte    Unused
+
+If the specified object is currently displayed in the "Data" MFD, close it and return to previous display.
+
+> This change is used only once to close the keypad panel from the reactor if an invalid combination is entered.
+
+
 ##### Change State Type 15: Earth destruction by laser
 
 This change has no parameters (all 12 bytes 0x00) and lets the player receive the message about the fired laser.
