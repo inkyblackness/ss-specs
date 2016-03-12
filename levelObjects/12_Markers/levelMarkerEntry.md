@@ -385,7 +385,7 @@ This change has no parameters (all 12 bytes 0x00) and directly returns to the ma
 > This entry is only used on level R and Alpha grove to define areas between the two objects. Purpose and effect unknown.
 
 
-#### Change State Type 8: Unknown
+##### Change State Type 8: Unknown
 
 > This entry is only used on level 2 in three arbitrary locations. Purpose and effect unknown.
 
@@ -427,19 +427,24 @@ The ```Radioactive object``` emits radiation with a radius of 2 tiles while ```W
 > This is used only once, on level 2 for the small room in Beta quadrant. The door is both the emitter as well as the watched object.
 
 
-##### Change State Type 13: Filtered Trigger Object
+##### Change State Type 13: Oriented Trigger Object
 
-**Filtered Trigger Object Details** (12 byte)
+**Oriented Trigger Object Details** (12 byte)
 
-    0000  [4]byte    Filter (?)
+    0000  uint16     Horizontal direction
+    0002  [2]byte    Unused
     0004  int32      Object index
     0008  [4]byte    Unused
 
-This change triggers the given object if the provided filter is satisfied.
+This change triggers the given object only if the player looks to the given ```Horizontal direction``` (+/- 45°).
+Value ```0x0000``` specifies north, going clockwise with increasing numbers, meaning:
 
-> The filter is either ```0x0000```, ```0x4000```, ```0x8000``` or ```0xC000```. It is exclusively used
-> on level 8 to trigger three different taunts from Diego.
-> What the filter is applied on is unknown.
+    0x0000  North (matches between NW and NE)
+    0x4000  East (matches between NE and SE)
+    0x8000  South (matches between SE and SW)
+    0xC000  West (matches between SW and NW)
+
+> This trigger is exclusively used on level 8 to trigger three different taunts from Diego.
 
 
 ##### Change State Type 14: Close Data MFD
