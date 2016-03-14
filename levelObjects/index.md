@@ -11,6 +11,8 @@ Information about level objects exists in two places:
 The static properties are stored in a separate file. See [Property Files](../fileFormat/PropertyFiles.md) for basic information.
 Instance data is stored as part of an archive. See [Level Objects](../archives/levelObjects.md) for basic information.
 
+### Known Classes, Subclasses and Types
+
 The following table lists the object classes together with the available types per subclass:
 
 | Class | Name                               | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  |
@@ -32,6 +34,31 @@ The following table lists the object classes together with the available types p
 |   14  | Critters                           | 9  | 12 | 7  | 7  | 2  | -  | -  | -  |
 
 > This information is not stored within the resource files, it is hardcoded in the engine.
+
+
+### Static Properties
+
+The following table lists the byte sizes of the generic and specific property structures per class.
+Many of these bytes are all zero in ```objprop.dat```; In these cases, no detailed data definition will be linked.
+
+| Class | Generic                                   | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  |
+|:-----:|-------------------------------------------|----|----|----|----|----|----|----|----|
+|   0   | [2](00_Weapons/weaponProperties.md)       | 1  | 1  | ?? | ?? | ?? | ?? | -  | -  |
+|   1   | ??                                        | ?? | ?? | ?? | ?? | ?? | ?? | ?? | -  |
+|   2   | ??                                        | ?? | ?? | ?? | -  | -  | -  | -  | -  |
+|   3   | ??                                        | ?? | ?? | -  | -  | -  | -  | -  | -  |
+|   4   | 22                                        | 1  | -  | -  | -  | -  | -  | -  | -  |
+|   5   | ??                                        | ?? | ?? | -  | -  | -  | -  | -  | -  |
+|   6   | ??                                        | ?? | ?? | ?? | ?? | ?? | -  | -  | -  |
+|   7   | ??                                        | ?? | ?? | ?? | ?? | ?? | ?? | ?? | ?? |
+|   8   | ??                                        | ?? | ?? | ?? | ?? | ?? | ?? | ?? | ?? |
+|   9   | ??                                        | ?? | ?? | ?? | ?? | ?? | ?? | -  | -  |
+|   10  | ??                                        | ?? | ?? | ?? | ?? | ?? | -  | -  | -  |
+|   11  | ??                                        | ?? | ?? | ?? | -  | -  | -  | -  | -  |
+|   12  | ??                                        | ?? | ?? | ?? | -  | -  | -  | -  | -  |
+|   13  | ??                                        | ?? | ?? | ?? | ?? | ?? | ?? | ?? | -  |
+|   14  | ??                                        | ?? | ?? | ?? | ?? | ?? | -  | -  | -  |
+
 
 ### Object Names
 
