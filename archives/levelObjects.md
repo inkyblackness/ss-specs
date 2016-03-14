@@ -20,7 +20,9 @@ Instance data of [Level Objects](../levelObjects/index.md) is stored as part of 
     000B  int16    X Coordinate
     000D  int16    Y Coordinate
     000F  byte     Z Coordinate (height)
-    0010  [3]byte  Rotation Angles
+    0010  byte     Pitch rotation (around X axis), increasing values turn upwards
+    0011  byte     Yaw rotation (around Z axis), increasing values turn rightwards
+    0012  byte     Roll rotation (around Y axis), increasing values turn rightwards
     0013  byte     Unknown
     0014  byte     Object type
     0015  int16    Unknown
