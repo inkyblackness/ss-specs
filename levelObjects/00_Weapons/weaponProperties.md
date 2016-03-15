@@ -4,7 +4,7 @@
 
 **Generic Weapon Propertes** (2 bytes)
 
-    0000  byte    Firing rate
+    0000  byte    Reload time
     0001  byte    Clip description
 
 
