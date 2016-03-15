@@ -150,8 +150,12 @@ This command always has either a ```Set Colour``` or a ```Set Colour And Shade``
 ##### Set Colour And Shade
 
     0000  int16  Model Command Identifier -- 0x001C
-    0002  int16  Colour palette index
+    0002  int16  Colour palette cross index
     0004  int16  Shade value (0..3)
+
+The ```Colour palette cross index``` refers to a small lookup table from the corresponding static object properties. This lookup table is a list of always 6 palette indices.
+
+> The data files contain cross indices of 0..6 . TSSHP skips those with value 0 and subtracts 1 from the remaining 6 values.
 
 ##### Texture Mapping
 
