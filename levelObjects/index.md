@@ -39,25 +39,25 @@ The following table lists the object classes together with the available types p
 ### Static Properties
 
 The following table lists the byte sizes of the generic and specific property structures per class.
-Many of these bytes are all zero in ```objprop.dat```; In these cases, no detailed data definition will be linked.
+Many of these bytes are all zero in ```objprop.dat```; In these cases no detailed data definition will be linked.
 
 | Class | Generic                                   | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  |
 |:-----:|-------------------------------------------|----|----|----|----|----|----|----|----|
 |   0   | [2](00_Weapons/weaponProperties.md)       | 1  | 1  | ?? | ?? | ?? | ?? | -  | -  |
-|   1   | ??                                        | ?? | ?? | ?? | ?? | ?? | ?? | ?? | -  |
-|   2   | ??                                        | ?? | ?? | ?? | -  | -  | -  | -  | -  |
-|   3   | ??                                        | ?? | ?? | -  | -  | -  | -  | -  | -  |
+|   1   | ??                                        | 1  | 1  | 1  | 1  | 1  | 1  | 1  | -  |
+|   2   | ??                                        | 20 | ?? | 1  | -  | -  | -  | -  | -  |
+|   3   | ??                                        | 1  | ?? | -  | -  | -  | -  | -  | -  |
 |   4   | 22                                        | 1  | -  | -  | -  | -  | -  | -  | -  |
-|   5   | ??                                        | ?? | ?? | -  | -  | -  | -  | -  | -  |
-|   6   | ??                                        | ?? | ?? | ?? | ?? | ?? | -  | -  | -  |
-|   7   | ??                                        | ?? | ?? | ?? | ?? | ?? | ?? | ?? | ?? |
-|   8   | ??                                        | ?? | ?? | ?? | ?? | ?? | ?? | ?? | ?? |
-|   9   | ??                                        | ?? | ?? | ?? | ?? | ?? | ?? | -  | -  |
-|   10  | ??                                        | ?? | ?? | ?? | ?? | ?? | -  | -  | -  |
-|   11  | ??                                        | ?? | ?? | ?? | -  | -  | -  | -  | -  |
-|   12  | ??                                        | ?? | ?? | ?? | -  | -  | -  | -  | -  |
-|   13  | ??                                        | ?? | ?? | ?? | ?? | ?? | ?? | ?? | -  |
-|   14  | ??                                        | ?? | ?? | ?? | ?? | ?? | -  | -  | -  |
+|   5   | 9                                         | 1  | 1  | -  | -  | -  | -  | -  | -  |
+|   6   | 5                                         | 1  | 1  | 1  | 1  | 1  | -  | -  | -  |
+|   7   | 2                                         | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  |
+|   8   | 2                                         | 1  | 1  | 1  | 1  | 1  | ?? | 1  | 2  |
+|   9   | 1                                         | 1  | 1  | 1  | 1  | 0  | 1  | -  | -  |
+|   10  | 1                                         | 1  | 1  | 1  | 1  | 1  | -  | -  | -  |
+|   11  | ??                                        | 1  | 1  | ?? | -  | -  | -  | -  | -  |
+|   12  | 1                                         | 1  | 1  | 1  | -  | -  | -  | -  | -  |
+|   13  | 3                                         | 1  | 1  | 1  | 1  | 1  | 1  | 1  | -  |
+|   14  | ??                                        | 1  | 2  | ?? | ?? | ?? | -  | -  | -  |
 
 
 ### Object Names
