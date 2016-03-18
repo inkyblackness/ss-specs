@@ -44,7 +44,7 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 | Class | Generic                                     | 0  | 1        | 2         | 3         | 4  | 5        | 6  | 7  |
 |:-----:|---------------------------------------------|----|----------|-----------|-----------|----|----------|----|----|
 |   0   | [2](00_Weapons/weaponProperties.md)         | 1  | 1        | ??        | ??        | ?? | ??       | -  | -  |
-|   1   | ??                                          | 1  | 1        | 1         | 1         | 1  | 1        | 1  | -  |
+|   1   | [14](01_AmmoClips/ammoClipProperties.md)    | 1  | 1        | 1         | 1         | 1  | 1        | 1  | -  |
 |   2   | [1](02_Projectiles/projectileProperties.md) | 20 | [6][2/1] | 1         | -         | -  | -        | -  | -  |
 |   3   | [15](03_Explosives/explosiveProperties.md)  | 1  | [3][3/1] | -         | -         | -  | -        | -  | -  |
 |   4   | 22                                          | 1  | -        | -         | -         | -  | -        | -  | -  |
