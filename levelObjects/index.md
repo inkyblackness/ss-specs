@@ -41,26 +41,27 @@ The following table lists the object classes together with the available types p
 The following table lists the byte sizes of the generic and specific property structures per class.
 Many of these bytes are all zero in ```objprop.dat```; In these cases no detailed data definition will be linked.
 
-| Class | Generic                                     | 0  | 1        | 2         | 3         | 4  | 5        | 6  | 7  |
-|:-----:|---------------------------------------------|----|----------|-----------|-----------|----|----------|----|----|
-|   0   | [2](00_Weapons/weaponProperties.md)         | 1  | 1        | [16][0/2] | [13][0/3] | ?? | ??       | -  | -  |
-|   1   | [14](01_AmmoClips/ammoClipProperties.md)    | 1  | 1        | 1         | 1         | 1  | 1        | 1  | -  |
-|   2   | [1](02_Projectiles/projectileProperties.md) | 20 | [6][2/1] | 1         | -         | -  | -        | -  | -  |
-|   3   | [15](03_Explosives/explosiveProperties.md)  | 1  | [3][3/1] | -         | -         | -  | -        | -  | -  |
-|   4   | 22                                          | 1  | -        | -         | -         | -  | -        | -  | -  |
-|   5   | 9                                           | 1  | 1        | -         | -         | -  | -        | -  | -  |
-|   6   | 5                                           | 1  | 1        | 1         | 1         | 1  | -        | -  | -  |
-|   7   | 2                                           | 1  | 1        | 1         | 1         | 1  | 1        | 1  | 1  |
-|   8   | 2                                           | 1  | 1        | 1         | 1         | 1  | [6][8/5] | 1  | 2  |
-|   9   | 1                                           | 1  | 1        | 1         | 1         | 0  | 1        | -  | -  |
-|   10  | 1                                           | 1  | 1        | 1         | 1         | 1  | -        | -  | -  |
-|   11  | [2](11_Animations/animationProperties.md)   | 1  | 1        | [1][11/2] | -         | -  | -        | -  | -  |
-|   12  | 1                                           | 1  | 1        | 1         | -         | -  | -        | -  | -  |
-|   13  | 3                                           | 1  | 1        | 1         | 1         | 1  | 1        | 1  | -  |
-|   14  | [75](14_Critters/critterProperties.md)      | 1  | 2        | [2][14/2] | [6][14/3] | 1  | -        | -  | -  |
+| Class | Generic                                     | 0  | 1        | 2         | 3         | 4         | 5        | 6  | 7  |
+|:-----:|---------------------------------------------|----|----------|-----------|-----------|-----------|----------|----|----|
+|   0   | [2](00_Weapons/weaponProperties.md)         | 1  | 1        | [16][0/2] | [13][0/3] | [13][0/4] | ??       | -  | -  |
+|   1   | [14](01_AmmoClips/ammoClipProperties.md)    | 1  | 1        | 1         | 1         | 1         | 1        | 1  | -  |
+|   2   | [1](02_Projectiles/projectileProperties.md) | 20 | [6][2/1] | 1         | -         | -         | -        | -  | -  |
+|   3   | [15](03_Explosives/explosiveProperties.md)  | 1  | [3][3/1] | -         | -         | -         | -        | -  | -  |
+|   4   | 22                                          | 1  | -        | -         | -         | -         | -        | -  | -  |
+|   5   | 9                                           | 1  | 1        | -         | -         | -         | -        | -  | -  |
+|   6   | 5                                           | 1  | 1        | 1         | 1         | 1         | -        | -  | -  |
+|   7   | 2                                           | 1  | 1        | 1         | 1         | 1         | 1        | 1  | 1  |
+|   8   | 2                                           | 1  | 1        | 1         | 1         | 1         | [6][8/5] | 1  | 2  |
+|   9   | 1                                           | 1  | 1        | 1         | 1         | 0         | 1        | -  | -  |
+|   10  | 1                                           | 1  | 1        | 1         | 1         | 1         | -        | -  | -  |
+|   11  | [2](11_Animations/animationProperties.md)   | 1  | 1        | [1][11/2] | -         | -         | -        | -  | -  |
+|   12  | 1                                           | 1  | 1        | 1         | -         | -         | -        | -  | -  |
+|   13  | 3                                           | 1  | 1        | 1         | 1         | 1         | 1        | 1  | -  |
+|   14  | [75](14_Critters/critterProperties.md)      | 1  | 2        | [2][14/2] | [6][14/3] | 1         | -        | -  | -  |
 
 [0/2]: 00_Weapons/weaponProperties.md#specific-2-properties
 [0/3]: 00_Weapons/weaponProperties.md#specific-3-properties
+[0/4]: 00_Weapons/weaponProperties.md#specific-4-properties
 [2/1]: 02_Projectiles/projectileProperties.md#specific-1-properties
 [3/1]: 03_Explosives/explosiveProperties.md#specific-1-properties
 [8/5]: 08_Items/itemProperties.md#cyberspace-items-specific-properties

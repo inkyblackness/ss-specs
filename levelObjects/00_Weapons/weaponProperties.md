@@ -38,3 +38,16 @@ This subclass describes melee weapons.
     000A  int8     Range
     000B  [2]byte  Unknown
 
+
+#### Specific 4 Properties
+
+This subclass describes energy beam weapons.
+
+**Specific 4 Properties** (13 bytes)
+
+    0000  [8]byte  [Generic Weapon Info](../GenericWeaponInfo.md)
+    0008  int8     Power usage
+    0009  uint8    Impact force (pushback on hit)
+    000A  int8     Range
+    000B  [2]byte  Unknown
+
