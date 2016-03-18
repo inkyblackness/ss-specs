@@ -25,3 +25,16 @@ This subclass describes projectile weapons.
     0009  int32    Projectile type (0x00CCSSTT)
     000D  [3]byte  Unknown
 
+
+#### Specific 3 Properties
+
+This subclass describes melee weapons.
+
+**Specific 3 Properties** (13 bytes)
+
+    0000  [8]byte  [Generic Weapon Info](../GenericWeaponInfo.md)
+    0008  int8     Power usage
+    0009  uint8    Impact force (pushback on hit)
+    000A  int8     Range
+    000B  [2]byte  Unknown
+
