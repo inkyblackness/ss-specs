@@ -54,13 +54,14 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 |   8   | 2                                           | 1  | 1        | 1         | 1         | 1  | [6][8/5] | 1  | 2  |
 |   9   | 1                                           | 1  | 1        | 1         | 1         | 0  | 1        | -  | -  |
 |   10  | 1                                           | 1  | 1        | 1         | 1         | 1  | -        | -  | -  |
-|   11  | ??                                          | 1  | 1        | ??        | -         | -  | -        | -  | -  |
+|   11  | [2](11_Animations/animationProperties.md)   | 1  | 1        | [1][11/2] | -         | -  | -        | -  | -  |
 |   12  | 1                                           | 1  | 1        | 1         | -         | -  | -        | -  | -  |
 |   13  | 3                                           | 1  | 1        | 1         | 1         | 1  | 1        | 1  | -  |
 |   14  | [75](14_Critters/critterProperties.md)      | 1  | 2        | [2][14/2] | [6][14/3] | 1  | -        | -  | -  |
 
 [2/1]: 02_Projectiles/projectileProperties.md#specific-1-properties
 [8/5]: 08_Items/itemProperties.md#cyberspace-items-specific-properties
+[11/2]: 11_Animations/animationProperties.md#specific-2-properties
 [14/2]: 14_Critters/critterProperties.md#specific-2-properties
 [14/3]: 14_Critters/critterProperties.md#cyberspace-critters-specific-properties
 
