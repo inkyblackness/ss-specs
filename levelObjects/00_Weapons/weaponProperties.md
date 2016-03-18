@@ -51,3 +51,16 @@ This subclass describes energy beam weapons.
     000A  int8     Range
     000B  [2]byte  Unknown
 
+
+#### Specific 5 Properties
+
+This subclass describes energy projectile weapons.
+
+**Specific 5 Properties** (18 bytes)
+
+    0000  [8]byte  [Generic Weapon Info](../GenericWeaponInfo.md)
+    0008  int8     Power usage
+    0009  [3]byte  Unknown
+    000C  int8     Projectile travel speed
+    000D  int32    Projectile type (0x00CCSSTT)
+    0011  byte     Unknown
