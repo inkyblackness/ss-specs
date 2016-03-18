@@ -43,7 +43,7 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 
 | Class | Generic                                     | 0  | 1        | 2         | 3         | 4  | 5        | 6  | 7  |
 |:-----:|---------------------------------------------|----|----------|-----------|-----------|----|----------|----|----|
-|   0   | [2](00_Weapons/weaponProperties.md)         | 1  | 1        | ??        | ??        | ?? | ??       | -  | -  |
+|   0   | [2](00_Weapons/weaponProperties.md)         | 1  | 1        | [16][1/2] | ??        | ?? | ??       | -  | -  |
 |   1   | [14](01_AmmoClips/ammoClipProperties.md)    | 1  | 1        | 1         | 1         | 1  | 1        | 1  | -  |
 |   2   | [1](02_Projectiles/projectileProperties.md) | 20 | [6][2/1] | 1         | -         | -  | -        | -  | -  |
 |   3   | [15](03_Explosives/explosiveProperties.md)  | 1  | [3][3/1] | -         | -         | -  | -        | -  | -  |
@@ -59,6 +59,7 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 |   13  | 3                                           | 1  | 1        | 1         | 1         | 1  | 1        | 1  | -  |
 |   14  | [75](14_Critters/critterProperties.md)      | 1  | 2        | [2][14/2] | [6][14/3] | 1  | -        | -  | -  |
 
+[1/2]: 00_Weapons/weaponProperties.md#specific-2-properties
 [2/1]: 02_Projectiles/projectileProperties.md#specific-1-properties
 [3/1]: 03_Explosives/explosiveProperties.md#specific-1-properties
 [8/5]: 08_Items/itemProperties.md#cyberspace-items-specific-properties
