@@ -59,6 +59,9 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 |   13  | 3                                           | 1  | 1        | 1         | 1         | 1         | 1         | 1  | -  |
 |   14  | [75](14_Critters/critterProperties.md)      | 1  | 2        | [2][14/2] | [6][14/3] | 1         | -         | -  | -  |
 
+
+> There is also the case of objects with a specific entry length of 0. This is the case for object types that didn't make it into the game (vending machines).
+
 [0/2]: 00_Weapons/weaponProperties.md#specific-2-properties
 [0/3]: 00_Weapons/weaponProperties.md#specific-3-properties
 [0/4]: 00_Weapons/weaponProperties.md#specific-4-properties
@@ -70,8 +73,19 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 [14/2]: 14_Critters/critterProperties.md#specific-2-properties
 [14/3]: 14_Critters/critterProperties.md#cyberspace-critters-specific-properties
 
+
 ### Object Names
 
 The names are localized and [stored as texts](../media/Texts.md). The short names are stored in chunk ```0x086D```, the long
 names are in chunk ```0x0024```.
 
+
+### Object Bitmaps
+
+Every object has bitmaps associated with it. The bitmaps are all stored in chunk ```0x0546``` in ```objart.res```, starting with block 1 for the first object. Each object has at least 3 bitmaps associated, with additional in-world bitmaps specified as per ```Extra``` field of the [Common Object Properties](../fileFormat/ResourceFiles.md#common-table).
+
+As a result, to determine the proper block number for a given object, the total number of previous (extra) bitmaps needs to be known.
+
+The first image is the standard image, the second (and additional) bitmaps are in-world bitmaps, and the last one is a micro-image, possibly used for an editor.
+
+Objects of render type ```Fragment``` have one extra bitmap. The first one contains the colour information and the extra bitmap the depth information; It is a "gray-scale" bitmap with ```0xD0``` as the center.
