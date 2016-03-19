@@ -7,9 +7,14 @@ This structure is reused for various offensive items.
     0000  sint16   Damage
     0002  byte     Unknown
     0003  byte     Damage type
-    0004  byte     Unknown
+    0004  byte     Special damage type
     0005  [2]byte  Unused
-    0007  byte     Unknown
+    0007  uint8    Armour penetration
+
+
+If ```Armour penetration``` is equal or higher than the ```Armour``` value of the object being hit, the full ```Damage``` is applied. Otherwise, the difference is subtracted from ```Damage```. If the resulting value reaches 0 or lower, "No Damage" is displayed. 
+
+```Special damage type``` matches the ```Special vulnerabilities``` field from [Common Object Properties](../fileFormat/ResourceFiles.md#common-table).
 
 
 **Damage Type Bitfield** (1 byte)
