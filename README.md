@@ -7,7 +7,12 @@ The goal is to document all meaningful bits and bytes of the original data files
 Start reading with the [main page](index.md) (the index).
 
 ## Status
-In its current state, this project does **not** supersede the information available from TSSHP (the [ss-specs.txt](http://tsshp.cvs.sourceforge.net/viewvc/tsshp/tsshp/doc/ss-specs.txt?view=markup) file). Content will be gradually ported to this project if a corresponding implementation exists within InkyBlackness.
+The content of this documentation supersedes the information available from TSSHP (the [ss-specs.txt](http://tsshp.cvs.sourceforge.net/viewvc/tsshp/tsshp/doc/ss-specs.txt?view=markup) file). In some instances, this documentation even provides more accurate descriptions.
+
+The format of all raw media content is described, with the exception of a few unknown fields. The majority of unknown information is with the level objects. See the [issue list](https://github.com/inkyblackness/ss-specs/issues) for an overview.
+
+Currently not in scope of this documentation project are music files (See [here for details](other/Music.md)) and the Macintosh release.
+
 
 ## Credits
 This project, as well as InkyBlackness itself, wouldn't be possible without the work of TSSHP and the effort of the people before that.
