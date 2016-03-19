@@ -7,9 +7,11 @@
     0000  [6]byte   Level object prefix
     0006  byte      Program version
     0007  byte      Log chunk offset
-    0008  byte      Unknown
+    0008  byte      Log level number
 
 #### Logs
 
 For logs, the ```Log chunk offset``` is based on the chunk ID ```0x09B8```. The high nibble is used as the level identifier - into
-which category the log should be put. See [Electronic Messages](../../content/ElectronicMessages.md) for details.
+which category the log should be put. This is the same value as ```Level number```.
+
+See [Electronic Messages](../../content/ElectronicMessages.md) for details on messages.
