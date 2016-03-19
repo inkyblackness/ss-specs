@@ -29,14 +29,14 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
 
 ## Index
 
-* By topic
+### By topic
   * [Map Information](mapInformation.md)
   * [Level Objects](levelObjects.md)
   * [Surveillance Screens](surveillanceScreens.md)
   * [Loop Configuration](loopConfiguration.md)
 
 
-* By level-specific chunk ID
+### By level-specific chunk ID
   * ```L02``` Unknown int32. ```0x0000000B``` for all maps.
   * ```L03``` Unknown int32. ```0x0000001B``` for all maps.
   * ```L04``` [Basic level information](mapInformation.md)
@@ -64,3 +64,16 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
   * ```L51``` [Loop Configuration](loopConfiguration.md)
   * ```L52``` Unknown int16. (Only present in ```CD-Release```)
   * ```L53``` Unknown. 0x40 byte length, all zeroes. (Only present in ```CD-Release```)
+
+
+### Levels of Citadel
+This is the level list of the base game:
+
+* Level 00: Reactor level
+* Level 01-09: Levels 1-9
+* Level 10: SHODAN cyberspace
+* Level 11: Delta grove
+* Level 12: Alpha grove
+* Level 13: Beta grove
+* Level 14: Cyberspace for levels 1 and 2
+* Level 15: Cyberspace
