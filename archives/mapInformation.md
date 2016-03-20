@@ -76,7 +76,7 @@ All non-open tiles are given as low -> high. Valleys have 3 vertexes higher and 
 
 **Floor/Ceiling Info** (1 byte)
 
-    bits  0-4     Height (ceiling is units down)
+    bits  0-4     Height (ceiling is units down from 0x20)
     bits  5-6     Texture rotation. When viewed from above: 1: 90°, 2: 180°, 3: 270° - always clockwise
     bit   7       Hazard flag. Floor has biohazard, ceiling has radiation hazard.
 
