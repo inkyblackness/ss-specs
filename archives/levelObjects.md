@@ -40,6 +40,8 @@ For all object entries not in use, their ```Previous``` field forms a single-lin
 The ```Next``` field of unused objects is not defined and contains arbitrary data.
 The last unused object entry refers to the starting point with its ```Previous``` value.
 
+The ```Cross-Reference table index``` of the starting point does not refer to a cross-reference entry, it is the index within the same table of the last object entry in use.
+
 > While the ```In use flag``` is the primary information whether an entry in this table describes a proper object,
 > there are entries in the archives "in use" which have bogus data. In these cases, they refer to the cross-reference
 > table entry number zero. This entry belongs to the starting point object entry, which is not in use.
@@ -69,7 +71,7 @@ Unused cross-reference entries contain arbitrary data and only the next object i
 
 ### Class Specific Information
 
-In the following chunks, all tables have entries with a common prefix.
+In the following chunks, all tables have a static count of entries. Each entry has a common prefix.
 
 **Level Object Prefix** (6 bytes)
 
@@ -77,9 +79,10 @@ In the following chunks, all tables have entries with a common prefix.
     0002  int16    Previous
     0004  int16    Next
 
-The ```Previous``` and ```Next``` fields form a double-linked list within the same table. The first and last entries are linked together, so an endless loop is created. All the tables have a static entry count and unused entries refer to an **Level Object Entry** that is not in use.
+The tables contain two lists each, similar to the main object table:
+The starting point is the first entry (index zero). The starting point refers to a double-linked list of used entries (via ```Next```), and a single-linked list of unused entries (via ```Previous```). Both lists are terminated by referring back to index zero.
 
-> For the archives, this unused entry is always the first one, index 0.
+The ```Index``` field of the starting point does not refer to a level object, it is the index within the same table of the last used entry. (The actual "previous" link to the double-linked list of used objects.)
 
 > The sum of all possible entries is slightly higher than the total count of possible **Level Object Entries**.
 
