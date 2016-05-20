@@ -42,10 +42,9 @@ The last unused object entry refers to the starting point with its ```Previous``
 
 The ```Cross-Reference table index``` of the starting point does not refer to a cross-reference entry, it is the index within the same table of the last object entry in use.
 
-> While the ```In use flag``` is the primary information whether an entry in this table describes a proper object,
-> there are entries in the archives "in use" which have bogus data. In these cases, they refer to the cross-reference
-> table entry number zero. This entry belongs to the starting point object entry, which is not in use.
-> For a robust implementation, both should be checked to determine whether an object entry is OK.
+If an object is placed in the world, it has the X, Y and Z coordinates set, as well as the ```Cross-Reference table index``` pointing to a corresponding entry in the cross-reference table.
+If an object was spawned by the engine without a location in the world, such as loot from corpses,
+then the ```X``` field is ```0xFFFF```, ```Y``` and ```Z``` fields are zero, and the ```Cross-Reference table index``` is zero as well.
 
 #### Level Object Cross-Reference Table
 
