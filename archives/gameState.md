@@ -84,7 +84,7 @@ This chunk contains everything about the hacker, together with general game-stat
     0300  byte     version for old fake id
     0301  byte     version for ice shield
     0302  byte     version for turbo navigation booster
-    0303  byte     version for fake id ice infiltrator
+    0303  byte     count for fake id ice infiltrator
     0304  byte     count for decoy evasion system
     0305  byte     count for recall escape program
     0306  byte     trioptimum fun pack module (bitmask)
