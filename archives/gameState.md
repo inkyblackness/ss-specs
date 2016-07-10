@@ -71,8 +71,33 @@ This chunk contains everything about the hacker, together with general game-stat
     02F5  byte     version for booster
     02F6  byte     version for jump jet
     02F7  byte     version for system status
+	
+    Installed Software(0: not installed):
+    02F8  byte     version for ice drill defense breaker
+    02F9  byte     version for datastorm assault software
+    02FA  byte     version for mine explosive module
+    02FB  byte     version for disc heavy attack program
+    02FC  byte     version for pulser combat software
+    02FD  byte     version for scrambler software grenade
+    02FE  byte     version for virus some cool thing
+    02FF  byte     version for cyber shield
+    0300  byte     version for old fake id
+    0301  byte     version for ice shield
+    0302  byte     version for turbo navigation booster
+    0303  byte     version for fake id ice infiltrator
+    0304  byte     count for decoy evasion system
+    0305  byte     count for recall escape program
+    0306  byte     trioptimum fun pack module (bitmask)
+	                bit:
+	                1    Ping
+	                2    Eel Zapper
+	                4    Road
+	                8    Botbounce
+	                16   15
+	                32   TriopToe
+	                64   Wing 0
 
-	Full clips of ammunition
+    Full clips of ammunition
     030B  byte     ML STANDARD ROUNDS
     030C  byte     ML TEFLON COATED ROUNDS 
     030D  byte     SV NEEDLE DARTS
