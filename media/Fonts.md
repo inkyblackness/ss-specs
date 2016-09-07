@@ -24,7 +24,7 @@ All glyphs in the bitmap are lined up in a single line. There are no Y offsets p
 
 The X-Offsets is an array of ```int16``` values. The length of the array is equal to the number of characters the font covers, plus one. The width of one glyph is always equal the difference to the next offset, even for the last one.
 
-For a monochrome font, the offset is counted in bits, always begining with the MSB.
+For a monochrome font, the offset is counted in bits, always beginning with the MSB.
 
 **Bitmap** (W*H bytes)
 

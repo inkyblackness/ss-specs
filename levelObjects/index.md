@@ -82,7 +82,7 @@ names are in chunk ```0x0024```.
 
 ### Object Bitmaps
 
-Every object has bitmaps associated with it. The bitmaps are all stored in chunk ```0x0546``` in ```objart.res```, starting with block 1 for the first object. Each object has at least 3 bitmaps associated, with additional in-world bitmaps specified as per ```Extra``` field of the [Common Object Properties](../fileFormat/ResourceFiles.md#common-table).
+Every object has bitmaps associated with it. The bitmaps are all stored in chunk ```0x0546``` in ```objart.res```, starting with block 1 for the first object. Each object has at least 3 bitmaps associated, with additional in-world bitmaps specified as per ```Extra``` field of the [Common Object Properties](../fileFormat/PropertyFiles.md#common-table).
 
 As a result, to determine the proper block number for a given object, the total number of previous (extra) bitmaps needs to be known.
 
