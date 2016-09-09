@@ -86,6 +86,11 @@ Every object has bitmaps associated with it. The bitmaps are all stored in chunk
 
 As a result, to determine the proper block number for a given object, the total number of previous (extra) bitmaps needs to be known.
 
-The first image is the standard image, the second (and additional) bitmaps are in-world bitmaps, and the last one is a micro-image, possibly used for an editor.
+The first image is the standard image, the second (and additional) bitmaps are in-world bitmaps, and the last one is a micro-image.
+
+> The micro-images are sometimes fully transparent. This has been found for marker objects for instance.
+> Maybe a (future) mapping unit would have been able to show objects, except those that weren't meant to be seen by the player.
+> For such transparent bitmaps, the first bitmap shows some abstract presentation. For example, the "continuous trigger" has the infinity symbol as first image.
+> On the contrary, using the first bitmap exclusively for editors might not be usable either as they sometimes have the same image for different types (software instance).
 
 Objects of render type ```Fragment``` have one extra bitmap. The first one contains the colour information and the extra bitmap the depth information; It is a "gray-scale" bitmap with ```0xD0``` as the center.
