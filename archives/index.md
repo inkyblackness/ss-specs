@@ -41,7 +41,7 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
   * ```L03``` Unknown int32. ```0x0000001B``` for all maps.
   * ```L04``` [Basic level information](mapInformation.md)
   * ```L05``` [Map Layout](mapInformation.md)
-  * ```L06``` Unknown. Multiple of 8 bytes per map, starting with 8.
+  * ```L06``` [Level timer](levelTimer.md)
   * ```L07``` [Level texture map](mapInformation.md)
   * ```L08``` [Master object table](levelObjects.md#level-object-table)
   * ```L09``` [Level object cross-reference table](levelObjects.md#level-object-cross-reference-table)

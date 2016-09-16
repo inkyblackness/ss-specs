@@ -15,7 +15,11 @@
     0010  int32     Height shift
     0014  int32     Placeholder   - ignore
     0018  int32     Cyberspace flag. 0: real life, 1: cyberspace
-    001C  byte[30]  Unknown
+    001D  byte[9]   Unknown
+    0025  int32     Timer value 1 - always 64 in the archives
+    0029  int32     Timer count
+    002D  int32     Timer value 2 - always 8 in the archives
+    0031  byte[9]   Unknown
 
 > The first four fields don't seem to be respected by the engine. A modification of these values does not show any result.
 > According to the documentation of TSSHP, these should specify the map width and height. The values add up, but as long as they
@@ -30,6 +34,9 @@ One height unit is the 32th of the level height. The higher the level is, the la
 
 The ```placeholder``` has no use in the archives.
 > According to the documentation of TSSHP, this field is used as a placeholder for a pointer within the game logic.
+
+```Timer value 1``` and ```Timer value 2``` require to be set to the values ```0x40``` and ```0x08``` respectively. Otherwise the level timers (stored in ```L06```) may not work properly.
+
 
 #### Tile map
 
