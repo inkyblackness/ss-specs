@@ -170,6 +170,8 @@ This chunk contains everything about the hacker, together with general game-stat
     048E  byte     infrared active (0: off, 1: on)
     0498  byte     FullScreen control (0: off, 1: on)
 
+    04DF  [7]int16 Timer settings of explosives, in 0.1 seconds; Default: 0x46 = 7 seconds
+
     0507  sint32   Kill count
 
     051b  int32    tilt (plus further bytes...)

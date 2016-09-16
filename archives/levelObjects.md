@@ -95,7 +95,7 @@ The name column links to the corresponding details.
 |   0   | ```L10```   | [Weapons][L10]                            | 16          | 8                         |
 |   1   | ```L11```   | [Ammo][L11]                               | 32          | 6                         |
 |   2   | ```L12```   | Projectiles                               | 32          | 40                        |
-|   3   | ```L13```   | Explosives                                | 32          | 12                        |
+|   3   | ```L13```   | [Explosives][L13]                         | 32          | 12                        |
 |   4   | ```L14```   | [Patches][L14]                            | 32          | 6                         |
 |   5   | ```L15```   | [Hardware][L15]                           | 8           | 7                         |
 |   6   | ```L16```   | [Software (including logs)][L16]          | 16          | 9                         |
@@ -111,6 +111,7 @@ The name column links to the corresponding details.
 
 [L10]: ../levelObjects/00_Weapons/levelWeaponEntry.md
 [L11]: ../levelObjects/01_AmmoClips/levelAmmoClipEntry.md
+[L13]: ../levelObjects/03_Explosives/levelExplosiveEntry.md
 [L14]: ../levelObjects/04_Patches/levelPatchEntry.md
 [L15]: ../levelObjects/05_Hardware/levelHardwareEntry.md
 [L16]: ../levelObjects/06_Software/levelSoftwareEntry.md
