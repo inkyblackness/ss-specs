@@ -158,7 +158,7 @@ These have the same layout as the general textureable furniture (see above).
 **Security Camera Info** (10 bytes)
 
     0000  [2]byte   Unused
-    0002  byte      Panning switch
+    0002  byte      Panning switch; 0x00: stationary, 0x01: panning
     0003  [7]byte   Unused
 
 
@@ -180,16 +180,16 @@ Instead of having different loop options, they trigger an object if used.
 
 ### Bridges 7/7/x
 
-#### Bridges 7/7/0
+#### Solid Bridges 7/7/0, 7/7/1
 
-**Bridge Info** (10 bytes)
+**Solid Bridge Info** (10 bytes)
 
-    0000  int16     Unknown
+    0000  [2]byte   Unused
     0002  byte      Size. Bits 0-3: X, bits 4-7: Y
     0003  byte      Height. 0 is default, level height units otherwise.
     0004  byte      Top/Bottom texture
     0005  byte      Side texture
-    0006  [4]byte   Unknown
+    0006  [4]byte   Unused
 
 The size fields are defined as 0: 3D model default, 4: tile width.
 The texture fields have bit 7 set to indicate texture from level texture list. If 0, the other 7 bits index
@@ -199,3 +199,22 @@ into ```citmat.res```.
 > If a texture is to be taken from citmat.res, the texture index must be > 0, otherwise it will still be the first
 > level texture, even if bit 7 is 0.
 
+
+#### Force Bridges 7/7/7, 7/7/8, 7/7/9
+
+**Force Bridge Info** (10 bytes)
+
+    0000  [2]byte   Unused
+    0002  byte      Size. Bits 0-3: X, bits 4-7: Y -- see above
+    0003  byte      Height. 0 is default, level height units otherwise.
+    0004  [2]byte   Unused
+    0006  byte      Colour
+    0007  [3]byte   Unused
+
+Object 7/7/8 is a placeholder for force bridges that have not been activated yet. These objects are invisible and are made to force bridges with the use of trigger action 24.
+
+Force bridges of type 7/7/9 differ from the typical ones (7/7/7) in having a default height of zero and no animation when switched from type 8. They furthermore need a size explicitly set.
+
+The engine supports several different values for ```Colour```. Used values are ```0x00``` for red and ```0xFE``` for green.
+
+> Not all 256 colour possibilities have been tested, many resulted in dark red tones or solid colours. Usable variants were found from ```0xF7``` and above.
