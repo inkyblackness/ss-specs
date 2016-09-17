@@ -87,16 +87,7 @@ This chunk contains everything about the hacker, together with general game-stat
     0303  byte     count for fake id ice infiltrator
     0304  byte     count for decoy evasion system
     0305  byte     count for recall escape program
-    0306  byte     trioptimum fun pack module (bitmask)
-	                bits:
-	                0x01    Ping
-	                0x02    Eel Zapper
-	                0x04    Road
-	                0x08    Botbounce
-	                0x10    15
-	                0x20    TriopToe
-                    0x40    Gameb (Not working, gives "not installed" message)
-	                0x80    Wing 0
+    0306  byte     trioptimum fun pack module (bitmask); See level software entries.
 
     Full clips of ammunition
     030B  byte     ML STANDARD ROUNDS
