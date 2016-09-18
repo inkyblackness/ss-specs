@@ -83,6 +83,27 @@ All access cards work the same way: When consumed, they add the given ```Access 
 
 ### Cyberspace Items 8/5/x
 
+#### Integrity Restorative 8/5/1
+
+**Integrity Restorative** (10 bytes)
+
+    0000  [2]byte   Unused
+    0002  byte      Restoration amount
+    0003  [7]byte   Unused
+
+Per default (```Restoration amount``` = 0), the item restores about 3/4 of integrity.
+
+#### Security Defense Mine 8/5/2
+
+**Security Defense Mine** (10 bytes)
+
+    0000  [2]byte   Unused
+    0002  byte      Damage amount
+    0003  [7]byte   Unused
+
+Per default (```Damage amount``` = 0), the item removes little amount (about one chevron).
+
+
 #### Security ID Module 8/5/3
 
 **Security ID Module** (10 bytes)
@@ -92,6 +113,31 @@ All access cards work the same way: When consumed, they add the given ```Access 
     0006  [4]byte   Unused
 
 Works like access cards - see above.
+
+#### Cyber Info Nodes 8/5/6, 8/5/8
+
+**Cyber Info Node** (10 bytes)
+
+    0000  [2]byte   Unused
+    0002  int16     Text index
+    0004  [6]byte   Unused
+
+For 8/5/6 (information nodes), the text index is for text chunk ```0x0878```.
+For 8/5/8 (data fragments), the text index is for text chunk ```0x087A```.
+
+
+#### Cyberspace Barricades 8/5/9
+
+**Cyberspace Barricade** (10 bytes)
+
+    0000  [2]byte   Unused
+    0002  byte      Size. Bits 0-3: X, bits 4-7: Y
+    0003  byte      Height. 0 is default, level height units otherwise.
+    0004  [2]byte   Unused
+    0006  byte      Colour
+    0007  [3]byte   Unused
+
+Layout and properties are the same as for force bridges (7/7/7).
 
 
 ### Wear and Tear Items 8/6/x
