@@ -32,6 +32,8 @@ A shift value of 0 gives 32 tiles of height, a value of 7 one fourth (1/4) of a 
 
 One height unit is the 32th of the level height. The higher the level is, the larger are the visible jumps of any height value.
 
+Although any level can be marked as cyberspace - even the starting level - only levels 10, 14 and 15 properly work. Apparently these level numbers are hardcoded in the engine. Cyberspace items in other levels don't work as expected, especially the exit port either crashes the game or puts the player at the start of the cyberspace level again.
+
 The ```placeholder``` has no use in the archives.
 > According to the documentation of TSSHP, this field is used as a placeholder for a pointer within the game logic.
 
