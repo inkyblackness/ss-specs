@@ -1,7 +1,7 @@
 ## Level Timer
 
 ```L06``` is a dynamically sized list of currently active timers. A timer triggers a level object at a specific time in the future.
-The list always has one "dummy" entry, plus a number of live entries equal to the ```Timer count``` field in ```L04``` [(Level Information)](mapInformation.md#Level_information).
+The list always has one "dummy" entry, plus a number of live entries equal to the ```Timer count``` field in ```L04``` [(Level Information)](mapInformation.md#Level-information).
 
 **Level Timer Entry** (8 bytes)
 
