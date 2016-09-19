@@ -14,9 +14,16 @@
     0002  int16     Unknown
     0004  int16     Unknown
 
+
 ### Buttons 9/0/x
 
-### Cyberspace Terminals 9/2/0
+
+### Recepticles 9/1/x
+
+
+### Stations 9/2/x
+
+#### Cyberspace Terminals 9/2/0
 
 **Cyberspace Terminal Panel Specific Info** (18 bytes)
 
@@ -32,11 +39,14 @@ The first field of the common info determines the terminal state:
     1: Active (Normal state)
     2: Locked. Trying to activate it gives an electrical shock.
 
-### Puzzles 9/3/0 to 9/3/3
+
+### Input Panels 9/3/x
+
+#### Puzzles 9/3/0 to 9/3/3
 
 Puzzles are either "wire" or "block" puzzles. The type of the puzzle is determined by a bit within the info structure.
 
-#### Wire Puzzles
+##### Wire Puzzles
 
 **Wire Puzzle Panel Specific Info** (18 bytes)
 
@@ -60,7 +70,7 @@ wire and the lower triple specifies the left connector.
 This allows for puzzles up to 5 wires and 8 connectors, although only up to 6 connectors are visible.
 
 
-#### Block Puzzles
+##### Block Puzzles
 
 **Block Puzzle Panel Specific Info** (18 bytes)
 
@@ -112,7 +122,7 @@ The blocks are:
     7: Switching node - not used
 
 
-### Elevator Panels 9/3/5
+#### Elevator Panels 9/3/5
 
 **Elevator Panel Specific Info** (18 bytes)
 
@@ -132,7 +142,7 @@ of the accessible floors.
 > The target array would allow for up to six entries, it is unknown if all six are supported.
 
 
-### Number Pads 9/3/7, 9/3/8
+#### Number Pads 9/3/7, 9/3/8
 
 **Number Pad Panel Specific Info** (18 bytes)
 
@@ -152,3 +162,12 @@ A combination must be something else than "000" to be active ("000" is always wr
 Combinations must not be entered in sequence, any of the three combinations is valid at any time.
 
 If the ```Fail object index``` refers to a valid object, this one is triggered when a wrong combination was entered.
+
+
+### Vending Machines 9/4/x
+
+These are not available.
+
+
+### Cyberspace Switches 9/5/x
+
