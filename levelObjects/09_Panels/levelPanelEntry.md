@@ -17,6 +17,8 @@
 
 ### Buttons 9/0/x
 
+Buttons come in various shapes and forms. All of them are triggers for actions and the entry data that of [actions](../Actions.md).
+
 
 ### Recepticles 9/1/x
 
