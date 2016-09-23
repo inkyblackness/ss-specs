@@ -37,3 +37,29 @@ All other values are interpreted as text/audio message index.
     5: Variable must be not equal to value
 
 
+### Object Type Conditions
+
+These conditions check for a specific object type.
+
+**Object Type Condition** (4 bytes)
+
+    0000  int32     Class/Subclass/Type encoded as 0x00CCSSTT
+
+Note that the most significant byte needs to be ```0x00```. 
+
+> These conditions are used for the quest items and for death watch trigger.
+
+
+### Object Index Conditions
+
+These conditions are level-specific and only used for deatch watch trigger.
+
+**Object Index Condition** (4 bytes)
+
+    0000  int16     Object index
+    0002  byte      Unused
+    0003  byte      Condition marker = 0x01
+
+
+As these conditions are used for the same type of triggers as the object type conditions, the ```condition marker``` identifies the class of condition.
+
