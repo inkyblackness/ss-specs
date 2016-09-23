@@ -432,6 +432,15 @@ This change has no parameters (all 12 bytes 0x00) and lets the player receive th
 The game continues after the message has played. Images and text are hardcoded.
 
 
+#### Change State Type 16: Unknown
+
+    0000  int32      Object type - 0x00CCSSTT
+    0004  int32      Unknown
+    0008  int32      Unused
+
+> This entry is only used on level 8, for 4 buttons. Purpose and effect unknown.
+
+
 ### Action Type 22: Trap Message
 
 **Trap Message Action Details** (16 byte)
