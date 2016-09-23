@@ -5,19 +5,18 @@
 **Level Panel Entry** (30 bytes)
 
     0000  [6]byte   Level object prefix
-    0006  [6]byte   Panel Common Info
-    0008  [18]byte  Panel Specific Info
-
-**Panel Common Info** (6 bytes)
-
-    0000  int16     Unknown
-    0002  int16     Unknown
-    0004  int16     Unknown
+    0008  [24]byte  Panel Specific Info
 
 
 ### Buttons 9/0/x
 
 Buttons come in various shapes and forms. All of them are triggers for actions and the entry data that of [actions](../Actions.md).
+
+    0000  [22]byte  Action data
+    0016  [2]byte   Unknown
+
+
+The conditions for buttons are based on [game variables](../Conditions.md#game-variable-conditions).
 
 
 ### Recepticles 9/1/x
@@ -25,24 +24,46 @@ Buttons come in various shapes and forms. All of them are triggers for actions a
 
 ### Stations 9/2/x
 
+The conditions for stations are based on [game variables](../Conditions.md#game-variable-conditions).
+
 #### Cyberspace Terminals 9/2/0
 
-**Cyberspace Terminal Panel Specific Info** (18 bytes)
+**Cyberspace Terminal Panel Specific Info** (24 bytes)
 
-    0000  int32     Target X
-    0004  int32     Target Y
-    0008  int32     Target Z
-    000C  int16     Target Level
-    000E  [4]byte   Unknown
+    0000  byte      State
+    0001  byte      Unused
+    0002  [4]byte   Condition
+    0006  int32     Target X
+    000A  int32     Target Y
+    000E  int32     Target Z
+    0012  int16     Target Level
+    0016  [2]byte   Unused
 
-The first field of the common info determines the terminal state:
+
+**State** (1 byte enumeration)
 
     0: Off
     1: Active (Normal state)
     2: Locked. Trying to activate it gives an electrical shock.
 
 
+#### Energy Charge Stations 9/2/1
+
+    0000  [2]byte   Unused
+    0002  [4]byte   Condition
+    0006  [18]byte  Unknown
+
+
 ### Input Panels 9/3/x
+
+The conditions for input panels are based on [game variables](../Conditions.md#game-variable-conditions).
+
+**Input Panel Info** (24 bytes)
+
+    0000  [2]byte   Unknown
+    0002  [4]byte   Condition
+    0006  [18]byte  Input panel info
+
 
 #### Puzzles 9/3/0 to 9/3/3
 
@@ -50,7 +71,7 @@ Puzzles are either "wire" or "block" puzzles. The type of the puzzle is determin
 
 ##### Wire Puzzles
 
-**Wire Puzzle Panel Specific Info** (18 bytes)
+**Wire Puzzle Input Panel Info** (18 bytes)
 
     0000  int32     Target object index (object to toggle on success)
     0004  byte      Puzzle layout
@@ -74,7 +95,7 @@ This allows for puzzles up to 5 wires and 8 connectors, although only up to 6 co
 
 ##### Block Puzzles
 
-**Block Puzzle Panel Specific Info** (18 bytes)
+**Block Puzzle Input Panel Info** (18 bytes)
 
     0000  int32     Target object index (object to toggle on success)
     0004  int16     State store object index (refers to a null trigger)
@@ -126,7 +147,7 @@ The blocks are:
 
 #### Elevator Panels 9/3/5
 
-**Elevator Panel Specific Info** (18 bytes)
+**Elevator Input Panel Info** (18 bytes)
 
     0000  [N]int16  Target level destination object index
     000C  int16     Accessible bitmask (which floors are accessible)
@@ -146,7 +167,7 @@ of the accessible floors.
 
 #### Number Pads 9/3/7, 9/3/8
 
-**Number Pad Panel Specific Info** (18 bytes)
+**Number Pad Input Panel Info** (18 bytes)
 
     0000  int16     3-digit combination 1
     0002  int16     Trigger object index 1
@@ -173,3 +194,9 @@ These are not available.
 
 ### Cyberspace Switches 9/5/x
 
+Cyberspace switches are triggers for actions and the entry data that of [actions](../Actions.md).
+
+    0000  [22]byte  Action data
+    0016  [2]byte   Unused
+
+The conditions for cyberspace switches are based on [game variables](../Conditions.md#game-variable-conditions).
