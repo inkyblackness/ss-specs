@@ -18,6 +18,9 @@
     0011  byte      Unused
     0012  int32     Repulsion flags; 0x00000001: disabled (float down); 0x00000008: strong repulsor
 
+### Critter AI Hints 12/0/7
+
+
 
 ### Triggers 12/0/x (with exceptions)
 
@@ -32,4 +35,13 @@ Trigger Types:
     8: Level Entry Trigger; Used for instance to initialize starting health
     10: This is not a trigger! See repulsors above.
 
+#### Conditions
 
+Nearly all triggers have conditions based on [game variables](../Conditions.md#game-variable-conditions).
+
+The following exceptions exist:
+* 4 (Death Watch Trigger): A union of [object type][obj-type-cond] and [object index conditions][obj-index-cond]
+* 11 (Ecology Trigger): Unknown
+
+[obj-type-cond]: ./Conditions.md#object-type-conditions
+[obj-index-cond]: ./Conditions.md#object-index-conditions
