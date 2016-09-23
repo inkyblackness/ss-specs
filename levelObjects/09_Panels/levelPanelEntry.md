@@ -13,10 +13,12 @@
 Buttons come in various shapes and forms. All of them are triggers for actions and the entry data that of [actions](../Actions.md).
 
     0000  [22]byte  Action data
-    0016  [2]byte   Unknown
+    0016  uint16    Access mask
 
 
 The conditions for buttons are based on [game variables](../Conditions.md#game-variable-conditions).
+
+```Access mask``` is an additional condition for the button. If not zero, the lower five bits can specify one required access level the hacker must have. The remaining 7 bits don't work properly or resolve to the "None" level.
 
 
 ### Recepticles 9/1/x
