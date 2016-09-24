@@ -12,6 +12,8 @@
 
 Buttons come in various shapes and forms. All of them are triggers for actions and the entry data that of [actions](../Actions.md).
 
+**Button Panel Specific Info** (24 bytes)
+
     0000  [22]byte  Action data
     0016  uint16    Access mask
 
@@ -22,6 +24,35 @@ The conditions for buttons are based on [game variables](../Conditions.md#game-v
 
 
 ### Recepticles 9/1/x
+
+Most recepticles work in conjunction with the quest items (8/7/x). With the exception of antenna relay panels, they contain regular actions as data.
+Unless noted otherwise below, the conditions for recepticles are based on object types.
+
+**Recepticle Panel Specific Info** (24 bytes)
+
+    0000  [22]byte  Action data
+    0016  [2]byte   Unused
+
+
+#### Antenna Relay Panel 9/1/3
+
+**Antenna Relay Panel Specific Info** (24 bytes)
+
+    0000  [6]byte   Unused
+    0006  int16     Trigger object index 1
+    000A  int16     Trigger object index 2
+    000E  int16     Destroy object index
+
+The two ```trigger object index``` values work only with trigger objects, they can't trigger arbitrary objects.
+
+> Behaviour of relays is hardcoded: After accepting the plastique, their type changes to 9/1/4 and a level timer is started. When the timer expires, the panel explodes, the type changes again to 9/1/5, the two objects are triggered and the object-to-destroy is removed.
+
+
+#### Retinal ID Scanner 9/1/6
+
+If the condition field is all zero, the scanner triggers its action when activated with any head item (hacker's eyes are never accepted).
+
+> Although the game uses a condition of ```06 00 00 00```, it does not work as a game variable check nor does it match up with the requested head. So far it is unknown how the scanner is bound to the right head.
 
 
 ### Stations 9/2/x
