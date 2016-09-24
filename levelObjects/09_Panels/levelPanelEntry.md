@@ -69,7 +69,7 @@ The conditions for stations are based on [game variables](../Conditions.md#game-
     0006  int32     Target X
     000A  int32     Target Y
     000E  int32     Target Z
-    0012  int16     Target Level
+    0012  int32     Target Level
     0016  [2]byte   Unused
 
 
@@ -82,9 +82,19 @@ The conditions for stations are based on [game variables](../Conditions.md#game-
 
 #### Energy Charge Stations 9/2/1
 
+**Energy Charge Station Specific Info** (24 bytes)
+
     0000  [2]byte   Unused
     0002  [4]byte   Condition
-    0006  [18]byte  Unknown
+    0006  int32     Power amount
+    000A  int32     Recharge time in seconds
+    000E  int32     Object index
+    0012  int32     Recharged timestamp
+    0016  [2]byte   Unused
+
+The object identified by ```Object index``` is triggered every time when energy is drawn from the station.
+
+The ```Recharged timestamp``` will be set to the game time when the station is usable again. There is no dedicated timer running.
 
 
 ### Input Panels 9/3/x
