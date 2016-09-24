@@ -108,7 +108,7 @@ The conditions for input panels are based on [game variables](../Conditions.md#g
     0006  [18]byte  Input panel info
 
 
-#### Puzzles 9/3/0 to 9/3/3
+#### Access Panels (Puzzles) 9/3/0 to 9/3/3, 9/3/9, 9/3/10
 
 Puzzles are either "wire" or "block" puzzles. The type of the puzzle is determined by a bit within the info structure.
 
@@ -188,24 +188,33 @@ The blocks are:
     7: Switching node - not used
 
 
-#### Elevator Panels 9/3/5
+#### Elevator Panels 9/3/4, 9/3/5, 9/3/6
 
 **Elevator Input Panel Info** (18 bytes)
 
-    0000  [N]int16  Target level destination object index
+    0000  int16     Destination object index 2
+    0002  int16     Destination object index 1
+    0004  int16     Destination object index 4
+    0006  int16     Destination object index 3
+    0008  int16     Destination object index 6
+    000A  int16     Destination object index 5
     000C  int16     Accessible bitmask (which floors are accessible)
     000E  int16     Elevator shaft bitmask (which floors does the shaft connect)
-    0010  [2]byte   Unknown
+    0010  [2]byte   Unused
 
 If a floor bit is set in the ```Elevator shaft bitmask``` field but not in the ```Accessible bitmask``` field, using
-that button gives the "Shaft damage" message.
+that button gives the "Shaft damage" message. The MFD is capable of displaying up to 12 floors.
 
-The ```Target``` field is the object index of the corresponding elevator panel in the target level. The array contains only
-entries for accessible floors and is ordered from top to bottom. This means the first entry relates to the highest bit
-of the accessible floors.
+The ```Destination object index``` values refer to the object index of the elevator panels in the other levels. Note the swapped order of the index values. Presumably the six values are loaded as three int32 values first, and then the index values are extracted. The Nth bit from the accessible bitmask, counted from LSB, references the Nth destination object index.
+
+For an elevator panel to work properly (and not crash the game), the following conditions must be met:
+* The panel must be in a tile which has the elevator music set. (Music index ```0xF``` in tile flags.)
+* The panels envolved in a level transition must reference each other. In other words, all panels of one connected elevator must have the same configuration.
 
 > Referencing an object from another level requires an editor to keep track of inter-level references. Or burden the user.
-> The target array would allow for up to six entries, it is unknown if all six are supported.
+> The game uses only up to three active floors.
+
+> The elevator panel on level 1 has the first byte of the input panel structure set to ```0x01```. Purpose and effect unknown.
 
 
 #### Number Pads 9/3/7, 9/3/8
@@ -228,6 +237,8 @@ A combination must be something else than "000" to be active ("000" is always wr
 Combinations must not be entered in sequence, any of the three combinations is valid at any time.
 
 If the ```Fail object index``` refers to a valid object, this one is triggered when a wrong combination was entered.
+
+> One number pad on level 0 has the first byte of the input panel structure set to ```0x06```. Purpose and effect unknown.
 
 
 ### Vending Machines 9/4/x
