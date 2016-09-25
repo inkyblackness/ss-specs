@@ -7,7 +7,12 @@
     0000  [6]byte   Level object prefix
     0006  [22]byte  Marker data
 
-### Repulsors 12/0/10
+### Infrastructure 12/0/x
+
+#### Critter AI Hints 12/0/7
+
+
+#### Repulsors 12/0/10
 
 **Repulsor Data** (22 byte)
 
@@ -18,24 +23,29 @@
     0011  byte      Unused
     0012  int32     Repulsion flags; 0x00000001: disabled (float down); 0x00000008: strong repulsor
 
-### Critter AI Hints 12/0/7
 
 
-
-### Triggers 12/0/x (with exceptions)
+#### Triggers 12/0/x (with exceptions)
 
 The type of the trigger object determines its cause. The marker data is then that of [actions](../Actions.md).
 
 Trigger Types:
 
-    0: Entry Trigger; Hacker enters tile
-    1: Null Trigger; Must be set off externally. Also used as data storage.
-    2:
-    3: Player Death; Used to resurrect Hacker
-    8: Level Entry Trigger; Used for instance to initialize starting health
+    0: Entry; Hacker enters tile
+    1: Null;            Must be set off externally. Also used as data storage.
+    2: Floor; 
+    3: Player Death;    Used to resurrect Hacker
+    4: Deatch Watch;    When certain objects (or types of objects) are destroyed. Common for CPU nodes.
+    5: Area Enter;      Unused
+    6: Area Continuous; Unused
+    7: This is not a trigger! See AI hints above.
+    8: Level Entry;     Used for instance to initialize starting health
+    9: Continuous;      Unused
     10: This is not a trigger! See repulsors above.
+    11: Ecology;
+    12: SHODAN;         Triggered when level security changes
 
-#### Conditions
+##### Conditions
 
 Nearly all triggers have conditions based on [game variables](../Conditions.md#game-variable-conditions).
 
@@ -45,3 +55,28 @@ The following exceptions exist:
 
 [obj-type-cond]: ./Conditions.md#object-type-conditions
 [obj-index-cond]: ./Conditions.md#object-index-conditions
+
+
+### Trip Beams 12/1/x
+
+These are not used in the game.
+
+
+### Map Marker 12/2/x
+
+Only two types are used in the game.
+
+
+#### Map Notes 12/2/3
+
+**Map Note Marker Data** (22 bytes)
+
+    0000  [18]byte  Unused
+    0012  int32     Entry offset
+
+The ```Entry offset``` points into ```L46``` ([map notes](mapInformation.md#map-notes)) for the text entry. When a map note is removed and the whole table is defragmented, all the entry offsets are changed accordingly.
+
+
+#### Music Voodoo Marker 12/2/4
+
+
