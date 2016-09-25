@@ -11,6 +11,15 @@
 
 #### Critter AI Hints 12/0/7
 
+**Critter AI Hint Data** (22 byte)
+
+    0000  [6]byte   Unused; A few have the first byte 0x06
+    0006  int16     Next object index
+    0008  [10]byte  Unused
+    0012  [4]byte   Unknown
+
+AI hint marker are arranged to form a loop with their ```next object index``` fields. 
+
 
 #### Repulsors 12/0/10
 
