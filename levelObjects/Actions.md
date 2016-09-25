@@ -441,6 +441,9 @@ The game continues after the message has played. Images and text are hardcoded.
 > This entry is only used on level 8, for 4 buttons. Purpose and effect unknown.
 
 
+### Action Type 21: Unknown
+
+
 ### Action Type 22: Trap Message
 
 **Trap Message Action Details** (16 byte)
