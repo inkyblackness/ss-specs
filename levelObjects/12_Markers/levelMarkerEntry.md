@@ -17,12 +17,12 @@
 **Repulsor Data** (22 byte)
 
     0000  [10]byte  Unused; A few have the first byte 0x06 without effect
-    000A  [4]byte   Unknown
-    000E  byte      Unused
-    000F  int16     Repulsion height; 0x0000: endless, 0x0100: one tile height
-    0011  byte      Unused
+    000A  int32     Start height
+    000E  int32     End height
     0012  int32     Repulsion flags; 0x00000001: disabled (float down); 0x00000008: strong repulsor
 
+The ```start height``` and ```end height``` values have a unit of ```0x00010000``` for one tile height. An ```end height``` of zero means endless.
+Both values are measured from the floor. Repulsion only happens if the hacker is within these limits.
 
 
 #### Triggers 12/0/x (with exceptions)
