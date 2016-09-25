@@ -31,9 +31,9 @@ The type of the trigger object determines its cause. The marker data is then tha
 
 Trigger Types:
 
-    0: Entry; Hacker enters tile
+    0: Entry;           Hacker enters tile (mid-air or per foot)
     1: Null;            Must be set off externally. Also used as data storage.
-    2: Floor; 
+    2: Floor;           Hacker touches floor of this tile (per foot exclusively)
     3: Player Death;    Used to resurrect Hacker
     4: Deatch Watch;    When certain objects (or types of objects) are destroyed. Common for CPU nodes.
     5: Area Enter;      Unused
@@ -42,7 +42,7 @@ Trigger Types:
     8: Level Entry;     Used for instance to initialize starting health
     9: Continuous;      Unused
     10: This is not a trigger! See repulsors above.
-    11: Ecology;
+    11: Ecology;        Certain objects go extinct
     12: SHODAN;         Triggered when level security changes
 
 ##### Conditions
@@ -51,10 +51,28 @@ Nearly all triggers have conditions based on [game variables](../Conditions.md#g
 
 The following exceptions exist:
 * 4 (Death Watch Trigger): A union of [object type][obj-type-cond] and [object index conditions][obj-index-cond]
-* 11 (Ecology Trigger): Unknown
+* 11 (Ecology Trigger): A combination of [object type][obj-type-cond] and a limit value. See below.
 
 [obj-type-cond]: ./Conditions.md#object-type-conditions
 [obj-index-cond]: ./Conditions.md#object-index-conditions
+
+
+##### Ecology Triggers
+
+These triggers watch a certain type of objects as their condition, together with a limit value. Whenever the current count of these objects is changed to a number below the limit value, the action is executed.
+
+**Ecology Trigger Condition** (4 bytes)
+
+    0000  byte      Type
+    0001  byte      Subclass
+    0002  byte      Class
+    0003  byte      Limit
+
+Note: The action is executed more than once. How often the action is executed is dependent on the delta. If the new object count equals to (limit-1), then the action is executed twice. If the new object count is less than that, the action is executed three times.
+
+> The layout for the C/S/T is the common one in an int32 value, with the high-byte representing the limit value.
+
+> The game watches only critters, typically to spawn new ones. The trigger also works with other classes.
 
 
 ### Trip Beams 12/1/x
