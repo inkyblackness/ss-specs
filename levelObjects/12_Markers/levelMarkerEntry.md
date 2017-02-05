@@ -106,4 +106,9 @@ The ```Entry offset``` points into ```L46``` ([map notes](mapInformation.md#map-
 
 #### Music Voodoo Marker 12/2/4
 
+**Music Voodoo Marker Data** (22 byte)
+
+    0000  [6]byte   Unused
+    0006  byte      Unknown
+    0007  [15]byte  Unused
 
