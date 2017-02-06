@@ -106,7 +106,7 @@ The name column links to the corresponding details.
 |   11  | ```L21```   | Animations                                | 32          | 10                        |
 |   12  | ```L22```   | [Markers (including traps)][L22]          | 160         | 28                        |
 |   13  | ```L23```   | [Containers][L23]                         | 64          | 21                        |
-|   14  | ```L24```   | Critters                                  | 64          | 46                        |
+|   14  | ```L24```   | [Critters][L24]                           | 64          | 46                        |
 
 
 [L10]: ../levelObjects/00_Weapons/levelWeaponEntry.md
@@ -121,6 +121,7 @@ The name column links to the corresponding details.
 [L20]: ../levelObjects/10_Barriers/levelBarrierEntry.md
 [L22]: ../levelObjects/12_Markers/levelMarkerEntry.md
 [L23]: ../levelObjects/13_Containers/levelContainerEntry.md
+[L24]: ../levelObjects/14_Critters/levelCritterEntry.md
 
 ### Class Extra Information
 
