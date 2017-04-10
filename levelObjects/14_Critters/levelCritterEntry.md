@@ -22,7 +22,7 @@
 
 ```State timeout``` is an indicator on how long the critter will stay in this state. Observed only in "cautious" state.
 This time is reduced as long as the hacker is in the vicinity. When the time reaches zero, the critter becomes hostile.
-The time value is typically quite low. A view high values like 0x0062 have been observed.
+The time value is typically quite low. A few high values like 0x0062 have been observed.
 
 The ```Primary critter state``` holds the state the critter is currently behaving in. This state is also reported by the targeting tool.
 
