@@ -112,7 +112,7 @@ the ending cutscene ends the game (showing score and credits).
     000C  int16      Object 4 index
     000E  int16      Object 4 delay
 
-The delays are all relative to the execution start of the action.
+The delays are all relative to the execution start of the action. Their unit is 0.1 of a second.
 
 
 ### Action Type 7: Change lightning
