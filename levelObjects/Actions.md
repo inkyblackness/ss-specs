@@ -22,8 +22,31 @@ If the value is decremented to zero after the action was executed, the object wh
 
     0000  int32      Target X
     0004  int32      Target Y
-    0008  int32      Unknown
-    000C  int32      Unknown
+    0008  byte       Target Height (level units)
+    0009  byte       Preserve Height Flag -- yes: 0x40, no: 0x00
+    000A  [2]byte    Unused
+    000C  byte       Cross-Level Transport Destination
+    000D  byte       Cross-Level Transport Flag
+    000E  [2]byte    Unused
+
+If the ```Preserve Height Flag``` is set to ```0x40```, then the ```Target Height``` field is ignored and the hacker
+is transported to the same height in which the outgoing tile was entered. (e.g.: jumping in)
+
+> This height-preservation is used only on level 2 for the experimental transporter, which incidentally has both
+> platforms at the same height.
+
+The ```Cross-Level Transportation Flag``` determines whether ```Cross-Level Transport Destination``` is being considered.
+If the flag is ```0x00```, then it is considered to be a cross-level transport. Other values make an in-level transport.
+
+> This flag has been found to be arbitrarily ```0x10```, ```0x20```, and ```0x22``` with no detectable difference.
+
+The ```Cross-Level Transportation Destination``` is furthermore split up. The low nibble determines the actual target
+level. This may be the same level where the trigger is in, in which case the level is "reloaded" (loading cursor seen).
+If the high nibble is set to another value than zero, the transfer is considered to be a cyberspace connection.
+
+> The destination is used only for an same-level transfer on level 4 (restoration chamber), and twice for two groves, to
+> transport the hacker to the restoration chamber on level 6. Other instances are set to ```0x22```, which are ignored
+> as the respective flag value is set to ```0x22``` as well.
 
 
 ### Action Type 2: Change Health
@@ -174,12 +197,15 @@ For the height fields the value ```0x0FFF``` indicates "don't move". Otherwise i
 **Random Timer Action Details** (16 byte)
 
     0000  int32      Object index
-    0004  int32      Time limit
+    0004  int32      Time interval
     0008  int32      Activation value
-    000C  [4]byte    Unknown
+    000C  int16      Variance
+    000E  [2]byte    Unused
 
-The ```Time limit``` specifies within which time span the given object shall be triggered randomly. The first activation
-waits until the complete time limit has elapsed, further activations are random within this limit.
+The ```Time interval``` specifies in 0.1 seconds units within which time span the given object shall be triggered regularly.
+The ```Variance``` adds some randomness to the interval. Usually low numbers are encountered.
+
+> The unit of the variance is not clear. A value of ```0x0200``` caused random delays of up to 25 seconds.
 
 The ```Activation value``` must be ```0xFFFF``` or higher for this action to work.
 
@@ -343,18 +369,42 @@ Control values:
 This change has no parameters (all 12 bytes 0x00) and directly returns to the main menu.
 
 
-#### Change State Type 7: Unknown
+#### Change State Type 7: Rotate Object
 
-    0000  int32      Object index 1
-    0004  int32      Object index 2
-    0008  int32      Unknown
+**Rotate Object State Details** (12 byte)
 
-> This entry is only used on level R and Alpha grove to define areas between the two objects. Purpose and effect unknown.
+    0000  int32      Object index
+    0004  byte       Amount
+    0005  byte       Type -- 0x00: endless, != 0x00: back/forth
+    0006  byte       Direction -- 0x00: forward, 0x01 when running backwards
+    0007  byte       Axis -- 0x00: Z (yaw), 0x01: X (pitch), 0x02: Y (roll)
+    0008  byte       Forward limit
+    0009  byte       Backward limit
+    000A  [2]byte    Unused
+
+This state change rotates an object along one axis. This rotation can be endless in one direction, or a back and forth rotation,
+depending on the ```Type``` field.
+
+If the rotation type is back and forth, then the object is rotated between the two limits. Should the object start outside of these
+limits, then rotation continues normally until it is within the limits.
+
+If the rotation type is endless, whenever one limit is reached, the object immediately jumps to an orientation as per the other limit.
 
 
-#### Change State Type 8: Unknown
+#### Change State Type 8: Remove Objects
 
-> This entry is only used on level 2 in three arbitrary locations. Purpose and effect unknown.
+**Remove Objects State Details** (12 byte)
+
+    0000  int32      Object type - 0x00CCSSTT
+    0004  int32      Amount
+    0008  int32      Unused
+
+This state change removes objects of the specified object type from the level. The ```Amount``` field appears to be a guideline on
+how many shall be removed. Tests showed that an even number was always considered as the lower odd number. (Specify 2, only one was removed.)
+
+> This action only works once. Where its state is stored is not determined yet.
+> Objects are not removed at random, tests showed the objects with the highest object indices were always removed first.
+> Avoid using high amounts. Tests did lock up the game.
 
 
 #### Change State Type 9: SHODAN pixelation
@@ -432,16 +482,34 @@ This change has no parameters (all 12 bytes 0x00) and lets the player receive th
 The game continues after the message has played. Images and text are hardcoded.
 
 
-#### Change State Type 16: Unknown
+#### Change State Type 16: Change Object Type Global
+
+**Change Object Type Global Action Details** (16 byte)
 
     0000  int32      Object type - 0x00CCSSTT
-    0004  int32      Unknown
-    0008  int32      Unused
+    0004  byte       New type
+    0005  [7]byte    Unused
 
-> This entry is only used on level 8, for 4 buttons. Purpose and effect unknown.
+This state change morphs all objects of given object type in the level and changes their type to the given one.
+Class and subclass stay the same. Stats, such as healthpoints, are maintained as well.
 
 
-### Action Type 21: Unknown
+### Action Type 21: Set Critter State
+
+**Set Critter State Action Details** (16 byte)
+
+    0000  int16      Unknown
+    0002  int16      Unknown
+    0004  int16      Reference object index 1
+    0006  int16      Reference object index 2
+    0008  int32      New critter state
+    000C  int16      Unknown
+    000E  int16      Unused
+
+Sets the state of critters inside the rectangle defined by the two reference objects.
+See [Critters](14_Critters/levelCritterEntry.md) for the enumeration values of critter states.
+
+> There are instances in which the first index is zero, while the unknown field at ```0000``` is set to a value.
 
 
 ### Action Type 22: Trap Message
@@ -486,13 +554,17 @@ Objects are only spawned if the ```Combat``` value is 1 or higher. Not all class
 
     0000  int32      Object index
     0004  int16      New type
-    0006  int16      Unknown
+    0006  int16      Reset mask
     0008  int32      Unknown
     000C  [4]byte    Unused
 
-This action changes the type of an object. It is primarily used to extend and retract force bridges.
+This action sets, or toggles, the type of an object. It is primarily used to extend and retract force bridges.
 > For bridges in their retracted state, the game uses "Elephant, Jorp" (```7/7/8```), an invisible dummy type.
 
-> The unknown field at ```0006``` is set to ```0x000F``` or ```0x0001``` for a few bridges on level 4 and 5. Effect unknown.
+The ```Reset mask``` is used when the specified object is already at given type. If the specified object is already at given type,
+then the new type is calculated as ```New type``` XOR ```Reset mask```.
+> So, to toggle between ```0x08``` and ```0x09```, ```New type``` should be ```0x08``` and ```Reset mask``` must be set to ```0x01```.
+> To toggle between ```0x08``` and ```0x07```, ```New type``` should be ```0x07``` and ```Reset mask``` must be set to ```0x0F```.
+
 > The unknown field at ```0008``` is set to ```1``` for only one force bridge in the game (on level 2) and does not seem to have any effect.
 
