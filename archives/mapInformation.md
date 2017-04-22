@@ -48,14 +48,15 @@ The outermost tiles of the level (the 'border') should always be solid tiles. If
 
 **Tile Map Entry** (16 bytes)
 
-    0000  byte    Type
-    0001  byte    Floor Info
-    0002  byte    Ceiling Info
-    0003  byte    Slope height. Valid for any non-flat tile.
-    0004  int16   Index to first object in cross-reference table.
-    0006  int16   Texture Info
-    0008  uint32  Flags
-    000C  uint32  State
+    0000  byte     Type
+    0001  byte     Floor Info
+    0002  byte     Ceiling Info
+    0003  byte     Slope height. Valid for any non-flat tile.
+    0004  int16    Index to first object in cross-reference table.
+    0006  int16    Texture Info
+    0008  uint32   Flags
+    000C  [3]byte  Unknown -- first byte always 0xFF
+    000F  byte     Light delta
 
 **Type** (1 byte)
 
@@ -110,9 +111,9 @@ Cyberspace levels specify the 'animation' type for floor and ceiling.
 
     Real World:
     0x80000000    Tile visited (automapper)
-    0x0F000000    Ceiling Shadow
+    0x0F000000    Ceiling shadow
     0x000F0000    Floor shadow
-    0x0000F000    Music Index
+    0x0000F000    Music index
     0x00000C00    Slope control. See below.
     0x00000200    Remodeled flag ("spooky" music)
     0x00000100    Use wall texture from adjacent tile
@@ -125,6 +126,20 @@ Cyberspace levels specify the 'animation' type for floor and ceiling.
     0x000F0000    Flight pull
     0x0000F000    Music Index
     0x00000060    Game-Of-Life flags (either needs to be set)
+
+
+```Ceiling shadow``` and ```Floor shadow``` specify the darkness intensity for the south-western corner of the tile.
+The ceiling value darkens all four surrounding ceilings.
+The walls made by surrounding top-pillars are darkened starting from the ceiling.
+The walls made by surrounding bottom-pillars are darkened starting from their floor.
+
+The floor value darkens all four surrounding floors.
+The walls made by surrounding bottom-pillars are darkened starting from the floor.
+The walls made by surrounding top-pillars are darkened starting from their ceiling.
+
+> The actions to modify the light values can only give tiles more light, or remove previously added light.
+> Thus, with shadow values of 0, these tiles are as bright as possible, without any chance of making them darker.
+
 
 ```Slope control``` specifies for the floor and ceiling how slopes (and valleys and ridges) should look like.
 
@@ -173,10 +188,10 @@ If `0x00000020` is set invert both
 > then no rotation happens (i.e., pulled backwards).
 > All but the 'Strong' pulls can be countered.
 
-**State** (4 bytes)
+**Light delta** (1 byte)
 
-Default value is ```0x000000FF```.
-
+The high nibble specifies the light delta to the ceiling shadow. The low nibble specifies the light delta to the floor shadow.
+The [Change lighting action](../levelObjects/Actions.md#action-type-7-change-lightning) modifies these values.
 
 ### Texture map
 
