@@ -287,7 +287,11 @@ Afterwards, the ```Next object``` field is incremented. It is reset to ```0``` i
 **Receive EMail Action Details** (16 byte)
 
     0000  int16      EMail index, based on 0x0989
-    0002  [14]byte   Unknown
+    0002  [2]byte    Unused
+    0004  int16      Delay
+    0008  [10]byte   Unused
+
+The ```Delay``` is roughly counted in seconds. Tests showed their actual unit seems to be somewhere at 0.9 seconds.
 
 
 ### Action Type 16: Change Effect
