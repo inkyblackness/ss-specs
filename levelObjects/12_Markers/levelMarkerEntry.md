@@ -109,6 +109,11 @@ The ```Entry offset``` points into ```L46``` ([map notes](mapInformation.md#map-
 **Music Voodoo Marker Data** (22 byte)
 
     0000  [6]byte   Unused
-    0006  byte      Unknown
+    0006  byte      Music flavour
     0007  [15]byte  Unused
 
+The ```Music flavour``` is an index, with a range of ```0x00```..```0x04```, referencing patches of "music" resembling industrial noise.
+They have a rectangular area of effect which covers 14x14 tiles, centered on the tile of the marker.
+The music is only played if the current tile has a music index of zero.
+
+> This is used extensively on maintenance level, the 4 flight decks, as well as for the maintenance tunnels on the groves.
