@@ -235,7 +235,9 @@ Additional Visual Effects:
     000A  int16      Target ceiling height
     000C  [4]byte    Unknown
 
-For the height fields the value ```0x0FFF``` indicates "don't move". Otherwise it's the target height in level height units.
+For the height fields the value ```0x0FFF``` indicates "don't move". Otherwise it's the target height in level height units (0..31).
+
+> The unknown field at 0x000C often has values set, to no effect.
 
 
 ### Action Type 11: Random Timer
@@ -364,7 +366,15 @@ This action is a more generic one with several different interpretations, depend
     0000  int32      Repulsor object index
     0004  byte       "Off" texture index (into level texture list)
     0005  byte       "On" texture index (into level texture list)
-    0006  [6]byte    Unused
+    0006  [2]byte    Unused
+    0008  byte       Toggle type
+    0009  [3]byte    Unused
+
+**Toggle type** (1 byte)
+ 
+    0x00  Toggle On/Off
+    0x01  Toggle On, stay on
+    0x02  Toggle Off, stay off
 
 
 #### Change State Type 2: Show Game Code Digit
@@ -596,6 +606,7 @@ The spawned objects are placed at the floor in the center of the tile.
 
 Objects are only spawned if the ```Combat``` value is 1 or higher. Not all classes can be spawned.
 > Although the game uses enemies exclusively, ammo, explosives, and patches can be spawned as well.
+> The unknown field at 000C has been found with values between 0x00..0x04 - no recognizable effect.
 
 
 ### Action Type 24: Change Object Type
