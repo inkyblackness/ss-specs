@@ -43,6 +43,8 @@ Nothing special.
     0000  [2]byte   Unknown
     0002  [4]int16  Object index
 
+> A few corpses have the first byte set to 0x01. Only found with empty corpses, and effect unknown.
+
 #### Severed Heads 8/2/13, 8/2/14
 
 **Severed Head** (10 bytes)
