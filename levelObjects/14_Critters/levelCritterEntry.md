@@ -53,7 +53,7 @@ A roaming critter has the ```Roaming critter state``` value set, and also needs 
 * ```02 01 01 00``` (not found in archive.dat)
 A critter only roams on its own if the hacker is within a radius of about 6 tiles.
 
-A patrolling critter follows a path laid out by ```Critter AI Hint``` marker (See [level marker](../12_Markers/levelMarkerEntry#critter-ai-hints-1207)). The first marker of such a path must be referenced in the second ```loot object index```.
+A patrolling critter follows a path laid out by ```Critter AI Hint``` marker (See [level marker](../12_Markers/levelMarkerEntry.md#critter-ai-hints-1207)). The first marker of such a path must be referenced in the second ```loot object index```.
 > The only working example of such a critter is initially docile, and has a state combination of ```00 00 04 00```.
 
 The ```Primary critter state``` holds the state the critter is currently behaving in. This state is also reported by the targeting tool.
