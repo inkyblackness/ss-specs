@@ -16,10 +16,15 @@
     0000  [6]byte   Unused; A few have the first byte 0x06
     0006  int16     Next object index
     0008  [10]byte  Unused
-    0012  [4]byte   Unknown
+    0012  int16     Trigger object flag -- 0: off, 1: on
+    0014  int16     Trigger object index
 
-AI hint marker are arranged to form a loop with their ```next object index``` fields. 
+AI hint marker are arranged to form a loop with their ```next object index``` fields. They describe a patrolling path for critters.
+If the ```trigger object flag``` is set to ```0x01```, the object identified by ```trigger object index``` will be triggered approximately 1.5 seconds after a critter entered the tile this marker is in.
 
+> These patrolling paths appear to work only under special circumstances. They are rarely used in the main game and so far have been found to properly work only on level 9 for a mutated cyborg.
+> The main reason for these hints not properly working is that roaming critters only walk when the hacker is within their vicinity - which often already makes them hostile. The cyborg on level 9 initially is docile, thus not concerned about a (passive) hacker. Its 4 state bytes are ```00 00 04 00``` and requires the second loot object to point to the first hint.
+> Critters take these hints as such - they first walk into their direction, and continue to walk after passing them. Without a new hint, they will wander off in random directions. The cyborg on level 9 properly walks back and forth because its linear back-and-forth path has a hint for ever tile, and the two edges of the path are in coves, within which the cyborg bumps against the walls until properly turned around.
 
 #### Repulsors 12/0/10
 
