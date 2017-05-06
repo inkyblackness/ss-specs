@@ -27,7 +27,8 @@ This subclass describes projectile weapons.
     0000  [8]byte  [Generic Weapon Info](../GenericWeaponInfo.md)
     0008  int8     Projectile travel speed
     0009  int32    Projectile type (0x00CCSSTT)
-    000D  [3]byte  Unknown
+    000D  byte     Unused
+    000E  sint16   Kickback
 
 
 #### Specific 3 Properties
@@ -40,7 +41,7 @@ This subclass describes melee weapons.
     0008  int8     Power usage
     0009  uint8    Impact force (pushback on hit)
     000A  int8     Range
-    000B  [2]byte  Unknown
+    000B  sint16   Kickback (only applied if hitting something)
 
 
 #### Specific 4 Properties
@@ -53,7 +54,7 @@ This subclass describes energy beam weapons.
     0008  int8     Power usage
     0009  uint8    Impact force (pushback on hit)
     000A  int8     Range
-    000B  [2]byte  Unknown
+    000B  sint16   Kickback
 
 
 #### Specific 5 Properties
@@ -64,7 +65,8 @@ This subclass describes energy projectile weapons.
 
     0000  [8]byte  [Generic Weapon Info](../GenericWeaponInfo.md)
     0008  int8     Power usage
-    0009  [3]byte  Unknown
+    0009  byte     Unknown
+    000A  sint16   Kickback
     000C  int8     Projectile travel speed
     000D  int32    Projectile type (0x00CCSSTT)
     0011  byte     Unknown
