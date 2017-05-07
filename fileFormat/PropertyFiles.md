@@ -80,7 +80,7 @@ At the end of the file is the table with common properties. For each object type
     000E  byte     Vulnerabilities (matching Damage Type from [Generic Weapon Info](../levelObjects/GenericWeaponInfo.md))
     000F  byte     Special vulnerabilities (matching Special Damage Type from [Generic Weapon Info](../levelObjects/GenericWeaponInfo.md))
     0010  [2]byte  Unused
-    0012  byte     Unknown
+    0012  byte     Defence value
     0013  byte     Unknown - found to be 0x00, 0x03 and 0x04
     0014  int16    Flags
     0016  int16    3D model index, based on chunk 0x08FC
@@ -88,6 +88,9 @@ At the end of the file is the table with common properties. For each object type
     0019  byte     Extra; High-nibble (bits 4-7): Number of extra bitmaps; bits 0-3: Unknown
     001A  byte     Unknown
 
+
+The ```defence value``` is compared to the ```offence value``` of a weapon or projectile. Higher defence values will decrease the damage, higher offence values will increase the damage.
+> It is not clear how much is added/removed. First tests indicated it's not the difference between the two values.
 
 > Unknown field 0x0000 is considered to be mass, yet changing its values did not show any effect.
 
