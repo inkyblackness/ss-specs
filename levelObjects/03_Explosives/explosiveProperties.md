@@ -35,4 +35,10 @@ The ```blast damage``` is fully applied within the ```blast core range```, addit
 
 **Specific 1 Properties** (3 bytes)
 
-    0000  [3]byte  Unknown
+    0000  byte     Minimum time
+    0001  byte     Maximum time
+    0002  byte     Random factor -- always 0x00
+
+```Minimum time``` and ```maximum time``` specify the range, in seconds, timed explosives can be set to.
+
+> ```Random factor``` is always set to 0x00. Since it may also let the explosive go off earlier than expected, this may happen while still in the hand - which is presumably why it is unused in the main game.
