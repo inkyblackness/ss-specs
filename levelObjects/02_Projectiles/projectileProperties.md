@@ -4,7 +4,19 @@
 
 **Projectile Generic Properties** (1 byte)
 
-    0000  byte     Unknown
+    0000  byte     Projectile flags
+
+
+**Projectile Flags Enumeration** (1 byte)
+
+    0x01  Emit light
+    0x02  Bounce off walls
+    0x04  Bounce off objects (real world), Pass through objects (cyberspace)
+    0x08  Unknown -- set for all cyberspace projectiles
+
+
+> Cyberspace projectiles can't emit light, though they can bounce off walls.
+> The flag ```0x08``` has no detectable effect, neither for cyberspace, nor real world.
 
 
 #### Specific 1 Properties
