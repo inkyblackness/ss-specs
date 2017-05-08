@@ -7,11 +7,11 @@
     0000  [75]byte  Unknown
 
 
-#### Specific 2 Properties
+#### Specific 1 Properties
 
-**Specific 2 Properties** (2 bytes)
+**Specific 1 Properties** (1 byte)
 
-    0000  [2]byte   Unknown
+    0000  [1]byte   Unknown
 
 
 #### Cyberspace Critters Specific Properties
