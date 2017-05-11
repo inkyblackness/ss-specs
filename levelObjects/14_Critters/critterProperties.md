@@ -36,9 +36,20 @@ The ```secondary attack probability``` determines how likely the critter will us
 
 **Critter Attack Info** (21 bytes)
 
+    0004  int16     Damage
+    0006  byte      Offence value
+    000B  byte      Hit chance
+    000C  byte      Attack range
+
+    000E  byte      Attack delay, in units of 0.9 seconds ("reload time")
+    000F  [2]byte   unused
     0011  int32     Projectile type -- 0x00CCSSTT; zero for "none"
 
+The ```offence value``` is compared to the defence value of the target object. See [common properties](../fileFormat/PropertyFiles.md#common-table) for details.
 
+A ```hit chance``` of ```0x00``` will still have the critter hit, though not that often and with less damage.
+
+The critter will want to get within the ```attack range``` to perform its attack. 
 
 #### Specific 1 Properties
 
