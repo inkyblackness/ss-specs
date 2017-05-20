@@ -69,14 +69,17 @@ At the end of the file is the table with common properties. For each object type
 
 **Common Object Properties** (27 bytes)
 
-    0000  int32    Unknown
+    0000  int16    Mass
+    0002  [2]byte  Unused
     0004  int16    Default hitpoints
     0006  uint8    Armour
     0007  byte     Render type
-    0008  byte     Unknown - found to be 0x00, 0x01 and 0x02
-    0009  byte     Unknown - found to be 0x00, 0x0F and 0x28
+    0008  byte     Physics type; 0x00: none (insubstantial), 0x01: regular, 0x02: special
+    0009  sint8    Bounciness (only for Physics type 0x01)
     000A  byte     Unused
-    000B  [3]byte  Unknown
+    000B  byte     Vertical frame offset
+    000C  byte     Unknown. These values are set (almost) identical to 000B and have no effect.
+    000D  byte     Unknown
     000E  byte     Vulnerabilities (matching Damage Type from [Generic Weapon Info](../levelObjects/GenericWeaponInfo.md))
     000F  byte     Special vulnerabilities (matching Special Damage Type from [Generic Weapon Info](../levelObjects/GenericWeaponInfo.md))
     0010  [2]byte  Unused
@@ -89,10 +92,13 @@ At the end of the file is the table with common properties. For each object type
     001A  byte     Unknown
 
 
+```Physics type``` governs how collisions shall be handled. ```0x00``` makes the object insubstantial, ignoring forces applied to it. For instance, most scenery stays where it was put. ```0x01``` is for regular objects meant to react "normal" in a physical world. ```0x02``` behaves strange is set for exactly one object (```14/0/6```, "SONIC THE HEDGEHOG", an unused critter). Objects with a physics type of ```0x02``` aren't affected by gravity for instance, but are repelled if hacker runs into them.
+The ```bounciness``` acts as repulsion force on the object if it collides with the ground or walls - or on the hacker if hacker runs into it. (Negative values make no difference for the object itself, hacker is propelled forward if running into such an object.) The bounciness depends on the ```mass```; Objects with more mass bounce around less.
+
+The ```vertical frame offset``` is applied to vertically center (animated) sprites on their position. If ```0x00```, the sprites are rendered with their bottom anchored at the object's position. Higher values will move the sprites downwards.
+
 The ```defence value``` is compared to the ```offence value``` of a weapon or projectile. Higher defence values will decrease the damage, higher offence values will increase the damage.
 > It is not clear how much is added/removed. First tests indicated it's not the difference between the two values.
-
-> Unknown field 0x0000 is considered to be mass, yet changing its values did not show any effect.
 
 > ```3D model index``` is also set to some values for render type ```0x02```, effect unknown.
 
