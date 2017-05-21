@@ -80,22 +80,24 @@ At the end of the file is the table with common properties. For each object type
     000B  byte     Vertical frame offset
     000C  byte     Unknown. These values are set (almost) identical to 000B and have no effect.
     000D  byte     Unknown
-    000E  byte     Vulnerabilities (matching Damage Type from [Generic Weapon Info](../levelObjects/GenericWeaponInfo.md))
-    000F  byte     Special vulnerabilities (matching Special Damage Type from [Generic Weapon Info](../levelObjects/GenericWeaponInfo.md))
+    000E  byte     Vulnerabilities
+    000F  byte     Special vulnerabilities
     0010  [2]byte  Unused
     0012  byte     Defence value
     0013  byte     Receive damage Flag; 0x00: Yes, 0x03: No, 0x04: Unknown 0x04
     0014  int16    Flags
     0016  int16    3D model index, based on chunk 0x08FC
-    0018  byte     Unknown
-    0019  byte     Extra; High-nibble (bits 4-7): Number of extra bitmaps; bits 0-3: Unknown
-    001A  byte     Unknown
+    0018  byte     Unknown -- set to 0x80 for many 3D objects
+    0019  byte     Extra; High-nibble (bits 4-7): Number of extra bitmaps; bits 0-3: Unknown (see below)
+    001A  byte     Destruction effect
 
 
 ```Physics type``` governs how collisions shall be handled. ```0x00``` makes the object insubstantial, ignoring forces applied to it. For instance, most scenery stays where it was put. ```0x01``` is for regular objects meant to react "normal" in a physical world. ```0x02``` behaves strange is set for exactly one object (```14/0/6```, "SONIC THE HEDGEHOG", an unused critter). Objects with a physics type of ```0x02``` aren't affected by gravity for instance, but are repelled if hacker runs into them.
 The ```bounciness``` acts as repulsion force on the object if it collides with the ground or walls - or on the hacker if hacker runs into it. (Negative values make no difference for the object itself, hacker is propelled forward if running into such an object.) The bounciness depends on the ```mass```; Objects with more mass bounce around less.
 
 The ```vertical frame offset``` is applied to vertically center (animated) sprites on their position. If ```0x00```, the sprites are rendered with their bottom anchored at the object's position. Higher values will move the sprites downwards.
+
+The ```vulnerabilities``` and ```special vulnerabilities``` match the corresponding damage type fields from [Generic Weapon Info](../levelObjects/GenericWeaponInfo.md).
 
 The ```defence value``` is compared to the ```offence value``` of a weapon or projectile. Higher defence values will decrease the damage, higher offence values will increase the damage.
 > It is not clear how much is added/removed. First tests indicated it's not the difference between the two values.
@@ -105,6 +107,8 @@ The ```receive damage flag``` determines whether the object would be destructibl
 
 > ```3D model index``` is also set to some values for render type ```0x02```, effect unknown.
 
+> For the ```extra``` field, the lower nibble (bits 0-3) have unknown properties. Changing it does not have any visible effect.
+> It is set to ```0x04``` for all objects capable of displaying something (screens and the like), and ```0x0C``` for projectiles.
 
 **Render Type Enumeration** (1 byte)
 
@@ -120,7 +124,7 @@ The ```receive damage flag``` determines whether the object would be destructibl
 
 **Common Object Flags** (2 byte)
 
-    0x0001  Inventory object
+    0x0001  Inventory object - can be picked up
     0x0002  Solid (can't be passed through)
     0x0004  Unknown
     0x0008  Unknown
@@ -136,3 +140,17 @@ The ```receive damage flag``` determines whether the object would be destructibl
     0x2000  Unknown
     0x4000  Unknown
     0x8000  Unknown
+
+
+**Object Destruction Effect** (1 byte)
+
+This byte is a bitmask field with the following layout:
+
+    0x1F    Animation frame index -- refers to different types of animations
+    0x20    Play destruction sound
+    0x40    Play destruction sound (not used in main game)
+    0x80    Actual explosion (with damage) -- requires Animation frame index to be 0x0F
+
+> Some objects have their "private" destruction sounds and have none of the sound bits set.
+> The ```actual explosion```, set for larger electrical appliances, works only if the full value is ```0x8F```.
+
