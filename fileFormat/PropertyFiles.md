@@ -84,7 +84,7 @@ At the end of the file is the table with common properties. For each object type
     000F  byte     Special vulnerabilities (matching Special Damage Type from [Generic Weapon Info](../levelObjects/GenericWeaponInfo.md))
     0010  [2]byte  Unused
     0012  byte     Defence value
-    0013  byte     Unknown - found to be 0x00, 0x03 and 0x04
+    0013  byte     Receive damage Flag; 0x00: Yes, 0x03: No, 0x04: Unknown 0x04
     0014  int16    Flags
     0016  int16    3D model index, based on chunk 0x08FC
     0018  byte     Unknown
@@ -99,6 +99,9 @@ The ```vertical frame offset``` is applied to vertically center (animated) sprit
 
 The ```defence value``` is compared to the ```offence value``` of a weapon or projectile. Higher defence values will decrease the damage, higher offence values will increase the damage.
 > It is not clear how much is added/removed. First tests indicated it's not the difference between the two values.
+
+The ```receive damage flag``` determines whether the object would be destructible - this still requires the object to be solid to register damage.
+> This flag is set to ```0x04``` only for the non-used SHODAN critter ```14/3/5``` - effect unknown.
 
 > ```3D model index``` is also set to some values for render type ```0x02```, effect unknown.
 
