@@ -7,6 +7,8 @@
     0000  [21]byte  Primary attack info
     0015  [21]byte  Secondary attack info
 
+    002A  int8      Unknown
+
     002C  sint8     Projectile source height offset
     002D  int8      Flags -- 0x01: Hover, 0x04: Unknown (few robots have this set)
 
@@ -24,6 +26,8 @@
     0046  byte      Interrupt probability
     0047  byte      Random loot selection -- 0x00: nothing
     0048  byte      Injury type -- 0x00: meat, 0x01: plant, 0x02: metal, 0x03: blood (cyborgs)
+    0049  byte      Primary attack key frame
+    004A  byte      Secondary attack key frame
 
 The ```projectile source height offset``` is a vertical offset specifying from where projectiles should be launched.
 > This is set to some positive values for the Elite Guard and Mutated Cyborg, so that their projectils appear from their heads.
@@ -45,19 +49,30 @@ The ```interrupt probability``` determines how likely the critter will be interr
 
 > The ```injury type``` ```0x02``` (metal) is also set for all cyberspace critters.
 
+The two ```attack key frame``` values are indices into the attack animation, when the corresponding attack should take effect.
+
 
 **Critter Attack Info** (21 bytes)
-
+    0000  byte      Damage type
     0004  int16     Damage
     0006  byte      Offence value
+    0007  byte      Unknown
+    0008  uint8     Impact force
+    0009  int16     Unknown
     000B  byte      Hit chance
     000C  byte      Attack range
-
-    000E  byte      Attack delay, in units of 0.9 seconds ("reload time")
+    000D  int16     Reload time, with 0x100 being approximately 0.9 seconds
     000F  [2]byte   unused
     0011  int32     Projectile type -- 0x00CCSSTT; zero for "none"
 
-The ```offence value``` is compared to the defence value of the target object. See [common properties](../fileFormat/PropertyFiles.md#common-table) for details.
+The ```damage type``` seems to be compatible with the damage type of [generic weapon info](../GenericWeaponInfo.md). Yet all damage types that affect hacker are handled equally; The two damage types ```0x04``` and ```0x08``` have no effect at all.
+> The main game only uses damage types ```0x01``` and ```0x02``` (and some combinations). ```0x04``` is also set for Diego as well as SHODAN, though this has no further effect.
+
+The ```offence value``` is compared to the defence value of the target object. See [common properties](../../fileFormat/PropertyFiles.md#common-table) for details.
+
+The ```impact force``` has hardly an effect on hacker. Even at the highest value ```0xFF```, hacker is pushed only a bit.
+
+> The ```unknown``` field at ```0x0009``` may be a kickback value, though this value does not appear to have any effect on the critters.
 
 A ```hit chance``` of ```0x00``` will still have the critter hit, though not that often and with less damage.
 
