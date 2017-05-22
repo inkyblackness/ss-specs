@@ -79,7 +79,7 @@ At the end of the file is the table with common properties. For each object type
     000A  byte     Unused
     000B  byte     Vertical frame offset
     000C  byte     Unknown. These values are set (almost) identical to 000B and have no effect.
-    000D  byte     Unknown
+    000D  byte     Unknown. Set to 0x30 for all barriers (10/x/x), without noticable effect.
     000E  byte     Vulnerabilities
     000F  byte     Special vulnerabilities
     0010  [2]byte  Unused
@@ -124,18 +124,18 @@ The ```receive damage flag``` determines whether the object would be destructibl
 
 **Common Object Flags** (2 byte)
 
-    0x0001  Inventory object - can be picked up
-    0x0002  Solid (can't be passed through)
-    0x0004  Unknown
-    0x0008  Unknown
-    0x0010  Consumable inventory object
-    0x0020  Blocks 3D rendering if closed (= opaque doors)
+    0x0001  Useful inventory object (green font)
+    0x0002  Solid - can't be passed through
+    0x0004  Triggerable object - world object is triggered (used) instead of picked up on double-click
+    0x0008  Unusable object - triggerable or not, double-click on these objects always gives "Can't use XXX"
+    0x0010  Usable inventory object - object is triggered on double-click in inventory list
+    0x0020  Blocks 3D rendering if closed (set for opaque doors)
     0x0040  Unknown
-    0x0080  Unknown
-    0x0100  Openable (removable) barrier (doors, gratings)
-    0x0200  Flat solid (can be stood upon)
-    0x0400  Unknown
-    0x0800  Explode on contact
+    0x0080  Ignore darkness (only if bit at 0x0040 is not set)
+    0x0100  Solid if closed (set for barriers and repulsor object)
+    0x0200  Flat solid (objects can be placed on it)
+    0x0400  Large explosion (only set for various explosion animations)
+    0x0800  Destroy on contact
     0x1000  Unknown
     0x2000  Unknown
     0x4000  Unknown
