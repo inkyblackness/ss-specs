@@ -10,9 +10,9 @@ Bitmaps are stored with a header, the pixel data (sometimes compressed), and an 
 
 **Bitmap Header** (28 bytes)
 
-    0000  [4]byte   Unknown. Always zero.
+    0000  [4]byte   Unused. Always zero.
     0004  int16     Type: 0x02: Uncompressed; 0x04 Compressed
-    0006  int16     Unknown
+    0006  int16     TransparencyFlag
     0008  int16     Width
     000A  int16     Height
     000C  int16     Stride
@@ -20,6 +20,11 @@ Bitmaps are stored with a header, the pixel data (sometimes compressed), and an 
     000F  byte      HeightFactor
     0010  [4]int16  HotspotBox: Left, Top, Right, Bottom
     0018  int32     Private palette offset
+
+The ```TransparencyFlag``` is set to value ```0x01``` when palette index ```0x00``` should be treated as a transparent pixel instead of painting it black.
+> Compressed images appear to default to transparency if the resolution of the game is 320x200. Higher resolutions require the flag set to behave identical.
+>
+> Other factors may also govern whether the bitmap should be treated with transparency - videos and level textures have their special handling in this regard.
 
 The ```WidthFactor``` and ```HeightFactor``` specify the index of the highest set bit of ```Width``` and ```Height```
 respectively. For example, if Width is 320 (0x140), then the WidthFactor is 8 (1<<8 == 0x100).
