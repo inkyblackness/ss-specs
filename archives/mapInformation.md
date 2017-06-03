@@ -96,7 +96,7 @@ The exact behaviour for the hazard flags is determined by the [level variables](
 
 The texture info field contains information for the tile textures of the level.
 For real world, it contains index values into the texture map (see next chunk below).
-Cyberspace levels specify the 'animation' type for floor and ceiling.
+Cyberspace levels specify the palette color index for floor and ceiling.
 
     Real World:
     bits  0-5     Wall texture
@@ -104,27 +104,30 @@ Cyberspace levels specify the 'animation' type for floor and ceiling.
     bits  11-15   Floor texture
 
     Cyberspace:
-    bits  0-7     Floor animation
-    bits  8-15    Ceiling animation
+    bits  0-7     Floor palette index
+    bits  8-15    Ceiling palette index
 
 **Flags** (4 bytes)
 
     Real World:
     0x80000000    Tile visited (automapper)
+    0x10000000    Unknown
     0x0F000000    Ceiling shadow
     0x000F0000    Floor shadow
     0x0000F000    Music index
     0x00000C00    Slope control. See below.
     0x00000200    Remodeled flag ("spooky" music)
     0x00000100    Use wall texture from adjacent tile
-    0x00000080    Unknown
-    0x00000040    Flip texture horizontally alternating
-    0x00000020    Flip texture horizontally
+    0x00000080    Unknown -- only used for computer room on level 7
+    0x00000040    Flip wall texture horizontally alternating
+    0x00000020    Flip wall texture horizontally
     0x0000001F    Offset for wall textures
 
     Cyberspace:
+    0x01000000    Unknown
     0x000F0000    Flight pull
     0x0000F000    Music Index
+    0x00000C00    Unknown
     0x00000060    Game-Of-Life flags (either needs to be set)
 
 
@@ -147,22 +150,22 @@ The walls made by surrounding top-pillars are darkened starting from their ceili
     1:  Ceiling is mirroring the floor; A slope height of 0x10 will have their most extent vertexes touch each other.
     2:  Ceiling is flat.
     3:  Floor is flat.
+
 	
-```Flip texture horizontally```
+```Flip wall texture horizontally```
 
-Textures are flipped horizontally.
-Wall textures in North/South axis and West/East axis are flipped separately.
-Flipping must be handled in following order.
+Wall textures can be flipped horizontally.
 
-If `0x00000040` is set
+In the ```alternating``` case, flipping is based on the parities of the tile's two coordinates (even/odd status of the X and Y values).
+Furthermore, North/South wall textures are flipped separately to East/West wall textures; If the North/South walls are flipped for a certain tile, the corresponding East/West walls will not be flipped. If the North/South walls are not flipped, then the East/West walls will be flipped.
+> This ensures mirrored patterns are kept across corners without the need to change the flags for every other tile. This is heavily used on level 9 for the infested walls.
 
-    flipNS = ((tileX & 1) == 1) ^ ((tileY & 1) == 0)
-    flipWE = !flipNS
-	
-If `0x00000020` is set invert both
+The North/South texture is to be flipped if the parities of the tile's two coordinates are different - East/West would be normal in this case.
 
-    flipNS = !flipNS
-    flipWE = !flipWE
+The North/Shouth texture is normal if the parities of the tile's two coordinates match - East/West would be flipped in this case.
+
+This alternation is inverted if additionally bit ```0x00000020```` is set.
+
 
 ```Flight pull``` specifies what default translation/rotation forces are in play
 
