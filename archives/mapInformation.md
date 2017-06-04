@@ -126,10 +126,10 @@ Cyberspace levels specify the palette color index for floor and ceiling of the S
     0x0000001F    Offset for wall textures
 
     Cyberspace:
-    0x01000000    Unknown
+    0x01000000    Flight pull: Strong pull towards floor
     0x000F0000    Flight pull
     0x0000F000    Music Index
-    0x00000C00    Unknown
+    0x00000C00    Slope control. See below.
     0x00000060    Game-Of-Life flags (either needs to be set)
 
 
@@ -187,6 +187,7 @@ This alternation is inverted if additionally bit ```0x00000020```` is set.
     13:  Medium pull towards ceiling
     14:  Medium pull towards floor
     15:  Strong pull towards ceiling
+    16:  Strong pull towards floor (requires separate extra bit)
 
 > The engine applies the force to the 'nose' of the hacker, i.e. it will pull the heading until the hacker looks straight
 > at the origin of the force. This causes the implicit rotation. Only if the heading is exactly opposite to the origin,
