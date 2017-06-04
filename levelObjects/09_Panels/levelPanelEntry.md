@@ -72,6 +72,7 @@ The conditions for stations are based on [game variables](../Conditions.md#game-
     0012  int32     Target Level
     0016  [2]byte   Unused
 
+The orientation of the player in the target cyberspace level can not be specified. The orientation will be taken over from the real world. 
 
 **State** (1 byte enumeration)
 
