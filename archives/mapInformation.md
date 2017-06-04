@@ -34,6 +34,8 @@ One height unit is the 32th of the level height. The higher the level is, the la
 
 Although any level can be marked as cyberspace - even the starting level - only levels 10, 14 and 15 properly work. Apparently these level numbers are hardcoded in the engine. Cyberspace items in other levels don't work as expected, especially the exit port either crashes the game or puts the player at the start of the cyberspace level again.
 
+As a further hardcoded limitation, only cyberspace levels 14 and 15 have a time limit. Level 10 is without limit.
+
 The ```placeholder``` has no use in the archives.
 > According to the documentation of TSSHP, this field is used as a placeholder for a pointer within the game logic.
 
@@ -96,7 +98,7 @@ The exact behaviour for the hazard flags is determined by the [level variables](
 
 The texture info field contains information for the tile textures of the level.
 For real world, it contains index values into the texture map (see next chunk below).
-Cyberspace levels specify the palette color index for floor and ceiling.
+Cyberspace levels specify the palette color index for floor and ceiling of the South-Western corner.
 
     Real World:
     bits  0-5     Wall texture
