@@ -20,9 +20,11 @@ The properties of the first texture determine how the remaining will behave (cli
     0002  int16  Current frame time
     0004  byte   Current frame index
     0005  byte   Number of frames for loop
-    0006  byte   Loop type
+    0006  byte   Loop type/Loop state
 
 **Loop Type** (1 byte)
 
-    0  Loop forward
-    1  Loop back and forth
+    0x00  Loop forward
+    0x01  Loop forth-and-back (forward state)
+    0x81  Loop forth-and-back (backward state)
+
