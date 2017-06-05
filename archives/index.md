@@ -59,7 +59,7 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
   * ```L47``` [Map notes pointer](mapInformation.md#map-notes)
 
   * ```L48``` Unknown. 0x30 byte length.
-  * ```L49``` Unknown. 0x1C0 byte length, all zeroes.
+  * ```L49``` Unknown. 0x1C0 byte length.
   * ```L50``` Unknown int16. ```0x0000``` for all maps.
   * ```L51``` [Loop Configuration](loopConfiguration.md)
   * ```L52``` Unknown int16. (Only present in ```CD-Release```)
