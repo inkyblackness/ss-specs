@@ -41,6 +41,10 @@ If specified, the ```color``` field identifies a hexadecimal colour palette inde
 The ```event``` field chains messages together. "i" events identify the message that must immediately follow the current one;
 The hexadecimal number is the offset for the next message (based on chunk ```0x0989```). Such interrupt messages then have "t" as event.
 
+> The vanilla resource files contain a few messages with errors in them:
+> There are some "stub email" messages with empty header lines, the text "stub email" twice and only one terminating empty line.
+> Furthermore, there is one message in ```gerstrng.res``` which misses the terminating empty line in the terse text.
+
 ### Text Content
 
 Within the texts, the substring ```$N``` is the placeholder for the name of the hacker.

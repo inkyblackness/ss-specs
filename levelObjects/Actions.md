@@ -83,8 +83,8 @@ The orientation and in-tile position of the source object will be kept.
     0000  int32      Variable key
     0004  int16      Value
     0006  int16      Operation
-    0008  int32      Message 1
-    000C  int32      Message 2
+    0008  int32      Message 1 (within chunk 0x0867)
+    000C  int32      Message 2 (within chunk 0x0867)
 
 Depending on the ```Variable key```, different sets of variables are modified.
 The variables are stored in the [Game State Structure](../../archives/gameState.md).
@@ -281,7 +281,7 @@ Afterwards, the ```Next object``` field is incremented. It is reset to ```0``` i
     0006  int16      Unknown
     0008  int16      Object 3 index
     000A  int16      Unknown
-    000C  int32      Message index; 0: no message
+    000C  int32      Message index (within chunk 0x0867); 0: no message 
 
 
 ### Action Type 15: Receive EMail
@@ -577,7 +577,7 @@ See [Critters](14_Critters/levelCritterEntry.md) for the enumeration values of c
 **Trap Message Action Details** (16 byte)
 
     0000  sint32     Background image
-    0004  int32      Message index
+    0004  int32      Message index (within chunk 0x0867)
     0008  int32      Text colour
     000C  int32      MFD suppression flag; 0: Show in MFD, 1: Show only in HUD
 
