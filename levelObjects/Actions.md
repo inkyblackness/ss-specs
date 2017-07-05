@@ -71,9 +71,15 @@ If the high nibble is set to another value than zero, the transfer is considered
     0002  int16      Move flag: 0: clone object, !0: move object
     0004  int32      Target X tile
     0008  int32      Target Y tile
-    000C  int32      Height
+    000C  byte       Target height (0..255)
+    000D  byte       Keep height flag; 0x00: use target height; 0x40: keep height of source object
 
 The orientation and in-tile position of the source object will be kept.
+
+> The game archive has various values for the ```move flag```.
+>
+> The ```keep height flag``` has also been found to be ```0x44``` behaving like ```0x40```.
+> The height field is also ```0x44``` in this case - presumably a case of "One of these nibbles needs to be 4 to work..."
 
 
 ### Action Type 4: Set Game Variable
@@ -231,13 +237,14 @@ Additional Visual Effects:
 
     0000  int32      Tile X
     0004  int32      Tile Y
-    0008  int16      Target floor height
-    000A  int16      Target ceiling height
+    0008  int16      Target floor height; 0..31, measured from floor absolute zero
+    000A  int16      Target ceiling height; 1..31, measured from floor absolute zero
     000C  [4]byte    Unknown
 
-For the height fields the value ```0x0FFF``` indicates "don't move". Otherwise it's the target height in level height units (0..31).
+For the height fields the value ```0x0FFF```, as well as ```0x0100``` indicate "don't move". The ceiling height has also been encountered to be ```0x0020```, also not moving.
 
 > The unknown field at 0x000C often has values set, to no effect.
+
 
 
 ### Action Type 11: Random Timer
