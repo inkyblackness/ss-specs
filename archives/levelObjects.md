@@ -27,7 +27,7 @@ This table contains 872 entries, which houses two lists.
     0013  byte     Unknown
     0014  byte     Object type
     0015  int16    Hitpoints
-    0017  [4]byte  Unknown
+    0017  [4]byte  Extra
 
 The starting point for both lists is the first entry (index zero). This entry is not in use (```In use flag``` is zero).
 
@@ -45,6 +45,26 @@ The ```Cross-Reference table index``` of the starting point does not refer to a 
 If an object is placed in the world, it has the X, Y and Z coordinates set, as well as the ```Cross-Reference table index``` pointing to a corresponding entry in the cross-reference table.
 If an object was spawned by the engine without a location in the world, such as loot from corpses,
 then the ```X``` field is ```0xFFFF```, ```Y``` and ```Z``` fields are zero, and the ```Cross-Reference table index``` is zero as well.
+
+The ```extra``` field is a multi-purpose field, which may hold further properties and/or state. The exact features are environment specific and may also be dependent on the classification of the object.
+
+##### Cyberspace extra
+
+In case the level is cyberspace, the ```extra``` field contains the following properties.
+
+**Cyberspace Level Object Extra** (4 bytes)
+
+    0000  byte     Unknown
+    0001  byte     ICE presence
+    0002  byte     Unknown
+    0003  byte     ICE level
+
+Level objects in cyberspace can be locked by ICE (Intrusion Countermeasures Electronics). ICE need to be defeated using the drill tool before the locked object can be acquired/used. The ```ICE presence``` field determines whether ICE is present. Any value != ```0x00``` has ICE present.
+If present, the health of the ICE is determined by the health of the object.
+The ```ICE level``` then determines how aggressive and powerful the ICE is. ```0x00``` is the weakest, ```0xFF``` is the highest.
+
+> Although the vanilla game uses ICE only on software objects, the engine also supports ICE on other objects, such as cyberspace exits.
+
 
 #### Level Object Cross-Reference Table
 
