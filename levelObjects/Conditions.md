@@ -52,7 +52,7 @@ Note that the most significant byte needs to be ```0x00```.
 
 ### Object Index Conditions
 
-These conditions are level-specific and only used for deatch watch trigger.
+These conditions are level-specific and only used for death watch trigger.
 
 **Object Index Condition** (4 bytes)
 
