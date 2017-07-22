@@ -20,21 +20,7 @@ This chunk contains everything about the hacker, together with general game-stat
     00AD  uint8    Power usage in JPM
 
     00B6  512xbool Boolean game variables
-
-                   Known boolean game variable indices:
-                   7 Shield on
-                   10 Delta	grove enabled
-                   11 Alpha grove enabled
-                   12 Beta grove enabled
-                   15 Beta grove launched
-                   21 Life pods enabled, reactor on destruct
-                   145 Online help
-    
     00F6  40xuint16 Integer game variables
-
-                   31 3-digit game code 1 ([Binary-Coded-Decimal](https://en.wikipedia.org/wiki/Binary-coded_decimal))
-                   32 3-digit game code 2 ([Binary-Coded-Decimal](https://en.wikipedia.org/wiki/Binary-coded_decimal))
-
     
     0148  byte     Option: Audio, Music Volume (0x00 .. 0x64)
     014A  uint16   Option: Video, Gamma (Default: 0x4A3D)
@@ -181,6 +167,10 @@ This chunk contains everything about the hacker, together with general game-stat
 
 
     0567  byte     Option: Text Length (0: normal, 1: terse)
+
+### Game variables
+
+Game variables are described on a [separate page](gameVariables.md)
 
 ### Notes
 

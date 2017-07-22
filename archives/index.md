@@ -17,6 +17,7 @@ This chunk contains the name of the archive (title of the save-game). It is a 0x
 
 ### [Game state chunk 0x0FA1 (4001)](gameState.md)
 This chunk contains information about the game and the hacker.
+It also contains the [level variables](levelVariables.md).
 
 ### Additional Chunks
 
