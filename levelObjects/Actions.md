@@ -152,7 +152,7 @@ The delays are all relative to the execution start of the action. Their unit is 
     0002  int16      Reference object index
     0004  int16      Transition type. 0x0000: immediate, 0x0001: fade, 0x0100: flicker
     0006  byte       Unknown -- Only four instances have this byte set to 0x01. No detectable effect.
-    0007  byte       Light modification -- 0x00: add light, 0x10: remove light
+    0007  byte       Light modification -- 0x00: light on, 0x10: light off
     0008  byte       Light type
     0009  byte       Unused
     000A  int16      Light surface. 0x0000: floor, 0x0001: ceiling, 0x0002: floor and ceiling
@@ -160,21 +160,22 @@ The delays are all relative to the execution start of the action. Their unit is 
 
 These actions modify the light deltas of the affected tiles. Such actions can not change the base darkness
 values of a tile. If a tile is fully bright by default, nothing can change that.
+The configured light parameters are absolute values.
 
 
 **Light type** (1 byte)
 
     0x00  Rectangular
-    0x01  Linear gradient
+    0x01  Linear gradient (not working)
     0x02  (behaves like rectangular)
     0x03  Circular gradient
 
 **Gradient light type parameter** (4 bytes)
 
-    0000  byte       Remove light begin intensity
-    0001  byte       Remove light end intensity
-    0002  byte       Add light begin intensity
-    0003  byte       Add light end intensity
+    0000  byte       Off light begin intensity
+    0001  byte       Off light end intensity
+    0002  byte       On light begin intensity
+    0003  byte       On light end intensity
 
 The intensity values have a range of ```0x00```..```0x7F```. A value of around ```0x14``` lights a tile as if it were fully lit.
 Values above will spill over to the surrounding tiles.
@@ -185,8 +186,8 @@ For this light type, the ```Light type extent``` specifies a second object index
 
 **Light type parameter** (4 bytes)
 
-    0000  byte       Remove light value 0x00..0x0F
-    0001  byte       Add light value 0x00..0x0F
+    0000  byte       Off light value 0x00..0x0F
+    0001  byte       On light value 0x00..0x0F
     0002  [2]byte    Unused
 
 #### Linear gradient light (type 0x01)
@@ -194,7 +195,8 @@ For this light type, the ```Light type extent``` specifies a second object index
 For this light type, the ```Light type extent``` specifies a second object index. The begin of the gradient is the tile with
 of the primary index, the end is the tile of the second index.
 
-> This light type is not used in the regular game
+> This light type is not used in the regular game.
+> Furthermore, this light type was only created manually and could not be reproduced in the editor environment.
 
 
 #### Circular gradient light (type 0x03)
