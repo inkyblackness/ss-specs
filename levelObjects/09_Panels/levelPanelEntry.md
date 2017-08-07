@@ -152,10 +152,10 @@ This allows for puzzles up to 5 wires and 8 connectors, although only up to 6 co
 
     0x00000001      Puzzle solved flag ("Circuit Activated")
     0x0000000E      Unknown
-    0x00000070      Y coordinate of source connector
+    0x00000070      Coordinate of source connector
     0x00000180      Source location
     0x00000E00      Unknown
-    0x00007000      Y coordinate of destination connector
+    0x00007000      Coordinate of destination connector
     0x00018000      Destination location
     0x00700000      Width
     0x07000000      Height
@@ -183,11 +183,13 @@ The blocks are:
     1: Inactive (x)
     2: Active (+)
     3: Active (+) - not used
-    4: Solid block
-    5: Solid block - not used
-    6: Switching node
-    7: Switching node - not used
+    4: Full node
+    5: Full node - not used
+    6: Hollow node
+    7: Hollow node - not used
 
+```Full nodes``` require only one incoming connection to forward power to the other three neighbours.
+```Hollow nodes``` require two incoming connections to forward power to the other two neighbours.
 
 #### Elevator Panels 9/3/4, 9/3/5, 9/3/6
 
