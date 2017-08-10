@@ -120,7 +120,7 @@ Puzzles are either "wire" or "block" puzzles. The type of the puzzle is determin
     0000  int32     Target object index (object to toggle on success)
     0004  byte      Puzzle layout
     0005  uint8     Target power level out of 0xFF
-    0006  uint8     Current power level; Same value as target value when solved
+    0006  uint8     Wire properties mask
     0007  int8      Puzzle type - must be 0x00 for wire puzzle
     0008  uint32    Target state of wires
     000C  uint32    Current state of wires
@@ -130,6 +130,14 @@ Puzzles are either "wire" or "block" puzzles. The type of the puzzle is determin
 
     0x0F            Wire count; 0 default to 4 wires
     0xF0            Connector count per size; 0 defaults to 6 connectors
+
+**Wire properties mask** (1 byte bitmask)
+
+    0x0F            Color wires; All pink if not set
+    0xF0            Solved state
+
+> For the properties mask, any of the respective four bits needs to be set to count for the whole nibble.
+> ```Solved state``` is always ```0xF0```, whereas ```Color wires``` is only set as ```0x01```.
 
 Wire states are stored as three-bit pairs, ordered from LSB to MSB (right to left). The first pair describes the first
 wire and the lower triple specifies the left connector.
