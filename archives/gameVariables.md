@@ -17,6 +17,8 @@ This page lists all game variables with their index, their initital value, and t
 |   10  | 0             | Delta grove launch enable (+ System Analyzer)                                                |
 |   11  | 0             | Alpha grove launch enable (+ System Analyzer)                                                |
 |   12  | 0             | Beta grove launch enable (+ System Analyzer)                                                 |
+|   13  | 0             | Relay 428 report status; 0: functioning, 1: faulty; Set by master switch, checked by diag.   |
+|   14  | 0             | Relay 428 repair status; 0: faulty, 1: fixed; Set by panel, checked by master switch         |
 |   15  | 0             | Beta grove jettisoned (+ System Analyzer)                                                    |
 |   16  | 1             | Unknown                                                                                      |
 |   18  | 1             | Unknown                                                                                      |
