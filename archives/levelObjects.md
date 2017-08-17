@@ -48,13 +48,24 @@ then the ```X``` field is ```0xFFFF```, ```Y``` and ```Z``` fields are zero, and
 
 The ```extra``` field is a multi-purpose field, which may hold further properties and/or state. The exact features are environment specific and may also be dependent on the classification of the object.
 
+##### Global extra
+
+For some objects, the ```extra``` field is dependent on the object type or class, and the field is applicable to both real world and cyberspace.
+
+**Panel Extra** (4 bytes)
+
+    0000  byte     Panel name index; Index into cybstrng 0x0869
+    0001  [3]byte  Other
+
+If the ```Panel name``` resolves to an unknown block or empty string, then the regular object name is displayed.
+
 ##### Cyberspace extra
 
 In case the level is cyberspace, the ```extra``` field contains the following properties.
 
 **Cyberspace Level Object Extra** (4 bytes)
 
-    0000  byte     Unknown
+    0000  byte     Other
     0001  byte     ICE presence
     0002  byte     Unknown
     0003  byte     ICE level
@@ -64,7 +75,6 @@ If present, the health of the ICE is determined by the health of the object.
 The ```ICE level``` then determines how aggressive and powerful the ICE is. ```0x00``` is the weakest, ```0xFF``` is the highest.
 
 > Although the vanilla game uses ICE only on software objects, the engine also supports ICE on other objects, such as cyberspace exits.
-
 
 #### Level Object Cross-Reference Table
 
