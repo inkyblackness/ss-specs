@@ -141,7 +141,9 @@ This page lists all game variables with their index, their initital value, and t
 
 | Index | Initial Value | Usage                                                   |
 |------:|--------------:|---------------------------------------------------------|
+|   1   | 0             | Incremented for each destroyed computer node lvls 1-7   |
 |   3   | 2             | Unknown                                                 |
+|   9   | 0             | Incremented by 1 for laser, beta grove, reactor         |
 |  12   | 3             | Unknown                                                 |
 |  13   | Mission value | Unknown                                                 |
 |  14   | Cyber value   | Unknown                                                 |
@@ -163,5 +165,12 @@ This page lists all game variables with their index, their initital value, and t
 |  30   | Puzzle value  | Unknown                                                 |
 |  31   | random        | Reactor code 1 (3-digit BCD)                            |
 |  32   | random        | Reactor code 2 (3-digit BCD)                            |
+|  33   | 0             | Destroyed comp. nodes on lvl1 before showing digit      |
+|  34   | 0             | Destroyed comp. nodes on lvl2 before showing digit      |
+|  35   | 0             | Destroyed comp. nodes on lvl3 before showing digit      |
+|  36   | 0             | Destroyed comp. nodes on lvl4 before showing digit      |
+|  37   | 0             | Destroyed comp. nodes on lvl5 before showing digit      |
+|  38   | 0             | Destroyed comp. nodes on lvl6 before showing digit      |
+|  39   | 0             | Destroyed cyberguards in large cspace / open barrier    |
 
 > The two random codes are stored in [Binary-Coded-Decimal](https://en.wikipedia.org/wiki/Binary-coded_decimal).
