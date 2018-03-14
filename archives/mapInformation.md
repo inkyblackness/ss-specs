@@ -15,7 +15,7 @@
     0010  int32     Height shift
     0014  int32     Placeholder   - ignore
     0018  int32     Cyberspace flag. 0: real life, 1: cyberspace
-    001D  byte[9]   Unknown
+    001C  byte[9]   Unknown
     0025  int32     Timer value 1 - always 64 in the archives
     0029  int32     Timer count
     002D  int32     Timer value 2 - always 8 in the archives
