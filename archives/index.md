@@ -38,8 +38,8 @@ Save-game files contain 4 further resources that are not present in archive.dat 
 
 
 ### By level-specific resource ID
-  * ```L02``` Unknown int32. ```0x0000000B``` for all maps.
-  * ```L03``` Unknown int32. ```0x0000001B``` for all maps.
+  * ```L02``` Map version number. int32 with value ```0x0000000B``` for all maps.
+  * ```L03``` Object version number. int32 with value ```0x0000001B``` for all maps.
   * ```L04``` [Basic level information](mapInformation.md)
   * ```L05``` [Map Layout](mapInformation.md)
   * ```L06``` [Level timer](levelTimer.md)
@@ -47,14 +47,14 @@ Save-game files contain 4 further resources that are not present in archive.dat 
   * ```L08``` [Master object table](levelObjects.md#level-object-table)
   * ```L09``` [Level object cross-reference table](levelObjects.md#level-object-cross-reference-table)
   * ```L10``` to ```L24``` 15 object [class specific tables](levelObjects.md#class-tables-and-entries)
-  * ```L25``` to ```L39``` 15 object [class extra info](levelObjects.md#class-extra-information)
+  * ```L25``` to ```L39``` 15 object [class default info](levelObjects.md#class-default-information)
 
-  * ```L40``` Unknown int32. For all maps: ```CD-Release```: ```0x0000000D```. All other: ```0x0000000B```
-  * ```L41``` Unknown byte. ```0x00``` for all maps.
+  * ```L40``` Miscellaneous savefile version number. int32. For all maps: ```CD-Release```: ```0x0000000D```. All other: ```0x0000000B```
+  * ```L41``` Unused entry. byte with value ```0x00``` for all maps.
 
   * ```L42``` [Texture animation](textureAnimation.md)
   * ```L43``` [Surveillance Sources](surveillanceScreens.md)
-  * ```L44``` [Surveillance Screen Deathwatch](surveillanceScreens.md)
+  * ```L44``` [Surveillance Surrogates](surveillanceScreens.md)
   * ```L45``` [Level variables](levelVariables.md)
   * ```L46``` [Map notes](mapInformation.md#map-notes)
   * ```L47``` [Map notes pointer](mapInformation.md#map-notes)

@@ -153,6 +153,7 @@ The name column links to the corresponding details.
 [L23]: ../levelObjects/13_Container/levelContainerEntry.md
 [L24]: ../levelObjects/14_Critter/levelCritterEntry.md
 
-### Class Extra Information
+### Class Default Information
 
-Each level has 15 further resources, ```L25``` to ```L39```, one for each object class. The length of these resources is the same as for one class entry of the corresponding specific entries. Most of the time, all their bytes are 0x00.
+Each level has 15 further resources, ```L25``` to ```L39```, one for each object class. The length of these resources is the same as for one class entry of the corresponding specific entries.
+This information is used as default for creating new objects. Most of the time, all their bytes are 0x00.
