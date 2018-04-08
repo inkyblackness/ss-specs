@@ -17,7 +17,7 @@ Instance data is stored as part of an archive. See [Level Objects](../archives/l
 
 The following table lists the object classes together with the available types per subclass:
 
-| Class | Name (<original source name>)      | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  |
+| Class | Name ([original source name])      | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  |
 |:-----:|------------------------------------|----|----|----|----|----|----|----|----|
 |   0   | Weapons ("Gun")                    | 5  | 2  | 2  | 2  | 3  | 2  | -  | -  |
 |   1   | Ammo                               | 2  | 2  | 3  | 2  | 2  | 2  | 2  | -  |

@@ -120,7 +120,7 @@ The ```Index``` field of the starting point does not refer to a level object, it
 The following table lists the the level resources per class type. It also lists how many entries each table contains and how big one entry is.
 The name column links to the corresponding details.
 
-| Class | Level Res   | Name (<original source name>)             | Entry Count | Entry Size (incl. prefix) |
+| Class | Level Res   | Name ([original source name])             | Entry Count | Entry Size (incl. prefix) |
 |:-----:|-------------|-------------------------------------------|-------------|---------------------------|
 |   0   | ```L10```   | [Weapons][L10] ("Gun")                    | 16          | 8                         |
 |   1   | ```L11```   | [Ammo][L11]                               | 32          | 6                         |
