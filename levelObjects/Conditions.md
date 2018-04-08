@@ -1,6 +1,6 @@
 ## Conditions
 
-Conditions are filters for [actions](Actions.md) and for some [panels](09_Panels/levelPanelEntry.md) that don't use actions.
+Conditions are filters for [actions](Actions.md) and for some [fixtures](09_Fixture/levelFixtureEntry.md) that don't use actions.
 
 Conditions can examine different aspects of the state of the game or (current) level.
 

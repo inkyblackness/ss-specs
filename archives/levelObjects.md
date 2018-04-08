@@ -120,38 +120,38 @@ The ```Index``` field of the starting point does not refer to a level object, it
 The following table lists the the level resources per class type. It also lists how many entries each table contains and how big one entry is.
 The name column links to the corresponding details.
 
-| Class | Level Res   | Name ([original source name])             | Entry Count | Entry Size (incl. prefix) |
+| Class | Level Res   | Name                                      | Entry Count | Entry Size (incl. prefix) |
 |:-----:|-------------|-------------------------------------------|-------------|---------------------------|
-|   0   | ```L10```   | [Weapons][L10] ("Gun")                    | 16          | 8                         |
+|   0   | ```L10```   | [Gun][L10]                                | 16          | 8                         |
 |   1   | ```L11```   | [Ammo][L11]                               | 32          | 6                         |
-|   2   | ```L12```   | Projectiles ("Physics")                   | 32          | 40                        |
-|   3   | ```L13```   | [Explosives][L13] ("Grenade")             | 32          | 12                        |
-|   4   | ```L14```   | [Patches][L14] ("Drug")                   | 32          | 6                         |
+|   2   | ```L12```   | Physics                                   | 32          | 40                        |
+|   3   | ```L13```   | [Grenade][L13]                            | 32          | 12                        |
+|   4   | ```L14```   | [Drug][L14]                               | 32          | 6                         |
 |   5   | ```L15```   | [Hardware][L15]                           | 8           | 7                         |
-|   6   | ```L16```   | [Software (including logs)][L16]          | 16          | 9                         |
-|   7   | ```L17```   | [Scenery][L17] ("Big Stuff")              | 176         | 16                        |
-|   8   | ```L18```   | [Items][L18] ("Small Stuff")              | 128         | 16                        |
-|   9   | ```L19```   | [Panels][L19] ("Fixture")                 | 64          | 30                        |
-|   10  | ```L20```   | [Barriers][L20] ("Door")                  | 64          | 14                        |
-|   11  | ```L21```   | Animations                                | 32          | 10                        |
-|   12  | ```L22```   | [Markers][L22] ("Trap")                   | 160         | 28                        |
-|   13  | ```L23```   | [Containers][L23]                         | 64          | 21                        |
-|   14  | ```L24```   | [Critters][L24]                           | 64          | 46                        |
+|   6   | ```L16```   | [Software][L16]                           | 16          | 9                         |
+|   7   | ```L17```   | [Big Stuff][L17]                          | 176         | 16                        |
+|   8   | ```L18```   | [Small Stuff][L18]                        | 128         | 16                        |
+|   9   | ```L19```   | [Fixture][L19]                            | 64          | 30                        |
+|   10  | ```L20```   | [Door][L20]                               | 64          | 14                        |
+|   11  | ```L21```   | Animating                                 | 32          | 10                        |
+|   12  | ```L22```   | [Trap][L22]                               | 160         | 28                        |
+|   13  | ```L23```   | [Container][L23]                          | 64          | 21                        |
+|   14  | ```L24```   | [Critter][L24]                            | 64          | 46                        |
 
 
-[L10]: ../levelObjects/00_Weapons/levelWeaponEntry.md
-[L11]: ../levelObjects/01_AmmoClips/levelAmmoClipEntry.md
-[L13]: ../levelObjects/03_Explosives/levelExplosiveEntry.md
-[L14]: ../levelObjects/04_Patches/levelPatchEntry.md
+[L10]: ../levelObjects/00_Gun/levelGunEntry.md
+[L11]: ../levelObjects/01_Ammo/levelAmmoEntry.md
+[L13]: ../levelObjects/03_Grenade/levelGrenadeEntry.md
+[L14]: ../levelObjects/04_Drug/levelDrugEntry.md
 [L15]: ../levelObjects/05_Hardware/levelHardwareEntry.md
 [L16]: ../levelObjects/06_Software/levelSoftwareEntry.md
-[L17]: ../levelObjects/07_Scenery/levelSceneryEntry.md
-[L18]: ../levelObjects/08_Items/levelItemEntry.md
-[L19]: ../levelObjects/09_Panels/levelPanelEntry.md
-[L20]: ../levelObjects/10_Barriers/levelBarrierEntry.md
-[L22]: ../levelObjects/12_Markers/levelMarkerEntry.md
-[L23]: ../levelObjects/13_Containers/levelContainerEntry.md
-[L24]: ../levelObjects/14_Critters/levelCritterEntry.md
+[L17]: ../levelObjects/07_BigStuff/levelBigStuffEntry.md
+[L18]: ../levelObjects/08_SmallStuff/levelSmallStuffEntry.md
+[L19]: ../levelObjects/09_Fixture/levelFixtureEntry.md
+[L20]: ../levelObjects/10_Door/levelDoorEntry.md
+[L22]: ../levelObjects/12_Trap/levelTrapEntry.md
+[L23]: ../levelObjects/13_Container/levelContainerEntry.md
+[L24]: ../levelObjects/14_Critter/levelCritterEntry.md
 
 ### Class Extra Information
 

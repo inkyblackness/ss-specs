@@ -17,23 +17,23 @@ Instance data is stored as part of an archive. See [Level Objects](../archives/l
 
 The following table lists the object classes together with the available types per subclass:
 
-| Class | Name ([original source name])      | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  |
+| Class | Name                               | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  |
 |:-----:|------------------------------------|----|----|----|----|----|----|----|----|
-|   0   | Weapons ("Gun")                    | 5  | 2  | 2  | 2  | 3  | 2  | -  | -  |
+|   0   | Gun                                | 5  | 2  | 2  | 2  | 3  | 2  | -  | -  |
 |   1   | Ammo                               | 2  | 2  | 3  | 2  | 2  | 2  | 2  | -  |
-|   2   | Projectiles ("Physics")            | 6  | 16 | 2  | -  | -  | -  | -  | -  |
-|   3   | Explosives ("Grenade")             | 5  | 3  | -  | -  | -  | -  | -  | -  |
-|   4   | Patches ("Drug")                   | 7  | -  | -  | -  | -  | -  | -  | -  |
+|   2   | Physics                            | 6  | 16 | 2  | -  | -  | -  | -  | -  |
+|   3   | Grenade                            | 5  | 3  | -  | -  | -  | -  | -  | -  |
+|   4   | Drug                               | 7  | -  | -  | -  | -  | -  | -  | -  |
 |   5   | Hardware                           | 5  | 10 | -  | -  | -  | -  | -  | -  |
-|   6   | Software (including logs)          | 7  | 3  | 4  | 5  | 3  | -  | -  | -  |
-|   7   | Scenery ("Big Stuff")              | 9  | 10 | 11 | 4  | 9  | 8  | 16 | 10 |
-|   8   | Items ("Small Stuff")              | 8  | 10 | 15 | 6  | 12 | 12 | 9  | 8  |
-|   9   | Panels ("Fixtures")                | 9  | 7  | 3  | 11 | 2  | 3  | -  | -  |
-|   10  | Barriers ("Door")                  | 10 | 9  | 7  | 5  | 10 | -  | -  | -  |
-|   11  | Animations                         | 9  | 11 | 14 | -  | -  | -  | -  | -  |
-|   12  | Markers ("Trap")                   | 13 | 1  | 5  | -  | -  | -  | -  | -  |
-|   13  | Containers                         | 3  | 3  | 4  | 8  | 13 | 7  | 8  | -  |
-|   14  | Critters                           | 9  | 12 | 7  | 7  | 2  | -  | -  | -  |
+|   6   | Software                           | 7  | 3  | 4  | 5  | 3  | -  | -  | -  |
+|   7   | Big Stuff                          | 9  | 10 | 11 | 4  | 9  | 8  | 16 | 10 |
+|   8   | Small Stuff                        | 8  | 10 | 15 | 6  | 12 | 12 | 9  | 8  |
+|   9   | Fixtures                           | 9  | 7  | 3  | 11 | 2  | 3  | -  | -  |
+|   10  | Door                               | 10 | 9  | 7  | 5  | 10 | -  | -  | -  |
+|   11  | Animating                          | 9  | 11 | 14 | -  | -  | -  | -  | -  |
+|   12  | Trap                               | 13 | 1  | 5  | -  | -  | -  | -  | -  |
+|   13  | Container                          | 3  | 3  | 4  | 8  | 13 | 7  | 8  | -  |
+|   14  | Critter                            | 9  | 12 | 7  | 7  | 2  | -  | -  | -  |
 
 > This information is not stored within the resource files, it is hardcoded in the engine.
 
@@ -45,10 +45,10 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 
 | Class | Generic                                     | 0  | 1         | 2         | 3         | 4         | 5         | 6  | 7  |
 |:-----:|---------------------------------------------|----|-----------|-----------|-----------|-----------|-----------|----|----|
-|   0   | [2](00_Weapons/weaponProperties.md)         | 1  | 1         | [16][0/2] | [13][0/3] | [13][0/4] | [18][0/5] | -  | -  |
-|   1   | [14](01_AmmoClips/ammoClipProperties.md)    | 1  | 1         | 1         | 1         | 1         | 1         | 1  | -  |
-|   2   | [1](02_Projectiles/projectileProperties.md) | 20 | [6][2/1]  | 1         | -         | -         | -         | -  | -  |
-|   3   | [15](03_Explosives/explosiveProperties.md)  | 1  | [3][3/1]  | -         | -         | -         | -         | -  | -  |
+|   0   | [2](00_Gun/gunProperties.md)                | 1  | 1         | [16][0/2] | [13][0/3] | [13][0/4] | [18][0/5] | -  | -  |
+|   1   | [14](01_Ammo/ammoProperties.md)             | 1  | 1         | 1         | 1         | 1         | 1         | 1  | -  |
+|   2   | [1](02_Physics/physicsProperties.md)        | 20 | [6][2/1]  | 1         | -         | -         | -         | -  | -  |
+|   3   | [15](03_Grenade/grenadeProperties.md)       | 1  | [3][3/1]  | -         | -         | -         | -         | -  | -  |
 |   4   | 22                                          | 1  | -         | -         | -         | -         | -         | -  | -  |
 |   5   | 9                                           | 1  | 1         | -         | -         | -         | -         | -  | -  |
 |   6   | 5                                           | 1  | 1         | 1         | 1         | 1         | -         | -  | -  |
@@ -56,24 +56,24 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 |   8   | 2                                           | 1  | 1         | 1         | 1         | 1         | [6][8/5]  | 1  | 2  |
 |   9   | 1                                           | 1  | 1         | 1         | 1         | 0         | 1         | -  | -  |
 |   10  | 1                                           | 1  | 1         | 1         | 1         | 1         | -         | -  | -  |
-|   11  | [2](11_Animations/animationProperties.md)   | 1  | 1         | [1][11/2] | -         | -         | -         | -  | -  |
+|   11  | [2](11_Animating/animatingProperties.md)    | 1  | 1         | [1][11/2] | -         | -         | -         | -  | -  |
 |   12  | 1                                           | 1  | 0         | 1         | -         | -         | -         | -  | -  |
 |   13  | 3                                           | 1  | 1         | 1         | 1         | 1         | 1         | 1  | -  |
-|   14  | [75](14_Critters/critterProperties.md)      | 3  | [1][14/1] | 1         | [6][14/3] | 1         | -         | -  | -  |
+|   14  | [75](14_Critter/critterProperties.md)       | 3  | [1][14/1] | 1         | [6][14/3] | 1         | -         | -  | -  |
 
 
 > There is also the case of objects with a specific entry length of 0. This is the case for object types that didn't make it into the game (vending machines).
 
-[0/2]: 00_Weapons/weaponProperties.md#specific-2-properties
-[0/3]: 00_Weapons/weaponProperties.md#specific-3-properties
-[0/4]: 00_Weapons/weaponProperties.md#specific-4-properties
-[0/5]: 00_Weapons/weaponProperties.md#specific-5-properties
-[2/1]: 02_Projectiles/projectileProperties.md#specific-1-properties
-[3/1]: 03_Explosives/explosiveProperties.md#specific-1-properties
-[8/5]: 08_Items/itemProperties.md#cyberspace-items-specific-properties
-[11/2]: 11_Animations/animationProperties.md#specific-2-properties
-[14/1]: 14_Critters/critterProperties.md#specific-1-properties
-[14/3]: 14_Critters/critterProperties.md#cyberspace-critters-specific-properties
+[0/2]: 00_Gun/gunProperties.md#specific-2-properties
+[0/3]: 00_Gun/gunProperties.md#specific-3-properties
+[0/4]: 00_Gun/gunProperties.md#specific-4-properties
+[0/5]: 00_Gun/gunProperties.md#specific-5-properties
+[2/1]: 02_Physics/physicsProperties.md#specific-1-properties
+[3/1]: 03_Grenade/grenadeProperties.md#specific-1-properties
+[8/5]: 08_SmallStuff/smallStuffProperties.md#cyberspace-items-specific-properties
+[11/2]: 11_Animating/animatingProperties.md#specific-2-properties
+[14/1]: 14_Critter/critterProperties.md#specific-1-properties
+[14/3]: 14_Critter/critterProperties.md#cyberspace-critters-specific-properties
 
 
 ### Object Names

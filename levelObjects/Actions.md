@@ -576,7 +576,7 @@ Class and subclass stay the same. Stats, such as healthpoints, are maintained as
     000E  int16      Unused
 
 Sets the state of critters inside the rectangle defined by the two reference objects.
-See [Critters](14_Critters/levelCritterEntry.md) for the enumeration values of critter states.
+See [Critters](14_Critter/levelCritterEntry.md) for the enumeration values of critter states.
 
 > There are instances in which the first index is zero, while the unknown field at ```0000``` is set to a value.
 
