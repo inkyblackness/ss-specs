@@ -6,10 +6,15 @@ Information in these documents MUST be verifiable, or have been verified (e.g. t
 In general, changes to the documents SHOULD be introduced by linking commits to corresponding issues. This way, issues can be used as reference material for verification.
 
 ### Language
-The human language of this documentation is English. Names of types/fields should follow that of the source (which is presumably en-us), while prose text SHOULD follow en-uk .
+The human language of this documentation is English. Names of types/fields SHOULD follow that of the source (which is presumably en-us), while prose text SHOULD follow en-uk .
 
 This is primarily to uphold the legacy of this documentation. The original ss-specs was maintained within the context of TSSHP, which came from Britain.
 
+When wording actions, consider differenciating between the character in the game-world ("the hacker"), and the player. ("The hacker has a rotation angle of xyz, so the player sees...").
+
+Sentences referring to individuals SHALL be phrased with inclusive, gender neutral language. The use of [singular they](https://en.wikipedia.org/wiki/Singular_they) is to be used if no other option is available.
+
+> While the hacker is represented with a male body and voice in the original game, a fan-mod could change this. This documentation states raw engine data, which doesn't care about humans, even if considered to be insects.
 
 ### Formatting
 
