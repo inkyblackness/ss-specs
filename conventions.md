@@ -1,7 +1,7 @@
 ## Conventions
 
 ### 1. Content
-Information in these documents MUST be verifiable, or have been verified (e.g. through testing) to be included. Assumptions, contradictions, discussions and the like MUST be handled through the [issue](https://github.com/inkyblackness/ss-specs/issues) system.
+Information in these documents MUST be verifiable, or have been verified (e.g. through testing or cross-reference to original code) to be included. Assumptions, contradictions, discussions and the like MUST be handled through the [issue](https://github.com/inkyblackness/ss-specs/issues) system.
 
 In general, changes to the documents SHOULD be introduced by linking commits to corresponding issues. This way, issues can be used as reference material for verification.
 
