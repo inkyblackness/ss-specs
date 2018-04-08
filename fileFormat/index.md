@@ -24,7 +24,7 @@ Data files come in the following variants:
 * [Resource files](ResourceFiles.md), which are structured archives
 * [Property files](PropertyFiles.md), containing one or more serialized tables
 
-Resource files are the majority. All files with filename suffix `.res` are resource files. Savegame files have the same format, including the "master" savegame file `archive.dat`. These files contain one or more entries, called "chunks" in this documentation. Chunks are identified and contain one or more data blocks.
+Resource files are the majority. All files with filename suffix `.res` are resource files. Savegame files have the same format, including the "master" savegame file `archive.dat`. These files contain one or more "resource" entries. Resources are identified and contain one or more data blocks. A resource with more than one data block is called a "compound resource".
 
 The property files are "flat" files containing one or more serialized tables.
 
@@ -32,7 +32,7 @@ The property files are "flat" files containing one or more serialized tables.
 
 The following table shows an overview of the known files, across the different releases.
 
-For resource files, chunks may share the same identifier. In this case they represent the alternatives available through configuration. The options are:
+For resource files, resources may share the same identifier. In this case they represent the alternatives available through configuration. The options are:
 * Language. Available are: "English", "French" and "German"
 * Cutscene resolution (MOVI format). Available are: "low" (320x150) and "svga" (600x300)
 

@@ -1,6 +1,6 @@
 ## Surveillance Sources
 
-The sources of surveillance screens are defined with ```L43```. This chunk contains a list of up to 8 object table index values.
+The sources of surveillance screens are defined with ```L43```. This resource contains a list of up to 8 object table index values.
 These referred objects provide the location and orientation for the video source of a screen. A screen then refers to one of these entries by using one of the corresponding [special values as 'picture source'](../levelObjects/07_Scenery/levelSceneryEntry.md).
 
 **Surveillance Sources Table** (16 bytes)
@@ -13,7 +13,7 @@ These referred objects provide the location and orientation for the video source
 
 ## Surveillance Screen Deathwatch
 
-Screens may be bound to a destructible object. If this object is destroyed, the corresponding screen shows static. These associations are stored in ```L44```, a chunk with a list of up to 8 object table index values.
+Screens may be bound to a destructible object. If this object is destroyed, the corresponding screen shows static. These associations are stored in ```L44```, a resource with a list of up to 8 object table index values.
 
 **Surveillance Screen Deathwatch Table** (16 bytes)
 

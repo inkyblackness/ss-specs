@@ -2,7 +2,7 @@
 
 This chapter documents the data format of the fonts. The game uses [bitmap fonts](https://en.wikipedia.org/wiki/Computer_font#Bitmap_fonts) which describe the characters.
 
-The fonts are stored in single blocks within chunks of type ```0x03```. They can be found in the file ```gamescr.res```.
+The fonts are stored in single blocks within resources of type ```0x03```. They can be found in the file ```gamescr.res```.
 
 All glyphs in the bitmap are lined up in a single line. There are no Y offsets per glyph, and the height is always equal to the height of the bitmap. An array of ```X-Offsets``` points to the start of a glyph and the width is equal the difference to the next offset.
 

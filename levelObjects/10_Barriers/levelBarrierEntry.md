@@ -19,7 +19,7 @@
 
 
 The ```Lock variable index``` determines whether a door is locked. If the referenced boolean variable is 1, then the door won't open when used. If the door is triggered by other means, the door is unlocked and the index is reset to zero.
-Using the door while being locked, the message according to ```Lock message``` is shown. The message index is into the text chunk ```0x0871```, with a block offset of ```7```. (```0x00``` gives the default "The door is locked" at index ```7```).
+Using the door while being locked, the message according to ```Lock message``` is shown. The message index is into the text resource ```0x0871```, with a block offset of ```7```. (```0x00``` gives the default "The door is locked" at index ```7```).
 
 The ```Required access level``` indicates which [access level](../content/AccessLevels.md) the hacker needs to activate
 (open) the door. If zero, no special access is required. This values is ```0xFF``` for doors "locked by SHODAN level security".

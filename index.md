@@ -14,7 +14,7 @@
   * [Bitmaps](media/Bitmaps.md)
   * [Palettes](media/Palettes.md)
   * [Sound Effects](media/SoundEffects.md)
-  * [MOVI Chunks](media/moviChunks.md)
+  * [MOVI Resources](media/moviChunks.md)
   * [Video Clips](media/VideoClips.md)
   * [Texts](media/Texts.md)
   * [Geometry](media/Geometry.md)

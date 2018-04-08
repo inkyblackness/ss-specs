@@ -1,9 +1,9 @@
 ## Sound Effects
 
-Sound effects are stored in ```digifx.res```, which contains chunks of data type ```0x07```.
-The chunks have IDs in the range from ```0x00C9``` to ```0x013B```, are uncompressed and without dictionary.
+Sound effects are stored in ```digifx.res```, which contains resources of data type ```0x07```.
+The resources have IDs in the range from ```0x00C9``` to ```0x013B```, are uncompressed and have one effect per resource.
 
-Each chunk contains one sound effect, which is stored in the
+Each resource contains one sound effect, which is stored in the
 [Creative Voice File](http://wiki.multimedia.cx/index.php?title=Creative_Voice) format.
 
 Although the format would allow for different sample formats, only unsigned 8-bit PCM audio (MIME type ```audio/L8```)

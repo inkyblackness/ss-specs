@@ -20,9 +20,9 @@ In general, this documentation describes (serialized) data structures. Such data
 
 #### Example
 
-    0000  string  Header text "LG Res File v2\r\n\x1A"
-    0011  []byte  not used (0x00)
-    007C  int32   file offset to chunk directory
+    0000  int32     some value
+    0004  [14]byte  unknown, not used (0x00)
+    0012  int16     other value
 
 Offset values MUST start at 0 and be given in hexadecimal (or placeholder). They SHOULD have a width of 4 (or more) digits.
 

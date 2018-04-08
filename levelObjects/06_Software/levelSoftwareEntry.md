@@ -59,7 +59,7 @@
 
 #### Logs
 
-For logs, the ```Log chunk offset``` is based on the chunk ID ```0x09B8```. The high nibble is used as the level identifier - into
+For logs, the ```Log resource offset``` is based on the resource ID ```0x09B8```. The high nibble is used as the level identifier - into
 which category the log should be put.
 
 See [Electronic Messages](../../content/ElectronicMessages.md) for details on messages.

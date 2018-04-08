@@ -17,7 +17,7 @@
     0002  int16     Paper ID
     0004  [6]byte   Unused
 
-The ```Paper ID``` refers to a paper text entry and is the offset from chunk ID ```0x003C```.
+The ```Paper ID``` refers to a paper text entry and is the offset from resource ID ```0x003C```.
 The referred text entries have multiple blocks and the engine simply concatenates all these strings to one text.
 
 
@@ -124,8 +124,8 @@ Works like access cards - see above.
     0002  int16     Text index
     0004  [6]byte   Unused
 
-For 8/5/6 (information nodes), the text index is for text chunk ```0x0878```.
-For 8/5/8 (data fragments), the text index is for text chunk ```0x087A```.
+For 8/5/6 (information nodes), the text index is for text resource ```0x0878```.
+For 8/5/8 (data fragments), the text index is for text resource ```0x087A```.
 
 
 #### Cyberspace Barricades 8/5/9

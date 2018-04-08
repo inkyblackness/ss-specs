@@ -1,12 +1,12 @@
 ## Level Objects
 
-Instance data of [Level Objects](../levelObjects/index.md) is stored as part of an archive. Two chunks describe general information, then further chunks are object class specific.
+Instance data of [Level Objects](../levelObjects/index.md) is stored as part of an archive. Two resources describe general information, then further resources are object class specific.
 
 ### General Information
 
 #### Level Object Table
 
-```L08```, a compressed chunk, contains a table with general entries about the objects in the current level.
+```L08```, a compressed resource, contains a table with general entries about the objects in the current level.
 This table contains 872 entries, which houses two lists.
 
 **Level Object Entry** (27 bytes)
@@ -78,7 +78,7 @@ The ```ICE level``` then determines how aggressive and powerful the ICE is. ```0
 
 #### Level Object Cross-Reference Table
 
-```L09```, a compressed chunk, is a table that links level objects and the tiles they are in. The index field in the [Tile Map Entry](mapInformation.md) refers to this table, as well as the table index field in the **Level Object Entry**. This table contains 1600 entries.
+```L09```, a compressed resource, is a table that links level objects and the tiles they are in. The index field in the [Tile Map Entry](mapInformation.md) refers to this table, as well as the table index field in the **Level Object Entry**. This table contains 1600 entries.
 
 **Level Object Cross-Reference Entry** (10 bytes)
 
@@ -100,7 +100,7 @@ Unused cross-reference entries contain arbitrary data and only the next object i
 
 ### Class Specific Information
 
-In the following chunks, all tables have a static count of entries. Each entry has a common prefix.
+In the following resources, all tables have a static count of entries. Each entry has a common prefix.
 
 **Level Object Prefix** (6 bytes)
 
@@ -117,10 +117,10 @@ The ```Index``` field of the starting point does not refer to a level object, it
 
 #### Class Tables and Entries
 
-The following table lists the the level chunks per class type. It also lists how many entries each table contains and how big one entry is.
+The following table lists the the level resources per class type. It also lists how many entries each table contains and how big one entry is.
 The name column links to the corresponding details.
 
-| Class | Level Chunk | Name                                      | Entry Count | Entry Size (incl. prefix) |
+| Class | Level Res   | Name                                      | Entry Count | Entry Size (incl. prefix) |
 |:-----:|-------------|-------------------------------------------|-------------|---------------------------|
 |   0   | ```L10```   | [Weapons][L10]                            | 16          | 8                         |
 |   1   | ```L11```   | [Ammo][L11]                               | 32          | 6                         |
@@ -155,4 +155,4 @@ The name column links to the corresponding details.
 
 ### Class Extra Information
 
-Each level has 15 further chunks, ```L25``` to ```L39```, one for each object class. The length of these chunks is the same as for one class entry of the corresponding specific entries. Most of the time, all their bytes are 0x00.
+Each level has 15 further resources, ```L25``` to ```L39```, one for each object class. The length of these resources is the same as for one class entry of the corresponding specific entries. Most of the time, all their bytes are 0x00.

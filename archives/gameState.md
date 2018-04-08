@@ -1,6 +1,6 @@
-## Game state and hacker information, chunk 0x0FA1
+## Game state and hacker information, resource 0x0FA1
 
-This chunk contains everything about the hacker, together with general game-state information.
+This resource contains everything about the hacker, together with general game-state information.
 
 
     0000  20xbyte  Hacker name (incl. 0x00 termination char). Game only allows 12 characters for input at start.

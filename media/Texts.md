@@ -1,7 +1,7 @@
 ## Texts
 
 All texts are stored in the language specific files ```cybstrng.res```, ```frnstrng.res``` and ```gerstrng.res```.
-These files contain 188 chunks of type ```0x01```. The chunks are directories with several blocks. Each block contains
+These files contain 188 resources of type ```0x01```. They are compound with several blocks. Each block contains
 one string, which is always 0x00 terminated.
 
 While the English strings may be readable according to standard ASCII, with the French and German options, texts
@@ -16,7 +16,7 @@ For texts with multiple lines, ```0x0A``` acts as a newline marker.
 
 ```0x02``` is a soft-hyphen between syllables. Not all texts contain this character.
 
-### Chunk Overview
+### Resource Overview
 
 * 0x0867 Trap messages, one per block
 * 0x0868 Wall texts

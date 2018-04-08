@@ -4,24 +4,24 @@ This section covers the archive files. There is one template archive file, calle
 Any new game is based on the archive.dat file. All these archive files contain the complete game state, including the level layout. In other words: Citadel itself, with all its content, is represented through such a file; Properties and media for the content is in the other resource files.
 
 ## Map specific data
-Each level has 98 chunks reserved, but only 51 in use. The level-specific chunks are grouped according to the level identifier. For example, on Citadel level R, the chunks start with ID ```4002``` (decimal) up to ```4053```. Level 1 uses ```4102``` to ```4153``` and so forth.
+Each level has 98 resources reserved, but only 51 in use. The level-specific resources are grouped according to the level identifier. For example, on Citadel level R, the resources start with ID ```4002``` (decimal) up to ```4053```. Level 1 uses ```4102``` to ```4153``` and so forth.
 
-On the following pages, chunks identified as ```LXX``` refer to level-specific chunk ```XX``` for any level. These numbers will always be given in decimal.
+On the following pages, resources identified as ```LXX``` refer to level-specific resource ```XX``` for any level. These numbers will always be given in decimal.
 
-## Extra Chunks
+## Extra Resources
 
-### Name of archive, chunk 0x0FA0 (4000)
-This chunk contains the name of the archive (title of the save-game). It is a 0x00 terminated string, with a dynamic length of up to 32 bytes (including the termination character).
+### Name of archive, resource 0x0FA0 (4000)
+This resource contains the name of the archive (title of the save-game). It is a 0x00 terminated string, with a dynamic length of up to 32 bytes (including the termination character).
 
-> The archive.dat file contains extra (unknown) data after the name in this chunk, up to a complete length of 128 bytes. A save-game file has only the name in this chunk. The name of the template archive is "Starting Game".
+> The archive.dat file contains extra (unknown) data after the name in this resource, up to a complete length of 128 bytes. A save-game file has only the name in this resource. The name of the template archive is "Starting Game".
 
-### [Game state chunk 0x0FA1 (4001)](gameState.md)
-This chunk contains information about the game and the hacker.
+### [Game state resource 0x0FA1 (4001)](gameState.md)
+This resource contains information about the game and the hacker.
 It also contains the [level variables](levelVariables.md).
 
-### Additional Chunks
+### Additional Resources
 
-Save-game files contain 4 further chunks that are not present in archive.dat :
+Save-game files contain 4 further resources that are not present in archive.dat :
 
 * 0x0000 Unknown int32. ```0x00000000``` at first investigation
 * 0x024E Unknown.
@@ -37,7 +37,7 @@ Save-game files contain 4 further chunks that are not present in archive.dat :
   * [Loop Configuration](loopConfiguration.md)
 
 
-### By level-specific chunk ID
+### By level-specific resource ID
   * ```L02``` Unknown int32. ```0x0000000B``` for all maps.
   * ```L03``` Unknown int32. ```0x0000001B``` for all maps.
   * ```L04``` [Basic level information](mapInformation.md)

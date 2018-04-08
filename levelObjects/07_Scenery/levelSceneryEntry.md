@@ -47,11 +47,11 @@ Animated screens are also controlled by the [Loop Configuration](../../archives/
 
 This field specifies what shall be shown. It has the following cases:
 
-    0x0000 .. 0x00F5  Image frames, offset from chunk 0x0141
+    0x0000 .. 0x00F5  Image frames, offset from resource 0x0141
     0x00F6            Static fading into SHODAN's face
     0x00F7            Unknown (only found to display static)
     0x00F8 .. 0x00FF  Surveillance screens 0 .. 7
-    0x0100 .. 0x017E  Text message from chunk 0x0877
+    0x0100 .. 0x017E  Text message from resource 0x0877
     0x017F            Random number for CPU rooms, level 1-6 before destroying nodes.
     0x0180 .. 0x01FF  Text message, scrolling vertically
 
@@ -100,7 +100,7 @@ These are scenery objects that are flat and should be placed at another surface.
 
 **Words Scenery Data** (10 bytes)
 
-    0000  int16     Text index (within chunk 0x0868)
+    0000  int16     Text index (within resource 0x0868)
     0002  int16     Font and size (bits 0-3 are font, 4-7 are size)
     0004  int16     Colour (palette index, 0 defaults to red)
     0006  [4]byte   Unused

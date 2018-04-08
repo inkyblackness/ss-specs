@@ -4,7 +4,7 @@
 
 #### Level information
 
-```L04```, a compressed chunk, contains the basic information about a level (a map).
+```L04```, a compressed resource, contains the basic information about a level (a map).
 
 **Level Information** (58 bytes)
 
@@ -44,7 +44,7 @@ The ```placeholder``` has no use in the archives.
 
 #### Tile map
 
-The tiles are described in the compressed chunk ```L05```, a table of tile map entries. The first entry describes the lower left tile and the next entries go east first, then north (first columns, then rows). All levels have a size of 64x64 tiles as the engine supports (and expects) only this layout.
+The tiles are described in the compressed resource ```L05```, a table of tile map entries. The first entry describes the lower left tile and the next entries go east first, then north (first columns, then rows). All levels have a size of 64x64 tiles as the engine supports (and expects) only this layout.
 
 The outermost tiles of the level (the 'border') should always be solid tiles. If these tiles are non-solid, the graphics engine may have rendering issues (walls not shown, just black) and entering these tiles freezes the game. This gives an effective available space of 62x62 tiles.
 
@@ -97,7 +97,7 @@ The exact behaviour for the hazard flags is determined by the [level variables](
 **Texture Info** (2 bytes)
 
 The texture info field contains information for the tile textures of the level.
-For real world, it contains index values into the texture map (see next chunk below).
+For real world, it contains index values into the texture map (see next resource below).
 Cyberspace levels specify the palette color index for floor and ceiling of the South-Western corner.
 
     Real World:
@@ -201,9 +201,9 @@ The [Change lighting action](../levelObjects/Actions.md#action-type-7-change-lig
 
 ### Texture map
 
-This chunk is a list of int16 texture identifier in chunk ```L07``` with a fixed length of 108 bytes.
+This resource is a list of int16 texture identifier in resource ```L07``` with a fixed length of 108 bytes.
 The ```Texture Info``` fields in the tile map refer to these identifier.
-Although the field for wall textures would allow for 64 textures, the chunk can only hold up to 54 textures.
+Although the field for wall textures would allow for 64 textures, the resource can only hold up to 54 textures.
 The first 32 textures can be used for floor/ceiling as well.
 
 > The engine caches these textures when reloading a savegame with the same level.
@@ -216,11 +216,11 @@ See [Level Textures](../content/LevelTextures.md) for further information.
 
 #### Text Data
 
-Text for the map notes is stored in the level-specific chunk ```L46```. The notes are stored sequentially, with the 0x00 character terminating a note.
+Text for the map notes is stored in the level-specific resource ```L46```. The notes are stored sequentially, with the 0x00 character terminating a note.
 
-The maximum length of one note is 40 bytes (including the termination character). The chunk itself is pre-initialized with 0x00 bytes to a total length of 0x800 bytes.
+The maximum length of one note is 40 bytes (including the termination character). The resource itself is pre-initialized with 0x00 bytes to a total length of 0x800 bytes.
 
-Data in this chunk is always defragmented. If a note is modified or removed, the notes are rearranged.
+Data in this resource is always defragmented. If a note is modified or removed, the notes are rearranged.
 
 #### Next available space
-Chunk ```L47``` is a single uint32 offset, pointing to the first available byte in the text data chunk.
+Resource ```L47``` is a single uint32 offset, pointing to the first available byte in the text data resource.

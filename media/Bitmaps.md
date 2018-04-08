@@ -1,8 +1,7 @@
 ## Bitmaps
 
 Bitmaps are images using a palette of colours. System Shock uses bitmaps exclusively for its graphics and uses one byte
-as index per pixel - thus 256 colours possible. The resources store such bitmaps with content type ```0x02``` and the
-corresponding chunks always have a directory, even if only one bitmap is stored.
+as index per pixel - thus 256 colours possible. The resources store such bitmaps with content type ```0x02``` and they are always compound, even if only one bitmap is stored.
 
 Bitmaps are stored with a header, the pixel data (sometimes compressed), and an optional private palette.
 
@@ -74,11 +73,11 @@ If a count is to be serialized that is higher than the long-form can store, the 
 ### Private Palette
 
 The format also allows for an optional palette, which is specific for the bitmap. If an image has no private palette, then this
-entry is not present and the chunk data ends directly after the pixel data.
+entry is not present and the resource data ends directly after the pixel data.
 Without a private palette, the colours of the bitmap are context specific. See [Palettes](Palettes.md) for more information.
 
 Private palettes are used for the splash screens at the beginning of the game, where nothing else is shown.
-The ```Private palette offset``` in the bitmap header specifies the absolute offset *from the beginning* of the chunk to the private palette entry. This means in case of a chunk with a directory, this offset measures across the previous chunk blocks as well.
+The ```Private palette offset``` in the bitmap header specifies the absolute offset *from the beginning* of the resource to the private palette entry. This means in case of a compound resource, this offset measures across the previous resource blocks as well.
 
 **Private Palette** (772 bytes)
 

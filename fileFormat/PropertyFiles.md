@@ -86,7 +86,7 @@ At the end of the file is the table with common properties. For each object type
     0012  byte     Defence value
     0013  byte     Receive damage Flag; 0x00: Yes, 0x03: No, 0x04: Unknown 0x04
     0014  int16    Flags
-    0016  int16    3D model index, based on chunk 0x08FC
+    0016  int16    3D model index, based on resource 0x08FC
     0018  byte     Unknown -- set to 0x80 for many 3D objects
     0019  byte     Extra; High-nibble (bits 4-7): Number of extra bitmaps; bits 0-3: Unknown (see below)
     001A  byte     Destruction effect

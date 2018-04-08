@@ -1,11 +1,11 @@
-## MOVI Chunks
+## MOVI Resources
 
-Chunks with content type ```0x11``` are a media container themselves, similar to audio/video container formats.
-These chunks are called "MOVI Chunks" since the initial tag is the four letter code ```MOVI```.
+Resources with content type ```0x11``` are a media container themselves, similar to audio/video container formats.
+These resources are called "MOVI Resources" since the initial tag is the four letter code ```MOVI```.
 
 ### Format
 
-Such a chunk contains the following components:
+Such a resource contains the following components:
 * a header, describing meta information about the media,
 * a palette, with initial colours,
 * an index, describing the following data entries, and

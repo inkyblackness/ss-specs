@@ -2,7 +2,7 @@
 
 This chapter documents the data format of the three dimensional objects encountered in the game (tables, ICE in cyberspace, crates...).
 
-All the geometry is stored in the file ```obj3d.res``` with content type ```0x0F```. Each chunk in this file has a directory with one data block. There is one object per chunk (and data block).
+All the geometry is stored in the file ```obj3d.res``` with content type ```0x0F```. Each resource in this file is compound with one data block. There is one object per resource (and data block).
 
 Each three dimensional ```model``` consists of a list vertex definitions and a structure of ```nodes```, with the model itself being the root node. A node contains a list of ```anchors```, with each one having a normal vector and a reference point.
 Up to exactly one anchor per node may branch out to two further nodes (creating a binary tree). Further anchors contain lists of rendered ```faces```. Faces are either texture mapped or filled with a single colour.
