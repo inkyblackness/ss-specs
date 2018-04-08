@@ -2,34 +2,49 @@
 A few files don't have an archive format, and instead are flat files consisting directly serialized tables.
 
 ### Texture Properties (textprop.dat)
-This file contains a single table of texture property entries, after a magic header value.
+This file contains a single table of texture property entries, after a header.
 
 > The table appears to be truncated. Since the game only uses 273 textures, this may have never been detected.
 > The file has 4004 bytes on disk, meaning 4000 bytes are available for the table.
 > In a test, the original engine appeared to be fine to read a smaller file with exactly 273 entries (3007 bytes) -
 > which had the unknown fields set to zero.
 
+> The original source explains the difference: The texture property system would support up to 400 textures.
+> It also **assumed** a property structure size of 10 bytes (hardcoded value), while the actual structure is 11 bytes long.
+> In other words, one could feed the engine more than 273 textures, yet no more than 363. More than 363 would simply be ignored and the extra textures would just have their default properties.
+> This also explains why the Mac port reads exactly 363 textures, as reading more would exhaust the file.
+
+
 #### Header
-The file starts with a 4-byte header, purpose unknown.
+The file starts with a 4-byte header.
 
-**Magic Header** (4 bytes)
+**Texture Properties File Header** (4 bytes)
 
-    0000  int32    magic header, value 0x09
+    0000  int32    file version number, value 0x09
+
+
+The engine rejects a properties file with a different version number.
+
 
 #### Properties Entry
 
 **Texture Property Entry** (11 bytes)
 
-    0000  [2]byte  Unknown
-    0002  int32    Unknown
-    0006  byte     Climbable. 0x00: not climbable; != 0x00: wall can be climbed
-    0007  byte     Unknown. Always 0x00
-    0008  byte     Transparency control
+    0000  byte     family (unused)
+    0001  byte     target (unused)
+    0002  sint16   resilience (unused); Default: 10 
+    0004  sint16   distance modifier; Default: 0
+    0006  byte     Climbable. 0x00: not climbable; != 0x00: wall can be climbed (original name: friction)
+    0007  byte     friction walk (unused); Always 0x00
+    0008  byte     Transparency control (original name: force_dir)
     0009  byte     Animation group
     000A  byte     Animation index - if texture is animated
 
-> The two bytes at the beginning almost always are each set to the low-byte of the index. A few exceptions have both bytes 0x00.
-> The second field at offset ```0002``` is nearly always ```0x0A```; The one existing exception has it 0.
+The two bytes at the beginning (```family``` and ```target```) almost always are each set to the low-byte of the index. A few exceptions have both bytes 0x00. Since they are unused, it is unclear what they mean.
+
+The ```resilience``` is nearly always ```0x0A```; The one existing exception has it 0. Since it is unused, it is unclear what it means.
+
+The ```distance modifier``` always zero. It is used in the renderer to determine which texture resolution to use, based on distance from the camera. A higher modifier causes the smaller resolutions to be chosen at larger distances; A negative value causes an earlier switch.
 
 See [Texture Animation](../archives/textureAnimation.md) for details on animated textures.
 
@@ -43,14 +58,17 @@ See [Texture Animation](../archives/textureAnimation.md) for details on animated
 ### Object Properties (objprop.dat)
 The object properties file contains several tables about properties of [level objects](../levelObjects/index.md). It has the following format:
 
-    | Magic | Class 0 Tables   | Class 1 Tables     | ... | Common Table |
+    | Header | Class 0 Tables   | Class 1 Tables     | ... | Common Table |
 
 #### Header
-The file starts with a 4-byte header, purpose unknown.
+The file starts with a 4-byte header containing the version number.
 
-**Magic Header** (4 bytes)
+**Object Properties File Header** (4 bytes)
 
-    0000  int32   magic header, value 0x2D
+    0000  int32   file version number, value 0x2D
+
+
+The engine rejects a properties file with a different version number.
 
 #### Class Tables
 For each object class, one entry exists with a table of class-generic properties and a further table, subclass-specific:
