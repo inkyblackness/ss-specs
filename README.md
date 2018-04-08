@@ -16,7 +16,8 @@ Currently not in scope of this documentation project are music files (See [here 
 
 
 ## Credits
-This project, as well as InkyBlackness itself, wouldn't be possible without the work of TSSHP and the effort of the people before that.
+* This project, as well as InkyBlackness itself, wouldn't be possible without the work of TSSHP and the effort of the people before that.
+* [Source release](https://github.com/NightDiveStudios/shockmac) of the Mac version, which finally allowed to figure out unknown details, and set some guesswork naming right.
 
 ## License
 
