@@ -53,5 +53,5 @@ Within the texts, the substring ```$N``` is the placeholder for the name of the 
 
 Corresponding audio resources are based on ID ```0x0AB5```. If an electronic message with ID X has audio, the audio will have resource ID ```0x0AB5``` + X. (Also: resource ID of text resource + 300)
 
-These audio resources are [MOVI resources](../media/moviChunks.md) with only the audio component. The audio recordings are stored in the files
+These audio resources are [MOVI resources](../media/moviResources.md) with only the audio component. The audio recordings are stored in the files
 ```citalog.res``` (English), ```geralog.res``` (German) and ```frnalog.res``` (French).

@@ -4,7 +4,7 @@ Video clips are made out of a sequence of standard [bitmaps](Bitmaps.md). The me
 is stored in resources of type ```0x04```. This information block refers to the resource that contains the frames, which
 is stored in the same resource file.
 
-Contrary to [MOVI Resources](moviChunks.md), video clips contain only the frame information - nothing else.
+Contrary to [MOVI Resources](moviResources.md), video clips contain only the frame information - nothing else.
 
 ### Format
 
