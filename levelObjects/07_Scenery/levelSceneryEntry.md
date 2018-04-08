@@ -1,6 +1,6 @@
 ## Level Scenery Table (Class 7)
 
-```L17``` is a table describing scenery and fixture items in real-world levels.
+```L17``` is a table describing scenery items in real-world levels.
 
 Cyberspace levels may re-use "scenery" entries for further software entries. These entries need to be
 interpreted differently. See [Software](../06_Software/levelSoftwareEntry.md).

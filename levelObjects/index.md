@@ -17,21 +17,21 @@ Instance data is stored as part of an archive. See [Level Objects](../archives/l
 
 The following table lists the object classes together with the available types per subclass:
 
-| Class | Name                               | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  |
+| Class | Name (<original source name>)      | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  |
 |:-----:|------------------------------------|----|----|----|----|----|----|----|----|
-|   0   | Weapons                            | 5  | 2  | 2  | 2  | 3  | 2  | -  | -  |
+|   0   | Weapons ("Gun")                    | 5  | 2  | 2  | 2  | 3  | 2  | -  | -  |
 |   1   | Ammo                               | 2  | 2  | 3  | 2  | 2  | 2  | 2  | -  |
-|   2   | Projectiles                        | 6  | 16 | 2  | -  | -  | -  | -  | -  |
-|   3   | Explosives                         | 5  | 3  | -  | -  | -  | -  | -  | -  |
-|   4   | Patches                            | 7  | -  | -  | -  | -  | -  | -  | -  |
+|   2   | Projectiles ("Physics")            | 6  | 16 | 2  | -  | -  | -  | -  | -  |
+|   3   | Explosives ("Grenade")             | 5  | 3  | -  | -  | -  | -  | -  | -  |
+|   4   | Patches ("Drug")                   | 7  | -  | -  | -  | -  | -  | -  | -  |
 |   5   | Hardware                           | 5  | 10 | -  | -  | -  | -  | -  | -  |
 |   6   | Software (including logs)          | 7  | 3  | 4  | 5  | 3  | -  | -  | -  |
-|   7   | Scenery / Fixtures                 | 9  | 10 | 11 | 4  | 9  | 8  | 16 | 10 |
-|   8   | Items (gettable and other objects) | 8  | 10 | 15 | 6  | 12 | 12 | 9  | 8  |
-|   9   | Panels (switches and the like)     | 9  | 7  | 3  | 11 | 2  | 3  | -  | -  |
-|   10  | Barriers (doors and gratings)      | 10 | 9  | 7  | 5  | 10 | -  | -  | -  |
+|   7   | Scenery ("Big Stuff")              | 9  | 10 | 11 | 4  | 9  | 8  | 16 | 10 |
+|   8   | Items ("Small Stuff")              | 8  | 10 | 15 | 6  | 12 | 12 | 9  | 8  |
+|   9   | Panels ("Fixtures")                | 9  | 7  | 3  | 11 | 2  | 3  | -  | -  |
+|   10  | Barriers ("Door")                  | 10 | 9  | 7  | 5  | 10 | -  | -  | -  |
 |   11  | Animations                         | 9  | 11 | 14 | -  | -  | -  | -  | -  |
-|   12  | Markers (including traps)          | 13 | 1  | 5  | -  | -  | -  | -  | -  |
+|   12  | Markers ("Trap")                   | 13 | 1  | 5  | -  | -  | -  | -  | -  |
 |   13  | Containers                         | 3  | 3  | 4  | 8  | 13 | 7  | 8  | -  |
 |   14  | Critters                           | 9  | 12 | 7  | 7  | 2  | -  | -  | -  |
 

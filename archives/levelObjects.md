@@ -120,21 +120,21 @@ The ```Index``` field of the starting point does not refer to a level object, it
 The following table lists the the level resources per class type. It also lists how many entries each table contains and how big one entry is.
 The name column links to the corresponding details.
 
-| Class | Level Res   | Name                                      | Entry Count | Entry Size (incl. prefix) |
+| Class | Level Res   | Name (<original source name>)             | Entry Count | Entry Size (incl. prefix) |
 |:-----:|-------------|-------------------------------------------|-------------|---------------------------|
-|   0   | ```L10```   | [Weapons][L10]                            | 16          | 8                         |
+|   0   | ```L10```   | [Weapons][L10] ("Gun")                    | 16          | 8                         |
 |   1   | ```L11```   | [Ammo][L11]                               | 32          | 6                         |
-|   2   | ```L12```   | Projectiles                               | 32          | 40                        |
-|   3   | ```L13```   | [Explosives][L13]                         | 32          | 12                        |
-|   4   | ```L14```   | [Patches][L14]                            | 32          | 6                         |
+|   2   | ```L12```   | Projectiles ("Physics")                   | 32          | 40                        |
+|   3   | ```L13```   | [Explosives][L13] ("Grenade")             | 32          | 12                        |
+|   4   | ```L14```   | [Patches][L14] ("Drug")                   | 32          | 6                         |
 |   5   | ```L15```   | [Hardware][L15]                           | 8           | 7                         |
 |   6   | ```L16```   | [Software (including logs)][L16]          | 16          | 9                         |
-|   7   | ```L17```   | [Scenery / Fixtures][L17]                 | 176         | 16                        |
-|   8   | ```L18```   | [Items (gettable and other objects)][L18] | 128         | 16                        |
-|   9   | ```L19```   | [Panels (switches and the like)][L19]     | 64          | 30                        |
-|   10  | ```L20```   | [Barriers (doors and gratings)][L20]      | 64          | 14                        |
+|   7   | ```L17```   | [Scenery][L17] ("Big Stuff")              | 176         | 16                        |
+|   8   | ```L18```   | [Items][L18] ("Small Stuff")              | 128         | 16                        |
+|   9   | ```L19```   | [Panels][L19] ("Fixture")                 | 64          | 30                        |
+|   10  | ```L20```   | [Barriers][L20] ("Door")                  | 64          | 14                        |
 |   11  | ```L21```   | Animations                                | 32          | 10                        |
-|   12  | ```L22```   | [Markers (including traps)][L22]          | 160         | 28                        |
+|   12  | ```L22```   | [Markers][L22] ("Trap")                   | 160         | 28                        |
 |   13  | ```L23```   | [Containers][L23]                         | 64          | 21                        |
 |   14  | ```L24```   | [Critters][L24]                           | 64          | 46                        |
 
