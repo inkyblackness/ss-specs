@@ -33,7 +33,7 @@ Save-game files contain 4 further resources that are not present in archive.dat 
 ### By topic
   * [Map Information](mapInformation.md)
   * [Level Objects](levelObjects.md)
-  * [Surveillance Screens](surveillanceScreens.md)
+  * [Surveillance Cameras](surveillanceCameras.md)
   * [Loop Configuration](loopConfiguration.md)
 
 
@@ -53,8 +53,8 @@ Save-game files contain 4 further resources that are not present in archive.dat 
   * ```L41``` Unused entry. byte with value ```0x00``` for all maps.
 
   * ```L42``` [Texture animation](textureAnimation.md)
-  * ```L43``` [Surveillance Sources](surveillanceScreens.md)
-  * ```L44``` [Surveillance Surrogates](surveillanceScreens.md)
+  * ```L43``` [Surveillance Sources](surveillanceCameras.md)
+  * ```L44``` [Surveillance Surrogates](surveillanceCameras.md)
   * ```L45``` [Level variables](levelVariables.md)
   * ```L46``` [Map notes](mapInformation.md#map-notes)
   * ```L47``` [Map notes pointer](mapInformation.md#map-notes)

@@ -55,7 +55,7 @@ This field specifies what shall be shown. It has the following cases:
     0x017F            Random number for CPU rooms, level 1-6 before destroying nodes.
     0x0180 .. 0x01FF  Text message, scrolling vertically
 
-For surveillance screens, the sources of screens 0-7 are specified in the [Surveillance Sources Table](../../archives/surveillanceScreens.md).
+For surveillance screens, the sources of screens 0-7 are specified in the [Surveillance Sources Table](../../archives/surveillanceCameras.md).
 
 
 The following big items support displays:
