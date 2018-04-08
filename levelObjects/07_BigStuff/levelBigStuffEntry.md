@@ -1,19 +1,19 @@
-## Level Scenery Table (Class 7)
+## Level BigStuff Table (Class 7)
 
-```L17``` is a table describing scenery items in real-world levels.
+```L17``` is a table describing big items in real-world levels.
 
-Cyberspace levels may re-use "scenery" entries for further software entries. These entries need to be
+Cyberspace levels may re-use "big stuff" entries for further software entries. These entries need to be
 interpreted differently. See [Software](../06_Software/levelSoftwareEntry.md).
 
 
-**Level Scenery Entry** (16 bytes)
+**Level BigStuff Entry** (16 bytes)
 
     0000  [6]byte   Level object prefix
-    0006  [10]byte  Scenery Info
+    0006  [10]byte  BigStuff Info
 
 ### Displays
 
-There are several scenery items that are capable of displaying (animated) content. They reuse the following common types:
+There are several big items that are capable of displaying (animated) content. They reuse the following common types:
 
 **Display Info** (10 bytes)
 
@@ -58,7 +58,7 @@ This field specifies what shall be shown. It has the following cases:
 For surveillance screens, the sources of screens 0-7 are specified in the [Surveillance Sources Table](../../archives/surveillanceScreens.md).
 
 
-The following scenery items support displays:
+The following big items support displays:
 7/0/6 (TV), 7/0/7 (COMPUTER MONITOR),
 7/2/6 (SCREEN, small), 7/2/8 (SCREEN, large), 7/2/9 (SCREEN, medium),
 with variation: 7/5/6 (CONTROL PEDESTAL)  (see below)
@@ -94,11 +94,11 @@ If ```Texture index``` is not zero, it specifies the alternate texture to use fo
 
 ### Surfaces 7/2/x
 
-These are scenery objects that are flat and should be placed at another surface.
+These are big objects that are flat and should be placed at another surface.
 
 #### Words 7/2/3
 
-**Words Scenery Data** (10 bytes)
+**Words BigStuff Data** (10 bytes)
 
     0000  int16     Text index (within resource 0x0868)
     0002  int16     Font and size (bits 0-3 are font, 4-7 are size)
@@ -108,7 +108,7 @@ These are scenery objects that are flat and should be placed at another surface.
 
 #### Texture Maps 7/2/7
 
-**Texture map scenery** (10 bytes)
+**Texture map big stuff** (10 bytes)
 
     0000  [6]byte   Unused
     0006  int16     Texture index
@@ -176,7 +176,7 @@ Instead of having different loop options, they trigger an object if used.
     0008  int16     Alternate picture source
 
 
-### Garden scenery 7/6/x
+### Garden big stuff 7/6/x
 
 ### Bridges 7/7/x
 

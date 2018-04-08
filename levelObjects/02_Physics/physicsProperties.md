@@ -1,13 +1,13 @@
-### Projectile Properties
+### Physics Properties
 
 #### Generic Properties
 
-**Projectile Generic Properties** (1 byte)
+**Physics Generic Properties** (1 byte)
 
-    0000  byte     Projectile flags
+    0000  byte     Physics flags
 
 
-**Projectile Flags Enumeration** (1 byte)
+**Physics Flags Enumeration** (1 byte)
 
     0x01  Emit light
     0x02  Bounce off walls
@@ -23,7 +23,7 @@
 
 These properties are set for some ```2/1/x``` objects. More specifically: For cyberspace projectiles. The other projectiles of this subclass have their specific bytes zero.
 
-**Projectile Specific 1 Properties** (6 bytes)
+**Physics Specific 1 Properties** (6 bytes)
 
     0000  [6]byte  Colour scheme
 

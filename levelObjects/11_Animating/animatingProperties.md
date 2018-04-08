@@ -1,8 +1,8 @@
-### Animation Properties
+### Animating Properties
 
-#### Generic Animation Properties
+#### Generic Animating Properties
 
-**Generic Animation Propertes** (2 bytes)
+**Generic Animating Propertes** (2 bytes)
 
     0000  byte     Frame time
     0001  byte     Emits light

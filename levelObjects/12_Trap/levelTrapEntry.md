@@ -1,11 +1,11 @@
-## Level Marker Table (Class 12)
+## Level Trap Table (Class 12)
 
-```L22``` is a table describing marker items.
+```L22``` is a table describing trap items and general marker.
 
-**Level Marker Entry** (28 bytes)
+**Level Trap Entry** (28 bytes)
 
     0000  [6]byte   Level object prefix
-    0006  [22]byte  Marker data
+    0006  [22]byte  Trap data
 
 ### Infrastructure 12/0/x
 
@@ -41,7 +41,7 @@ Both values are measured from the floor. Repulsion only happens if the hacker is
 
 #### Triggers 12/0/x (with exceptions)
 
-The type of the trigger object determines its cause. The marker data is then that of [actions](../Actions.md).
+The type of the trigger object determines its cause. The trap data is then that of [actions](../Actions.md).
 
 Trigger Types:
 
@@ -118,7 +118,7 @@ The ```Entry offset``` points into ```L46``` ([map notes](mapInformation.md#map-
     0007  [15]byte  Unused
 
 The ```Music flavour``` is an index, with a range of ```0x00```..```0x04```, referencing patches of "music" resembling industrial noise.
-They have a rectangular area of effect which covers 14x14 tiles, centered on the tile of the marker.
+They have a rectangular area of effect which covers 14x14 tiles, centered on the tile of the trap.
 The music is only played if the current tile has a music index of zero.
 
 > This is used extensively on maintenance level, the 4 flight decks, as well as for the maintenance tunnels on the groves.

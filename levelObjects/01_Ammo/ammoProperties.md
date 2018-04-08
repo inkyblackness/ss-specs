@@ -1,8 +1,8 @@
-### Ammo Clip Properties
+### Ammo Properties
 
-#### Generic Ammo Clip Properties
+#### Generic Ammo Properties
 
-**Generic Ammo Clip Propertes** (14 bytes)
+**Generic Ammo Propertes** (14 bytes)
 
     0000  [8]byte  [Generic Weapon Info](../GenericWeaponInfo.md)
     0008  uint8    Rounds per clip

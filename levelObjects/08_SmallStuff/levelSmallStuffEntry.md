@@ -1,17 +1,17 @@
-## Level Item Table (Class 8)
+## Level SmallStuff Table (Class 8)
 
-```L18``` is a table describing general items
+```L18``` is a table describing general small stuff.
 
-**Level Item Entry** (16 bytes)
+**Level SmallStuff Entry** (16 bytes)
 
     0000  [6]byte   Level object prefix
-    0006  [10]byte  Item data
+    0006  [10]byte  SmallStuff data
 
 ### Junk 8/0/x
 
 #### Papers 8/0/2
 
-**Paper Item** (10 bytes)
+**Paper** (10 bytes)
 
     0000  [2]byte   Unused
     0002  int16     Paper ID
@@ -23,7 +23,7 @@ The referred text entries have multiple blocks and the engine simply concatenate
 
 #### Briefcases 8/0/7
 
-**Briefcase Item** (10 bytes)
+**Briefcase** (10 bytes)
 
     0000  [2]byte   Unused
     0002  [4]int16  Object index
@@ -38,7 +38,7 @@ Nothing special.
 
 #### Corpses 8/2/0 - 8/2/7
 
-**Corpse Item** (10 bytes)
+**Corpse** (10 bytes)
 
     0000  [2]byte   Unknown
     0002  [4]int16  Object index
@@ -142,7 +142,7 @@ For 8/5/8 (data fragments), the text index is for text resource ```0x087A```.
 Layout and properties are the same as for force bridges (7/7/7).
 
 
-### Wear and Tear Items 8/6/x
+### Wear and Tear Stuff 8/6/x
 
 Nothing special.
 

@@ -1,18 +1,18 @@
-## Level Panels Table (Class 9)
+## Level Fixture Table (Class 9)
 
-```L19``` is a table describing panels and electrical stuff.
+```L19``` is a table describing fixtures and electrical stuff.
 
-**Level Panel Entry** (30 bytes)
+**Level Fixture Entry** (30 bytes)
 
     0000  [6]byte   Level object prefix
-    0008  [24]byte  Panel Specific Info
+    0008  [24]byte  Fixture Specific Info
 
 
 ### Buttons 9/0/x
 
 Buttons come in various shapes and forms. All of them are triggers for actions and the entry data that of [actions](../Actions.md).
 
-**Button Panel Specific Info** (24 bytes)
+**Button Fixture Specific Info** (24 bytes)
 
     0000  [22]byte  Action data
     0016  uint16    Access mask
@@ -28,7 +28,7 @@ The conditions for buttons are based on [game variables](../Conditions.md#game-v
 Most recepticles work in conjunction with the quest items (8/7/x). With the exception of antenna relay panels, they contain regular actions as data.
 Unless noted otherwise below, the conditions for recepticles are based on object types.
 
-**Recepticle Panel Specific Info** (24 bytes)
+**Recepticle Fixture Specific Info** (24 bytes)
 
     0000  [22]byte  Action data
     0016  [2]byte   Unused
@@ -61,7 +61,7 @@ The conditions for stations are based on [game variables](../Conditions.md#game-
 
 #### Cyberspace Terminals 9/2/0
 
-**Cyberspace Terminal Panel Specific Info** (24 bytes)
+**Cyberspace Terminal Specific Info** (24 bytes)
 
     0000  byte      State
     0001  byte      Unused

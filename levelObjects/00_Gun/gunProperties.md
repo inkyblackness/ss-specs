@@ -1,15 +1,15 @@
-### Weapon Properties
+### Gun Properties
 
-#### Generic Weapon Properties
+#### Generic Gun Properties
 
-**Generic Weapon Propertes** (2 bytes)
+**Generic Gun Propertes** (2 bytes)
 
     0000  uint8   Trigger time
     0001  byte    Clip description
 
-The ```Trigger time``` is related to the firing rate. For non-automatic weapons, this time specifies when the next bullet can be shot or the next swing can be made with a melee weapon.
+The ```Trigger time``` is related to the firing rate. For non-automatic guns, this time specifies when the next bullet can be shot or the next swing can be made with a melee weapon.
 The unit for this value is about 36 milliseconds. A value of ```0x00``` means 'as fast as you can press fire'.
-Changing this value does not have any detectable effect for automatic weapons (```0/1/x```).
+Changing this value does not have any detectable effect for automatic guns (```0/1/x```).
 
 
 **Clip Description** (1 byte)

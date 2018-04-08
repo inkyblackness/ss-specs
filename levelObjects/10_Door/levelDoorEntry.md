@@ -1,14 +1,14 @@
-## Level Barrier Table (Class 10)
+## Level Door Table (Class 10)
 
-```L20``` is a table describing barrier items.
+```L20``` is a table describing doors and barriers.
 
-**Level Barrier Entry** (14 bytes)
+**Level Door Entry** (14 bytes)
 
     0000  [6]byte   Level object prefix
-    0006  [8]bytes  Barrier Data
+    0006  [8]bytes  Door Data
 
 
-**Door Barrier Data** (8 bytes)
+**Door Data** (8 bytes)
 
     0000  int16    Lock variable index
     0002  byte     Lock message

@@ -1,8 +1,8 @@
-### Level Patches Table (Class 4)
+### Level Drug Table (Class 4)
 
-```L14``` is a table describing patches.
+```L14``` is a table describing Drugs.
 
-**Level Patch Entry** (6 bytes)
+**Level Drug Entry** (6 bytes)
 
     0000  [6]byte   Level object prefix
 
