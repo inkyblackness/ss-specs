@@ -6,11 +6,14 @@ The goal is to document all meaningful bits and bytes of the original data files
 
 Start reading with the [main page](index.md) (the index).
 
+If you would like to contribute to the documentation, please consider [the guidelines](CONTRIBUTING.md).
+
 ## Status
 The content of this documentation supersedes the information available from TSSHP (the [ss-specs.txt](http://tsshp.cvs.sourceforge.net/viewvc/tsshp/tsshp/doc/ss-specs.txt?view=markup) file). In some instances, this documentation even provides more accurate descriptions.
 
 The format of all raw media content is described, with the exception of a few unknown fields. The same counts for the game objects.
 See the [issue list](https://github.com/inkyblackness/ss-specs/issues) for an overview about what is still actively analyzed.
+With the release of the original source (see credits below), many so far unknown things can be clarified.
 
 Currently not in scope of this documentation project are music files (See [here for details](other/Music.md)) and the Macintosh release.
 

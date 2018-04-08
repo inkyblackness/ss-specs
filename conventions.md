@@ -1,18 +1,24 @@
 ## Conventions
 
-### 1. Content
+### Content
 Information in these documents MUST be verifiable, or have been verified (e.g. through testing or cross-reference to original code) to be included. Assumptions, contradictions, discussions and the like MUST be handled through the [issue](https://github.com/inkyblackness/ss-specs/issues) system.
 
 In general, changes to the documents SHOULD be introduced by linking commits to corresponding issues. This way, issues can be used as reference material for verification.
 
-### 2. Formatting
+### Language
+The human language of this documentation is English. Names of types/fields should follow that of the source (which is presumably en-us), while prose text SHOULD follow en-uk .
+
+This is primarily to uphold the legacy of this documentation. The original ss-specs was maintained within the context of TSSHP, which came from Britain.
+
+
+### Formatting
 
 Vanilla [Markdown](http://daringfireball.net/projects/markdown/syntax) SHOULD be used for all pages.
 
 The biggest header available is the H2 header (""## Title"). H1 header are reserved for the main title. Each page SHOULD start with an H2 header, which is also the link in the [index](index.md).
 
 
-### 3. Data
+### Data
 In general, this documentation describes (serialized) data structures. Such data structures SHOULD be documented using code blocks and follow the following format:
 
     offset  type  description
