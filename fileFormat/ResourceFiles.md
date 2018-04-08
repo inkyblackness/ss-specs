@@ -5,6 +5,9 @@ Resource files are structured archives. These files contain one or more "resourc
 
 A resource identifier is a ```uint16``` value, and a compound resource uses a ```uint16``` value as index.
 
+Resource identifier are "valid" from value ```0x0003``` and above.
+```0x0000``` is the NULL identifier, and 1 and 2 are used engine-internally.
+
 ### General Format
 A resource file consists of a header, resources and a file directory. The header points to the file offset of the file directory and the file directory points to the file offset of the first resource.
 
@@ -23,11 +26,13 @@ The file header has a length of 128 bytes and has the following format:
 
 **File Header** (128 bytes)
 
-    0000  string  Header text "LG Res File v2\r\n\x1A"
-    0011  []byte  not used (0x00)
-    007C  int32   file offset to directory
+    0000  [16]byte  signature "LG Res File v2\r\n"
+    0010  [96]byte  comment, terminated with "\x1A" (remainder 0x00)
+    0070  [12]byte  reserved, set to 0x00
+    007C  sint32    file offset to directory
 
-> Although the byte 0x1A is found in all resource files immediately after the header text, it is not part of the string. It serves as a terminator for an optional comment that may follow the string header.
+> No resource file has been found containing a comment. It always only contains the terminator byte 0x1A.
+> The comment is terminated with 0x1A as this represents the ```Ctrl+Z``` code. This was a little trick to enable people to ```type``` the file on the command line and not be spammed with binary garbage.
 
 ### File Directory
 The file directory consists of a 6 byte header followed directly by its directory entries:
@@ -39,23 +44,26 @@ The file directory consists of a 6 byte header followed directly by its director
 
 **Resource file directory entry** (10 bytes)
 
-    0000  int16  resource ID
-    0002  int24  resource length (unpacked)
-    0005  int8   resource flags (see below)
-    0006  int24  resource length (packed in file)
-    0009  int8   content type
+    0000  uint16  resource ID
+    0002  sint24  resource length (unpacked)
+    0005  sint8   resource flags (see below)
+    0006  sint24  resource length (packed in file)
+    0009  sint8   content type
 
 ### Resource Flags
 
 The resource flag marks extra information about the resource.
 
 **Resource Flag** (1 byte)
+
     0x01  compressed
     0x02  compound
-    0x04  unused (reserved)
+    0x04  reserved (unused)
     0x08  load on open (unused)
 
-"Flat" resources contain only one data block, which is the complete resource data itself. Compound resources contain 0 or more blocks.
+
+"Flat" resources contain only one data block, which is the complete resource data itself. Compound resources contain 0, one, or more blocks.
+
 
 ### Content Types
 
