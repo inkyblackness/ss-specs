@@ -48,7 +48,7 @@ The file directory consists of a 6 byte header followed directly by its director
     0002  sint24  resource length (unpacked)
     0005  sint8   resource flags (see below)
     0006  sint24  resource length (packed in file)
-    0009  sint8   content type
+    0009  sint8   resource type
 
 ### Resource Flags
 
@@ -65,19 +65,23 @@ The resource flag marks extra information about the resource.
 "Flat" resources contain only one data block, which is the complete resource data itself. Compound resources contain 0, one, or more blocks.
 
 
-### Content Types
+### Resource Types
 
-The following content types are known:
+The following resource types are known:
 
-    0x00  Palette
-    0x01  Text
-    0x02  Bitmap
+    0x00  Palette (although originally called "unknown", it is used for palettes exclusively)
+    0x01  String
+    0x02  Image
     0x03  Font
-    0x04  Video clip
-    0x07  Sound effect
+    0x04  Animation Script (Video clip)
+    0x07  Sound effect (.voc)
     0x0F  3D model geometry
-    0x11  MOVI
+    0x11  Movie
     0x30  Archive
+
+> The original source lists several more resource types, which are all unused in System Shock.
+> Presumably this is the result of re-used code.
+
 
 ### Compound Resources
 If a resource is flagged to be compound, the resource data starts with a directory. This directory contains relative offsets to the first bytes of the contained blocks, following the directory.
