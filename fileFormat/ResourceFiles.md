@@ -6,14 +6,15 @@ Resource files are structured archives. These files contain one or more "resourc
 A resource identifier is a ```uint16``` value, and a compound resource uses a ```uint16``` value as index.
 
 Resource identifier are "valid" from value ```0x0003``` and above.
-```0x0000``` is the NULL identifier, and 1 and 2 are used engine-internally.
+```0x0000``` is the NULL identifier (this was quick approach to erase resources from file for developers), and ```0x0001``` and ```0x0002``` are used engine-internally (first used to point to head ptr in 
+[LRU](https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)) cache, second - to tail ptr in LRU).
 
 ### General Format
 A resource file consists of a header, resources and a file directory. The header points to the file offset of the file directory and the file directory points to the file offset of the first resource.
 
-    |    /--------------------------------------------v            |
-    | Header | Res0     | Res1        | ... | Res N   | Directory  |
-    |        ^----------------------------------------------/      |
+    |        /--------------------------------------v                      |
+    | Header.dirOffset | Res0 | Res1 | ...  | Res N | Directory.dataOffset |
+    |                  ^----------------------------------------/          |
 
 All resources, as well as the file directory, start at a 4-byte boundary.
 
@@ -24,12 +25,12 @@ To calculate the file offset of a resource, the file directory has to be read fi
 ### File Header
 The file header has a length of 128 bytes and has the following format:
 
-**File Header** (128 bytes)
+**File Header** (`ResFileHeader` struct, 128 bytes)
 
-    0000  [16]byte  signature "LG Res File v2\r\n"
-    0010  [96]byte  comment, terminated with "\x1A" (remainder 0x00)
-    0070  [12]byte  reserved, set to 0x00
-    007C  sint32    file offset to directory
+    0000  [16]byte  signature  signature "LG Res File v2\r\n"
+    0010  [96]byte  comment    comment, terminated with "\x1A" (remainder 0x00)
+    0070  [12]byte  reserved   reserved, set to 0x00
+    007C  sint32    dirOffset  file offset to directory
 
 > No resource file has been found containing a comment. It always only contains the terminator byte 0x1A.
 > The comment is terminated with 0x1A as this represents the ```Ctrl+Z``` code. This was a little trick to enable people to ```type``` the file on the command line and not be spammed with binary garbage.
@@ -37,18 +38,18 @@ The file header has a length of 128 bytes and has the following format:
 ### File Directory
 The file directory consists of a 6 byte header followed directly by its directory entries:
 
-**Resource file directory header** (6 bytes)
+**Resource file directory header** (`ResDirHeader` struct, 6 bytes)
 
-    0000  uint16  number of resources in the file
-    0002  sint32  file offset to beginning of first resource
+    0000  uint16  numEntries  number of resources in the file
+    0002  sint32  dataOffset  file offset to beginning of first resource
 
-**Resource file directory entry** (10 bytes)
+**Resource file directory entry** (`ResDirEntry` struct, 10 bytes)
 
-    0000  uint16  resource ID
-    0002  sint24  resource length (unpacked)
-    0005  sint8   resource flags (see below)
-    0006  sint24  resource length (packed in file)
-    0009  sint8   resource type
+    0000  uint16  id     resource ID
+    0002  sint24  size   resource length (unpacked)
+    0005  sint8   flags  resource flags (see below)
+    0006  sint24  csize  resource length (packed in file)
+    0009  sint8   type   resource type (see below)
 
 ### Resource Flags
 
@@ -56,32 +57,34 @@ The resource flag marks extra information about the resource.
 
 **Resource Flag** (1 byte)
 
-    0x01  compressed
-    0x02  compound
-    0x04  reserved (unused)
-    0x08  load on open (unused)
+    0x01  RDF_LZW         compressed
+    0x02  RDF_COMPOUND    compound
+    0x04  RDF_RESERVED    reserved (unused)
+    0x08  RDF_LOADONOPEN  load on open (unused)
 
+> The original source lists several more resource flags, which are all unused in System Shock.
+> Presumably this is the result of re-used code.
 
 "Flat" resources contain only one data block, which is the complete resource data itself. Compound resources contain 0, one, or more blocks.
 
-
 ### Resource Types
 
-The following resource types are known:
+The following resource types appears in System Shock:
 
-    0x00  Palette (although originally called "unknown", it is used for palettes exclusively)
-    0x01  String
-    0x02  Image
-    0x03  Font
-    0x04  Animation Script (Video clip)
-    0x07  Sound effect (.voc)
-    0x0F  3D model geometry
-    0x11  Movie
-    0x30  Archive
+    0x00  UNKNOWN  Palette (although originally called "unknown", it is used for palettes exclusively)
+    0x01  STRING   String
+    0x02  IMAGE    Image
+    0x03  FONT     Font
+    0x04  ANIM     Animation Script (Video clip)
+    0x07  VOC      Sound effects and voices (.voc)
+    0x0F  OBJ3D    3D model geometry
+    0x11  MOVIE    Movie
+    0x30  APP1     Application specific resource (used in archive.dat for storing maps)
 
 > The original source lists several more resource types, which are all unused in System Shock.
 > Presumably this is the result of re-used code.
-
+>
+> There exists 0x05 (PALL) resource type specially for palettes, but never used in System Shock.
 
 ### Compound Resources
 If a resource is flagged to be compound, the resource data starts with a directory. This directory contains relative offsets to the first bytes of the contained blocks, following the directory.
