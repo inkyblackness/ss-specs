@@ -14,7 +14,7 @@ The following sub-sections will most likely be applicable for your question:
 
 * [Engineering](https://www.systemshock.org/index.php?board=36.0) - for modding the game or creating fan-missions in general
 * [Deck 13](https://www.systemshock.org/index.php?board=13.0) - for engine source-code, ports, and tool-development related topics
-
+* [System Shock source code](https://github.com/nothings/shockmac) - source code of System Shock for Mac OS with notes from Sean Barrett
 
 ### Scope
 
