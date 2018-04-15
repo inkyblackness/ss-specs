@@ -6,14 +6,14 @@ Resource files are structured archives. These files contain one or more "resourc
 A resource identifier is a ```uint16``` value, and a compound resource uses a ```uint16``` value as index.
 
 Resource identifier are "valid" from value ```0x0003``` and above.
-```0x0000``` is the NULL identifier (it means that this resource will be erased from file), and 1 and 2 are used engine-internally.
+```0x0000``` is the NULL identifier (it means that this resource will be erased from file), and ```0x0001``` and ```0x0002``` are used engine-internally.
 
 ### General Format
 A resource file consists of a header, resources and a file directory. The header points to the file offset of the file directory and the file directory points to the file offset of the first resource.
 
-    |    /--------------------------------------------v            |
-    | Header | Res0     | Res1        | ... | Res N   | Directory  |
-    |        ^----------------------------------------------/      |
+    |        /--------------------------------------v                      |
+    | Header.dirOffset | Res0 | Res1 | ...  | Res N | Directory.dataOffset |
+    |                  ^----------------------------------------/          |
 
 All resources, as well as the file directory, start at a 4-byte boundary.
 
@@ -66,7 +66,6 @@ The resource flag marks extra information about the resource.
 
 "Flat" resources contain only one data block, which is the complete resource data itself. Compound resources contain 0, one, or more blocks.
 
-
 ### Resource Types
 
 The following resource types appears in System Shock:
@@ -83,6 +82,7 @@ The following resource types appears in System Shock:
 
 > The original source lists several more resource types, which are all unused in System Shock.
 > Presumably this is the result of re-used code.
+>
 > There exists 0x05 (PALL) resource type specially for palettes, but never used in System Shock.
 
 ### Compound Resources
