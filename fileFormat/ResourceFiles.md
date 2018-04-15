@@ -6,7 +6,8 @@ Resource files are structured archives. These files contain one or more "resourc
 A resource identifier is a ```uint16``` value, and a compound resource uses a ```uint16``` value as index.
 
 Resource identifier are "valid" from value ```0x0003``` and above.
-```0x0000``` is the NULL identifier (it means that this resource will be erased from file), and ```0x0001``` and ```0x0002``` are used engine-internally.
+```0x0000``` is the NULL identifier (this was quick approach to erase resources from file for developers), and ```0x0001``` and ```0x0002``` are used engine-internally (first used to point to head ptr in 
+[LRU](https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)) cache, second - to tail ptr in LRU).
 
 ### General Format
 A resource file consists of a header, resources and a file directory. The header points to the file offset of the file directory and the file directory points to the file offset of the first resource.
