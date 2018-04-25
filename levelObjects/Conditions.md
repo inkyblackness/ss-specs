@@ -7,7 +7,7 @@ Conditions can examine different aspects of the state of the game or (current) l
 
 ### Game Variable Conditions
 
-These conditions check the value of a game variable.
+These conditions check the value of a game variable (also called "quest value").
 
 **Game Variable Condition** (4 bytes)
 
@@ -35,6 +35,7 @@ All other values are interpreted as text/audio message index.
     3: Variable must be greater than value
     4: Variable must be greater than, or equal to, value
     5: Variable must be not equal to value
+    6: Value must be greater than a random value of range 0..254 (variable value is ignored)
 
 
 ### Object Type Conditions

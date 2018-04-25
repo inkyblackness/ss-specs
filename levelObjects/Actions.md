@@ -4,6 +4,17 @@ Level trigger and various panels (buttons and the like) make use of actions that
 
 Actions can be triggered by various sources. They may have conditions that first have to be met before the action is actually performed. The type of the action determines how to interpret the details (parameters) of the action.
 
+### Quest Value Key
+
+Some actions make use of quest value keys, which are used to either resolve a raw value, or a value from the game variables ("quest values").
+
+* If bit ```0x1000``` is set in the key, the current integer game variable value of index ```key & 0x0FFF``` is referenced.
+* If bit ```0x2000``` is set in the key, the current boolean game variable value of index ```key & 0x0FFF``` is referenced.
+* For resolving values, if the key is less than 0x1000, then the resulting value is the value key itself.
+
+
+### Action Data
+
 **Action Data** (22 bytes)
 
     0000  byte       Action type
@@ -16,37 +27,30 @@ The value is only decremented if it is not zero and the condition was met.
 If the value is decremented to zero after the action was executed, the object where the action is in is deleted.
 
 
-### Action Type 1: Transport player
+### Action Type 1: Transport hacker
 
-**Transport Player Action Details** (16 byte)
+**Transport Hacker Action Details** (16 byte)
 
     0000  int32      Target X
     0004  int32      Target Y
-    0008  byte       Target Height (level units)
-    0009  byte       Preserve Height Flag -- yes: 0x40, no: 0x00
-    000A  [2]byte    Unused
-    000C  byte       Cross-Level Transport Destination
-    000D  byte       Cross-Level Transport Flag
-    000E  [2]byte    Unused
+    0008  int32      Target Z
+    000C  int32      Target Level
 
-If the ```Preserve Height Flag``` is set to ```0x40```, then the ```Target Height``` field is ignored and the hacker
-is transported to the same height in which the outgoing tile was entered. (e.g.: jumping in)
+For all three target axis values, if they are ```0x4000``` or greater, they are ignored and the respective axis is not changed in the transport.
+The ```X``` and ```Y``` axes specify tile numbers, the ```Z``` axis is interpreted in level units.
 
-> This height-preservation is used only on level 2 for the experimental transporter, which incidentally has both
-> platforms at the same height.
+> In the main game, this axis-preservation is used only on level 2 for the Z axis on the experimental transporter,
+> which incidentally has both platforms at the same height.
 
-The ```Cross-Level Transportation Flag``` determines whether ```Cross-Level Transport Destination``` is being considered.
-If the flag is ```0x00```, then it is considered to be a cross-level transport. Other values make an in-level transport.
+If to be considered, the target values are then used as quest value keys to resolve the actual location for the respective axis.
 
-> This flag has been found to be arbitrarily ```0x10```, ```0x20```, and ```0x22``` with no detectable difference.
+> The main game does not make use of this quest value lookup feature. All encounterd values are direct values.
 
-The ```Cross-Level Transportation Destination``` is furthermore split up. The low nibble determines the actual target
-level. This may be the same level where the trigger is in, in which case the level is "reloaded" (loading cursor seen).
-If the high nibble is set to another value than zero, the transfer is considered to be a cyberspace connection.
+The ```target level``` specifies a cross-level transfer to the identified level if the value is smaller than ```0x1000```.
+If it is ```0x1000``` or greater, transportation is only done within the same level, regardless of the value.
 
-> The destination is used only for an same-level transfer on level 4 (restoration chamber), and twice for two groves, to
-> transport the hacker to the restoration chamber on level 6. Other instances are set to ```0x22```, which are ignored
-> as the respective flag value is set to ```0x22``` as well.
+> Cross-level transport is used only for a same-level transfer on level 4 (restoration chamber), and twice for two groves, to
+> transport the hacker to the restoration chamber on level 6. Other instances are set to ```0x2222```, which are ignored.
 
 
 ### Action Type 2: Change Health
