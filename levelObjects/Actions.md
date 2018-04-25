@@ -55,14 +55,24 @@ If it is ```0x1000``` or greater, transportation is only done within the same le
 
 ### Action Type 2: Change Health
 
+This action is also called "damage", probably based on the first parameter.
+
 **Change Health Action Details** (16 byte)
 
-    0000  int32      Unused
+    0000  int32      Damage delta
     0004  int16      Health delta
-    0006  int16      Health change flag; 0: remove delta, 1: add delta
+    0006  byte       Health change flag; 0: remove delta, 1: add delta
+    0007  byte       Damage type -- used if removing health
     0008  int16      Power delta
     000A  int16      Power change flag; 0: remove delta, 1: add delta
-    000C  [4]byte    Unknown
+    000C  int16      Fatigue delta
+    000E  int16      Fatigue change flag; 0: add delta, 1: remove delta
+
+All four ```delta``` values are used as quest value keys to resolve the actual delta value.
+
+> The ```damage delta``` is not used in the main game.
+> Although intended to cause explosion damage, due to mixed up parameters in the code, a fixed amount of damage is done,
+> with the delta value being interpreted as damage type.
 
 > Reducing health to/below 0 causes death. Reducing power below 0 causes an underflow and hacker is fully powered again.
 
