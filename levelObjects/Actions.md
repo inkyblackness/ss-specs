@@ -81,19 +81,26 @@ All four ```delta``` values are used as quest value keys to resolve the actual d
 
 **Clone/Move Action Details** (16 byte)
 
-    0000  int16      Source object index
-    0002  int16      Move flag: 0: clone object, !0: move object
+    0000  int16      Source object index -- quest value key
+    0002  int16      Move flag
     0004  int32      Target X tile
     0008  int32      Target Y tile
-    000C  byte       Target height (0..255)
-    000D  byte       Keep height flag; 0x00: use target height; 0x40: keep height of source object
+    000C  int32      Target Z
 
-The orientation and in-tile position of the source object will be kept.
+The ```move flag``` has a dual purpose. First, it is used to determine whether the object shall be moved or cloned.
+If it is zero, then the object is cloned; If it has bit ```0x1000``` set, then the object is cloned as well; All other values cause the source object to be moved.
+If the object is cloned, then the ```move flag``` parameter will be used as quest value key to store the object index of the newly created object.
 
 > The game archive has various values for the ```move flag```.
->
-> The ```keep height flag``` has also been found to be ```0x44``` behaving like ```0x40```.
-> The height field is also ```0x44``` in this case - presumably a case of "One of these nibbles needs to be 4 to work..."
+
+For all three target axis values, if they are ```0x4000``` or greater, they are ignored and the respective axis is not changed.
+The ```X``` and ```Y``` axes specify tile numbers, the ```Z``` axis is interpreted in level units.
+
+> In the main game, this axis-preservation is used with various values, including ```0x4400```.
+
+If to be considered, the target values are then used as quest value keys to resolve the actual location for the respective axis.
+
+The orientation and in-tile position of the source object will be kept.
 
 
 ### Action Type 4: Set Game Variable
