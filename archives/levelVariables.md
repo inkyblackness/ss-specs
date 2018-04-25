@@ -21,8 +21,8 @@
 
 **Automap Variables** (27 bytes)
 
-    0000  type        Initialized.
-    0001  type        Zoom; 1 (farthest) .. 5 (nearest)
+    0000  byte        Initialized.
+    0001  byte        Zoom; 1 (farthest) .. 5 (nearest)
     0002  sint32      X-coordinate; (as fix32 value)
     0006  sint32      Y-coordinate; (as fix32 value)
     000A  uint16      Unknown
