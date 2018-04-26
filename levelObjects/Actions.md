@@ -79,6 +79,8 @@ All four ```delta``` values are used as quest value keys to resolve the actual d
 
 ### Action Type 3: Clone/Move Object
 
+> This action is internally called "Create Object". Name not kept to describe actual functionality better.
+
 **Clone/Move Action Details** (16 byte)
 
     0000  int16      Source object index -- quest value key
@@ -105,19 +107,22 @@ The orientation and in-tile position of the source object will be kept.
 
 ### Action Type 4: Set Game Variable
 
+> This action is internally called "Quest Bit". Name not kept to describe actual functionality better.
+
 **Set Game Variable Action Details** (16 byte)
 
-    0000  int32      Variable key
+    0000  int32      Quest value key
     0004  int16      Value
     0006  int16      Operation
     0008  int32      Message 1 (within resource 0x0867)
     000C  int32      Message 2 (within resource 0x0867)
 
-Depending on the ```Variable key```, different sets of variables are modified.
+Depending on the ```quest value key```, different sets of variables are modified.
 The variables are stored in the [Game State Structure](../../archives/gameState.md).
+If no bit in the nibble of ```0xF000``` is set, the quest value key defaults to boolean variables.
 
-If ```Variable key``` has bit ```0x1000``` set, then a int16 variable is modified. The variable index is ```key & 0x003F```.
-If the bit is not set, then a boolean variable is modified. The variable index is ```key & 0x01FF```.
+> For the most part in the main game, the boolean variable selector ```0x2000``` is not set and thus relies on this default handling.
+> There are a few cases where this boolean variable selector is set.
 
 For the int16 variables, ```Value``` must be in the range ```0..0x0FFF```. Operation can be one of the following:
 
@@ -126,12 +131,12 @@ For the int16 variables, ```Value``` must be in the range ```0..0x0FFF```. Opera
     2:  Subtract value
     3:  Multiply with value
     4:  Divide by value (Resulting fractions are cut, divide by 0 is ignored)
+    5:  Modulo by value
 
-For the boolean variables, ```Operation``` is always ```0```. The values are either ```0``` or ```1``` to set that value, or ```2``` to toggle the current value.
+For the boolean variables, ```Operation``` is ignored and always ```0```.
+The values are either ```0``` or ```1``` to set that value, or ```2``` to toggle the current value.
 
-If the resulting value is not zero, the (optional) ```Message 1``` is played/shown. If the resulting value is zero, the (optional) ```Message 2``` is played/shown.
-
-> There are rare occurrences of ```Variable key``` having bit ```0x2000``` set. These behave identical as for the boolean variables and can be ignored.
+If the resulting value is not zero, the (optional) ```Message 1``` is played/shown. If the resulting value is zero, the (optional) ```Message 2``` is played/shown. Both message parameters are quest value keys.
 
 > Operations other than Set or Add are not used in the game for the int16 values.
 
