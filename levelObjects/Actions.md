@@ -370,21 +370,23 @@ All three ```object indices``` are interpreted as quest value keys.
 The ```Delay``` is roughly counted in seconds. Tests showed their actual unit seems to be somewhere at 0.9 seconds.
 
 
-### Action Type 16: Change Effect
+### Action Type 16: Expose
 
 **Change Effect Action Details** (16 byte)
 
     0000  int16      Delta value
     0002  int16      Effect change flag; 0: add delta, 1: remove delta
     0004  int32      Effect type
-    0008  [8]byte    Unknown
+    0008  [8]byte    Unused
+
+This action exposes the hacker to some typed hazard or treatment.
 
 Effect types are:
 
     4: Radiation poisoning
     8: Bio contamination
 
-> The game uses this only once to remove the radiation in level R - treatment area.
+> The main game uses this only once to remove the radiation in level R - treatment area.
 
 
 ### Action Type 17: Set Object Parameter
