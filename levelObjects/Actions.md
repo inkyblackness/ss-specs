@@ -418,6 +418,8 @@ For ```big stuff``` and ```door``` classes, if a value is ```-1``` it doesn't mo
 
 ### Action Type 18: Set Screen Picture
 
+> Internally, this action is called "animate".
+
 **Set Screen Picture Action Details** (16 byte)
 
     0000  int16      Screen 1 object index
@@ -432,17 +434,17 @@ If provided, the ```Single sequence``` source is played first. If provided, the 
 next and looped. If no loop is provided, the last frame of the single sequence will be kept.
 
 
-### Action Type 19: Change State
+### Action Type 19: Hack
 
 This action is a more generic one with several different interpretations, depending on the first field.
 
-**Change State Action Details** (16 byte)
+**Hack Action Details** (16 byte)
 
-    0000  int32      Change type
-    0004  [12]byte   Change parameter
+    0000  int32      Hack type
+    0004  [12]byte   Hack parameter
 
 
-#### Change State Type 1: Toggle repulsor
+#### Hack Action Type 1: Toggle repulsor
 
 **Toggle Repulsor Details** (12 byte)
 
@@ -460,7 +462,7 @@ This action is a more generic one with several different interpretations, depend
     0x02  Toggle Off, stay off
 
 
-#### Change State Type 2: Show Game Code Digit
+#### Hack Action Type 2: Show Game Code Digit
 
 **Show Game Code Digit Details** (12 byte)
 
@@ -469,7 +471,7 @@ This action is a more generic one with several different interpretations, depend
     0008  [4]byte    Unused
 
 
-#### Change State Type 3: Set Parameter from Variable
+#### Hack Action Type 3: Set Parameter from Variable
 
 **Set Parameter From Variable Details** (12 byte)
 
@@ -482,7 +484,7 @@ This action is a more generic one with several different interpretations, depend
 > Use with caution.
 
 
-#### Change State Type 4: Set Button State
+#### Hack Action Type 4: Set Button State
 
 **Set Button State Details** (12 byte)
 
@@ -491,7 +493,7 @@ This action is a more generic one with several different interpretations, depend
     0008  int32      Unknown
 
 
-#### Change State Type 5: Door Control
+#### Hack Action Type 5: Door Control
 
 **Door Control State Details** (12 byte)
 
@@ -507,12 +509,12 @@ Control values:
     4: suppress auto-close
 
 
-#### Change State Type 6: Return to main menu
+#### Hack Action Type 6: Return to main menu
 
 This change has no parameters (all 12 bytes 0x00) and directly returns to the main menu.
 
 
-#### Change State Type 7: Rotate Object
+#### Hack Action Type 7: Rotate Object
 
 **Rotate Object State Details** (12 byte)
 
@@ -534,7 +536,7 @@ limits, then rotation continues normally until it is within the limits.
 If the rotation type is endless, whenever one limit is reached, the object immediately jumps to an orientation as per the other limit.
 
 
-#### Change State Type 8: Remove Objects
+#### Hack Action Type 8: Remove Objects
 
 **Remove Objects State Details** (12 byte)
 
@@ -550,14 +552,14 @@ how many shall be removed. Tests showed that an even number was always considere
 > Avoid using high amounts. Tests did lock up the game.
 
 
-#### Change State Type 9: SHODAN pixelation
+#### Hack Action Type 9: SHODAN pixelation
 
 This change has no parameters (all 12 bytes 0x00) and fills the screen with an image. The used image is hardcoded.
 The game returns to the main menu after the screen is filled.
 It should be used only in cyberspace; Using it in real world messes up tile textures.
 
 
-#### Change State Type 10: Set Condition
+#### Hack Action Type 10: Set Condition
 
 **Set Condition Details** (12 byte)
 
@@ -568,12 +570,12 @@ It should be used only in cyberspace; Using it in real world messes up tile text
 Sets the condition values of specified object.
 
 
-#### Change State Type 11: Show System Analyzer
+#### Hack Action Type 11: Show System Analyzer
 
 This change has no parameters (all 12 bytes 0x00) and forces the display of the "General" tab of the system analyzer in the MFD.
 
 
-#### Change State Type 12: Make Item Radioactive
+#### Hack Action Type 12: Make Item Radioactive
 
 **Make Item Radioactive Details** (12 byte)
 
@@ -587,7 +589,7 @@ The ```Radioactive object``` emits radiation with a radius of 2 tiles while ```W
 > This is used only once, on level 2 for the small room in Beta quadrant. The door is both the emitter as well as the watched object.
 
 
-#### Change State Type 13: Oriented Trigger Object
+#### Hack Action Type 13: Oriented Trigger Object
 
 **Oriented Trigger Object Details** (12 byte)
 
@@ -607,7 +609,7 @@ Value ```0x0000``` specifies north, going clockwise with increasing numbers, mea
 > This trigger is exclusively used on level 8 to trigger three different taunts from Diego.
 
 
-#### Change State Type 14: Close Data MFD
+#### Hack Action Type 14: Close Data MFD
 
 **Close Data MFD Details** (12 byte)
 
@@ -619,13 +621,13 @@ If the specified object is currently displayed in the "Data" MFD, close it and r
 > This change is used only once to close the keypad panel from the reactor if an invalid combination is entered.
 
 
-#### Change State Type 15: Earth destruction by laser
+#### Hack Action Type 15: Earth destruction by laser
 
 This change has no parameters (all 12 bytes 0x00) and lets the player receive the message about the fired laser.
 The game continues after the message has played. Images and text are hardcoded.
 
 
-#### Change State Type 16: Change Object Type Global
+#### Hack Action Type 16: Change Object Type Global
 
 **Change Object Type Global Action Details** (16 byte)
 
