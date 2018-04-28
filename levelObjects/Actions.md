@@ -645,6 +645,33 @@ Class and subclass stay the same. Stats, such as healthpoints, are maintained as
 If ```new type``` specifies a value greater than ```0x0F```, the object will be destroyed.
 
 
+### Action Type 20: Set Tile Textures
+
+> This action is not used in the main game.
+
+**Set Tile Textures Action Details** (16 byte)
+
+    0000   int32     Area
+    0004   int32     Floor Operation
+    0008   int32     Wall Operation
+    000C   int32     Ceiling Operation
+
+The ```area``` defines a rectangular area of affected tiles.
+If ```area``` is less than ```0x10000```, then only one tile is affected, identified by ```0xXXYY```.
+Otherwise, ```area``` is interpreted as two object indices (interpreted as quest value keys), that define the area by their respective location.
+
+The three ```operation``` fields identify, per texture, what to do.
+
+**Texture Operation** (4 byte)
+
+    0000   int16     Source filter
+    0002   int16     Destination texture
+
+If ```source filter``` is either equal to or greater than ```0x1000```, or the tile uses the texture identified by this filter, then set the texture according to ```destination texture``` if this value is less than ```0x1000```.
+
+Said differently, try to set ```destination texture``` only if the value is less than ```0x1000```, and consider only tiles if set as a flood-fill, or if the source matches.
+
+
 ### Action Type 21: Set Critter State
 
 **Set Critter State Action Details** (16 byte)
