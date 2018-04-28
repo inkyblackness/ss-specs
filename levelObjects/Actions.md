@@ -708,7 +708,7 @@ For the ```Background image```, the following values are possible:
     -1  SHODAN (black and white)
     -2  Diego
 
-> The game uses other image references as well, apparently they don't work. This is due to the code being modified to ignore positive background image values.
+> The game uses other image references as well, yet they don't work. This is due to the code being modified to ignore positive background image values.
 
 
 ### Action Type 23: Spawn Objects
@@ -716,17 +716,26 @@ For the ```Background image```, the following values are possible:
 **Spawn Objects Action Details** (16 byte)
 
     0000  int32      Object type; Format 0x00CCSSTT
-    0004  int16      Reference object index 1
-    0006  int16      Reference object index 2
-    0008  int32      Number of objects
-    000C  [4]byte    Unknown
+    0004  int32      Area
+    0008  int32      Quantity - quest value key
+    000C  int32      Flags
 
-This action spawns a random number of objects, randomly distributed within the rectangle defined by the two reference objects.
+This action spawns a random number of objects, randomly distributed within an area.
 The spawned objects are placed at the floor in the center of the tile.
 
-Objects are only spawned if the ```Combat``` value is 1 or higher. Not all classes can be spawned.
+The ```area``` field specifies a rectangular area, either based on two objects, or a square.
+If ```area``` is less than ```0x10000```, then it specifies half of the final side-length of the resulting square, and the trap object's location is at the lower-right corner of this square. Otherwise, ```area``` specifies two object indices that define the rectangle with their locations.
+
+Objects are only spawned if the ```Combat``` value is 1 or higher. If it is 3, then one more object than requested is spawned.
+Not all classes can be spawned.
 > Although the game uses enemies exclusively, ammo, explosives, and patches can be spawned as well.
-> The unknown field at 000C has been found with values between 0x00..0x04 - no recognizable effect.
+
+**Spawn Objects Flags** (4 byte)
+
+    0x00000001       Avoid spawn if tile is within a distance of 7 based on the sum of X and Y deltas.
+    0x00000002       Avoid spawn if hacker looks at the tile within a distance of 14 based on the sum of X and Y deltas.
+    0x00000004       Allow spawn if tile is an elevator tile (identified by elevator music).
+    0x00000008       Force spawn, even if the ceiling is too low, or the tile contains already a critter.
 
 
 ### Action Type 24: Change Object Type
