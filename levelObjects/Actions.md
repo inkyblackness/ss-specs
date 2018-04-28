@@ -353,6 +353,11 @@ Afterwards, the ```next object``` field is incremented. It is reset to ```0``` i
 All three ```object indices``` are interpreted as quest value keys.
 
 
+### Action Type 14: Unused
+
+> This action is not used and does nothing.
+
+
 ### Action Type 15: Receive EMail
 
 **Receive EMail Action Details** (16 byte)
