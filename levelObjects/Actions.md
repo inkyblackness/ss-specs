@@ -169,6 +169,8 @@ the ending cutscene ends the game (showing score and credits).
 
 The delays are all relative to the execution start of the action. Their unit is 0.1 of a second.
 
+All four object indices are quest value keys. They are resolved when this action is executed, not after the delay.
+
 
 ### Action Type 7: Change lighting
 
@@ -238,10 +240,13 @@ tile of the triggering object (```Reference object index``` is ignored).
     0000  int16      Sound index, based on 0x00C9; 0: Play nothing
     0002  int16      Sound play count; 0: endless
     0004  int16      Visual effect
-    0006  [2]byte    Unknown
+    0006  [2]byte    Unused
     0008  int16      Additional visual effect
-    000A  [2]byte    Unknown
-    000C  [4]byte    Unknown
+    000A  [2]byte    Unused
+    000C  int16      Additional visual effect time; 0: endless
+    000E  [2]byte    Unused
+
+All parameters are used as quest value keys.
 
 Visual Effects:
 
@@ -257,8 +262,8 @@ Additional Visual Effects:
     0: None
     1: White flash
     2: Pink flash
-    3: Gray static (fullscreen, endless)
-    4: Vertical panning (including HUD, endless)
+    3: Gray static (fullscreen)
+    4: Vertical panning (including HUD)
 
 
 ### Action Type 9: Change tile heights
