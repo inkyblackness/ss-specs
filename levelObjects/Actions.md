@@ -279,9 +279,23 @@ Tile coordinates, as well as the heights, are used as quest value keys.
 
 For the height fields a value equal to, or greater than ```0x0100``` indicates "don't move".
 
-> The ceiling height has also been encountered to be ```0x0020```, also not moving. This is due to an overflow 
+> The ceiling height has also been encountered to be ```0x0020```, also not moving.
 
 The ```silent flag``` only works for floor changes. If the ceiling changes height, it makes sound regardless of this parameter.
+
+
+### Action Type 10: Change Terrain
+
+    0000  int32      Tile X
+    0004  int32      Tile Y
+    0008  int32      Tile type
+    000C  int32      Terrain parameter (slope height)
+
+All four parameters are used as quest value keys.
+
+If ```tile type``` or ```terrain parameter``` has the bit ```0x4000``` set, the respective property will not be changed.
+
+> This action is not used in the main game.
 
 
 ### Action Type 11: Random Timer
