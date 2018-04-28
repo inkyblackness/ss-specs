@@ -298,9 +298,9 @@ If ```tile type``` or ```terrain parameter``` has the bit ```0x4000``` set, the 
 > This action is not used in the main game.
 
 
-### Action Type 11: Random Timer
+### Action Type 11: Scheduled Trap
 
-**Random Timer Action Details** (16 byte)
+**Scheduled Trap Action Details** (16 byte)
 
     0000  int32      Object index
     0004  int32      Time interval
@@ -308,14 +308,19 @@ If ```tile type``` or ```terrain parameter``` has the bit ```0x4000``` set, the 
     000C  int16      Variance
     000E  [2]byte    Unused
 
-The ```Time interval``` specifies in 0.1 seconds units within which time span the given object shall be triggered regularly.
-The ```Variance``` adds some randomness to the interval. Usually low numbers are encountered.
+Parameters ```object index```, ```time interval```, and ```variance``` (if set != 0) are used as quest value keys.
 
-> The unit of the variance is not clear. A value of ```0x0200``` caused random delays of up to 25 seconds.
+The ```time interval``` specifies in 0.1 seconds units within which time span the identified object shall be triggered regularly.
+The ```variance``` adds some randomness to the interval. Usually low numbers are encountered in the main game.
 
-The ```Activation value``` must be ```0xFFFF``` or higher for this action to work.
+> The unit of the variance is that of the engine-internal ticks.
 
-> The game has the ```Activation value``` typically set to ```0xFFFF```, ```0x10000``` or ```0x11111```. No difference has been found.
+The ```activation value``` has three different uses:
+* greater than or equal to ```0xFFFF```: endless scheduling.
+* bit ```0x1000``` set AND boolean game variable identified by this value key is true: schedule trigger
+* value between ```0x0000``` (exclusive) and ```0x1000``` (exclusive): remaining schedule amount, down to zero
+
+> The game has the ```Activation value``` typically set to ```0xFFFF```, ```0x10000``` or ```0x11111``` in the main game.
 
 
 ### Action Type 12: Cycle Objects
