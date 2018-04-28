@@ -338,9 +338,9 @@ This action triggers objects from the list of ```object indices```. The ```next 
 Afterwards, the ```next object``` field is incremented. It is reset to ```0``` if it is either greater than ```2```, or it is ```2``` and the third object index is ```0```.
 
 
-### Action Type 13: Delete Object
+### Action Type 13: Destroy Object
 
-**Delete Object Action Details** (16 byte)
+**Destroy Object Action Details** (16 byte)
 
     0000  int16      Object 1 index
     0002  int16      Unknown
@@ -349,6 +349,8 @@ Afterwards, the ```next object``` field is incremented. It is reset to ```0``` i
     0008  int16      Object 3 index
     000A  int16      Unknown
     000C  int32      Message index (within resource 0x0867); 0: no message 
+
+All three ```object indices``` are interpreted as quest value keys.
 
 
 ### Action Type 15: Receive EMail
