@@ -325,13 +325,17 @@ The ```activation value``` has three different uses:
 
 ### Action Type 12: Cycle Objects
 
+> Internally, this action is called "Alternating splitter"
+
 **Cycle Objects Action Details** (16 byte)
 
     0000  [3]int32   Object indices
     000C  int32      Next object
 
-This action triggers objects from the list of ```Object indices```. The ```Next object``` field indicates which entry to trigger next.
-Afterwards, the ```Next object``` field is incremented. It is reset to ```0``` if either ```3``` is reached or the next object index is ```0```.
+All three ```object indices``` are interpreted as quest value keys.
+
+This action triggers objects from the list of ```object indices```. The ```next object``` field indicates which entry to trigger next.
+Afterwards, the ```next object``` field is incremented. It is reset to ```0``` if it is either greater than ```2```, or it is ```2``` and the third object index is ```0```.
 
 
 ### Action Type 13: Delete Object
