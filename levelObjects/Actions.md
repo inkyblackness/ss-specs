@@ -740,13 +740,14 @@ Not all classes can be spawned.
 
 ### Action Type 24: Change Object Type
 
+> Internally, this action is called "transmogrify".
+
 **Change Object Type Action Details** (16 byte)
 
     0000  int32      Object index
     0004  int16      New type
     0006  int16      Reset mask
-    0008  int32      Unknown
-    000C  [4]byte    Unused
+    0008  [8]byte    Unused
 
 This action sets, or toggles, the type of an object. It is primarily used to extend and retract force bridges.
 > For bridges in their retracted state, the game uses "Elephant, Jorp" (```7/7/8```), an invisible dummy type.
@@ -756,5 +757,6 @@ then the new type is calculated as ```New type``` XOR ```Reset mask```.
 > So, to toggle between ```0x08``` and ```0x09```, ```New type``` should be ```0x08``` and ```Reset mask``` must be set to ```0x01```.
 > To toggle between ```0x08``` and ```0x07```, ```New type``` should be ```0x07``` and ```Reset mask``` must be set to ```0x0F```.
 
-> The unknown field at ```0008``` is set to ```1``` for only one force bridge in the game (on level 2) and does not seem to have any effect.
+> The first byte of unused field at ```0008``` is set to ```1``` for only one force bridge in the game (on level 2) and is ignored.
+> It appears that an earlier version of the code supported suppressing of animations.
 
