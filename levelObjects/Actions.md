@@ -692,6 +692,8 @@ See [Critters](14_Critter/levelCritterEntry.md) for the enumeration values of cr
 
 ### Action Type 22: Trap Message
 
+> Internally, such messages are called "barks".
+
 **Trap Message Action Details** (16 byte)
 
     0000  sint32     Background image
@@ -706,7 +708,7 @@ For the ```Background image```, the following values are possible:
     -1  SHODAN (black and white)
     -2  Diego
 
-> The game uses other image references as well, apparently they don't work.
+> The game uses other image references as well, apparently they don't work. This is due to the code being modified to ignore positive background image values.
 
 
 ### Action Type 23: Spawn Objects
