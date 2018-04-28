@@ -272,12 +272,16 @@ Additional Visual Effects:
     0004  int32      Tile Y
     0008  int16      Target floor height; 0..31, measured from floor absolute zero
     000A  int16      Target ceiling height; 1..31, measured from floor absolute zero
-    000C  [4]byte    Unknown
+    000C  [2]byte    Unused
+    000E  int16      Silent flag; 0: play sound, 1: no sound
 
-For the height fields the value ```0x0FFF```, as well as ```0x0100``` indicate "don't move". The ceiling height has also been encountered to be ```0x0020```, also not moving.
+Tile coordinates, as well as the heights, are used as quest value keys.
 
-> The unknown field at 0x000C often has values set, to no effect.
+For the height fields a value equal to, or greater than ```0x0100``` indicates "don't move".
 
+> The ceiling height has also been encountered to be ```0x0020```, also not moving. This is due to an overflow 
+
+The ```silent flag``` only works for floor changes. If the ceiling changes height, it makes sound regardless of this parameter.
 
 
 ### Action Type 11: Random Timer
