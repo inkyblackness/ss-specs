@@ -471,26 +471,27 @@ This action is a more generic one with several different interpretations, depend
     0008  [4]byte    Unused
 
 
-#### Hack Action Type 3: Set Parameter from Variable
+#### Hack Action Type 3: Set Fixture Parameter from Variable
 
-**Set Parameter From Variable Details** (12 byte)
+**Set Fixture Parameter From Variable Details** (12 byte)
 
-    0000  int32      Target object index
-    0004  int32      Parameter number (1 based)
+    0000  int32      Fixture object index
+    0004  int32      Parameter number (1..4)
     0008  int32      Game integer variable index
 
-> This change is used only twice, exclusively to set the codes for the reactor in the base game.
-> The change itself does not check for target object type and allows modification of (seemingly) arbitrary objects.
-> Use with caution.
+> This hack is used only twice, exclusively to set the codes for the reactor in the base game.
+> Similar to the "Set Object Parameter" action, the interpretation of the modified parameter is depending on the action in the target fixture.
 
 
-#### Hack Action Type 4: Set Button State
+#### Hack Action Type 4: Set Frame State
 
-**Set Button State Details** (12 byte)
+> Although this hack is called "fixture frame", it doesn't check for the type of the target object and allows to modify any object's frame state.
+
+**Set Frame State Details** (12 byte)
 
     0000  int32      Button object index
-    0004  int32      New state; 0: off, 1: on
-    0008  int32      Unknown
+    0004  int32      New frame state; 0: off, 1: on
+    0008  int32      MFD update flag; 0: ignored, != 0: update MFD
 
 
 #### Hack Action Type 5: Door Control
@@ -506,12 +507,12 @@ Control values:
     1: open door
     2: close door
     3: toggle door
-    4: suppress auto-close
+    4: disable auto-close
 
 
 #### Hack Action Type 6: Return to main menu
 
-This change has no parameters (all 12 bytes 0x00) and directly returns to the main menu.
+This hack has no parameters (all 12 bytes 0x00) and directly returns to the main menu.
 
 
 #### Hack Action Type 7: Rotate Object
@@ -527,7 +528,7 @@ This change has no parameters (all 12 bytes 0x00) and directly returns to the ma
     0009  byte       Backward limit
     000A  [2]byte    Unused
 
-This state change rotates an object along one axis. This rotation can be endless in one direction, or a back and forth rotation,
+This hack rotates an object along one axis. This rotation can be endless in one direction, or a back and forth rotation,
 depending on the ```Type``` field.
 
 If the rotation type is back and forth, then the object is rotated between the two limits. Should the object start outside of these
@@ -536,25 +537,26 @@ limits, then rotation continues normally until it is within the limits.
 If the rotation type is endless, whenever one limit is reached, the object immediately jumps to an orientation as per the other limit.
 
 
-#### Hack Action Type 8: Remove Objects
+#### Hack Action Type 8: Remove Critters
 
-**Remove Objects State Details** (12 byte)
+> This hack is called "armageddon" internally, most likely in a reference to a similar action in the game Lemmings.
+
+**Remove Critters State Details** (12 byte)
 
     0000  int32      Object type - 0x00CCSSTT
-    0004  int32      Amount
+    0004  int32      Radius
     0008  int32      Unused
 
-This state change removes objects of the specified object type from the level. The ```Amount``` field appears to be a guideline on
-how many shall be removed. Tests showed that an even number was always considered as the lower odd number. (Specify 2, only one was removed.)
+This hack removes critters of the specified object type from the level.
+The ```radius``` specifies how many shall be removed around the tile of the action's object, in tiles.
 
-> This action only works once. Where its state is stored is not determined yet.
-> Objects are not removed at random, tests showed the objects with the highest object indices were always removed first.
-> Avoid using high amounts. Tests did lock up the game.
+> Avoid using high amounts. The engine can remove only a certain amount of objects in one tick (100) and has no guard if more are removed.
+> A memory overrun occurs in this case.
 
 
 #### Hack Action Type 9: SHODAN pixelation
 
-This change has no parameters (all 12 bytes 0x00) and fills the screen with an image. The used image is hardcoded.
+This hack has no parameters (all 12 bytes 0x00) and fills the screen with an image. The used image is hardcoded.
 The game returns to the main menu after the screen is filled.
 It should be used only in cyberspace; Using it in real world messes up tile textures.
 
@@ -567,12 +569,13 @@ It should be used only in cyberspace; Using it in real world messes up tile text
     0004  [4]byte    Condition
     0008  [4]byte    Unused
 
-Sets the condition values of specified object.
+Sets the condition values of specified object (fixture or trap).
 
 
 #### Hack Action Type 11: Show System Analyzer
 
-This change has no parameters (all 12 bytes 0x00) and forces the display of the "General" tab of the system analyzer in the MFD.
+    0000  int32      Page index (0..2)
+    0004  [8]byte    Unused
 
 
 #### Hack Action Type 12: Make Item Radioactive
@@ -591,6 +594,9 @@ The ```Radioactive object``` emits radiation with a radius of 2 tiles while ```W
 
 #### Hack Action Type 13: Oriented Trigger Object
 
+> This hack is exclusively used on level 8 to trigger three different taunts from Diego.
+> Hence it is also called "Diego Taunt" in the source.
+
 **Oriented Trigger Object Details** (12 byte)
 
     0000  uint16     Horizontal direction
@@ -598,15 +604,13 @@ The ```Radioactive object``` emits radiation with a radius of 2 tiles while ```W
     0004  int32      Object index
     0008  [4]byte    Unused
 
-This change triggers the given object only if the player looks to the given ```Horizontal direction``` (+/- 45°).
+This hack triggers the given object only if the player looks to the given ```Horizontal direction``` (+/- 45°).
 Value ```0x0000``` specifies north, going clockwise with increasing numbers, meaning:
 
     0x0000  North (matches between NW and NE)
     0x4000  East (matches between NE and SE)
     0x8000  South (matches between SE and SW)
     0xC000  West (matches between SW and NW)
-
-> This trigger is exclusively used on level 8 to trigger three different taunts from Diego.
 
 
 #### Hack Action Type 14: Close Data MFD
@@ -618,25 +622,27 @@ Value ```0x0000``` specifies north, going clockwise with increasing numbers, mea
 
 If the specified object is currently displayed in the "Data" MFD, close it and return to previous display.
 
-> This change is used only once to close the keypad panel from the reactor if an invalid combination is entered.
+> This hack is used only once to close the keypad panel from the reactor if an invalid combination is entered.
 
 
 #### Hack Action Type 15: Earth destruction by laser
 
-This change has no parameters (all 12 bytes 0x00) and lets the player receive the message about the fired laser.
+This hack has no parameters (all 12 bytes 0x00) and lets the player receive the message about the fired laser.
 The game continues after the message has played. Images and text are hardcoded.
 
 
-#### Hack Action Type 16: Change Object Type Global
+#### Hack Action Type 16: Change Critter Type Global
 
-**Change Object Type Global Action Details** (16 byte)
+**Change Critter Type Global Action Details** (16 byte)
 
-    0000  int32      Object type - 0x00CCSSTT
+    0000  int32      Critter type - 0x00CCSSTT
     0004  byte       New type
     0005  [7]byte    Unused
 
-This state change morphs all objects of given object type in the level and changes their type to the given one.
+This hack morphs all critters of given object type in the level and changes their type to the given one.
 Class and subclass stay the same. Stats, such as healthpoints, are maintained as well.
+
+If ```new type``` specifies a value greater than ```0x0F```, the object will be destroyed.
 
 
 ### Action Type 21: Set Critter State
