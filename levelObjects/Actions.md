@@ -393,20 +393,27 @@ Effect types are:
 
 **Set Object Parameter Action Details** (16 byte)
 
-    0000  int32      Object index
+    0000  int16      Object index 0
+    0002  int16      Object index 2
     0004  int32      Value 1
     0008  int32      Value 2
     000C  int32      Value 3
 
-This action sets parameters of a target object. Which value is applied to which parameter is dependent on the target.
+Both object indices are treated as quest value keys.
 
-The following table lists the known mappings. If a value is ```0xFFFFFFFF``` it doesn't modify the target.
+This action sets parameters of target objects. Which value is applied to which parameter is dependent on the target.
 
-| Target  | Value 1      | Value 2      | Value 3         |
-|:-------:|--------------|--------------|-----------------|
-| Screen  | Frame count  | Unknown      | Picture source  |
-| Door    | Unknown      | Unknown      | Unknown         |
-| Trigger | Unknown      | Unknown      | Unknown         |
+The following table lists the mappings.
+
+| Target Class  | Value 1         | Value 2                          | Value 3         |
+|:-------------:|-----------------|----------------------------------|-----------------|
+| Big Stuff     | Cosmetic value  | Data1                            | Data2           |
+| Door          | Locked          | ```0xFF00```: Message index, ```0x00FF```: Cosmetic value | ```0xFF00```: Access level, ```0x00FF```: Auto-close time |
+| Fixture, Trap | Parameter Number (1..4) | Parameter Value          | Unused          |
+
+For ```big stuff``` and ```door``` classes, if a value is ```-1``` it doesn't modify the respective target parameter.
+
+> Which parameters are specifially affected for fixtures and traps depends on their respective interpretation of the 16 bytes.
 
 
 ### Action Type 18: Set Screen Picture
