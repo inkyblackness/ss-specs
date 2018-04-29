@@ -349,11 +349,11 @@ Afterwards, the ```next object``` field is incremented. It is reset to ```0``` i
 **Destroy Object Action Details** (16 byte)
 
     0000  int16      Object 1 index
-    0002  int16      Unknown
+    0002  int16      Unused
     0004  int16      Object 2 index
-    0006  int16      Unknown
+    0006  int16      Unused
     0008  int16      Object 3 index
-    000A  int16      Unknown
+    000A  int16      Unused
     000C  int32      Message index (within resource 0x0867); 0: no message 
 
 All three ```object indices``` are interpreted as quest value keys.
