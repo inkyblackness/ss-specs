@@ -586,18 +586,20 @@ Sets the condition values of specified object (fixture or trap).
     0004  [8]byte    Unused
 
 
-#### Hack Action Type 12: Make Item Radioactive
+#### Hack Action Type 12: Make Area Radioactive
 
-**Make Item Radioactive Details** (12 byte)
+> Internally this hack is called "spew". Yet it only supports spillage of radiation.
 
-    0000  int32      Radioactive object index
+**Make Area Radioactive Details** (12 byte)
+
+    0000  int32      Reference object index
     0004  int16      Watched object index
     0006  int16      Watched object trigger state
-    0008  [4]byte    Unused
+    0008  int32      Spew type. Only value of 0 supported (= radiation).
 
-The ```Radioactive object``` emits radiation with a radius of 2 tiles while ```Watched object``` is in given state (1 = active/open).
+The rectangular area defined by ```reference object``` and the object of the action emits radiation while ```watched object``` is in given state (1 = active/open).
 
-> This is used only once, on level 2 for the small room in Beta quadrant. The door is both the emitter as well as the watched object.
+> This is used only once, on level 2 for the small room in Beta quadrant. The door is both the reference as well as the watched object.
 
 
 #### Hack Action Type 13: Oriented Trigger Object
