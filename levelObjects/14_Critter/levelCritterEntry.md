@@ -70,3 +70,20 @@ The ```Primary critter state``` holds the state the critter is currently behavin
     0x07  confused
  
 > Various combinations of the state values can be found in the main game. While they have different effects, their pattern is not clear.
+
+**Critter Mood Enumeration**
+
+    0     Friendly
+    1     Neutral
+    2     Hostile
+    3     Isolation
+    4     Attacking
+
+**Critter Orders Enumeration**
+
+    0     Guard
+    1     Roam
+    2     Sleep
+    3     Patrol between two points
+    4     Highway - Follow path
+    5     No move (guarding without moving)

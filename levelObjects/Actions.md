@@ -682,18 +682,32 @@ Said differently, try to set ```destination texture``` only if the value is less
 
 **Set Critter State Action Details** (16 byte)
 
-    0000  int16      Unknown
-    0002  int16      Unknown
-    0004  int16      Reference object index 1
-    0006  int16      Reference object index 2
-    0008  int32      New critter state
-    000C  int16      Unknown
-    000E  int16      Unused
+    0000  int16      Filter parameter
+    0002  int16      Filter type
+    0004  int32      Area
+    0008  int32      New critter mood -- ignored if value >= 0x1000
+    000C  int32      New critter orders -- ignored if value >= 0x1000
 
-Sets the state of critters inside the rectangle defined by the two reference objects.
+Sets the state of critters.
 See [Critters](14_Critter/levelCritterEntry.md) for the enumeration values of critter states.
 
-> There are instances in which the first index is zero, while the unknown field at ```0000``` is set to a value.
+The ```filter type``` parameter defines via bits which critters should be considered and how the ```filter parameter``` is interpreted.
+
+**Filter Type Bitfield** (2 byte)
+
+    0x0001  Consider loner critters only. If not set, only consider pack critters.
+    0x0002  Ignore loner/pack property of critter.
+    0x0004  If set, ```filter parameter``` identifies one specific critter to affect (regardless of remaining bits). Use area otherwise.
+    0x0008  Affect every critter in the area, regardless of subtype/type. (Note: only works for small areas)
+
+If neither bits ```0x0004```, nor ```0x0008``` are set, then ```filter parameter``` specifies the subclass and type of affected critters (```0xSSTT```).
+
+The ```area``` parameter defines the affected tiles in the following ways:
+* All zero: affect entire level
+* Lower 16 bits zero: upper 16 bits define half of the side-length of a square, with the tile of the action object at its center.
+* Two 16 bit values identifying reference objects that define a rectangular area.
+
+Unless the ```new critter mood``` is ```friendly```, mood is ignored on combat level 0.
 
 
 ### Action Type 22: Trap Message
