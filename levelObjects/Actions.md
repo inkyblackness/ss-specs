@@ -124,7 +124,7 @@ If no bit in the nibble of ```0xF000``` is set, the quest value key defaults to 
 > For the most part in the main game, the boolean variable selector ```0x2000``` is not set and thus relies on this default handling.
 > There are a few cases where this boolean variable selector is set.
 
-For the int16 variables, ```Value``` must be in the range ```0..0x0FFF```. Operation can be one of the following:
+For the int16 variables, ```value``` must be in the range ```0..0x0FFF```. ```Operation``` can be one of the following:
 
     0:  Set value
     1:  Add value
@@ -133,10 +133,10 @@ For the int16 variables, ```Value``` must be in the range ```0..0x0FFF```. Opera
     4:  Divide by value (Resulting fractions are cut, divide by 0 is ignored)
     5:  Modulo by value
 
-For the boolean variables, ```Operation``` is ignored and always ```0```.
+For the boolean variables, ```operation``` is ignored and always ```0```.
 The values are either ```0``` or ```1``` to set that value, or ```2``` to toggle the current value.
 
-If the resulting value is not zero, the (optional) ```Message 1``` is played/shown. If the resulting value is zero, the (optional) ```Message 2``` is played/shown. Both message parameters are quest value keys.
+If the resulting value is not zero, the (optional) ```message 1``` is played/shown. If the resulting value is zero, the (optional) ```message 2``` is played/shown. Both message parameters are quest value keys.
 
 > Operations other than Set or Add are not used in the game for the int16 values.
 
@@ -176,11 +176,10 @@ All four object indices are quest value keys. They are resolved when this action
 
 **Change Lighting Action Details** (16 byte)
 
-    0000  int16      Light type extent
-    0002  int16      Reference object index
+    0000  int16      Light type extent - quest value key
+    0002  int16      Reference object index - quest value key
     0004  int16      Transition type. 0x0000: immediate, 0x0001: fade, 0x0100: flicker
-    0006  byte       Unknown -- Only four instances have this byte set to 0x01. No detectable effect.
-    0007  byte       Light modification -- 0x00: light on, 0x10: light off
+    0006  int16      Transition state
     0008  byte       Light type
     0009  byte       Unused
     000A  int16      Light surface. 0x0000: floor, 0x0001: ceiling, 0x0002: floor and ceiling
@@ -190,13 +189,19 @@ These actions modify the light deltas of the affected tiles. Such actions can no
 values of a tile. If a tile is fully bright by default, nothing can change that.
 The configured light parameters are absolute values.
 
+The ```transition state``` is a bitmask storing the state for a change.
+
+**Transition state** (2 bytes)
+
+    0x0FFF  Step counter
+    0x1000  0: light on, 1: light off
 
 **Light type** (1 byte)
 
     0x00  Rectangular
-    0x01  Linear gradient (not working)
-    0x02  (behaves like rectangular)
-    0x03  Circular gradient
+    0x01  Linear gradient (East-West smooth)
+    0x02  Linear gradient (North-South smooth)
+    0x03  Radial gradient
 
 **Gradient light type parameter** (4 bytes)
 
@@ -205,12 +210,9 @@ The configured light parameters are absolute values.
     0002  byte       On light begin intensity
     0003  byte       On light end intensity
 
-The intensity values have a range of ```0x00```..```0x7F```. A value of around ```0x14``` lights a tile as if it were fully lit.
-Values above will spill over to the surrounding tiles.
-
 #### Rectangular light (type 0x00)
 
-For this light type, the ```Light type extent``` specifies a second object index. All tiles within this rectangle are affected.
+For this light type, the ```light type extent``` specifies a second object index. All tiles within this rectangle are affected.
 
 **Light type parameter** (4 bytes)
 
@@ -218,19 +220,23 @@ For this light type, the ```Light type extent``` specifies a second object index
     0001  byte       On light value 0x00..0x0F
     0002  [2]byte    Unused
 
-#### Linear gradient light (type 0x01)
+#### Linear gradient light (types 0x01, 0x02)
 
-For this light type, the ```Light type extent``` specifies a second object index. The begin of the gradient is the tile with
-of the primary index, the end is the tile of the second index.
+For this light type, the ```light type extent``` specifies a second object index to define the affected area.
 
-> This light type is not used in the regular game.
-> Furthermore, this light type was only created manually and could not be reproduced in the editor environment.
+For these types, the ```gradient light type parameter``` intensity values have a range of ```0x00```..```0x0F```.
+
+> These light types are not used in the regular game.
 
 
-#### Circular gradient light (type 0x03)
+#### Radial gradient light (type 0x03)
 
-For this light type, the ```Light type extent``` specifies a radius, in tiles, of affected tiles. The begin of the gradient is always the
-tile of the triggering object (```Reference object index``` is ignored).
+For this light type, the ```light type extent``` specifies a radius, in tiles, of affected tiles. The begin of the gradient is always the
+tile of the triggering object (```reference object index``` is ignored).
+
+The intensity values of the ```gradient light type parameter``` have a range of ```0x00```..```0x7F```.
+A value of around ```0x14``` lights a tile as if it were fully lit.
+Values above will spill over to the surrounding tiles.
 
 
 ### Action Type 8: Effect
