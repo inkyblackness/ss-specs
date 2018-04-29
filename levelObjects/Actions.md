@@ -1,8 +1,9 @@
 ## Actions
 
-Level trigger and various panels (buttons and the like) make use of actions that perform some state change and/or give some indication to the player. They are essentially what make a level (and the game in total) come to life.
+Level traps and various fixtures (buttons and the like) make use of actions that perform some state change and/or give some indication to the player. They are essentially what make a level (and the game in total) come to life.
 
 Actions can be triggered by various sources. They may have conditions that first have to be met before the action is actually performed. The type of the action determines how to interpret the details (parameters) of the action.
+
 
 ### Quest Value Key
 
@@ -26,6 +27,7 @@ The ```Use quota``` indicates how often more this action can be executed. ```0``
 The value is only decremented if it is not zero and the condition was met.
 If the value is decremented to zero after the action was executed, the object where the action is in is deleted.
 
+Internally the ```action details``` are processed as four sint32 values. This documentation dissects them further where appropriate.
 
 ### Action Type 1: Transport hacker
 
