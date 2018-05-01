@@ -73,10 +73,12 @@ The outermost tiles of the level (the 'border') should always be solid tiles. If
     0001  byte     Floor Info
     0002  byte     Ceiling Info
     0003  byte     Slope height. Valid for any non-flat tile.
-    0004  int16    Index to first object in cross-reference table.
-    0006  int16    Texture Info
+    0004  sint16   Index to first object in cross-reference table.
+    0006  uint16   Texture Info
     0008  uint32   Flags
-    000C  [3]byte  Unknown -- first byte always 0xFF
+    000C  byte     Sub Clip     -- always 0xFF
+    000D  byte     Clear Solid  -- unknown
+    000E  byte     Unused
     000F  byte     Light delta
 
 **Type** (1 byte)
@@ -132,14 +134,16 @@ Cyberspace levels specify the palette color index for floor and ceiling of the S
 
     Real World:
     0x80000000    Tile visited (automapper)
-    0x10000000    Unknown
+    0x70000000    Unused
     0x0F000000    Ceiling shadow
+    0x00F00000    Unused
     0x000F0000    Floor shadow
-    0x0000F000    Music index
+    0x0000E000    Music index
+    0x00001000    Music "peril"
     0x00000C00    Slope control. See below.
-    0x00000200    Remodeled flag ("spooky" music)
+    0x00000200    Deconstructed flag ("spooky" music)
     0x00000100    Use wall texture from adjacent tile
-    0x00000080    Unknown -- only used for computer room on level 7
+    0x00000080    Unused -- only set for computer room on level 7
     0x00000040    Flip wall texture horizontally alternating
     0x00000020    Flip wall texture horizontally
     0x0000001F    Offset for wall textures
@@ -147,7 +151,8 @@ Cyberspace levels specify the palette color index for floor and ceiling of the S
     Cyberspace:
     0x01000000    Flight pull: Strong pull towards floor
     0x000F0000    Flight pull
-    0x0000F000    Music Index
+    0x0000E000    Music index
+    0x00001000    Music "peril"
     0x00000C00    Slope control. See below.
     0x00000060    Game-Of-Life flags (either needs to be set)
 
@@ -218,6 +223,7 @@ This alternation is inverted if additionally bit ```0x00000020```` is set.
 The high nibble specifies the light delta to the ceiling shadow. The low nibble specifies the light delta to the floor shadow.
 The [Change lighting action](../levelObjects/Actions.md#action-type-7-change-lightning) modifies these values.
 
+
 ### Texture map
 
 This resource is a list of int16 texture identifier in resource ```L07``` with a fixed length of 108 bytes.
@@ -226,6 +232,7 @@ Although the field for wall textures would allow for 64 textures, the resource c
 The first 32 textures can be used for floor/ceiling as well.
 
 > The engine caches these textures when reloading a savegame with the same level.
+> In the original source this list is also referred to as ```loaded textures``` or ```loved_textures```.
 > The 'texture' index for space is 0x00CD, the observation grating has 0x00B1 (ceiling on groves and bridge)
 
 See [Level Textures](../content/LevelTextures.md) for further information.
