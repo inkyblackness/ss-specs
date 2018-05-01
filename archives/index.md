@@ -42,7 +42,7 @@ Save-game files contain 4 further resources that are not present in archive.dat 
   * ```L03``` Object version number. int32 with value ```0x0000001B``` for all maps.
   * ```L04``` [Basic level information](mapInformation.md)
   * ```L05``` [Map Layout](mapInformation.md)
-  * ```L06``` [Level timer](levelTimer.md)
+  * ```L06``` [Level schedules](levelSchedules.md)
   * ```L07``` [Level texture map](mapInformation.md)
   * ```L08``` [Master object table](levelObjects.md#level-object-table)
   * ```L09``` [Level object cross-reference table](levelObjects.md#level-object-cross-reference-table)

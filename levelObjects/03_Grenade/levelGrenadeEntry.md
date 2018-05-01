@@ -21,9 +21,9 @@
     0x0005  Landed live grenade (land mines only, can't be picked up)
 
 
-The timer settings of explosives are stored in the [game state](gameState.md).
+The timer settings of explosives are stored in the [game state](../../archives/gameState.md).
 
-The ```Timer time``` field is set to the same value as in the [level timer](levelTimer.md), though modifying this value doesn't have an effect. The level timer is the authorative entry when to trigger the explosive.
+The ```Timer time``` field is set to the same value as in the [level schedules](../../archives/levelSchedules.md), though modifying this value doesn't have an effect. The level timer is the authorative entry when to trigger the explosive.
 
 
 ### Contact explosives 3/0/x
