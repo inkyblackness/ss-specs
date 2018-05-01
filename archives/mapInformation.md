@@ -6,40 +6,59 @@
 
 ```L04```, a compressed resource, contains the basic information about a level (a map).
 
+> In the original source, this structure is called ```FullMap```.
+
 **Level Information** (58 bytes)
 
-    0000  int32     Unknown       - always 64 in the archives.
-    0004  int32     Unknown       - always 64 in the archives.
-    0008  int32     Unknown       - always 6 in the archives.
-    000C  int32     Unknown       - always 6 in the archives.
-    0010  int32     Height shift
-    0014  int32     Placeholder   - ignore
-    0018  int32     Cyberspace flag. 0: real life, 1: cyberspace
-    001C  byte[9]   Unknown
-    0025  int32     Timer value 1 - always 64 in the archives
-    0029  int32     Timer count
-    002D  int32     Timer value 2 - always 8 in the archives
-    0031  byte[9]   Unknown
+    0000  sint32    X Size        - always 64 in the archives.
+    0004  sint32    Y Size        - always 64 in the archives.
+    0008  sint32    X Shift       - always 6 in the archives.
+    000C  sint32    Y Shift       - always 6 in the archives.
+    0010  sint32    Z Shift
+    0014  byte[4]   Placeholder   - ignore
+    0018  byte      Cyberspace flag. 0: real life, 1: cyberspace
+    0019  byte[12]  Unused
+    0025  byte[21]  Scheduler Info
 
-> The first four fields don't seem to be respected by the engine. A modification of these values does not show any result.
-> According to the documentation of TSSHP, these should specify the map width and height. The values add up, but as long as they
-> don't show any effect, they are useless.
+> The engine doesn't support maps with more than 4096 tiles. By default, this is a map of 64x64 tiles.
+> While other combinations of X/Y sizes are feasible, as long as the respective shift parameter matches, there is
+> hardly a point to try something different than 64x64.
 
-The ```Height shift``` determines the height of the level as well as the size of one height unit for tiles.
+The ```z shift``` determines the height of the level as well as the size of one height unit for tiles.
 The level is one tile width high (perfect cube) if the shift value is 5.
 A shift value of 0 gives 32 tiles of height, a value of 7 one fourth (1/4) of a tile. So it's 32, 16, 8, 4, 2, 1, 1/2, 1/4 for 0..7.
 > Most levels have a shift value of 3, giving 4 tile widths of height. Security (Level 8) has a shift value of 1 - 16 tiles.
 
 One height unit is the 32th of the level height. The higher the level is, the larger are the visible jumps of any height value.
 
-Although any level can be marked as cyberspace - even the starting level - only levels 10, 14 and 15 properly work. Apparently these level numbers are hardcoded in the engine. Cyberspace items in other levels don't work as expected, especially the exit port either crashes the game or puts the player at the start of the cyberspace level again.
+Although any level can be marked as cyberspace - even the starting level - only levels 10, 14 and 15 properly work.
+This is due to the engine considering 10 and everything above 13 to be cyberspace.
+Cyberspace items in other levels don't work as expected, especially the exit port either crashes the game or puts the player at the start of the cyberspace level again.
 
 As a further hardcoded limitation, only cyberspace levels 14 and 15 have a time limit. Level 10 is without limit.
 
-The ```placeholder``` has no use in the archives.
-> According to the documentation of TSSHP, this field is used as a placeholder for a pointer within the game logic.
+The ```placeholder``` has no use in the archives. In the engine, this field is used as a placeholder for a pointer within the game logic.
 
-```Timer value 1``` and ```Timer value 2``` require to be set to the values ```0x40``` and ```0x08``` respectively. Otherwise the level timers (stored in ```L06```) may not work properly.
+The ```schedule``` information is the primary entry for level-specific timers.
+
+
+**Level Scheduler Information** (21 bytes)
+
+    0000  sint32    Size          - always 64 in the archives
+    0004  sint32    Schedule count
+    0008  sint32    Element size  - always 8 in the archives
+    000C  byte      Grow          - always 0 in the archives
+    000D  byte[4]   Pointer1
+    0011  byte[4]   Pointer2
+
+
+```Size``` and ```element size``` require to be set to the values ```0x40``` and ```0x08``` respectively. Otherwise the level timers (stored in ```L06```) will not work properly.
+
+The ```element size``` of 8 comes from the size of scheduler entries.
+
+```Grow```, a boolean, would indicate to the scheduler system to allow reallocating the timer list to contain more than ```size``` amount of entries. Yet, the engine always initializes this with 0 (= don't grow).
+
+The two pointer fields are used engine-internally.
 
 
 #### Tile map
