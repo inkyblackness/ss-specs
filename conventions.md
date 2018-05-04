@@ -58,11 +58,10 @@ Unless otherwise noted, integer values are stored in [little-endian](http://en.w
 Due hardware limitations and slow perfomance of float point operations, System Shock uses fixed point number represenation of real data type.
 Usually engine uses [Q15.16](https://en.wikipedia.org/wiki/Q_(number_format)) format (1 bit for sign, 15 bits for integer part, 16 bits for fractional):
 
-    0x 0 000 0000
-       | |   |
-       | |   fractional part
-       | integer part
-       sign (0 means positive, 1 - negative)
+    0x 0000 0000
+       |    |
+       |    fractional part
+       integer part with sign (first bit, 0 means positive, 1 - negative)
 
 This format is refered as `fix` (int32). For example, (2 * Pi) number is `0x0006487f` (6 + 18559/65536 = 6.28319)
 
