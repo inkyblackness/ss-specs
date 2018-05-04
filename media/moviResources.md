@@ -119,12 +119,12 @@ The data entry contains unsigned 8-bit PCM samples.
 
 #### 3 Text (MOVIE_CHUNK_TEXT)
 
-**Subtitle Entry** (16+N bytes)
+**Subtitle Entry** (`MovieTextItem` struct) (16+N bytes)
 
-    0000  [4]byte   Subtitle Control
-    0004  byte      Unknown -- always 0x10
-    0005  [11]byte  Unknown -- always 0x00
-    0010  []byte    Null terminated string
+    0000  uint32   tag     Subtitle Control
+    0004  uint32   offset  Offset to text string, always 0x10
+    0008  [4]byte          Unknown -- always 0x00
+    0010  []byte           Null terminated string
 
 ##### Subtitle Controls
 
