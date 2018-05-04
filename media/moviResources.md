@@ -11,7 +11,7 @@ Such a resource contains the following components:
 * an index, describing the following data entries, and
 * the data entries.
 
-**MOVI Header** (`MovieHeader` struct)
+**MOVI Header** (`MovieHeader` struct) (1024 bytes)
 
     0000  uint32      magicId          Container tag 0x49564F4D ("MOVI")
     0004  int32       numChunks        Number of chunk entries in file
@@ -46,13 +46,11 @@ The palette is always present, even if the MOVI contains only audio. In such cas
 First 4 bytes are uint32 bit field which follow structure:
 
     bits  00-23  24  time       Fixed point timestamp from movie start (in seconds)
-    bits  24-26   3  played     Has this chunk been clocked out?
-    bits  27-31   4  flags      Chunk type specific flags
-    bits  32-32   1  chunkType  Chunk type (see below)
+    bits  24-26   3  played     Has this chunk been clocked out? (Used by engine internally)
+    bits  27-30   4  flags      Chunk type specific flags
+    bits  31-31   1  chunkType  Chunk type (see below)
 
-> In Mac OS port of System Shock these bit fields are reversed due big-endianness - don't be confused!
-
-Chunk specific flags may be:
+**Chunk type specific flags** may be:
 
 For Video chunk type (0x01 MOVIE_CHUNK_VIDEO)
 
@@ -66,7 +64,7 @@ For Palette chunk type (0x04 MOVIE_CHUNK_PALETTE)
     0x00  MOVIE_FPAL_SET          Set palette from data 
     0x01  MOVIE_FPAL_BLACK        Set palette to black
     0x07  MOVIE_FPAL_EFFECTMASK   4 bits of flags is effect
-    0x08  MOVIE_FPAL_CLEAR 0x08   If bit set, clear screen
+    0x08  MOVIE_FPAL_CLEAR        If bit set, clear screen
 
 For Table chunk type (0x05 MOVIE_CHUNK_TABLE)
 
