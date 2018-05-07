@@ -73,7 +73,7 @@ If ```source object``` is not -1, it is attempted next, including condition chec
     0002  uint8    TSecs
     0003  uint8    Count -- unused
 
-This event exposes ```type``` to the hacker for half of the amoung given in ```damage```. Damage values are rounded towards the greater number.
+This event exposes ```type``` to the hacker for half of the amount given in ```damage```. Damage values are rounded towards the greater number.
 If the calculated half is not equal to the ```damage``` value, then another event is re-scheduled with an offset of ```tSecs```.
 
 > An earlier version of the engine appeared to use ```count``` as a counter towards zero, though this was replaced with the damage-halving algorithm.
