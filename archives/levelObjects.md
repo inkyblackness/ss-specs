@@ -9,7 +9,7 @@ Instance data of [Level Objects](../levelObjects/index.md) is stored as part of 
 ```L08```, a compressed resource, contains a table with general entries about the objects in the current level.
 This table contains 872 entries, which houses two lists.
 
-**Level Object Entry** (27 bytes)
+**Level Object Entry** (`Obj` struct) (27 bytes)
 
     0000  byte     In use flag. 0: free, 1: in use
     0001  byte     Object class
@@ -18,8 +18,8 @@ This table contains 872 entries, which houses two lists.
     0005  int16    Cross-Reference table index
     0007  int16    Previous
     0009  int16    Next
-    000B  int16    X Coordinate
-    000D  int16    Y Coordinate
+    000B  uint16   X Coordinate
+    000D  uint16   Y Coordinate
     000F  byte     Z Coordinate (height)
     0010  byte     Pitch rotation (around X axis), increasing values turn upwards
     0011  byte     Yaw rotation (around Z axis), increasing values turn rightwards
