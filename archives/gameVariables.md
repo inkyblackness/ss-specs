@@ -136,6 +136,8 @@ This page lists all game variables with their index, their initital value, and t
 |  295  | 1             | Unknown                                                                                      |
 |  297  | 1             | Unknown                                                                                      |
 |  299  | 1             | Unknown                                                                                      |
+|  300  | 0             | Set to 1 while the data reader icon is flashing & beeping                                    |
+
 
 ### Integer variables
 
