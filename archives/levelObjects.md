@@ -59,6 +59,14 @@ For some objects, the ```extra``` field is dependent on the object type or class
 
 If the ```Panel name``` resolves to an unknown block or empty string, then the regular object name is displayed.
 
+**Surfaces Extra* (4 bytes)
+
+    0000  byte     Unknown
+    0001  byte     Bitmap Index
+    0002  [2]byte  Unknown
+
+This is used for simple surfaces, such as icons (`7/2/1`) and paintings (`7/2/4`).
+
 ##### Cyberspace extra
 
 In case the level is cyberspace, the ```extra``` field contains the following properties.
