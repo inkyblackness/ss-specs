@@ -87,8 +87,7 @@ At the end of the file is the table with common properties. For each object type
 
 **Common Object Properties** (27 bytes)
 
-    0000  int16    Mass
-    0002  [2]byte  Unused
+    0000  int32    Mass
     0004  int16    Default hitpoints
     0006  uint8    Armour
     0007  byte     Render type

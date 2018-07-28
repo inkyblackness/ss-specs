@@ -15,32 +15,30 @@ This table contains 872 entries, which houses two lists.
     0001  byte     Object class
     0002  byte     Object subclass
     0003  int16    Class table index
-    0005  int16    Cross-Reference table index
-    0007  int16    Previous
-    0009  int16    Next
+    0005  int16    Cross-Reference table index (also: used list head)
+    0007  int16    Next
+    0009  int16    Previous
     000B  uint16   X Coordinate
     000D  uint16   Y Coordinate
     000F  byte     Z Coordinate (height)
     0010  byte     Pitch rotation (around X axis), increasing values turn upwards
-    0011  byte     Yaw rotation (around Z axis), increasing values turn rightwards
-    0012  byte     Roll rotation (around Y axis), increasing values turn rightwards
-    0013  byte     Unknown
+    0011  byte     Yaw/Heading rotation (around Z axis), increasing values turn rightwards
+    0012  byte     Roll/Bank rotation (around Y axis), increasing values turn rightwards
+    0013  byte     Physics (0xFF for unaffected, the default)
     0014  byte     Object type
-    0015  int16    Hitpoints
+    0015  sint16   Hitpoints
     0017  [4]byte  Extra
 
 The starting point for both lists is the first entry (index zero). This entry is not in use (```In use flag``` is zero).
 
-The ```Next``` field of the starting point refers to the first object of a list of objects in use. For all object entries in use,
+The `Cross-Reference table index` field of the starting point refers to the first object of a list of objects in use. For all object entries in use,
 their ```Previous``` and ```Next``` fields form a double-linked list, with the exception of the starting point:
 The last used object entry refers to the starting point with its ```Next``` value without being referred-to from the starting point.
 
-The ```Previous``` index of the starting point refers to the first object of a list of objects not in use.
-For all object entries not in use, their ```Previous``` field forms a single-linked list.
-The ```Next``` field of unused objects is not defined and contains arbitrary data.
-The last unused object entry refers to the starting point with its ```Previous``` value.
-
-The ```Cross-Reference table index``` of the starting point does not refer to a cross-reference entry, it is the index within the same table of the last object entry in use.
+The `Next` index of the starting point refers to the first object of a list of objects not in use.
+For all object entries not in use, their `Next` field forms a single-linked list.
+The `Previous` field of unused objects is not defined and contains arbitrary data.
+The last unused object entry refers to the starting point with its ```Next``` value.
 
 If an object is placed in the world, it has the X, Y and Z coordinates set, as well as the ```Cross-Reference table index``` pointing to a corresponding entry in the cross-reference table.
 If an object was spawned by the engine without a location in the world, such as loot from corpses,
@@ -51,6 +49,16 @@ The ```extra``` field is a multi-purpose field, which may hold further propertie
 ##### Global extra
 
 For some objects, the ```extra``` field is dependent on the object type or class, and the field is applicable to both real world and cyberspace.
+
+**Basic Extra** (4 bytes)
+
+    0000  byte     Make Info - a general index
+    0001  byte     Current Frame - for animations
+    0002  byte     Time Remainder - for animations
+    0003  byte     Instance Flags - for various purposes
+
+This is the layout as defined by the engine. Yet, these values may be interpreted/used specifically according to type and/or environment.
+
 
 **Panel Extra** (4 bytes)
 
