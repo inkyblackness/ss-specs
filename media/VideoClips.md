@@ -37,6 +37,17 @@ and a corresponding bitmap resource (containing the frames in blocks).
 Video mails have a size of 200x100 pixel and are the same for the HD and CD releases. They share the palette of the
 game (```gamepal.res```).
 
+#### Hardcoded constants
+
+The classic engine has the following hardcoded constants:
+
+* There are 6 video mails, ordered as: "shield", "grove", "bridge", "laser", "explode", and "status"
+* "laser" has two sequences, "explode" has five sequences. The twelth sequence is the intro, having index 10, right before the status.
+* The first ID for the sequence descriptions is `0x0A4C`
+* The first ID for the sequence bitmaps is `0x0A40`
+
+> The engine always plays the intro first, then the requested video mail. The bundling of sequences (like for "explode") is hardcoded,
+> so if another video mail could either split itself up, or simply have only one frame (or none at all) at the end.
 
 ### Cutscenes
 
