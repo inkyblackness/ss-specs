@@ -5,7 +5,7 @@ These files contain 188 resources of type ```0x01```. They are compound with sev
 one string, which is always 0x00 terminated.
 
 While the English strings may be readable according to standard ASCII, with the French and German options, texts
-need to be interpreted according to the DOS [code page 850](http://en.wikipedia.org/wiki/Code_page_850).
+need to be interpreted according to the DOS [code page 437](http://en.wikipedia.org/wiki/Code_page_437).
 
 > Since texts are always presented through the game fonts, any one-byte codepage can be used - As long as the
 > corresponding font bitmaps match for the requested characters (bytes).
