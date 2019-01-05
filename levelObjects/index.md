@@ -43,23 +43,23 @@ The following table lists the object classes together with the available types p
 The following table lists the byte sizes of the generic and specific property structures per class.
 Many of these bytes are all zero in ```objprop.dat```; In these cases no detailed data definition will be linked.
 
-| Class | Generic                                     | 0  | 1         | 2         | 3         | 4         | 5         | 6  | 7  |
-|:-----:|---------------------------------------------|----|-----------|-----------|-----------|-----------|-----------|----|----|
-|   0   | [2](00_Gun/gunProperties.md)                | 1  | 1         | [16][0/2] | [13][0/3] | [13][0/4] | [18][0/5] | -  | -  |
-|   1   | [14](01_Ammo/ammoProperties.md)             | 1  | 1         | 1         | 1         | 1         | 1         | 1  | -  |
-|   2   | [1](02_Physics/physicsProperties.md)        | 20 | [6][2/1]  | 1         | -         | -         | -         | -  | -  |
-|   3   | [15](03_Grenade/grenadeProperties.md)       | 1  | [3][3/1]  | -         | -         | -         | -         | -  | -  |
-|   4   | 22                                          | 1  | -         | -         | -         | -         | -         | -  | -  |
-|   5   | 9                                           | 1  | 1         | -         | -         | -         | -         | -  | -  |
-|   6   | 5                                           | 1  | 1         | 1         | 1         | 1         | -         | -  | -  |
-|   7   | 2                                           | 1  | 1         | 1         | 1         | 1         | 1         | 1  | 1  |
-|   8   | 2                                           | 1  | 1         | 1         | 1         | 1         | [6][8/5]  | 1  | 2  |
-|   9   | 1                                           | 1  | 1         | 1         | 1         | 0         | 1         | -  | -  |
-|   10  | 1                                           | 1  | 1         | 1         | 1         | 1         | -         | -  | -  |
-|   11  | [2](11_Animating/animatingProperties.md)    | 1  | 1         | [1][11/2] | -         | -         | -         | -  | -  |
-|   12  | 1                                           | 1  | 0         | 1         | -         | -         | -         | -  | -  |
-|   13  | 3                                           | 1  | 1         | 1         | 1         | 1         | 1         | 1  | -  |
-|   14  | [75](14_Critter/critterProperties.md)       | 3  | [1][14/1] | 1         | [6][14/3] | 1         | -         | -  | -  |
+| Class | Generic                                     | 0         | 1         | 2         | 3         | 4         | 5         | 6  | 7  |
+|:-----:|---------------------------------------------|-----------|-----------|-----------|-----------|-----------|-----------|----|----|
+|   0   | [2](00_Gun/gunProperties.md)                | 1         | 1         | [16][0/2] | [13][0/3] | [13][0/4] | [18][0/5] | -  | -  |
+|   1   | [14](01_Ammo/ammoProperties.md)             | 1         | 1         | 1         | 1         | 1         | 1         | 1  | -  |
+|   2   | [1](02_Physics/physicsProperties.md)        | [20][2/0] | [6][2/1]  | 1         | -         | -         | -         | -  | -  |
+|   3   | [15](03_Grenade/grenadeProperties.md)       | 1         | [3][3/1]  | -         | -         | -         | -         | -  | -  |
+|   4   | 22                                          | 1         | -         | -         | -         | -         | -         | -  | -  |
+|   5   | 9                                           | 1         | 1         | -         | -         | -         | -         | -  | -  |
+|   6   | 5                                           | 1         | 1         | 1         | 1         | 1         | -         | -  | -  |
+|   7   | 2                                           | 1         | 1         | 1         | 1         | 1         | 1         | 1  | 1  |
+|   8   | 2                                           | 1         | 1         | 1         | 1         | 1         | [6][8/5]  | 1  | 2  |
+|   9   | 1                                           | 1         | 1         | 1         | 1         | 0         | 1         | -  | -  |
+|   10  | 1                                           | 1         | 1         | 1         | 1         | 1         | -         | -  | -  |
+|   11  | [2](11_Animating/animatingProperties.md)    | 1         | 1         | [1][11/2] | -         | -         | -         | -  | -  |
+|   12  | 1                                           | 1         | 0         | 1         | -         | -         | -         | -  | -  |
+|   13  | 3                                           | 1         | 1         | 1         | 1         | 1         | 1         | 1  | -  |
+|   14  | [75](14_Critter/critterProperties.md)       | 3         | [1][14/1] | 1         | [6][14/3] | 1         | -         | -  | -  |
 
 
 > There is also the case of objects with a specific entry length of 0. This is the case for object types that didn't make it into the game (vending machines).
@@ -68,6 +68,7 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 [0/3]: 00_Gun/gunProperties.md#specific-3-properties
 [0/4]: 00_Gun/gunProperties.md#specific-4-properties
 [0/5]: 00_Gun/gunProperties.md#specific-5-properties
+[2/0]: 02_Physics/physicsProperties.md#specific-0-properties
 [2/1]: 02_Physics/physicsProperties.md#specific-1-properties
 [3/1]: 03_Grenade/grenadeProperties.md#specific-1-properties
 [8/5]: 08_SmallStuff/smallStuffProperties.md#cyberspace-items-specific-properties
