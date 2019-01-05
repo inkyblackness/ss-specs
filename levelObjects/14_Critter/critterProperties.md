@@ -106,6 +106,7 @@ The critter will want to get within the `attack range` to perform its attack.
 
     0000  int16     Shield engergy
 
+> The `shield energy` value is unused in the engine.
 
 #### Specific 3 Properties
 

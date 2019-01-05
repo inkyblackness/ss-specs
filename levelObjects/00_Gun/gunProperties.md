@@ -53,7 +53,7 @@ This subclass describes energy beam weapons.
 **Specific 4 Properties** (`BeamGunProp` struct) (13 bytes)
 
     0000  [8]byte  [Generic Weapon Info](../GenericWeaponInfo.md)
-    0008  uint8    Power usage
+    0008  uint8    Max charge
     0009  uint8    Attack mass (impact force - pushback on hit)
     000A  uint8    Range
     000B  sint16   Attack speed (kickback)
@@ -66,7 +66,7 @@ This subclass describes energy projectile weapons.
 **Specific 5 Properties** (`BeamprojGunProp` struct) (18 bytes)
 
     0000  [8]byte  [Generic Weapon Info](../GenericWeaponInfo.md)
-    0008  uint8    Power usage
+    0008  uint8    Max charge
     0009  byte     Attack mass
     000A  sint16   Attack speed (kickback)
     000C  uint8    Projectile travel speed
