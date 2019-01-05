@@ -49,20 +49,21 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 |   1   | [14](01_Ammo/ammoProperties.md)             | 1         | 1         | 1         | 1         | 1         | 1         | 1  | -  |
 |   2   | [1](02_Physics/physicsProperties.md)        | [20][2/0] | [6][2/1]  | 1         | -         | -         | -         | -  | -  |
 |   3   | [15](03_Grenade/grenadeProperties.md)       | 1         | [3][3/1]  | -         | -         | -         | -         | -  | -  |
-|   4   | 22                                          | 1         | -         | -         | -         | -         | -         | -  | -  |
-|   5   | 9                                           | 1         | 1         | -         | -         | -         | -         | -  | -  |
-|   6   | 5                                           | 1         | 1         | 1         | 1         | 1         | -         | -  | -  |
-|   7   | 2                                           | 1         | 1         | 1         | 1         | 1         | 1         | 1  | 1  |
+|   4   | 17                                          | 7         | -         | -         | -         | -         | -         | -  | -  |
+|   5   | 2                                           | 1         | 2         | -         | -         | -         | -         | -  | -  |
+|   6   | 2                                           | 1         | 1         | 1         | 1         | 1         | -         | -  | -  |
+|   7   | 4                                           | 1         | 1         | 1         | 1         | 1         | 1         | 1  | 1  |
 |   8   | 2                                           | 1         | 1         | 1         | 1         | 1         | [6][8/5]  | 1  | 2  |
 |   9   | 1                                           | 1         | 1         | 1         | 1         | 0         | 1         | -  | -  |
 |   10  | 1                                           | 1         | 1         | 1         | 1         | 1         | -         | -  | -  |
 |   11  | [2](11_Animating/animatingProperties.md)    | 1         | 1         | [1][11/2] | -         | -         | -         | -  | -  |
-|   12  | 1                                           | 1         | 0         | 1         | -         | -         | -         | -  | -  |
+|   12  | 1                                           | 1         | 1         | 1         | -         | -         | -         | -  | -  |
 |   13  | 3                                           | 1         | 1         | 1         | 1         | 1         | 1         | 1  | -  |
-|   14  | [75](14_Critter/critterProperties.md)       | 3         | [1][14/1] | 1         | [6][14/3] | 1         | -         | -  | -  |
+|   14  | [75](14_Critter/critterProperties.md)       | 1         | 2         | 2         | [6][14/3] | 1         | -         | -  | -  |
 
 
 > There is also the case of objects with a specific entry length of 0. This is the case for object types that didn't make it into the game (vending machines).
+> Though, this is only a guess. Yet, the serialization code of the source-port (based on the mac-port) shows a hack by shifting the offset back by 2 bytes after serializing the doors. So, something must have been done in the original engine.
 
 [0/2]: 00_Gun/gunProperties.md#specific-2-properties
 [0/3]: 00_Gun/gunProperties.md#specific-3-properties
@@ -73,7 +74,6 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 [3/1]: 03_Grenade/grenadeProperties.md#specific-1-properties
 [8/5]: 08_SmallStuff/smallStuffProperties.md#specific-5-properties
 [11/2]: 11_Animating/animatingProperties.md#specific-2-properties
-[14/1]: 14_Critter/critterProperties.md#specific-1-properties
 [14/3]: 14_Critter/critterProperties.md#specific-3-properties
 
 
