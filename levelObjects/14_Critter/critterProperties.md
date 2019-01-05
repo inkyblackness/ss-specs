@@ -98,16 +98,6 @@ The critter will want to get within the `attack range` to perform its attack.
     0x0E            Serv-bot
 
 
-#### Specific 1 Properties
-
-"Cyborg" critters.
-
-**Specific 1 Properties** (`CyborgCritterProp` struct) (2 bytes)
-
-    0000  int16     Shield engergy
-
-> The `shield energy` value is unused in the engine.
-
 #### Specific 3 Properties
 
 These critters (`14/3/x`) are for cyberspace.
