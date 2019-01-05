@@ -71,7 +71,7 @@ Many of these bytes are all zero in ```objprop.dat```; In these cases no detaile
 [2/0]: 02_Physics/physicsProperties.md#specific-0-properties
 [2/1]: 02_Physics/physicsProperties.md#specific-1-properties
 [3/1]: 03_Grenade/grenadeProperties.md#specific-1-properties
-[8/5]: 08_SmallStuff/smallStuffProperties.md#cyberspace-items-specific-properties
+[8/5]: 08_SmallStuff/smallStuffProperties.md#specific-5-properties
 [11/2]: 11_Animating/animatingProperties.md#specific-2-properties
 [14/1]: 14_Critter/critterProperties.md#specific-1-properties
 [14/3]: 14_Critter/critterProperties.md#cyberspace-critters-specific-properties

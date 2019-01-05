@@ -1,10 +1,10 @@
-### Item Properties
+### Small Stuff Properties
 
-#### Cyberspace Items Specific Properties
+#### Specific 5 Properties
 
 These items (```8/5/x```) are cyberspace items.
 
-**Cyberspace Items Specific Properties** (6 bytes)
+**Cyberspace Items Specific Properties** (`CyberSmallstuffProp` struct) (6 bytes)
 
     0000  [6]byte  Colour scheme
 
