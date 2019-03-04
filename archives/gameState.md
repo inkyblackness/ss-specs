@@ -3,24 +3,49 @@
 This resource contains everything about the hacker, together with general game-state information.
 
 
-    0000  20xbyte  Hacker name (incl. 0x00 termination char). Game only allows 12 characters for input at start.
-    0015  4xbyte   Game rating: combat, mission, puzzle, cyber. All 0..3
+    0000  20xbyte   Hacker name (incl. 0x00 termination char). Game only allows 12 characters for input at start.
+    0014  byte      Realspace Level; The level to return to after exiting cyberspace.
 
-    0039  byte     Current level identifier
+    0015  4xbyte    Game rating: combat, mission, puzzle, cyber. All 0..3
+    0019  3xbyte    Unused.
 
-    007A  14xref   General inventory references, 2 bytes each. Access Cards are 0xFE 0x00
+    001C  uint32    Game time
+    0020  uint32    Last second update
+    0024  uint32    Last drug update
+    0028  uint32    Last ware update
+    002C  uint32    Last animation check
+    0030  int32     Queue Time
+    0034  int32     Delta Time
+    0038  byte      Detail Level
 
-    009C  byte     Health 0x00..0xFF
+    0039  byte      Current level identifier
+    003A  22xint16  Initial SHODAN levels
+    0066  6xbyte    Controls
+    006C  int16     Player Object ID
+    006E  8xbyte    Realspace location; The point to return to after exiting cyberspace.
+    0076  int32     Version number; Value: 6
+    007A  14xint16  General inventory references, Object IDs. Access Cards are 0xFE 0x00
 
-    00A3  byte     Current radiation poisoning in 0.5 LBP units
+    0096  byte      Posture
+    0097  byte      Foot planted; 1: on the floor
+    0098  byte      Lean X
+    0099  byte      Lean Y
+    009A  int16     Unused
 
-    00A7  byte     Current bio contamination in 0.5 LBP units
-
-    00AC  byte     Power 0x00..0xFF
-    00AD  uint8    Power usage in JPM
-
-    00B6  512xbool Boolean game variables
-    00F6  40xuint16 Integer game variables
+    009C  byte      Health 0x00..0xFF
+    009D  byte      Cyberspace Integrity
+    009E  uint16    Hitpoint regeneration per minute
+    00A0  8xbyte    Damage rate per minute [explosion, energy, magnetic, radiation, gas, tranq, needle, bio]
+    00A8  uint16    Bio post expose
+    00AA  uint16    Rad post expose
+    00AC  byte      Power 0x00..0xFF
+    00AD  byte      Power usage in JPM
+    00AE  byte      Power regeneration
+    00AF  byte      Energy out; 1: is out of energy
+    00B0  int16     Cyberspace trips
+    00B2  int32     Cyberspace time base
+    00B6  512xbool  Boolean game variables
+    00F6  40xint16  Integer game variables
     
     0148  byte     Option: Audio, Music Volume (0x00 .. 0x64)
     014A  uint16   Option: Video, Gamma (Default: 0x4A3D)
