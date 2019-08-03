@@ -1,7 +1,7 @@
 ## MOVI Resources
 
-Resources with content type ```0x11``` are a media container themselves, similar to audio/video container formats.
-These resources are called "MOVI Resources" since the initial tag is the four letter code ```MOVI```.
+Resources with content type `0x11` are a media container themselves, similar to audio/video container formats.
+These resources are called "MOVI Resources" since the initial tag is the four letter code `MOVI`.
 
 ### Format
 
@@ -46,9 +46,9 @@ The palette is always present, even if the MOVI contains only audio. In such cas
 First 4 bytes are uint32 bit field which follow structure:
 
     bits  00-23  24  time       Fixed point timestamp from movie start (in seconds)
-    bits  24-26   3  played     Has this chunk been clocked out? (Used by engine internally)
-    bits  27-30   4  flags      Chunk type specific flags
-    bits  31-31   1  chunkType  Chunk type (see below)
+    bits  24-24   1  played     Has this chunk been clocked out? (Used by engine internally)
+    bits  25-28   4  flags      Chunk type specific flags
+    bits  39-31   3  chunkType  Chunk type (see below)
 
 **Chunk type specific flags** may be:
 
@@ -88,18 +88,18 @@ Frames are either "full" frames, which set all, or nearly all, pixels in the buf
 
 ##### Low-resolution Video
 
-Low-resolution video is using type ```0x21```. Data contains a bounding box and then the compressed frame using the [compression algorithm](./Bitmaps.md#pixel-compression) for standard bitmaps. 
+Low-resolution video is using type `0x21`. Data contains a bounding box and then the compressed frame using the [compression algorithm](./Bitmaps.md#pixel-compression) for standard bitmaps. 
 
 **Low Resolution Video Data** (8+N bytes)
 
     0000  [4]int16  Bounding Box
     0008  []byte    Compressed pixel data
 
-> In the existing videos, the bounding box is always ```0, 0, 320, 150```, specifying the same size as the video itself.
+> In the existing videos, the bounding box is always `0, 0, 320, 150`, specifying the same size as the video itself.
 
 ##### High-resolution Video
 
-High-resolution video is using type ```0x79``` with a more complex compression algorithm. This algorithm works in conjunction of the ```Table``` types. See [below](#high-resolution-video-compression) for details on the algorithm.
+High-resolution video is using type `0x79` with a more complex compression algorithm. This algorithm works in conjunction of the `Table` types. See [below](#high-resolution-video-compression) for details on the algorithm.
 
 **High Resolution Video Data** (2+N bytes)
 
@@ -107,7 +107,7 @@ High-resolution video is using type ```0x79``` with a more complex compression a
     0002  []byte  Bitstream
     XXXX  []byte  Mask-stream
 
-The ```Bitstream``` is a stream of serialized big-endian integers. The ```Mask-stream``` is a stream of serialized little-endian integers of different lengths (2, 4, 6, and 8 bytes).
+The `Bitstream` is a stream of serialized big-endian integers. The `Mask-stream` is a stream of serialized little-endian integers of different lengths (2, 4, 6, and 8 bytes).
 
 The order and layout of the values in the streams is determined by the algorithm. The decoder will want to read past the end of the streams in a few cases. For these cases the missing bits/bytes are to be set to zero. The encoder removed any trailing 0x00 bytes from these streams in order to save further space.
 
@@ -128,19 +128,20 @@ The data entry contains unsigned 8-bit PCM samples.
 
 ##### Subtitle Controls
 
-```'AREA'``` (uint32 ```0x41455241```) is for setting up the subtitle space. It defines the rectangle, in pixel (left, top, right, bottom), where the text is to be displayed. Example:
+`'AREA'` (uint32 `0x41455241`) is for setting up the subtitle space. It defines the rectangle, in pixel (left, top, right, bottom), where the text is to be displayed. Example:
+
 ```
 20 365 620 395 CLR
 ```
 
-```'STD '``` (uint32 ```0x20445453```), ```'FRN '``` (uint32 ```0x204E5246```) and ```'GER '``` (uint32 ```0x20524547```) specify the actual subtitle text in the respective language, with ```'STD '``` being the default language (English).
+`'STD '` (uint32 `0x20445453`), `'FRN '` (uint32 `0x204E5246`) and `'GER '` (uint32 `0x20524547`) specify the actual subtitle text in the respective language, with `'STD '` being the default language (English).
 
 #### 4 Palette (MOVIE_CHUNK_PALETTE)
 
-There are two palette entry types: ```0x4C``` and ```0x04```. For any change in the palette, two entries are in the container. Both entries always come in sequence (first ```0x4C```, then ```0x04```) and both have identical timestamp values. 
+There are two palette entry types: `0x4C` and `0x04`. For any change in the palette, two entries are in the container. Both entries always come in sequence (first `0x4C`, then `0x04`) and both have identical timestamp values. 
 
-The entry with type ```0x4C``` will have a length of 0 and the same data offset as the next entry, ```0x04```.
-The entry with type ```0x04``` points to data of 0x300 bytes (= 256*3) which describes the new palette for upcoming frames. 
+The entry with type `0x4C` will have a length of 0 and the same data offset as the next entry, `0x04`.
+The entry with type `0x04` points to data of 0x300 bytes (= 256*3) which describes the new palette for upcoming frames. 
 
 > At least for high-resolution videos, the next frame after a palette change does not always entirely set the complete pixel buffer for the next frame.
 > In the intro video for instance, SHODAN's gaining of conscience scene has a few pixel left over from the previous scene.
@@ -150,31 +151,31 @@ The entry with type ```0x04``` points to data of 0x300 bytes (= 256*3) which des
 
 #### 5 Table (MOVIE_CHUNK_TABLE)
 
-Table entries are used in combination with video type ```0x79``` entries for high-resolution videos. There are two table types:
-* ```0x05```: Palette lookup list
-* ```0x0D```: Control table
+Table entries are used in combination with video type `0x79` entries for high-resolution videos. There are two table types:
+* `0x05`: Palette lookup list
+* `0x0D`: Control table
 
 See [below](#high-resolution-video-compression) for details on the algorithm.
 
-Such entries are common to several frames. For any change, two entries are in the container. Both entries always come in sequence (first ```0x05```, then ```0x0D```).
+Such entries are common to several frames. For any change, two entries are in the container. Both entries always come in sequence (first `0x05`, then `0x0D`).
 
 > In the existing files, a change of tables is always followed by a change of palette. The exception is the first scene, which uses the initial palette from the MOVI header.
 
 ##### Palette lookup list
 
-This entry, with type ```0x05``` is a simple lookup list. Every entry of type byte is a palette index.
+This entry, with type `0x05` is a simple lookup list. Every entry of type byte is a palette index.
 This list is truncated as well. The decoder will want to read past the end of this stream, in which case zero bytes must be returned.
 
 ##### Packed Control Words
 
-Table type ```0x0D``` contains a runlength encoded list of control words.
+Table type `0x0D` contains a runlength encoded list of control words.
 
 **Packed Control Words** (4+(N*4) bytes)
 
     0000  int32     Unpacked size
     0004  []Packed  Packed entries
 
-The ```Unpacked size``` field equals the number of control words, times three (specifying the size in bytes).
+The `Unpacked size` field equals the number of control words, times three (specifying the size in bytes).
 The remainder of the entry is then the list of packed control words, from which the actual list of control words is unpacked.
 
 **Packed Entry** (4 bytes)
@@ -182,7 +183,7 @@ The remainder of the entry is then the list of packed control words, from which 
     0000  byte    Word count
     0001  uint24  Control Word
 
-The field ```Word count``` specifies how often the ```Control Word``` shall be extracted. A value of 0 is never encountered.
+The field `Word count` specifies how often the `Control Word` shall be extracted. A value of 0 is never encountered.
 
 ### High-resolution Video Compression
 
@@ -208,31 +209,35 @@ A possible decoder is implemented using the following sequence:
 
 * Iterate over the tiles, outer loop is the rows, inner loop the columns. Finish the loops if either all tiles are covered, or the bit-stream has been exhausted. The stream is exhausted if the current position is at the end of or beyond the available range.
 * Read a 12-bit value from the bit-stream. Use this value as an index into the control word table.
-* If the ```Count value``` of the control word is zero
-    * A ```Count value``` of zero indicates a ```Long Offset```. In this case, the ```Type``` and ```Parameter``` fields are taken together to form a 20-bit ```Long Offset``` value.
+* If the `Count value` of the control word is zero
+    * A `Count value` of zero indicates a `Long Offset`. In this case, the `Type` and `Parameter` fields are taken together to form a 20-bit `Long Offset` value.
     * Advance the bit-stream by 8 bits
-    * Enter a loop as long as the current control word indicates a ```Long Offset```.
+    * Enter a loop as long as the current control word indicates a `Long Offset`.
         * Advance the bit-stream by 4 bits
-        * Read a 4-bit value from the bit-stream. Add this value to the ```Long Offset``` of the current control word and use the result as another index into the control word table. The retrieved entry becomes the new current control word.
-* Advance the bit-stream by the ```Count``` value of the current control word. This may indicate a different amount of bits than previously read, even less.
-* If the type of the current control word is ```6```, use the previously processed control word as the current one for further processing.
-* If the type of the current control word is ```5```, tiles shall be skipped
-    * Read a 5-bit value from the bit-stream and advance it by 5 bits. This is the ```Skip Count``` value.
-    * A ```Skip Count``` of 0x1F skips the remainder of the current tile row
+        * Read a 4-bit value from the bit-stream. Add this value to the `Long Offset` of the current control word and use the result as another index into the control word table. The retrieved entry becomes the new current control word.
+* Advance the bit-stream by the `Count` value of the current control word. This may indicate a different amount of bits than previously read, even less.
+* If the type of the current control word is `6`, use the previously processed control word as the current one for further processing.
+* If the type of the current control word is `5`, tiles shall be skipped
+    * Read a 5-bit value from the bit-stream and advance it by 5 bits. This is the `Skip Count` value.
+    * A `Skip Count` of `0x1F` skips the remainder of the current tile row
     * Any other value skips the given amount of columns, additionally to the current one. A value of 0 skips only the current tile.
-* Any type in the range of ```0``` to ```4``` colours the current tile. See below.
+* Any type in the range of `0` to `4` colours the current tile. See below.
 * Next loop iteration
 
-> Type ```7``` is never encountered. According to the documentation of TSSHP, this has the same meaning as ```6```: use previous control word.
+> Type `7` is never encountered. According to the documentation of TSSHP, this has the same meaning as `6`: use previous control word.
 
+##### Encoder hints
+
+* Using the previous control word (type `6`) is not allowed for the first tile of a row. It can't repeat the last operation from the previous row.
+* Usage of "transparency" byte `0x00` is only processed if at the first index of a palette lookup. See below.
 
 ##### Colouring a tile
 
-To colour a tile, the ```Parameter``` value of the current control word is used, as well as the ```mask-stream``` and the ```palette lookup list```. The 16 pixel of a tile are coloured from left to right, top to bottom.
+To colour a tile, the `Parameter` value of the current control word is used, as well as the `mask-stream` and the `palette lookup list`. The 16 pixel of a tile are coloured from left to right, top to bottom.
 
-The palette value for a pixel is determined by an index into a small ```lookup array``` of palette indices. Depending on the type of the control word, this lookup array is either a made up one, or a segment of the ```palette lookup list```. The length of a ```lookup array``` is always a power of 2 and has possible lengths of 2, 4, 8 or 16.
+The palette value for a pixel is determined by an index into a small `lookup array` of palette indices. Depending on the type of the control word, this lookup array is either a made up one, or a segment of the `palette lookup list`. The length of a `lookup array` is always a power of 2 and has possible lengths of 2, 4, 8 or 16.
 
-The corresponding index values into such lookup arrays have bit sizes of 1, 2, 3 or 4 bits. The 16 index values for a tile are packed into a ```mask integer``` of 2, 4, 6 or 8 bytes. Depending on the type of the control word, this ```mask integer``` is made up or read from the ```mask-stream```.
+The corresponding index values into such lookup arrays have bit sizes of 1, 2, 3 or 4 bits. The 16 index values for a tile are packed into a `mask integer` of 2, 4, 6 or 8 bytes. Depending on the type of the control word, this `mask integer` is made up or read from the `mask-stream`.
 
 > For example, a lookup array of 4 palette values requires an index size of 2 bits, resulting in a mask integer of 4 byte.
 >
@@ -242,9 +247,10 @@ The corresponding index values into such lookup arrays have bit sizes of 1, 2, 3
 
 | Type | Lookup Array                                           | Mask Integer            |
 |:----:|--------------------------------------------------------|-------------------------|
-|   0  | ```[ Parameter >> 0 & 0xFF, Parameter >> 8 & 0xFF ]``` | Static ```0xAAAA```     |
-|   1  | ```[ Parameter >> 0 & 0xFF, Parameter >> 8 & 0xFF ]``` | 2 byte from mask-stream |
+|   0  | `[ Parameter >> 0 & 0xFF, Parameter >> 8 & 0xFF ]`     | Static `0xAAAA`         |
+|   1  | `[ Parameter >> 0 & 0xFF, Parameter >> 8 & 0xFF ]`     | 2 byte from mask-stream |
 |   2  | Parameter is start index into list, 4 entries          | 4 byte from mask-stream |
 |   3  | Parameter is start index into list, 8 entries          | 6 byte from mask-stream |
 |   4  | Parameter is start index into list, 16 entries         | 8 byte from mask-stream |
 
+If the lookup array index is `0`, and the entry ix `0x00`, use the color from the previous frame.
