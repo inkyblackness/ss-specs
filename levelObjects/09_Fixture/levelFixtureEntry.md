@@ -57,10 +57,7 @@ The two ```trigger object index``` values work only with trigger objects, they c
 
 #### Retinal ID Scanner 9/1/6
 
-If the condition field is all zero, the scanner triggers its action when activated with any head item (hacker's eyes are never accepted).
-
-> Although the game uses a condition of ```06 00 00 00```, it does not work as a game variable check nor does it match up with the requested head. So far it is unknown how the scanner is bound to the right head.
-
+When using a head item on the retinal scanner, the condition field is compared against the head's ```Current Frame``` value (for object 8/12/13), or ```Current Frame + 11``` (for object 8/12/14). Note that this is different from the ```Image index``` value which determines how the head appears in the MFD.
 
 ### Stations 9/2/x
 
