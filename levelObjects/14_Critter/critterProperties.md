@@ -3,6 +3,7 @@
 #### Generic Critter Properties
 
 **Generic Critter Propertes** (`CritterProp` struct) (75 bytes)
+
     0000  byte      Intelligence; unused
     0001  [21]byte  Primary attack info
     0016  [21]byte  Secondary attack info
@@ -42,12 +43,13 @@ The `secondary attack probability` determines how likely the critter will use it
 
 The `disrupt probability` determines how likely the critter will be interrupted when being hit. `0xFF` means always, `0x00` will have the critter execute its attacks and movement without interruptions.
 
-`Treasure type` is an enumeration value (ranging from `0x00` to `0x0E`), pointing into a hardcoded pool of possible loot. See below for the possible constants. The concrete loot is randmoized accordingly.
+`Treasure type` is an enumeration value (ranging from `0x00` to `0x0E`), pointing into a hardcoded pool of possible loot. See below for the possible constants. The concrete loot is randomized accordingly.
 
 The `attack key frame` value is an index into the attack animation, when the corresponding attack should take effect.
 
 
 **Critter Attack Info** (`CritterAttack` struct) (21 bytes)
+
     0000  uint8     Damage type
     0001  uint8     Special damage type
     0002  [2]byte   Unused
@@ -94,7 +96,7 @@ The critter will want to get within the `attack range` to perform its attack.
     0x0A            Elite cyborg
     0x0B            Standard corpse
     0x0C            Loot-oriented corpse
-    0x0D            Electro-stuff treasure
+    0x0D            Repairbot
     0x0E            Serv-bot
 
 
