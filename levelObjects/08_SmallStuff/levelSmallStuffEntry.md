@@ -165,6 +165,17 @@ For 8/5/8 (data fragments), the text index is for text resource ```0x087A```.
 Layout and properties are the same as for force bridges (7/7/7).
 
 
+#### Cyberspace Decoys 8/5/10
+
+**Cyberspace Decoy** (10 bytes)
+
+    0000  [2]byte   Unused
+    0002  int16     Destroy object index
+    0004  [6]byte   Unused
+
+Normally, these cannot be destroyed in cyberspace. However, if placed in a map and made vulnerable to damage, decoys can be made to destroy another object when destroyed.
+
+
 ### Wear and Tear Stuff 8/6/x
 
 Nothing special.
