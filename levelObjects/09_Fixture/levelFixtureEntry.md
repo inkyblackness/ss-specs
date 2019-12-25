@@ -23,15 +23,22 @@ The conditions for buttons are based on [game variables](../Conditions.md#game-v
 ```Access mask``` is an additional condition for the button. If not zero, the lower five bits can specify one required access level the hacker must have. The remaining 7 bits don't work properly or resolve to the "None" level.
 
 
-### Recepticles 9/1/x
+### Receptacles 9/1/x, 9/4/x
 
-Most recepticles work in conjunction with the quest items (8/7/x). With the exception of antenna relay panels, they contain regular actions as data.
-Unless noted otherwise below, the conditions for recepticles are based on object types.
+Most receptacles work in conjunction with the quest items (8/7/x). With the exception of antenna relay panels, they contain regular actions as data.
+Unless noted otherwise below, the conditions for receptacles are based on object types, with an optional trap message if the wrong item is used.
 
-**Recepticle Fixture Specific Info** (24 bytes)
+**Receptacle Fixture Specific Info** (24 bytes)
 
     0000  [22]byte  Action data
     0016  [2]byte   Unused
+
+**Receptacle Fixture Condition** (4 bytes)
+
+    0000  byte      Object type
+    0001  byte      Object subclass
+    0002  byte      Object class
+    0003  byte      Trap message (optional)
 
 
 #### Antenna Relay Panel 9/1/3
@@ -50,10 +57,7 @@ The two ```trigger object index``` values work only with trigger objects, they c
 
 #### Retinal ID Scanner 9/1/6
 
-If the condition field is all zero, the scanner triggers its action when activated with any head item (hacker's eyes are never accepted).
-
-> Although the game uses a condition of ```06 00 00 00```, it does not work as a game variable check nor does it match up with the requested head. So far it is unknown how the scanner is bound to the right head.
-
+When using a head item on the retinal scanner, the condition field is compared against the head's ```Current Frame``` value (for object 8/12/13), or ```Current Frame + 11``` (for object 8/12/14). Note that this is different from the ```Image index``` value which determines how the head appears in the MFD.
 
 ### Stations 9/2/x
 
@@ -250,11 +254,6 @@ Combinations must not be entered in sequence, any of the three combinations is v
 If the ```Fail object index``` refers to a valid object, this one is triggered when a wrong combination was entered.
 
 > One number pad on level 0 has the first byte of the input panel structure set to ```0x06```. Purpose and effect unknown.
-
-
-### Vending Machines 9/4/x
-
-These are not available.
 
 
 ### Cyberspace Switches 9/5/x

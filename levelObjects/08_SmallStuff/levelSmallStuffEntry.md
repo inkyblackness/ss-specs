@@ -40,10 +40,33 @@ Nothing special.
 
 **Corpse** (10 bytes)
 
-    0000  [2]byte   Unknown
+    0000  byte      Treasure type
+    0001  byte      Unused
     0002  [4]int16  Object index
 
-> A few corpses have the first byte set to 0x01. Only found with empty corpses, and effect unknown.
+The four ```Object index``` values determine the corpse's loot. More random loot can be added to empty slots based on the ```Treasure type```.
+
+
+**Treasure Type Enumeration** (1 byte)
+
+    0xF5            No treasure
+    0xF6            Humanoid
+    0xF7            Drone
+    0xF8            Assassin
+    0xF9            Warrior cyborg
+    0xFA            Flier bot
+    0xFB            Security 1 bot
+    0xFC            Exec bot
+    0xFD            Cyborg enforcer
+    0xFE            Security 2 bot
+    0xFF            Elite cyborg
+    0x00            Standard corpse
+    0x01            Loot-oriented corpse
+    0x02            Repairbot
+    0x03            Serv-bot
+
+
+> The treasure type values for corpses are the same as for [critter properties](../14_Critter/critterProperties.md), except offset by 11.
 
 #### Severed Heads 8/2/13, 8/2/14
 
@@ -140,6 +163,17 @@ For 8/5/8 (data fragments), the text index is for text resource ```0x087A```.
     0007  [3]byte   Unused
 
 Layout and properties are the same as for force bridges (7/7/7).
+
+
+#### Cyberspace Decoys 8/5/10
+
+**Cyberspace Decoy** (10 bytes)
+
+    0000  [2]byte   Unused
+    0002  int16     Destroy object index
+    0004  [6]byte   Unused
+
+Normally, these cannot be destroyed in cyberspace. However, if placed in a map and made vulnerable to damage, decoys can be made to destroy another object when destroyed.
 
 
 ### Wear and Tear Stuff 8/6/x

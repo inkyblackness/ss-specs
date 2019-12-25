@@ -49,9 +49,9 @@ Trigger Types:
     1: Null;            Must be set off externally. Also used as data storage.
     2: Floor;           Hacker touches floor of this tile (per foot exclusively)
     3: Player Death;    Used to resurrect Hacker
-    4: Deatch Watch;    When certain objects (or types of objects) are destroyed. Common for CPU nodes.
-    5: Area Enter;      Unused
-    6: Area Continuous; Unused
+    4: Death Watch;     When certain objects (or types of objects) are destroyed. Common for CPU nodes.
+    5: Area Enter;      Hacker enters (or leaves) a given radius
+    6: Area Continuous; Hacker enters any tile inside (or outside) a given radius
     7: This is not a trigger! See AI hints above.
     8: Level Entry;     Used for instance to initialize starting health
     9: Continuous;      Unused
@@ -65,11 +65,23 @@ Nearly all triggers have conditions based on [game variables](../Conditions.md#g
 
 The following exceptions exist:
 * 4 (Death Watch Trigger): A union of [object type][obj-type-cond] and [object index conditions][obj-index-cond]
+* 5, 6 (Area Trigger): A radius around the trigger. See below.
 * 11 (Ecology Trigger): A combination of [object type][obj-type-cond] and a limit value. See below.
 
 [obj-type-cond]: ./Conditions.md#object-type-conditions
 [obj-index-cond]: ./Conditions.md#object-index-conditions
 
+##### Area Triggers
+
+These triggers activate when the hacker enters or leaves a circular area around the trigger. The radius of this area is determined by the condition.
+
+**Area Trigger Condition** (4 bytes)
+
+    0000  sint32    Radius (in tiles)
+
+If the ```radius``` is between 1 and 4095, the trigger activates when the hacker is within a circular area of that size around the trigger's tile. A negative radius will activate the trigger when the hacker is outside of the circle instead (e.g. if the radius is -5, the trigger activates when the hacker is at least 5 tiles away from the trigger).
+
+Trigger type 5 ("Area Enter") activates once the hacker either enters (positive radius) or leaves (negative radius) the area. Type 6 ("Area Continuous") activates when the hacker enters any tile that is either inside (positive radius) or outside (negative radius) of the area.
 
 ##### Ecology Triggers
 

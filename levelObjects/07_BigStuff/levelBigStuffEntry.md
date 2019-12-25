@@ -61,7 +61,7 @@ For surveillance screens, the sources of screens 0-7 are specified in the [Surve
 The following big items support displays:
 7/0/6 (TV), 7/0/7 (COMPUTER MONITOR),
 7/2/6 (SCREEN, small), 7/2/8 (SCREEN, large), 7/2/9 (SCREEN, medium),
-with variation: 7/5/6 (CONTROL PEDESTAL)  (see below)
+with variation: 7/5/5 (CONTROL PANEL), 7/5/6 (CONTROL PEDESTAL)  (see below)
 
 ### Electronics 7/0/x
 
@@ -162,7 +162,7 @@ These have the same layout as the general textureable furniture (see above).
     0003  [7]byte   Unused
 
 
-#### Control Pedestals (with display) 7/5/6
+#### Control Pedestals (with display) 7/5/5, 7/5/6
 
 Control pedestals are similar to displays regarding the source of the display.
 Instead of having different loop options, they trigger an object if used.
