@@ -123,8 +123,10 @@ The data entry contains unsigned 8-bit PCM samples.
 
     0000  uint32   tag     Subtitle Control
     0004  uint32   offset  Offset to text string, always 0x10
-    0008  [4]byte          Unknown -- always 0x00
+    0008  [8]byte          Unused -- always 0x00, as they are skipped
     0010  []byte           Null terminated string
+
+Subtitle text will be shown with the color from palette index 255 (last entry).
 
 ##### Subtitle Controls
 
