@@ -2,7 +2,7 @@
 
 ```L06``` is a dynamically sized list of currently active schedules. A schedule performs some delayed action at a specific time in the future.
 It contains a number of live entries equal to the ```timer count``` field from ```L04``` [(Level Information)](mapInformation.md#Level-information).
-Unless the list is full, this list always has one extra "dummy" entry at the end.
+Unless the list is full, this list always has one extra "terminator" entry at the end.
 
 **Level Schedule Entry** (`SchedEvent` struct) (8 bytes)
 
@@ -14,10 +14,10 @@ Unless the list is full, this list always has one extra "dummy" entry at the end
 
 ```Type``` specifies how the schedule should be handled on timeout. ```Data``` is then type-specific.
 
-> The one dummy entry is required to exist, and does not have to contain any useful information at the beginning (can be all zero).
+> The one terminator entry is required to exist, and does not have to contain any useful information at the beginning (can be all zero).
 > The engine sorts the schedule entries according to their ```trigger time```.
 
-For the schedule data, any object index refers to the master object table in the level.
+For the schedule data, any object index refers to the main object table in the level.
 
 ### Schedule Type 0: Null Schedule Event
 

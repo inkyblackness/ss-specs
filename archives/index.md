@@ -44,7 +44,7 @@ Save-game files contain 4 further resources that are not present in archive.dat 
   * ```L05``` [Map Layout](mapInformation.md)
   * ```L06``` [Level schedules](levelSchedules.md)
   * ```L07``` [Level texture map](mapInformation.md)
-  * ```L08``` [Master object table](levelObjects.md#level-object-table)
+  * ```L08``` [Main object table](levelObjects.md#level-object-table)
   * ```L09``` [Level object cross-reference table](levelObjects.md#level-object-cross-reference-table)
   * ```L10``` to ```L24``` 15 object [class specific tables](levelObjects.md#class-tables-and-entries)
   * ```L25``` to ```L39``` 15 object [class default info](levelObjects.md#class-default-information)

@@ -774,7 +774,7 @@ Not all classes can be spawned.
     0008  [8]byte    Unused
 
 This action sets, or toggles, the type of an object. It is primarily used to extend and retract force bridges.
-> For bridges in their retracted state, the game uses "Elephant, Jorp" (```7/7/8```), an invisible dummy type.
+> For bridges in their retracted state, the game uses "Elephant, Jorp" (```7/7/8```), an invisible placeholder type.
 
 The ```Reset mask``` is used when the specified object is already at given type. If the specified object is already at given type,
 then the new type is calculated as ```New type``` XOR ```Reset mask```.

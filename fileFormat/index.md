@@ -24,7 +24,7 @@ Data files come in the following variants:
 * [Resource files](ResourceFiles.md), which are structured archives
 * [Property files](PropertyFiles.md), containing one or more serialized tables
 
-Resource files are the majority. All files with filename suffix `.res` are resource files. Savegame files have the same format, including the "master" savegame file `archive.dat`. These files contain one or more "resource" entries. Resources are identified and contain one or more data blocks. A resource with more than one data block is called a "compound resource".
+Resource files are the majority. All files with filename suffix `.res` are resource files. Savegame files have the same format, including the "starter" savegame file `archive.dat`. These files contain one or more "resource" entries. Resources are identified and contain one or more data blocks. A resource with more than one data block is called a "compound resource".
 
 The property files are "flat" files containing one or more serialized tables.
 
