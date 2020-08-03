@@ -14,7 +14,10 @@ When wording actions, consider differenciating between the character in the game
 
 Sentences referring to individuals SHALL be phrased with inclusive, gender neutral language. The use of [singular they](https://en.wikipedia.org/wiki/Singular_they) is to be used if no other option is available.
 
-> While the hacker is represented with a male body and voice in the original game, a fan-mod could change this. This documentation states raw engine data, which doesn't care about humans, even if considered to be insects.
+> While the hacker is represented with a male body and voice in the original game, a fan-mod could change this. (see [here](https://www.moddb.com/mods/system-shock-female-hacker))
+> This documentation states raw engine data, which doesn't care about humans, even if considered to be insects.
+
+More generally, consider online guides about inclusive language, such as [this one from Google](https://developers.google.com/style/inclusive-documentation).
 
 ### Formatting
 
