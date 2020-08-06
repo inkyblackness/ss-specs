@@ -144,9 +144,9 @@ This page lists all game variables with their index, their initital value, and t
 | Index | Initial Value | Usage                                                   |
 |------:|--------------:|---------------------------------------------------------|
 |   1   | 0             | Incremented for each destroyed computer node lvls 1-7   |
-|   3   | 2             | Unknown                                                 |
+|   3   | 2             | Engine state                                            |
 |   9   | 0             | Incremented by 1 for laser, beta grove, reactor         |
-|  12   | 3             | Unknown                                                 |
+|  12   | 3             | Number of groves                                        |
 |  13   | Mission value | Unknown                                                 |
 |  14   | Cyber value   | Unknown                                                 |
 |  15   | Combat value  | Unknown                                                 |
@@ -174,5 +174,35 @@ This page lists all game variables with their index, their initital value, and t
 |  37   | 0             | Destroyed comp. nodes on lvl5 before showing digit      |
 |  38   | 0             | Destroyed comp. nodes on lvl6 before showing digit      |
 |  39   | 0             | Destroyed cyberguards in large cspace / open barrier    |
+|  40   |               | Unknown                                                 |
+|  41   | as per config | Audio music volume (0x00 .. 0x64)                       |
+|  42   | 0x4A3D        | Video gamma                                             |
+|  43   | as per config | Audio digital FX volume (0x00 .. 0x64)                  |
+|  44   | as per config | Mouse handedness (Right: 0, Left: 1)                    |
+|  45   |               | Unknown                                                 |
+|  46   |               | Unknown                                                 |
+|  47   | 0x5555        | Double click time                                       |
+|  48   | as per config | Selected language (0: ENG, 1: FRA, 2: GER)              |
+|  49   | as per config | Audio message volume (0x00 .. 0x64)                     |
+|  50   | as per config | Video resolution                                        |
+|  51   | 256           | Joystick sensitivity                                    |
+|  52   |               | Unknown                                                 |
+|  53   | as per config | Audio messages (0: Text, 1: Speech, 2: Both)            |
+|  54   |               | Unknown                                                 |
+|  55   |               | Unknown                                                 |
+|  56   |               | Unknown                                                 |
+|  57   |               | Unknown                                                 |
+|  58   | as per config | Audio channels (0: 2ch, 1: 4ch, 2: 8ch)                 |
+|  59   |               | Unknown                                                 |
+|  60   |               | Unknown                                                 |
+|  61   |               | Unknown                                                 |
+|  62   |               | Unknown                                                 |
+|  63   |               | Unknown                                                 |
+
+
+The two random codes (index 31, 32) will be randomized if they are equal.
 
 > The two random codes are stored in [Binary-Coded-Decimal](https://en.wikipedia.org/wiki/Binary-coded_decimal).
+
+> The integer values from index 40 on seem to be all about in-game options.
+> This may be the reason why it was earlier thought that there are only 40 game variables.

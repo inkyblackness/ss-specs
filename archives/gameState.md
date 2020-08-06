@@ -23,7 +23,7 @@ This resource contains everything about the hacker, together with general game-s
     0066  6xbyte    Controls
     006C  int16     Player Object ID
     006E  8xbyte    Realspace location; The point to return to after exiting cyberspace.
-    0076  int32     Version number; Value: 6
+    0076  int32     Version number of the data structure; Value: 6
     007A  14xint16  General inventory references, Object IDs. Access Cards are 0xFE 0x00
 
     0096  byte      Posture
@@ -44,23 +44,23 @@ This resource contains everything about the hacker, together with general game-s
     00AF  byte      Energy out; 1: is out of energy
     00B0  int16     Cyberspace trips
     00B2  int32     Cyberspace time base
-    00B6  512xbool  Boolean game variables
-    00F6  40xint16  Integer game variables
-    
-    0148  byte     Option: Audio, Music Volume (0x00 .. 0x64)
-    014A  uint16   Option: Video, Gamma (Default: 0x4A3D)
-    014C  byte     Option: Audio, Digital FX Volume (0x00 .. 0x64)
-    014E  byte     Option: Input, Mouse hand (Right: 0, Left: 1)
-    0154  uint16   Option: Input, Double Click (Default: 0x5555)
-    0156  byte     Option: Language setting (0: ENG, 1: FRA, 2: GER)
-    0158  byte     Option: Audio, Message Volume (0x00 .. 0x64)  
-    0159  uint16   Option: Video, Resolution (0x0000: default?, 0x0001: 320x200, 0x0101: 320x400, 0x0201: 640x400, 0x0003: 640x480)  
 
-    0160  byte     Option: Audio, Messages (0: Text, 1: Speech, 2: Both)
-    016A  byte     Option: Audio, Channels (0: 2ch, 1: 4ch, 2: 8ch)
+    00B6  [64]uint8  512 Boolean game variables; Bytes are counted up, bits within byte counted from LSB; Example: bit[10] = 0x00 0x04 0x..
+    00F6  [64]int16  64 Integer game variables
 
-    0176  uint32   HUD message flags: 0x80: shield absorbs %d%%, 0x40: night sight active; 0x01000000: time remaining
+    0176  uint32    HUD modes; Bitfield as per hud.h
+    017A  byte      Unused
+    017B  sint32    Fatigue
+    017F  uint16    Fatigue spending; Current rate of fatigue expenditure in pts/sec
+    0181  uint16    Fatigue regeneration
+    0183  uint16    Fatigue regeneration base
+    0185  uint16    Fatigue regeneration maximum
+    0187  sint8     Accuracy
+    0188  byte      Shield absorb rate, in percent
+    0189  byte      Shield threshold
+    018A  byte      Light value; setting of lamp
 
+    018B  [10]byte  2x5 MFD slot indices
     0195  5xbyte   MFD[s] button controls. 0: enabled, no function; 1: news flash; 2: enabled, selected; 3: disabled
 
     01D3  byte     MFD[l] map display: 0x01: side, 0x00: zoomed
@@ -152,19 +152,22 @@ This resource contains everything about the hacker, together with general game-s
     0335  byte     NITROPACK
     0336  byte     EARTH SHAKER EXPLOSIVE
     
-    046B  5x byte  First weapon
+    0337  [294]byte  Message status bitfield; 47 emails + 23 data fragments + (16 logs * 14 levels)
+    045D  [14]byte   Level log marker; On which level logs are in inventory
+
+    046B  [5]byte  First weapon
       +0  byte     Subclass (0xFF means no weapon)
       +1  byte     Type
       +2  byte     Rounds
       +3  byte     Ammunition type / Energy (0x80 bit is overload)
       +4  byte     Unknown
     
-    0470  5x byte  Second weapon
-    0475  5x byte  Third weapon
-    047A  5x byte  Fourth weapon
-    047F  5x byte  Fifth weapon
-    0484  5x byte  Sixth weapon
-    0489  5x byte  Seventh weapon
+    0470  [5]byte  Second weapon
+    0475  [5]byte  Third weapon
+    047A  [5]byte  Fourth weapon
+    047F  [5]byte  Fifth weapon
+    0484  [5]byte  Sixth weapon
+    0489  [5]byte  Seventh weapon
     
     0490  byte     Sensaround icon active (dependent on MFD)
     0493  byte     Bioware icon active (dependent on MFD)
@@ -172,26 +175,50 @@ This resource contains everything about the hacker, together with general game-s
     048E  byte     infrared active (0: off, 1: on)
     0498  byte     FullScreen control (0: off, 1: on)
 
-    04DF  [7]int16 Timer settings of explosives, in 0.1 seconds; Default: 0x46 = 7 seconds
+    04DF  [7]uint16  Timer settings of explosives, in 0.1 seconds; Default: 0x46 = 7 seconds
+
+    04ED  uint16   Unused
+    04EF  uint16   Time to completion of current program (seconds). Essentially unused, although used to print some strings
+
+    04F1  uint16   ObjectID of current target
+    04F3  uint32   Last weapon fire time
+    04F7  uint16   Weapon fire rate; Time needed before next fire.
+
+    04F9  [10]byte  HUD actives: weapon, grenade, drug, cart, hardware, combat soft, defense soft, misc soft, general, email
 
     0507  sint32   Kill count
 
-    051b  int32    tilt (plus further bytes...)
+    0517  sint32   Death count; How often hacker was resurrected.
+    051B  int32    Tilt (eye position)
 
-    0520  int16    X Coordinate (east/west)
-
-    0524  int16    Y Coordinate (north/south)
-
-    0528  uint16   height above ground. standard head height: 0x00BD
-    052C  float32  pitch. 0 is facing East, going clockwise  
-
-    0530  float32  upper body back force (?)
-    0534  float32  upper body left force (?)
-    0538  float32  forward force (?)
-    053C  float32  left force (?)
-
+    051F  [12]fix  Physics state (EDMS) - see below
 
     0567  byte     Option: Text Length (0: normal, 1: terse)
+
+
+### Physics state (EDMS `State` structure, 48 bytes)
+
+    0000  fix      X Coordinate (East -> West)
+    0004  fix      Y Coordinate (North -> South)
+    0008  fix      Z Coordinate (above ground)
+    000C  fix      Yaw; 0 is facing East, going counter-clockwise
+    0010  fix      Upper body back force (?)
+    0014  fix      Upper body left force (?)
+    0018  fix      Forward force (?) -- X dot product
+    001C  fix      Left force (?) -- Y dot product
+    0020  fix      Unknown -- Z dot product
+    0024  fix      Unknown
+    0028  fix      Unknown
+    002C  fix      Unknown
+
+Rotation values are in range 0..2PI.
+
+### Message status enumeration (1 byte)
+
+    0x80  Message received
+    0x40  Message read
+    0x3F  Unused
+
 
 ### Game variables
 
@@ -204,15 +231,3 @@ In archive.dat, this table is (nearly) all 0x00.
 
 #### 0x01D3/0x01D4
 For the MFD[s] map displays the game stores 0x05 for side view, apparently treating bit0 as a flag.
-
-
-### Unmapped game options
-
-#### Options not (yet) found in archives
-* Option: Input, Popup Cursor (Off, On)
-* Option: Video, Detail
-* Option: Audio, Stereo (Normal, Reversed)
-
-#### Options not determined:
-* Option: Joystick
-* Option: Video, Headset
