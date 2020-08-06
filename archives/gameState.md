@@ -1,4 +1,4 @@
-## Game state and hacker information, resource 0x0FA1
+## Game state and hacker information, resource 0x0FA1 (`Player` struct)
 
 This resource contains everything about the hacker, together with general game-state information.
 
@@ -6,7 +6,7 @@ This resource contains everything about the hacker, together with general game-s
     0000  20xbyte   Hacker name (incl. 0x00 termination char). Game only allows 12 characters for input at start.
     0014  byte      Realspace Level; The level to return to after exiting cyberspace.
 
-    0015  4xbyte    Game rating: combat, mission, puzzle, cyber. All 0..3
+    0015  4xbyte    Difficulties (Game rating): combat, mission, puzzle, cyber. All 0..3
     0019  3xbyte    Unused.
 
     001C  uint32    Game time
@@ -24,7 +24,7 @@ This resource contains everything about the hacker, together with general game-s
     006C  int16     Player Object ID
     006E  8xbyte    Realspace location; The point to return to after exiting cyberspace.
     0076  int32     Version number of the data structure; Value: 6
-    007A  14xint16  General inventory references, Object IDs. Access Cards are 0xFE 0x00
+    007A  [14]int16  General inventory references, Object IDs. Access Cards are 0xFE 0x00
 
     0096  byte      Posture
     0097  byte      Foot planted; 1: on the floor
@@ -32,7 +32,7 @@ This resource contains everything about the hacker, together with general game-s
     0099  byte      Lean Y
     009A  int16     Unused
 
-    009C  byte      Health 0x00..0xFF
+    009C  byte      Health; 0x00..0xFF
     009D  byte      Cyberspace Integrity
     009E  uint16    Hitpoint regeneration per minute
     00A0  8xbyte    Damage rate per minute [explosion, energy, magnetic, radiation, gas, tranq, needle, bio]
@@ -193,7 +193,13 @@ This resource contains everything about the hacker, together with general game-s
 
     051F  [12]fix  Physics state (EDMS) - see below
 
+    054F  byte     Currently active inventory category
+    0550  byte     Active bio tracks
+
     0567  byte     Option: Text Length (0: normal, 1: terse)
+
+
+> In archive.dat, this table is (nearly) all 0x00, and also slightly smaller than necessary.
 
 
 ### Physics state (EDMS `State` structure, 48 bytes)
@@ -224,10 +230,92 @@ Rotation values are in range 0..2PI.
 
 Game variables are described on a [separate page](gameVariables.md)
 
-### Notes
+### Initial game state
 
-#### New Game
-In archive.dat, this table is (nearly) all 0x00.
+The original engine does not allow for having `archive.dat` specify the initial state for both the game and hacker.
 
-#### 0x01D3/0x01D4
-For the MFD[s] map displays the game stores 0x05 for side view, apparently treating bit0 as a flag.
+The `System Shock Enhanced Edition Source Port` introduced a modified start behaviour,
+which allows for (almost) full control on how and where the protagonist starts:
+When the first field of the `physics state` (the `X` coordinate of EDMS state) is not zero,
+then most default settings are skipped, and data is taken from `archive.dat`.
+Still, some minimal setup is performed either way, in order to have a stable game.
+
+> This behaviour exists already in the original engine, but it only considers the physics structure itself,
+> and no further information, such as the current level or any game variable.
+
+#### Mission-independent hardcoded defaults
+
+The following defaults are being applied regardless of existing data in `archive.dat`.
+
+##### Game state fields
+
+| Offset | Name                       | Initial value                                       |
+|--------|----------------------------|-----------------------------------------------------|
+|  0000  | Hacker name                | as per start menu                                   |
+|  0015  | Difficulties               | as per start menu                                   |
+|  0038  | Detail Level               | as per configuration                                |
+|  003A  | Initial SHODAN levels      | all to `-1`                                         |
+|  006C  | Player Object ID           | `0`                                                 |
+|  00A0  | Damage rate per minute     | all to `0`                                          |
+|  04F1  | ObjectID of current target | `0`                                                 |
+|  04F3  | Last weapon fire time      | `0`                                                 |
+|   **   | Various MFD fields         | To a consistent (empty) MFD display                 |
+|  02E9  | Installed Hardware[10]     | `1` to hardcode "fullscreen hardware"               |
+|  0550  | Active bio tracks          | `0xFF`                                              |
+|  00F6  | Integer game variables[48] | Language, as per configuration                      |
+
+The two "random" game variables (index 31 and 32) are randomized only if they are equal.
+
+
+#### Mission-dependent defaults
+
+The following defaults are being applied *only* if `physics state` field `X` is zero.
+
+##### Game state fields
+
+| Offset | Name                       | Initial value                                       |
+|--------|----------------------------|-----------------------------------------------------|
+|  0039  | Current level identifier   | `1`                                                 |
+|  007A  | General Inventory          | all to `0`                                          |
+|  009C  | Health                     | `212`                                               |
+|  009D  | Cyberspace Integrity       | `255`                                               |
+|  009E  | Hitpoint regeneration      | `0`                                                 |
+|  00AC  | Power                      | `255`                                               |
+|  00B2  | Cyberspace time base       | `504000` (30 minutes in 280 ticks-per-second)       |
+|  0181  | Fatigue regeneration       | `0`                                                 |
+|  0183  | Fatigue regeneration base  | `100`                                               |
+|  0183  | Fatigue regeneration max   | `400`                                               |
+|  0187  | Accuracy                   | `100`                                               |
+|  0188  | Shield absorb rate         | `0`                                                 |
+|  0337  | Message status[26]         | `0x80`, to mark email from Rebecca received         |
+|  046B  | Weapons[*].type            | `0xFF`, to mark no weapon in slot                   |
+|  04DF  | Explosives timer[*]        | `70` (= 7 seconds)                                  |
+|  04F9  | HUD actives[9]             | `0xFF`, to mark email being active                  |
+
+
+##### Variables
+
+The following integer variables are set:
+
+| Integer | Value  |
+|---------|--------|
+|    3    | 2      |
+|   12    | 3      |
+|   51    | 256    |
+
+And the following boolean variables are set to `true`:
+
+```
+0x001, 0x002, 0x003, 0x010, 0x012, 0x015, 0x016, 0x017, 0x018, 0x019, 0x01A,
+0x020, 0x021, 0x024, 0x025,
+0x04B, 0x04C, 0x04D, 0x04E, 0x04F,
+0x050, 0x051, 0x052, 0x053, 0x054, 0x055, 0x056, 0x057, 0x058, 0x059, 0x05A, 0x05B, 0x05C, 0x05D, 0x05E, 0x05F,
+0x070, 0x071, 0x072, 0x073, 0x074, 0x075, 0x076, 0x077, 0x078, 0x079, 0x07A, 0x07B, 0x07C, 0x07D, 0x07E, 0x07F,
+0x0A0, 0x0A1, 0x0A2, 0x0A3, 0x0A4, 0x0A5, 0x0A6, 0x0A7, 0x0A8, 0x0A9,
+0x0C0, 0x0C1, 0x0C2, 0x0C3, 0x0C4, 0x0C5, 0x0C6, 0x0C7, 0x0C8, 0x0C9, 0x0CA, 0x0CB, 0x0CC, 0x0CD, 0x0CE, 0x0CF,
+0x0E1, 0x0E3, 0x0E5, 0x0E7, 0x0E9, 0x0EB, 0x0ED, 0x0EF,
+0x0F1, 0x0F3, 0x0F5, 0x0F7, 0x0F9, 0x0FB, 0x0FD, 0x0FF,
+0x101, 0x103, 0x105, 0x107, 0x109, 0x10B, 0x10D, 0x10F,
+0x111, 0x113, 0x115, 0x117, 0x119, 0x11B, 0x11D, 0x11F,
+0x121, 0x123, 0x125, 0x127, 0x129, 0x12B,
+```
