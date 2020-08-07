@@ -291,6 +291,7 @@ The following defaults are being applied *only* if `physics state` field `X` is 
 |  046B  | Weapons[*].type            | `0xFF`, to mark no weapon in slot                   |
 |  04DF  | Explosives timer[*]        | `70` (= 7 seconds)                                  |
 |  04F9  | HUD actives[9]             | `0xFF`, to mark email being active                  |
+|  051F  | Physics state (EDMS)       | X=30.5, Y=22.5, Z=planted at floor, Alpha=West      |
 
 
 ##### Variables
