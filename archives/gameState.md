@@ -22,7 +22,7 @@ This resource contains everything about the hacker, together with general game-s
     003A  22xint16  Initial SHODAN levels
     0066  6xbyte    Controls
     006C  int16     Player Object ID
-    006E  8xbyte    Realspace location; The point to return to after exiting cyberspace.
+    006E  [8]byte   Realspace location; The point to return to after exiting cyberspace.
     0076  int32     Version number of the data structure; Value: 6
     007A  [14]int16  General inventory references, Object IDs. Access Cards are 0xFE 0x00
 
@@ -60,143 +60,151 @@ This resource contains everything about the hacker, together with general game-s
     0189  byte      Shield threshold
     018A  byte      Light value; setting of lamp
 
+    Multi-Function-Display (MFD) state
     018B  [10]byte  2x5 MFD slot indices
-    0195  5xbyte   MFD[s] button controls. 0: enabled, no function; 1: news flash; 2: enabled, selected; 3: disabled
+    0195  [7]byte   MFD status
+    019C  [7]byte   MFD function IDs
+    01A3  [32]byte  MFD function flags
+    01C3  [256]byte MFD function data
+    02C3  [2]byte   current MFDs
+    02C5  [2]byte   MFD empty functions
+    02C7  [64]byte  MFD access puzzles
+    0307  [2]byte   MFD save slots
 
-    01D3  byte     MFD[l] map display: 0x01: side, 0x00: zoomed
-    01D4  byte     MFD[r] map display: 0x01: side, 0x00: zoomed
 
     Installed Hardware (0: not installed):
-    02E9  byte     version for infrared night vision
-    02EA  byte     version for target info
-    02EB  byte     version for Sensaround
-    02EC  byte     version for "Aim Enhancement Hardware"
-    02ED  byte     version for HUD (unknown function)
-    02EE  byte     version for bioscan
-    02EF  byte     version for navigation unit
-    02F0  byte     version for shield
-    02F1  byte     version for data reader
-    02F2  byte     version for lantern
-    02F3  byte     version for view control
-    02F4  byte     version for enviro suit
-    02F5  byte     version for booster
-    02F6  byte     version for jump jet
-    02F7  byte     version for system status
+    030A  byte     version for infrared night vision
+    030B  byte     version for target info
+    030C  byte     version for Sensaround
+    030D  byte     version for "Aim Enhancement Hardware"
+    030E  byte     version for HUD (unknown function)
+    030F  byte     version for bioscan
+    0310  byte     version for navigation unit
+    0311  byte     version for shield
+    0312  byte     version for data reader
+    0313  byte     version for lantern
+    0314  byte     version for view control
+    0315  byte     version for enviro suit
+    0316  byte     version for booster
+    0317  byte     version for jump jet
+    0318  byte     version for system status
 	
     Installed Software(0: not installed):
-    02F8  byte     version for ice drill defense breaker
-    02F9  byte     version for datastorm assault software
-    02FA  byte     version for mine explosive module
-    02FB  byte     version for disc heavy attack program
-    02FC  byte     version for pulser combat software
-    02FD  byte     version for scrambler software grenade
-    02FE  byte     version for virus some cool thing
-    02FF  byte     version for cyber shield
-    0300  byte     version for old fake id
-    0301  byte     version for ice shield
-    0302  byte     version for turbo navigation booster
-    0303  byte     count for fake id ice infiltrator
-    0304  byte     count for decoy evasion system
-    0305  byte     count for recall escape program
-    0306  byte     trioptimum fun pack module (bitmask); See level software entries.
+    0319  [7]byte  offensive software
+    0320  [3]byte  defensive software
+    0323  [9]byte  misc software
 
     Full clips of ammunition
-    030B  byte     ML STANDARD ROUNDS
-    030C  byte     ML TEFLON COATED ROUNDS 
-    030D  byte     SV NEEDLE DARTS
-    030E  byte     SV TRANQ DARTS
-    030F  byte     HOLLOW-TIP 2100 CLIP
-    0310  byte     HEAVY SLUG 2100 CLIP
-    0311  byte     DC RUBBER SLUGS
-    0312  byte     MARK3 MAGNESIUM-TIP SHELLS
-    0313  byte     MARK3 PENETRATOR SHELLS
-    0314  byte     AM HORNET CLIP
-    0315  byte     AM SPLINTER CLIP
-    0316  byte     RF SLAG CLIP
-    0317  byte     RF LARGE SLAG CLIP
-    0318  byte     SG MAG PULSE CART
-    0319  byte     MM RAIL CLIP
+    032C  byte     ML STANDARD ROUNDS
+    032D  byte     ML TEFLON COATED ROUNDS 
+    032E  byte     SV NEEDLE DARTS
+    032F  byte     SV TRANQ DARTS
+    0330  byte     HOLLOW-TIP 2100 CLIP
+    0331  byte     HEAVY SLUG 2100 CLIP
+    0332  byte     DC RUBBER SLUGS
+    0333  byte     MARK3 MAGNESIUM-TIP SHELLS
+    0334  byte     MARK3 PENETRATOR SHELLS
+    0335  byte     AM HORNET CLIP
+    0336  byte     AM SPLINTER CLIP
+    0337  byte     RF SLAG CLIP
+    0338  byte     RF LARGE SLAG CLIP
+    0339  byte     SG MAG PULSE CART
+    033A  byte     MM RAIL CLIP
 	
 	Ammunition not in full clips
-    031A  byte     ML STANDARD ROUNDS
-    031B  byte     ML TEFLON COATED ROUNDS
-    031C  byte     SV NEEDLE DARTS
-    031D  byte     SV TRANQ DARTS
-    031E  byte     HOLLOW-TIP 2100 CLIP
-    031F  byte     HEAVY SLUG 2100 CLIP
-    0320  byte     DC RUBBER SLUGS
-    0321  byte     MARK3 MAGNESIUM-TIP SHELLS
-    0322  byte     MARK3 PENETRATOR SHELLS
-    0323  byte     AM HORNET CLIP
-    0324  byte     AM SPLINTER CLIP
-    0325  byte     RF SLAG CLIP
-    0326  byte     RF LARGE SLAG CLIP
-    0327  byte     SG MAG PULSE CART
-    0328  byte     MM RAIL CLIP
+    033B  byte     ML STANDARD ROUNDS
+    033C  byte     ML TEFLON COATED ROUNDS
+    033D  byte     SV NEEDLE DARTS
+    033E  byte     SV TRANQ DARTS
+    033F  byte     HOLLOW-TIP 2100 CLIP
+    0340  byte     HEAVY SLUG 2100 CLIP
+    0341  byte     DC RUBBER SLUGS
+    0342  byte     MARK3 MAGNESIUM-TIP SHELLS
+    0343  byte     MARK3 PENETRATOR SHELLS
+    0344  byte     AM HORNET CLIP
+    0345  byte     AM SPLINTER CLIP
+    0346  byte     RF SLAG CLIP
+    0347  byte     RF LARGE SLAG CLIP
+    0348  byte     SG MAG PULSE CART
+    0349  byte     MM RAIL CLIP
 	
 	Patches
-    0329  byte     STAMINUP STIMULANT
-    032A  byte     SIGHT VISION ENCHANCEMENT
-    032B  byte     BERSERK COMBAT BOOSTER
-    032C  byte     MEDIPATCH HEALING AGENT
-    032D  byte     REFLEX REACTION AID
-    032E  byte     GENIUS MIND-ENCHANCER
-    032F  byte     DETOX UNIVERSAL ANTIDOTE
+    034A  byte     STAMINUP STIMULANT
+    034B  byte     SIGHT VISION ENCHANCEMENT
+    034C  byte     BERSERK COMBAT BOOSTER
+    034D  byte     MEDIPATCH HEALING AGENT
+    034E  byte     REFLEX REACTION AID
+    034F  byte     GENIUS MIND-ENCHANCER
+    0350  byte     DETOX UNIVERSAL ANTIDOTE
 	
 	Explosives
-    0330  byte     FRAGMENTATION GRENADE
-    0331  byte     EMP GRENADE
-    0332  byte     GAS GRENADE
-    0333  byte     CONCUSSION BOMB
-    0334  byte     LAND MINE
-    0335  byte     NITROPACK
-    0336  byte     EARTH SHAKER EXPLOSIVE
+    0351  byte     FRAGMENTATION GRENADE
+    0352  byte     EMP GRENADE
+    0353  byte     GAS GRENADE
+    0354  byte     CONCUSSION BOMB
+    0355  byte     LAND MINE
+    0356  byte     NITROPACK
+    0357  byte     EARTH SHAKER EXPLOSIVE
     
-    0337  [294]byte  Message status bitfield; 47 emails + 23 data fragments + (16 logs * 14 levels)
-    045D  [14]byte   Level log marker; On which level logs are in inventory
+    0358  [294]byte  Message status bitfield; 47 emails + 23 data fragments + (16 logs * 14 levels)
+    047E  [14]byte   Level log marker; On which level logs are in inventory
 
-    046B  [5]byte  First weapon
+    048C  [5]byte  First weapon
       +0  byte     Subclass (0xFF means no weapon)
       +1  byte     Type
       +2  byte     Rounds
       +3  byte     Ammunition type / Energy (0x80 bit is overload)
-      +4  byte     Unknown
+      +4  byte     Unused
     
-    0470  [5]byte  Second weapon
-    0475  [5]byte  Third weapon
-    047A  [5]byte  Fourth weapon
-    047F  [5]byte  Fifth weapon
-    0484  [5]byte  Sixth weapon
-    0489  [5]byte  Seventh weapon
+    0491  [5]byte  Second weapon
+    0496  [5]byte  Third weapon
+    049B  [5]byte  Fourth weapon
+    04A0  [5]byte  Fifth weapon
+    04A5  [5]byte  Sixth weapon
+    04AA  [5]byte  Seventh weapon
     
-    0490  byte     Sensaround icon active (dependent on MFD)
-    0493  byte     Bioware icon active (dependent on MFD)
-    0494  byte     Compass icon active (0: off, 1: on)
-    048E  byte     infrared active (0: off, 1: on)
-    0498  byte     FullScreen control (0: off, 1: on)
+    04AF  [15]byte  Hardware on/off
+    04BE  [19]byte  Software status on/off
 
-    04DF  [7]uint16  Timer settings of explosives, in 0.1 seconds; Default: 0x46 = 7 seconds
+    04D1  byte     Jumpjet energy fraction
+    04D2  [32]byte email sender count
+    04F2  [7]byte  Patches time remainder
+    04F9  [7]byte  Patches intensity 
 
-    04ED  uint16   Unused
-    04EF  uint16   Time to completion of current program (seconds). Essentially unused, although used to print some strings
+    0500  [7]uint16  Timer settings of explosives, in 0.1 seconds; Default: 0x46 = 7 seconds
 
-    04F1  uint16   ObjectID of current target
-    04F3  uint32   Last weapon fire time
-    04F7  uint16   Weapon fire rate; Time needed before next fire.
+    050E  uint16   Unused
+    0510  uint16   Time to completion of current program (seconds). Essentially unused, although used to print some strings
 
-    04F9  [10]byte  HUD actives: weapon, grenade, drug, cart, hardware, combat soft, defense soft, misc soft, general, email
+    0512  uint16   ObjectID of current target
+    0514  uint32   Last weapon fire time
+    0518  uint16   Weapon fire rate; Time needed before next fire.
 
-    0507  sint32   Kill count
+    051A  [10]byte  HUD actives: weapon, grenade, drug, cart, hardware, combat soft, defense soft, misc soft, general, email
 
-    0517  sint32   Death count; How often hacker was resurrected.
-    051B  int32    Tilt (eye position)
+    0524  sint32   Kill count
 
-    051F  [12]fix  Physics state (EDMS) - see below
+    0528  sint32   Death count; How often hacker was resurrected.
+    052C  int32    Tilt (eye position)
+
+    0530  [12]fix  Physics state (EDMS) - see below
 
     054F  byte     Currently active inventory category
     0550  byte     Active bio tracks
 
-    0567  byte     Option: Text Length (0: normal, 1: terse)
+    0551  int16    current email
+
+    0553  [6]byte  version
+    0554  byte     dead flag
+    0555  uint16   lean filter state
+    0557  [2]byte  unused
+    0559  byte     MFD save field
+
+    055B  uint32   Auto fire click
+    055F  uint32   Posture state
+          byte     Option: Text Length (0: normal, 1: terse)
+          uint32   Last head bob
+          [9]byte  Padding
 
 
 > In archive.dat, this table is (nearly) all 0x00, and also slightly smaller than necessary.
