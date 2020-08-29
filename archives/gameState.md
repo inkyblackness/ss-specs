@@ -24,7 +24,7 @@ This resource contains everything about the hacker, together with general game-s
     006C  int16     Player Object ID
     006E  [8]byte   Realspace location; The point to return to after exiting cyberspace.
     0076  int32     Version number of the data structure; Value: 6
-    007A  [14]int16  General inventory references, Object IDs. Access Cards are 0xFE 0x00
+    007A  [14]int16  General inventory references, Object IDs
 
     0096  byte      Posture
     0097  byte      Foot planted; 1: on the floor
@@ -152,8 +152,8 @@ This resource contains everything about the hacker, together with general game-s
     048B  [5]byte  First weapon
       +0  byte     Subclass (0xFF means no weapon)
       +1  byte     Type
-      +2  byte     Rounds
-      +3  byte     Ammunition type / Energy (0x80 bit is overload)
+      +2  byte     Rounds / Heat
+      +3  byte     Ammunition type / Energy setting (0x80 bit is overload)
       +4  byte     Unused
     
     0490  [5]byte  Second weapon
@@ -271,11 +271,11 @@ The following defaults are being applied regardless of existing data in `archive
 |  003A  | Initial SHODAN levels      | all to `-1`                                         |
 |  006C  | Player Object ID           | `0`                                                 |
 |  00A0  | Damage rate per minute     | all to `0`                                          |
-|  04F1  | ObjectID of current target | `0`                                                 |
-|  04F3  | Last weapon fire time      | `0`                                                 |
+|  0511  | ObjectID of current target | `0`                                                 |
+|  0513  | Last weapon fire time      | `0`                                                 |
 |   **   | Various MFD fields         | To a consistent (empty) MFD display                 |
-|  02E9  | Installed Hardware[10]     | `1` to hardcode "fullscreen hardware"               |
-|  0550  | Active bio tracks          | `0xFF`                                              |
+|  0309  | Installed Hardware[10]     | `1` to hardcode "fullscreen hardware"               |
+|  0570  | Active bio tracks          | `0xFF`                                              |
 |  00F6  | Integer game variables[48] | Language, as per configuration                      |
 
 The two "random" game variables (index 31 and 32) are randomized only if they are equal.
@@ -301,11 +301,11 @@ The following defaults are being applied *only* if `physics state` field `X` is 
 |  0183  | Fatigue regeneration max   | `400`                                               |
 |  0187  | Accuracy                   | `100`                                               |
 |  0188  | Shield absorb rate         | `0`                                                 |
-|  0337  | Message status[26]         | `0x80`, to mark email from Rebecca received         |
-|  046B  | Weapons[*].type            | `0xFF`, to mark no weapon in slot                   |
-|  04DF  | Explosives timer[*]        | `70` (= 7 seconds)                                  |
-|  04F9  | HUD actives[9]             | `0xFF`, to mark email being active                  |
-|  051F  | Physics state (EDMS)       | X=30.5, Y=22.5, Z=planted at floor, Alpha=West      |
+|  0357  | Message status[26]         | `0x80`, to mark email from Rebecca received         |
+|  048B  | Weapons[*].type            | `0xFF`, to mark no weapon in slot                   |
+|  04FF  | Explosives timer[*]        | `70` (= 7 seconds)                                  |
+|  0519  | HUD actives[9]             | `0xFF`, to mark email being active                  |
+|  053F  | Physics state (EDMS)       | X=30.5, Y=22.5, Z=planted at floor, Alpha=West      |
 
 
 ##### Variables
